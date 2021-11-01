@@ -1,2 +1,2 @@
 # SprintingModel_julia
-Sprinting model convert from fortran to julia
+Sprinting model converted from fortran to julia
