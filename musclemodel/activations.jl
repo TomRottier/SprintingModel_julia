@@ -35,4 +35,8 @@ function activation(t, p::ActivationProfile)
     return p.ramps[end].a1
 end
 
+# custom plotting
 Plots.plot(t, p::ActivationProfile) = plot(x -> activation(x, p), t)
+
+# convert ActivationProfile to vec
+Base.Vector(a::ActivationProfile) = [a.a0, vcat([[b.t0,b.r,b.a1] for b in a.ramps]...)... ]
