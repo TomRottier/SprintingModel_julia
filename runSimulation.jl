@@ -15,7 +15,7 @@ include("callbacks.jl")
 p, u₀ = setup(activation_parameters="data/stance_evaluation_opt_activation.csv")
 
 # time span
-tspan = (0.0, 0.485)
+tspan = (0.0, 0.111)
 
 # set up problem
 prob = ODEProblem(eom, u₀, tspan, p)
