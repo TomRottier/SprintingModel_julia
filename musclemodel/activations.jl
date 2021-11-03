@@ -11,7 +11,7 @@ struct ActivationProfile
 end
 ActivationProfile(a0, r::ActivationRamp) = ActivationProfile(a0, [r])
 ActivationProfile(a0, ramps...) = ActivationProfile(a0, [ActivationRamp(ramps[i:i + 2]...) for i in 1:3:length(ramps)])
-
+ActivationProfile(x::AbstractArray) = ActivationProfile(x[1], x[2:end]...)
 
 # ramp function - time relative to onset time (t-t0)
 ramp(t, a0, r, a1) = a0 + (a1 - a0) * (t / r)^3 * (6 * (t / r)^2 - 15 * (t / r) + 10)
