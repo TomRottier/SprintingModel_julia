@@ -1,0 +1,15 @@
+# general
+[x] refactor parallelisation setup
+
+[x] create new parameter struct without reading from file each time
+    - dont need to reset Z array as fixed variables stay fixed, variable ones change
+    - do need to reset torque generators to give correct conditions (cc angle, angvel etc)
+
+[] compare performance of Dierckx.jl with Splines.jl
+
+[] repeat stance phase optimisations
+
+
+# whole stride optimisations
+[] virtual second contact
+
