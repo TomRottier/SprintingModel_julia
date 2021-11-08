@@ -1,13 +1,14 @@
 using Distributed
 
-addprocs(4, exeflags="--project")   # create worker processes with project activated
+addprocs(6, exeflags="--project")   # create worker processes with current project activated
 @everywhere include("parallel_setup.jl")
 
 # set up simulated annealing
-T₀ = 5.0
+T₀ = 1.0
 N = 42
-Ns = 4
-Nt = 1
+Ns = 12
+Nt = 5
+
 
 # x₀ = vcat(Vector.([p.he.cc.α_p, p.ke.cc.α_p, p.ae.cc.α_p, p.hf.cc.α_p, p.kf.cc.α_p, p.af.cc.α_p])...)
 x₀ = rand(N)
@@ -22,3 +23,7 @@ result = Result(f₀, x₀)
 
 # run sa
 @time sa!(current, result, options)
+
+open("optimisations/matching/results.csv", "a") do io 
+    writedlm(io, [VCMX result.fopt result.xopt...], ',')
+end
