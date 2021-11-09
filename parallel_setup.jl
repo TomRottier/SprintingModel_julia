@@ -1,7 +1,7 @@
 # packages and code loaded on all processes
 using DelimitedFiles
 using StaticArrays, Parameters, Dierckx, SimulatedAnnealing, Setfield
-using OrdinaryDiffEq, Plots
+using OrdinaryDiffEq
 
 include("musclemodel/torque_generator.jl")
 include("model/parameters.jl")

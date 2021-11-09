@@ -5,7 +5,13 @@
     - dont need to reset Z array as fixed variables stay fixed, variable ones change
     - do need to reset torque generators to give correct conditions (cc angle, angvel etc)
 
-[] compare performance of Dierckx.jl with Splines.jl
+[x] compare performance of Dierckx.jl with other packages - no real difference
+
+[] find better way to run optimisations
+    - dont want to change initial_conditions.csv each time
+        - new vcmx value requires u1,u2 to be recalculated
+        - could break up everything into smaller functions?
+    - dont want to change parallel_setip.jl to change VCMX
 
 [] repeat stance phase optimisations
 
