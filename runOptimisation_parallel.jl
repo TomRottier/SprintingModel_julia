@@ -1,4 +1,5 @@
 using Distributed
+using Plots
 
 addprocs(6, exeflags="--project")   # create worker processes with current project activated
 @everywhere include("parallel_setup.jl")
