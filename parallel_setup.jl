@@ -20,7 +20,7 @@ const p, u₀ = setup(initial_conditions="optimisations/sprinter/initial_conditi
 const tspan = (0.0, 0.111)
 
 # matching variables
-VCMX = 10.1
+VCMX = 10.3
 TSW = 0.374
 
 # initialise problem
