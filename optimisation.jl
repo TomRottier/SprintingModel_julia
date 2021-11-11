@@ -30,8 +30,7 @@ function cost(sol)
     return 10(abs(VCMX - vcmx)) + abs(TSW - tsw)
 end    
 
-
-# converts input vector to parameters to be optimised and resets torque generators ot inital values
+# converts input vector to parameters to be optimised and resets torque generators to inital values
 function updateParameters(p, x, u₀)
     @unpack he, ke, ae, hf, kf, af = p
     @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7 = u₀
