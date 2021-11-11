@@ -16,9 +16,6 @@ end
 getTorque(sol) = reduce(hcat, [[getTorque(sol, t)...] for t in sol.t])'
 
 
-
-
-
 function get_torque_generator(sol, t)
     @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7, θhe, θke, θae, θhf, θkf, θaf = sol(t)
     @unpack he, hf, ke, kf, ae, af = sol.prob.p
@@ -67,3 +64,63 @@ function plotTorques(t, v)
 end
 
 plotTorques(sol) = plotTorques(sol.t, get_torque_generator(sol))
+
+
+function get_forces(sol, t)
+    @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7 = sol(t)
+    @unpack k1, k2, k3, k4, k5, k6, k7, k8, l2, pop1xi, pop2xi = sol.prob.p
+
+    pop2y = q2 - l2 * sin(q3 - q4 - q5 - q6 - q7)		
+
+    if q2 < 0.0
+		dp1x = q1 - pop1xi
+		ry1 = -k3 * q2 - k4 * abs(q2) * u2
+		rx1 = -ry1 * (k1 * dp1x + k2 * u1)
+
+	else
+		rx1 = 0.0
+		ry1 = 0.0
+	end
+
+	if pop2y < 0.0
+		pop2x = q1 - l2 * cos(q3 - q4 - q5 - q6 - q7)
+		vop2x = u1 - l2 * sin(q3-q4-q5-q6-q7)*(u3-u4-u5-u6-u7)
+		vop2y = u2 - l2 * cos(q3-q4-q5-q6-q7)*(u3-u4-u5-u6-u7)	
+		dp2x = pop2x - pop2xi
+		ry2 = -k7 * pop2y - k8 * abs(pop2y) * vop2y
+		rx2 = -ry2 * (k5 * dp2x + k6 * vop2x)
+	else
+		rx2 = 0.0
+		ry2 = 0.0
+	end
+
+    return rx1+rx2, ry1+ry2
+end
+
+get_forces(sol) = [get_forces(sol,t) for t in sol.t]
+rx(sol) = [first(x) for x in get_forces(sol)]
+ry(sol) = [last(x) for x in get_forces(sol)]
+
+contact_time(sol) = sol.t[end]
+function aerial_time(sol)
+    tc = contact_time(sol)
+    vcmyto = vocmy(sol,tc)
+    discrim = vcmyto^2 + 4 * p.g * (pocmy(sol, 0.0) - pocmy(sol, tc))
+    discrim ≥ 0.0 ? ta = (-vcmyto - sqrt(discrim)) / sol.prob.p.g : error("imaginary aerial time")
+
+    return ta
+end
+
+# swing time
+swing_time(sol) = contact_time(sol) + 2aerial_time(sol)
+
+# step averaged velocity
+function step_velocity(sol)
+    tc = contact_time(sol)
+    ta = aerial_time(sol)
+    lc = pocmx(sol, tc) - pocmx(sol, 0.0)   # contact length
+    vcmyto = vocmy(sol, tc)
+    la = vocmx(sol, tc) * ta    # aerial length
+
+    return (lc + la) / (ta + tc) # step averaged velocity
+end

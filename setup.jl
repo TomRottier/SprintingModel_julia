@@ -116,7 +116,7 @@ function setup(;
     initial_conditions="data/initial_conditions.csv",
     torque_generator_parameters="data/torque_generator_parameters.csv",
     activation_parameters="data/activation_parameters.csv",
-    swing="data/swing.csv",
+    swing="data/matching_swing.csv",
     hat="data/HAT.csv")
 
     # load parameters
@@ -124,7 +124,8 @@ function setup(;
     @inbounds footang, g, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi = input_p
     mt = ma + mb + mc + md + me + mf + mg
     u8 = u9 = 0.0
-
+    footang = deg2rad(footang)
+    
     # load initial conditions
     input_u, headers_u = readdlm(initial_conditions, ',', Float64, header=true)
     @inbounds Xmtp, Ymtp, q3, θm, θa, θk, θh, vcmx, vcmy, u3, ωm, ωa, ωk, ωh = input_u

@@ -1,7 +1,7 @@
 # packages and code loaded on all processes
 using DelimitedFiles
 using StaticArrays, Parameters, Dierckx, SimulatedAnnealing, Setfield
-using OrdinaryDiffEq
+using OrdinaryDiffEq, Plots
 
 include("musclemodel/torque_generator.jl")
 include("model/parameters.jl")
@@ -14,13 +14,14 @@ include("callbacks.jl")
 include("optimisation.jl")
 
 # set up initial model
-p, u₀ = setup(initial_conditions="optimisations/sprinter/initial_conditions.csv")
+p, u₀ = setup(initial_conditions="optimisations/sprinter/initial_conditions.csv",
+            swing="data/sprinter_swing.csv")
 
 # time span
 tspan = (0.0, 0.111)
 
 # matching variables
-VCMX = 10.1
+VCMX = 10.3
 TSW = 0.374
 
 # initialise problem
