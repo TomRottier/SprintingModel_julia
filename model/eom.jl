@@ -48,9 +48,9 @@ function eom(u, p, t)
 	end
 
 	if pop2y < 0.0
-		pop2x = q1 - l2 * z[28]
-		vop2x = u1 - l2 * z[30] * ((((u3 - u4) - u5) - u6) - u7)
-		vop2y = u2 - l2 * z[31] * ((((u3 - u4) - u5) - u6) - u7)	
+		pop2x = q1 - l2 * cos(q3 - q4 - q5 - q6 - q7)
+		vop2x = u1 - l2 * sin(q3-q4-q5-q6-q7)*(u3-u4-u5-u6-u7)
+		vop2y = u2 - l2 * cos(q3-q4-q5-q6-q7)*(u3-u4-u5-u6-u7)	
 		dp2x = pop2x - pop2xi
 		ry2 = -k7 * pop2y - k8 * abs(pop2y) * vop2y
 		rx2 = -ry2 * (k5 * dp2x + k6 * vop2x)

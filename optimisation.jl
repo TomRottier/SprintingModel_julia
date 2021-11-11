@@ -22,7 +22,7 @@ function cost(sol)
     lc = pocmx(sol, tc) - pocmx(sol, 0.0)   # contact length
     vcmyto = vocmy(sol, tc)
     discrim = vcmyto^2 + 4 * p.g * (pocmy(sol, 0.0) - pocmy(sol, tc))
-    discrim ≥ 0.0 ? ta = (-vcmyto - sqrt(discrim)) / p.g : return 1000.0 # aerial time, return if none
+    discrim ≥ 0.0 ? ta = (-vcmyto - sqrt(discrim)) / sol.prob.p.g : return 1000.0 # aerial time, return if none
     la = vocmx(sol, tc) * ta    # aerial length
     tsw = tc + 2ta
     vcmx = (lc + la) / (ta + tc) # step averaged velocity
