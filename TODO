@@ -13,6 +13,8 @@
         - could break up everything into smaller functions?
     - dont want to change parallel_setip.jl to change VCMX
 
+[] add functions to calculate forces
+
 [] repeat stance phase optimisations
 
 

@@ -23,3 +23,6 @@ prob = ODEProblem(eom, u₀, tspan, p)
 # solve
 sol = solve(prob, Tsit5(), reltol=1e-6, abstol=1e-6, saveat=0.001, callback=cb)
 
+# plot solution
+animate_model(sol)
+
