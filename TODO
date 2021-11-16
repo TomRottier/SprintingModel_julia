@@ -1,4 +1,7 @@
-# general
+# TODO
+
+## general
+
 [x] refactor parallelisation setup
 
 [x] create new parameter struct without reading from file each time
@@ -11,13 +14,14 @@
     - dont want to change initial_conditions.csv each time
         - new vcmx value requires u1,u2 to be recalculated
         - could break up everything into smaller functions?
-    - dont want to change parallel_setip.jl to change VCMX
+    - dont want to change parallel_setup.jl to change VCMX
 
-[] add functions to calculate forces
+[x] add functions to calculate forces
+
+[] quicker way to create and run a model from results.csv
 
 [] repeat stance phase optimisations
 
+## whole stride optimisations
 
-# whole stride optimisations
 [] virtual second contact
-

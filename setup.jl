@@ -6,7 +6,7 @@ struct Inputs
     torque_parameters::Matrix{Any}
     activation_parameters::Matrix{Any}
     swing_data::Matrix{Float64}
-    hat_data::Vector{Float64}
+    hat_data::Matrix{Float64}
 end
 
 function load_inputs(; 
@@ -14,7 +14,7 @@ function load_inputs(;
     initial_conditions="data/initial_conditions.csv",
     torque_generator_parameters="data/torque_generator_parameters.csv",
     activation_parameters="data/activation_parameters.csv",
-    swing="data/swing.csv",
+    swing="data/matching_swing.csv",
     hat="data/HAT.csv")
 
     # load parameters
@@ -22,7 +22,6 @@ function load_inputs(;
 
     # load initial conditions
     input_u, headers_u = readdlm(initial_conditions, ',', Float64, header=true)
-
 
     # load torque generator parameters
     tq_p, headers_tq = readdlm(torque_generator_parameters, ',', header=true)
@@ -35,9 +34,29 @@ function load_inputs(;
     hat_data = readdlm(hat, ',', Float64, skipstart=1)
 
     # return in struct
-    return Inputs(input_p, input_u, tq_p, α_p, swing_data, hat_data)
+    return Inputs(vec(input_p), vec(input_u), tq_p, α_p, swing_data, hat_data)
 end
 
+# returns the parameters for a given speed from a csv file
+function read_from_results(fname, speed)
+    p, header = readdlm(fname, ',', Float64, header=true)
+    row = p[p[:,1] .== speed,:]
+
+    return row[3:end]
+end
+
+# returns u₀ and p created from results.csv
+function load_from_results(inputs, fname, speed)
+    p = read_from_results(fname, speed)
+
+    # create new inputs
+    _inputs = deepcopy(inputs)
+    _inputs.initial_conditions[8] = speed
+    _inputs.activation_parameters[:,2:end] = reshape(p, :, 6) |> permutedims # reshape to 6xn matrix, row major
+
+    return set_values(_inputs)
+end 
+    
 function set_values(inputs)
     @unpack parameters, initial_conditions, torque_parameters, activation_parameters, swing_data, hat_data = inputs
 
@@ -108,6 +127,16 @@ function set_values(inputs)
     kf = TorqueGenerator(deg2rad(θk), deg2rad(ωk), tq_p[5][1], tq_p[5][2], α_p[5])
     af = TorqueGenerator(deg2rad(θa), deg2rad(ωa), tq_p[6][1], tq_p[6][2], α_p[6])
 
+    # intial CC angles
+    θcc₀ = map(x -> x.cc.θ, [he,ke,ae,hf,kf,af])
+
+    # parameters
+    p = Params(ea, fa, gs, eap, fap, gsp, eapp, fapp, gspp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi)
+
+    # intial conditions
+    u₀ =  SVector(q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7, θcc₀...)
+
+    return p, u₀
     
 end
 
