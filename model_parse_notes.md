@@ -15,3 +15,5 @@
 - Params struct can't convert u8,u9 to floats which it needs to have same type as other fields
 
 - Have to change torque generator type afterwards as you won't know from al file
+
+- forces in eom.jl use z values which, on intial call, are not set []

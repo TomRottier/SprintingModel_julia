@@ -14,14 +14,14 @@ include("callbacks.jl")
 include("optimisation.jl")
 
 # set up initial model
-const p, u₀ = setup(initial_conditions="optimisations/sprinter/initial_conditions.csv")
+const inputs = load_inputs()
+p, u₀ = set_values(inputs)
 
 # time span
 const tspan = (0.0, 0.111)
 
-# matching variables
-VCMX = 10.3
-TSW = 0.374
-
 # initialise problem
 const prob = ODEProblem(eom, u₀, tspan, p)
+
+# swing time
+TSW = 0.374
