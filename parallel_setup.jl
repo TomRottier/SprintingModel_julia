@@ -14,14 +14,14 @@ include("callbacks.jl")
 include("optimisation.jl")
 
 # set up initial model
-const inputs = load_inputs()
+inputs = load_inputs(swing="data/college_swing.csv")
 p, u₀ = set_values(inputs)
 
 # time span
 const tspan = (0.0, 0.111)
 
 # initialise problem
-const prob = ODEProblem(eom, u₀, tspan, p)
+prob = ODEProblem(eom, u₀, tspan, p)
 
 # swing time
 TSW = 0.374
