@@ -11,14 +11,13 @@
 [x] compare performance of Dierckx.jl with other packages - no real difference
 
 [] find better way to run optimisations
-    - dont want to change initial_conditions.csv each time
-        - new vcmx value requires u1,u2 to be recalculated
-        - could break up everything into smaller functions?
-    - dont want to change parallel_setup.jl to change VCMX
+    - [x] dont want to change initial_conditions.csv each time
+    - [x] dont want to change parallel_setup.jl to change VCMX
+    - still need to chane parallel_setup.jl to change swing data
 
 [x] add functions to calculate forces
 
-[] quicker way to create and run a model from results.csv
+[x] quicker way to create and run a model from results.csv
 
 [] repeat stance phase optimisations
 
