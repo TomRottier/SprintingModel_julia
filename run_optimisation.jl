@@ -14,7 +14,7 @@ Nt = 5
 
 # initial guess
 x₀ = rand(N)
-f₀ = simulate(x₀, p, prob)
+f₀ = simulate(x₀, p, prob, u₀)
 
 # bounds and step length
 ub = ones(N)
@@ -22,13 +22,13 @@ lb = repeat([0.01, 0.0, 0.1, 0.01, 0.0, 0.1, 0.01], 6) # constrain lb of activat
 v = ub .- lb
 
 # initial structs
-current = State(f₀, x₀, v, T₀)
-result = Result(f₀, x₀)
+current = State(f=f₀, x=x₀, v=v, T=T₀)
+result = Result(fopt=f₀, xopt=x₀)
 options = Options(func = x -> simulate(x, p, prob, u₀), N = N, Ns = Ns, Nt = Nt, lb = lb, ub = ub, tol = 1e-4, print_status = true)
 
 # optimisation loop
 submax_velocity = true
-while submax_velocity
+@time while submax_velocity
     # set velocity and reinitialise initial conditions and prob
     @everywhere begin
         VCMX += 0.1
@@ -42,20 +42,20 @@ while submax_velocity
     # (re)initialise sa
     x₀ = result.xopt    # use previous optimal x as starting point for next optimisation
     f₀ = simulate(x₀, p, prob, u₀)
-    current = State(f₀, x₀, v, T₀)
+    current = State(f=f₀, x=x₀, v=v, T=T₀)
     options = Options(func = x -> simulate(x, p, prob, u₀), N = N, Ns = Ns, Nt = Nt, lb = lb, ub = ub, tol = 1e-4, print_status = true)
-    result = Result(f₀, x₀)
+    result = Result(fopt=f₀, xopt=x₀)
 
     # run sa
     @time sa!(current, result, options)
 
     # write results to file
-    open("optimisations/sprinter/results.csv", "a") do io
+    open("optimisations/college/results.csv", "a") do io
         writedlm(io, [VCMX result.fopt result.xopt...], ',')
     end
 
     # check if conditions met to be able to run at VCMX
-    popt = updateParameters(p, result.xopt, u₀)
+    popt, u₀ = updateParameters(p, result.xopt, u₀)
     sol = solve(ODEProblem(eom, u₀, tspan, popt), Tsit5(), abstol = 1e-5, reltol = 1e-5, callback = cb, saveat = 0.001)
     animate_model(sol)
     submax_velocity = abs(swing_time(sol) - TSW) < 0.001 && abs(step_velocity(sol) - VCMX) < 0.01

@@ -14,7 +14,7 @@ include("callbacks.jl")
 include("optimisation.jl")
 
 # set up initial model
-inputs = load_inputs()
+inputs = load_inputs(swing="data/college_swing.csv")
 p, u₀ = set_values(inputs)
 
 # time span
