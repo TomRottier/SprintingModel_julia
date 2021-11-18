@@ -1,34 +1,22 @@
 # functions for optimisations
 
 # update and run simulation with new parameters
-function simulate(x, p, prob)
+function simulate(x, p, prob, u₀)
     # new parameter struct with updated parameters from x and reset torque generators
-    pnew = updateParameters(p, x, prob.u0)
+    pnew, unew = updateParameters(p, x, u₀)
 
     # remake problem with updated parameters
-    newprob = remake(prob, p=pnew) # z values not being reset? - z values dont need to be reset
+    newprob = remake(prob, u0 = unew, p = pnew)
 
     # solve
-    sol = solve(newprob, Tsit5(), abstol=1e-5, reltol=1e-5, save_everystep=false, callback=cb)
+    sol = solve(newprob, Tsit5(), abstol = 1e-5, reltol = 1e-5, save_everystep = false, callback = cb)
 
     # cost 
     return cost(sol)
 end
 
 # cost function
-function cost(sol)
-    global VCMX,TSW
-    tc = sol.t[end]     # contact time
-    lc = pocmx(sol, tc) - pocmx(sol, 0.0)   # contact length
-    vcmyto = vocmy(sol, tc)
-    discrim = vcmyto^2 + 4 * p.g * (pocmy(sol, 0.0) - pocmy(sol, tc))
-    discrim ≥ 0.0 ? ta = (-vcmyto - sqrt(discrim)) / sol.prob.p.g : return 1000.0 # aerial time, return if none
-    la = vocmx(sol, tc) * ta    # aerial length
-    tsw = tc + 2ta
-    vcmx = (lc + la) / (ta + tc) # step averaged velocity
-
-    return 10(abs(VCMX - vcmx)) + abs(TSW - tsw)
-end    
+cost(sol) = 10(abs(VCMX - step_velocity(sol))) + abs(TSW - swing_time(sol))
 
 # converts input vector to parameters to be optimised and resets torque generators to inital values
 function updateParameters(p, x, u₀)
@@ -59,7 +47,13 @@ function updateParameters(p, x, u₀)
     _kf = TorqueGenerator(θk, ωk, kf.cc.cc_p, kf.sec.sec_p, kf_α_p)
     _af = TorqueGenerator(θa, ωa, af.cc.cc_p, af.sec.sec_p, af_α_p)
 
+    # get new initial CC angles
+    _u₀ = SVector(u₀[1:14]..., map(x -> x.cc.θ, [_he, _ke, _ae, _hf, _kf, _af])...)
+
+
     # returns new Params struct with torque generators ready for next simulation
-    return setproperties(p, (he = _he, ke = _ke, ae = _ae, hf = _hf, kf = _kf, af = _af))
+    _p = setproperties(p, (he = _he, ke = _ke, ae = _ae, hf = _hf, kf = _kf, af = _af))
+
+    return _p, _u₀
 end
 

@@ -1,6 +1,6 @@
 using Distributed
 
-addprocs(6, exeflags="--project")   # create worker processes with current project activated
+addprocs(6, exeflags = "--project")   # create worker processes with current project activated
 @everywhere include("parallel_setup.jl")
 
 # set initial speed
@@ -18,19 +18,19 @@ f₀ = simulate(x₀, p, prob)
 
 # bounds and step length
 ub = ones(N)
-lb = repeat([0.01,0.0,0.1,0.01,0.0,0.1,0.01], 6) # constrain lb of activation to 0.01
+lb = repeat([0.01, 0.0, 0.1, 0.01, 0.0, 0.1, 0.01], 6) # constrain lb of activation to 0.01
 v = ub .- lb
 
 # initial structs
 current = State(f₀, x₀, v, T₀)
 result = Result(f₀, x₀)
-options = Options(func=x -> simulate(x, p, prob), N=N, Ns=Ns, Nt=Nt, lb=lb, ub=ub, tol=1e-4, print_status=true)
+options = Options(func = x -> simulate(x, p, prob, u₀), N = N, Ns = Ns, Nt = Nt, lb = lb, ub = ub, tol = 1e-4, print_status = true)
 
 # optimisation loop
 submax_velocity = true
 while submax_velocity
     # set velocity and reinitialise initial conditions and prob
-    @everywhere begin 
+    @everywhere begin
         VCMX += 0.1
         inputs.initial_conditions[8] = VCMX
         p, u₀ = set_values(inputs)
@@ -41,22 +41,22 @@ while submax_velocity
 
     # (re)initialise sa
     x₀ = result.xopt    # use previous optimal x as starting point for next optimisation
-    f₀ = simulate(x₀, p, prob)
+    f₀ = simulate(x₀, p, prob, u₀)
     current = State(f₀, x₀, v, T₀)
-    options = Options(func=x -> simulate(x, p, prob), N=N, Ns=Ns, Nt=Nt, lb=lb, ub=ub, tol=1e-4, print_status=true)
+    options = Options(func = x -> simulate(x, p, prob, u₀), N = N, Ns = Ns, Nt = Nt, lb = lb, ub = ub, tol = 1e-4, print_status = true)
     result = Result(f₀, x₀)
 
     # run sa
     @time sa!(current, result, options)
 
     # write results to file
-    open("optimisations/sprinter/results.csv", "a") do io 
+    open("optimisations/sprinter/results.csv", "a") do io
         writedlm(io, [VCMX result.fopt result.xopt...], ',')
     end
 
     # check if conditions met to be able to run at VCMX
     popt = updateParameters(p, result.xopt, u₀)
-    sol = solve(ODEProblem(eom, u₀, tspan, popt), Tsit5(), abstol=1e-5, reltol=1e-5, callback=cb, saveat=0.001)
+    sol = solve(ODEProblem(eom, u₀, tspan, popt), Tsit5(), abstol = 1e-5, reltol = 1e-5, callback = cb, saveat = 0.001)
     animate_model(sol)
     submax_velocity = abs(swing_time(sol) - TSW) < 0.001 && abs(step_velocity(sol) - VCMX) < 0.01
 end

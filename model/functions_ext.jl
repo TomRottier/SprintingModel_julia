@@ -21,22 +21,22 @@ function get_torque_generator(sol, t)
     @unpack he, hf, ke, kf, ae, af = sol.prob.p
 
     # update torque generators
-    θh = π + q7 
-	θk = π - q6
-	θa = π + q5 
-	θm = q4
-	ωh = u7
-	ωk = -u6
-	ωa = u5
-	ωm = u4
+    θh = π + q7
+    θk = π - q6
+    θa = π + q5
+    θm = q4
+    ωh = u7
+    ωk = -u6
+    ωa = u5
+    ωm = u4
 
     # get values from torque generators 
     d_he = get_torque_generator(he, t, 2π - θh, -ωh, θhe)
-	d_ke = get_torque_generator(ke, t, 2π - θk, -ωk, θke)
-	d_ae = get_torque_generator(ae, t, 2π - θa, -ωa, θae)
-	d_hf = get_torque_generator(hf, t, θh, ωh, θhf)
-	d_kf = get_torque_generator(kf, t, θk, ωk, θkf)
-	d_af = get_torque_generator(af, t, θa, ωa, θaf)
+    d_ke = get_torque_generator(ke, t, 2π - θk, -ωk, θke)
+    d_ae = get_torque_generator(ae, t, 2π - θa, -ωa, θae)
+    d_hf = get_torque_generator(hf, t, θh, ωh, θhf)
+    d_kf = get_torque_generator(kf, t, θk, ωk, θkf)
+    d_af = get_torque_generator(af, t, θa, ωa, θaf)
 
     # CC torque relevant values
     out = map([d_he, d_hf, d_ke, d_kf, d_ae, d_af]) do d
@@ -54,13 +54,13 @@ function plotTorques(t, v)
     plts = Vector{Any}(undef, n)
     titles = ["he", "hf", "ke", "kf", "ae", "af"]
     labels = ["α" "τ_θ" "τ_ω"]
-    for i in 1:n
+    for i = 1:n
         data = hcat([tup[i] for tup in v]...)'
-        plts[i] = plot(t, data, label=labels, title=titles[i], legend=:outertopright, xaxis="time (s)")
+        plts[i] = plot(t, data, label = labels, title = titles[i], legend = :outertopright, xaxis = "time (s)")
     end
 
-    plot(size=(600, 600), plts..., layout=(3, 2), ylims=(-.1, 1.7), yticks=0:0.3:1.5)
-    
+    plot(size = (600, 600), plts..., layout = (3, 2), ylims = (-.1, 1.7), yticks = 0:0.3:1.5)
+
 end
 
 plotTorques(sol) = plotTorques(sol.t, get_torque_generator(sol))
@@ -70,43 +70,44 @@ function get_forces(sol, t)
     @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7 = sol(t)
     @unpack k1, k2, k3, k4, k5, k6, k7, k8, l2, pop1xi, pop2xi = sol.prob.p
 
-    pop2y = q2 - l2 * sin(q3 - q4 - q5 - q6 - q7)		
+    pop2y = q2 - l2 * sin(q3 - q4 - q5 - q6 - q7)
 
     if q2 < 0.0
-		dp1x = q1 - pop1xi
-		ry1 = -k3 * q2 - k4 * abs(q2) * u2
-		rx1 = -ry1 * (k1 * dp1x + k2 * u1)
+        dp1x = q1 - pop1xi
+        ry1 = -k3 * q2 - k4 * abs(q2) * u2
+        rx1 = -ry1 * (k1 * dp1x + k2 * u1)
 
-	else
-		rx1 = 0.0
-		ry1 = 0.0
-	end
+    else
+        rx1 = 0.0
+        ry1 = 0.0
+    end
 
-	if pop2y < 0.0
-		pop2x = q1 - l2 * cos(q3 - q4 - q5 - q6 - q7)
-		vop2x = u1 - l2 * sin(q3-q4-q5-q6-q7)*(u3-u4-u5-u6-u7)
-		vop2y = u2 - l2 * cos(q3-q4-q5-q6-q7)*(u3-u4-u5-u6-u7)	
-		dp2x = pop2x - pop2xi
-		ry2 = -k7 * pop2y - k8 * abs(pop2y) * vop2y
-		rx2 = -ry2 * (k5 * dp2x + k6 * vop2x)
-	else
-		rx2 = 0.0
-		ry2 = 0.0
-	end
+    if pop2y < 0.0
+        pop2x = q1 - l2 * cos(q3 - q4 - q5 - q6 - q7)
+        vop2x = u1 - l2 * sin(q3 - q4 - q5 - q6 - q7) * (u3 - u4 - u5 - u6 - u7)
+        vop2y = u2 - l2 * cos(q3 - q4 - q5 - q6 - q7) * (u3 - u4 - u5 - u6 - u7)
+        dp2x = pop2x - pop2xi
+        ry2 = -k7 * pop2y - k8 * abs(pop2y) * vop2y
+        rx2 = -ry2 * (k5 * dp2x + k6 * vop2x)
+    else
+        rx2 = 0.0
+        ry2 = 0.0
+    end
 
-    return rx1+rx2, ry1+ry2
+    return rx1 + rx2, ry1 + ry2
 end
 
-get_forces(sol) = [get_forces(sol,t) for t in sol.t]
+get_forces(sol) = [get_forces(sol, t) for t in sol.t]
 rx(sol) = [first(x) for x in get_forces(sol)]
 ry(sol) = [last(x) for x in get_forces(sol)]
 
 contact_time(sol) = sol.t[end]
 function aerial_time(sol)
+    @unpack g = sol.prob.p
     tc = contact_time(sol)
-    vcmyto = vocmy(sol,tc)
-    discrim = vcmyto^2 + 4 * p.g * (pocmy(sol, 0.0) - pocmy(sol, tc))
-    discrim ≥ 0.0 ? ta = (-vcmyto - sqrt(discrim)) / sol.prob.p.g : error("imaginary aerial time")
+    vcmyto = vocmy(sol, tc)
+    discrim = vcmyto^2 + 4.0g * (pocmy(sol, 0.0) - pocmy(sol, tc))
+    discrim ≥ 0.0 ? ta = (-vcmyto - sqrt(discrim)) / g : ta = 100_000.0
 
     return ta
 end
