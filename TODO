@@ -24,3 +24,7 @@
 ## whole stride optimisations
 
 [] virtual second contact
+    - [x] add a saving callback that saves the force (and any other variables of interest) produced at each timestep
+    - [] fit a function to these variables e.g. rx/ry as functions of CoM height
+    - [] add flag to parameters to signal when second contact occuring
+    - [] set values of virtual contact forces from function

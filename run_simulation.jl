@@ -1,6 +1,6 @@
 using DelimitedFiles
 using StaticArrays, Parameters, Dierckx, Setfield
-using OrdinaryDiffEq, Plots
+using OrdinaryDiffEq, Plots, DiffEqCallbacks
 
 include("musclemodel/torque_generator.jl")
 include("model/parameters.jl")
@@ -22,7 +22,7 @@ tspan = (0.0, 0.111)
 prob = ODEProblem(eom, u₀, tspan, p)
 
 # solve
-sol = solve(prob, Tsit5(), reltol = 1e-5, abstol = 1e-5, saveat = 0.001, callback = cb)
+sol = solve(prob, Tsit5(), reltol = 1e-5, abstol = 1e-5, saveat = 0.001, callback = cbs)
 
 # plot solution
 animate_model(sol)
