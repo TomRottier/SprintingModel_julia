@@ -1,5 +1,5 @@
 # Automatically generated
-struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9}
+mutable struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9}
     z::Vector{Float64}
     ea::F1
     fa::F2
@@ -59,11 +59,12 @@ struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9}
     mt::T
     u8::T
     u9::T
-    vrx::F10
-    vry::F11
+    vrx
+    vry
     virtual_stance::Bool
 
 end
+# TODO: sort out struct ^ mutable or not, type parameters for functions
 
 # initialise with constant values
 function Params(ea, fa, gs, eap, fap, gsp, eapp, fapp, gspp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi)
@@ -72,8 +73,9 @@ function Params(ea, fa, gs, eap, fap, gsp, eapp, fapp, gspp, ae, af, footang, g,
     u8 = 0.0
     u9 = 0.0
 
-    vrx(x) -> 0.0
-    vry(x) -> 0.0
+    # need to make correct type
+    vrx = Spline1D(0:0.1:1.0, 0:10)
+    vry = Spline1D(0:0.1:1.0, 0:10)
     virtual_stance = false
 
     z[295] = l12 * mf

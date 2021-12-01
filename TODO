@@ -26,5 +26,12 @@
 [] virtual second contact
     - [x] add a saving callback that saves the force (and any other variables of interest) produced at each timestep
     - [] fit a function to these variables e.g. rx/ry as functions of CoM height
-    - [] add flag to parameters to signal when second contact occuring
-    - [] set values of virtual contact forces from function
+    - [x] add flag to parameters to signal when second contact occuring
+    - [x] set values of virtual contact forces from function
+
+[] maybe need to add air resistance?
+    - e.g. initial velocity 10.0 m/s
+    - end of stance #1 velocity 10.05 m/s
+    - velocity at start of stance #2 10.05 m/s
+    - velocity at end of stance #2 = 10.1 m/s
+    - accelerating!

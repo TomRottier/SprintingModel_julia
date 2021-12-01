@@ -12,11 +12,11 @@ include("setup.jl")
 include("callbacks.jl")
 
 # set up model
-inputs = load_inputs(swing = "data/sprinter_swing.csv")
-p, u₀ = load_from_results(inputs, "optimisations/sprinter/results.csv", 10.1)
+inputs = load_inputs(swing = "data/matching_swing.csv")
+p, u₀ = load_from_results(inputs, "optimisations/matching/results.csv", 10.0)
 
 # time span
-tspan = (0.0, 0.111)
+tspan = (0.0, 0.5)
 
 # set up problem
 prob = ODEProblem(eom, u₀, tspan, p)
