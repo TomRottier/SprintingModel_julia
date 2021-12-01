@@ -14,7 +14,7 @@ Nt = 5
 
 # initial guess
 x₀ = rand(N)
-f₀ = simulate(x₀, p, prob)
+f₀ = simulate(x₀, p, prob, u₀)
 
 # bounds and step length
 ub = ones(N)

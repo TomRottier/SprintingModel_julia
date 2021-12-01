@@ -19,3 +19,5 @@
 - forces in eom.jl use z values which, on intial call, are not set []
 
 - may be useful to have some functions also in z form e.g. when calculating pocmy in eom
+
+- angle-driven joint torque functions need up's and vrx/y

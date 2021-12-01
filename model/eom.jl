@@ -2,6 +2,7 @@
 function eom(u, p, t)
     @unpack ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi, mt, u8, u9, z = p
     @unpack ea, fa, gs, eap, fap, gsp, eapp, fapp, gspp = p
+    @unpack vrx, vry, virtual_stance = p
     @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7, θhe, θke, θae, θhf, θkf, θaf = u
 
     # specified variables
@@ -68,9 +69,8 @@ function eom(u, p, t)
     end
 
     # virtual grf
-    cmy = q2 + z[56] * z[25] + z[57] * z[44] + z[58] * z[48] + z[59] * z[51] + z[60] * z[2] + 0.5 * z[55] * z[40] + 0.5 * z[61] * z[36] - z[54] * z[29]
-    vrx = virtual_stance ? vrx(cmy) : 0.0
-    vry = virtual_stance ? vry(cmy) : 0.0
+    vrx = virtual_stance ? vrx(t) : 0.0
+    vry = virtual_stance ? vry(t) : 0.0
 
     # z variables
     z[153] = ator + ktor

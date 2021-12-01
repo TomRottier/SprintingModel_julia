@@ -11,7 +11,7 @@ function condition(out, u, t, integrator)
     out[1] = u[2]
 
     # second contact occurs when CoM height equal or lower to that at touchdown
-    out[2] = pocmy(integrator.sol, t) - saved_values.saveval[1][1]
+    out[2] = pocmy(integrator.sol, t) - pocmy(integrator.sol, 0.0)
 
     # end of integration when stance leg touches down again
     # also uses out[1] (q2 y position)
@@ -22,27 +22,15 @@ end
 function affect!(integrator, idx)
 
     if idx == 1
-        # fit spline to cmy-grf values when stance ends
-        # when stance ends fit function to pocmy-grf 
-        cmy = [x[1] for x in saved_values.savevals]
-        rx = [x[2] for x in saved_values.savevals]
-        ry = [x[3] for x in saved_values.savevals]
-
-        _vrx = Spline1D(cmy, rx)
-        _vry = Spline1D(cmy, ry)
-
-        vrx(s) = evaluate(_vrx, s)
-        vry(s) = evaluate(_vry, s)
-
-        integrator.prob.p.vrx = vrx
-        integrator.prob.p.vry = vry
+        # do nothing when stance ends
+        println("stance ended at $(integrator.t)")
 
     elseif idx == 2
         # do nothing if (CoM height - initial CoM height) increases to zero
         return nothing
 
     elseif idx == 3
-        # do nothing if q2 increases to zero
+        # do nothing if mtpy increases to zero
         return nothing
 
     end
@@ -52,17 +40,40 @@ end
 ## affect integrator when condition met and downcrossing (+ve to -ve)
 function affect_neg!(integrator, idx)
 
-    if idx == 1
+    # TODO: tidy this up
+    if idx == 1 && integrator.t > 0.1 # toe begins above the ground
         # terminate integration if q2 decreases to zero
+        println("terminating due to condition 1")
         terminate!(integrator)
-
     elseif idx == 2
-        # when virtual stance occuring set virtual_stance to true 
-        integrator.prob.p.virtual_stance = true
+        if integrator.p.virtual_stance == false # fit spline to grf relative to start of stance
+            T = integrator.t
+            _t = deepcopy(saved_values.t)
+            _cmy = deepcopy([x[1] for x in saved_values.saveval])
+            _rx = deepcopy([x[2] for x in saved_values.saveval])
+            _ry = deepcopy([x[3] for x in saved_values.saveval])
+
+            _vrx = Spline1D(_t, _rx)
+            _vry = Spline1D(_t, _ry)
+
+            vrx(t) = evaluate(_vrx, t - T)
+            vry(t) = evaluate(_vry, t - T)
+            # integrator.p = setproperties(integrator.p, (vrx = vrx, vry = vry))
+            integrator.p.vrx = vrx
+            integrator.p.vry = vry
+
+            # when virtual stance occuring set virtual_stance to true 
+            integrator.p.virtual_stance = true
+
+            println("virtual stance begin at $(integrator.t)")
+        else # when com y returns to touchdown position after second stance
+            terminate!(integrator)
+        end
 
     elseif idx == 3
         # terminate integration if mtpy decreases to zero
         terminate!(integrator)
+        println("terminating due to condition 3, pop2y = $(pop2y(integrator.sol, integrator.t))")
     end
 
 end
@@ -71,7 +82,7 @@ end
 # function to calculate saved values
 function save_func(u, t, integrator)
     @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7 = u
-    @unpack k1, k2, k3, k4, k5, k6, k7, k8, l2, pop1xi, pop2xi = integrator.prob.p
+    @unpack k1, k2, k3, k4, k5, k6, k7, k8, l2, pop1xi, pop2xi, vrx, vry = integrator.p
 
     pop2y = q2 - l2 * sin(q3 - q4 - q5 - q6 - q7)
 
@@ -101,15 +112,19 @@ function save_func(u, t, integrator)
     rx = rx1 + rx2
     ry = ry1 + ry2
 
+    # vgrf
+    vrx = vrx(t)
+    vry = vry(t)
+
     # pocmy
     cmy = pocmy(integrator.sol, t)
 
-    return (cmy, rx, ry)
+    return (cmy, rx, ry, vrx, vry)
 end
 # saved values
-const saved_values = SavedValues(Float64, Tuple{Float64,Float64,Float64})
+const saved_values = SavedValues(Float64, Tuple{Float64,Float64,Float64,Float64,Float64})
 # would prefer to stop the saving callback once takeoff occurs but not sure if possible
-scb = SavingCallback(save_func, saved_values, saveat = 0:0.001:0.1)
+scb = SavingCallback(save_func, saved_values)
 
 ## callback function to pass 
 cb = VectorContinuousCallback(condition, affect!, affect_neg!, 3, save_positions = (false, true))
