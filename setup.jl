@@ -1,12 +1,13 @@
 # setup model
 # struct to hold values
 struct Inputs
-    parameters::Vector{Any}
+    parameters::Vector{Float64}
     initial_conditions::Vector{Float64}
     torque_parameters::Matrix{Any}
     activation_parameters::Matrix{Any}
     swing_data::Matrix{Float64}
     hat_data::Matrix{Float64}
+    matching_data::Matrix{Float64}
 end
 
 function load_inputs(;
@@ -15,7 +16,8 @@ function load_inputs(;
     torque_generator_parameters = "data/torque_generator_parameters.csv",
     activation_parameters = "data/activation_parameters.csv",
     swing = "data/matching_swing.csv",
-    hat = "data/HAT.csv")
+    hat = "data/HAT.csv",
+    matching_data = "data/matchingData.csv")
 
     # load parameters
     input_p, headers_p = readdlm(parameters, ',', Float64, header = true)
@@ -33,8 +35,12 @@ function load_inputs(;
     swing_data = readdlm(swing, ',', Float64, skipstart = 1)
     hat_data = readdlm(hat, ',', Float64, skipstart = 1)
 
+    # load matching data
+    matching_data, headers_matching = readdlm(matching_data, ',', Float64, skipstart = 1, header = true)
+    matching_data = matching_data[:, 1:2:end-2] # only use left side data
+
     # return in struct
-    return Inputs(vec(input_p), vec(input_u), tq_p, α_p, swing_data, hat_data)
+    return Inputs(vec(input_p), vec(input_u), tq_p, α_p, swing_data, hat_data, matching_data)
 end
 
 # returns the parameters for a given speed from a csv file
@@ -153,7 +159,8 @@ function setup(;
     torque_generator_parameters = "data/torque_generator_parameters.csv",
     activation_parameters = "data/activation_parameters.csv",
     swing = "data/matching_swing.csv",
-    hat = "data/HAT.csv")
+    hat = "data/HAT.csv",
+    matching_data = "data/matchingData.csv")
 
     # load parameters
     input_p, headers_p = readdlm(parameters, ',', Float64, header = true)
@@ -200,6 +207,10 @@ function setup(;
     gsp(t) = derivative(hat_spl, t, 1)
     gspp(t) = derivative(hat_spl, t, 2)
 
+    # load matching data
+    matching_data, headers_matching = readdlm(matching_data, ',', Float64, skipstart = 1, header = true)
+    matching_data = matching_data[1:2:end-2] # only use left side data
+
     # convert initial conditions into generalised coordinates and speeds
     q3 = q3 |> deg2rad              # q3 = q3
     q4 = θm |> deg2rad              # mang = q4
@@ -243,5 +254,5 @@ function setup(;
     # intial conditions
     u₀ = SVector(q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7, θcc₀...)
 
-    return p, u₀
+    return p, u₀, matching_data
 end

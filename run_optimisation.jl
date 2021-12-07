@@ -1,12 +1,12 @@
 using Distributed
 
-addprocs(6, exeflags = "--project")   # create worker processes with current project activated
+addprocs(4, exeflags = "--project")   # create worker processes with current project activated
 @everywhere include("parallel_setup.jl")
 
 # set initial speed
-@everywhere VCMX = 8.9
+@everywhere VCMX = 9.6
 
-# imulated annealing parameters
+# simulated annealing parameters
 T₀ = 0.5
 N = 42
 Ns = 12
@@ -50,13 +50,13 @@ while submax_velocity
     @time sa!(current, result, options)
 
     # write results to file
-    open("optimisations/sprinter/results.csv", "a") do io
+    open("optimisations/matching/results.csv", "a") do io
         writedlm(io, [VCMX result.fopt result.xopt...], ',')
     end
 
     # check if conditions met to be able to run at VCMX
-    popt = updateParameters(p, result.xopt, u₀)
-    sol = solve(ODEProblem(eom, u₀, tspan, popt), Tsit5(), abstol = 1e-5, reltol = 1e-5, callback = cb, saveat = 0.001)
+    popt, u₀opt = updateParameters(p, result.xopt, u₀)
+    sol = solve(ODEProblem(eom, u₀, tspan, popt), Tsit5(), abstol = 1e-5, reltol = 1e-5, callback = cbs, saveat = 0.001)
     animate_model(sol)
     submax_velocity = abs(swing_time(sol) - TSW) < 0.001 && abs(step_velocity(sol) - VCMX) < 0.01
 end

@@ -23,9 +23,9 @@
 
 ## whole stride optimisations
 
-[] virtual second contact
+[x] virtual second contact
     - [x] add a saving callback that saves the force (and any other variables of interest) produced at each timestep
-    - [] fit a function to these variables e.g. rx/ry as functions of CoM height
+    - [x] fit a function to these variables e.g. rx/ry as functions of time
     - [x] add flag to parameters to signal when second contact occuring
     - [x] set values of virtual contact forces from function
 
@@ -35,3 +35,14 @@
     - velocity at start of stance #2 10.05 m/s
     - velocity at end of stance #2 = 10.1 m/s
     - accelerating!
+
+[x] rmse comparison to data
+
+[] need to reset saved_values for every optimisation it seems
+    - but also don't want saved_values as non-const global - not sure how callbacks will have access to it then?
+
+[] what to do when simulation time longer than matching data
+    - use and evaluate functions instead?
+
+[] not sure virtual stance working in parallel
+    - virtual_stance not be reset?r
