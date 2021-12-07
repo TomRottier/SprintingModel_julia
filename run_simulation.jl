@@ -1,4 +1,4 @@
-using DelimitedFiles
+using DelimitedFiles, Statistics
 using StaticArrays, Parameters, Dierckx, Setfield
 using OrdinaryDiffEq, Plots, DiffEqCallbacks
 
@@ -12,11 +12,12 @@ include("setup.jl")
 include("callbacks.jl")
 
 # set up model
-inputs = load_inputs(swing = "data/matching_swing.csv")
+inputs = load_inputs()
 p, u₀ = load_from_results(inputs, "optimisations/matching/results.csv", 10.0)
+const matching_data = inputs.matching_data
 
 # time span
-tspan = (0.0, 0.5)
+tspan = (0.0, 0.484)
 
 # set up problem
 prob = ODEProblem(eom, u₀, tspan, p)
@@ -26,6 +27,10 @@ sol = solve(prob, Tsit5(), reltol = 1e-5, abstol = 1e-5, saveat = 0.001, callbac
 
 # plot solution
 animate_model(sol)
+
+
+
+
 
 
 function run_simulation(;

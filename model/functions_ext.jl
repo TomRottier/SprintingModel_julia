@@ -101,27 +101,35 @@ get_forces(sol) = [get_forces(sol, t) for t in sol.t]
 rx(sol) = [first(x) for x in get_forces(sol)]
 ry(sol) = [last(x) for x in get_forces(sol)]
 
-contact_time(sol) = sol.t[end]
-function aerial_time(sol)
-    @unpack g = sol.prob.p
-    tc = contact_time(sol)
-    vcmyto = vocmy(sol, tc)
-    discrim = vcmyto^2 + 4.0g * (pocmy(sol, 0.0) - pocmy(sol, tc))
-    discrim ≥ 0.0 ? ta = (-vcmyto - sqrt(discrim)) / g : ta = 100_000.0
 
-    return ta
-end
+## for stance simulation
+# contact_time(sol) = sol.t[end]
+# function aerial_time(sol)
+#     @unpack g = sol.prob.p
+#     tc = contact_time(sol)
+#     vcmyto = vocmy(sol, tc)
+#     discrim = vcmyto^2 + 4.0g * (pocmy(sol, 0.0) - pocmy(sol, tc))
+#     discrim ≥ 0.0 ? ta = (-vcmyto - sqrt(discrim)) / g : ta = 100_000.0
 
-# swing time
-swing_time(sol) = contact_time(sol) + 2aerial_time(sol)
+#     return ta
+# end
 
-# step averaged velocity
-function step_velocity(sol)
-    tc = contact_time(sol)
-    ta = aerial_time(sol)
-    lc = pocmx(sol, tc) - pocmx(sol, 0.0)   # contact length
-    vcmyto = vocmy(sol, tc)
-    la = vocmx(sol, tc) * ta    # aerial length
+# # swing time
+# swing_time(sol) = contact_time(sol) + 2aerial_time(sol)
 
-    return (lc + la) / (ta + tc) # step averaged velocity
-end
+# # step averaged velocity
+# function step_velocity(sol)
+#     tc = contact_time(sol)
+#     ta = aerial_time(sol)
+#     lc = pocmx(sol, tc) - pocmx(sol, 0.0)   # contact length
+#     vcmyto = vocmy(sol, tc)
+#     la = vocmx(sol, tc) * ta    # aerial length
+
+#     return (lc + la) / (ta + tc) # step averaged velocity
+# end
+
+## for stride simulation
+contact_idx(sv) = findfirst(x -> x ≥ 0.0, @view sv[2:end, 2])
+aerial_idx(sv) = findfirst(x -> x ≥ 0.0, @view sv[:, 4]) - contact_idx(sv)
+swing_time(sol, sv) = sol.t[contact_idx(sv)] + 2 * sol.t[aerial_idx(sv)]
+stride_velocity(sol) = mean(vocmx(sol))

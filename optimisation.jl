@@ -4,19 +4,49 @@
 function simulate(x, p, prob, u₀)
     # new parameter struct with updated parameters from x and reset torque generators
     pnew, unew = updateParameters(p, x, u₀)
+    pnew.virtual[3] = false
 
     # remake problem with updated parameters
     newprob = remake(prob, u0 = unew, p = pnew)
 
+    # TODO: means saved_values no longer accessible to outside this function e.g in affect_neg!
+    # reset values in saving callback
+    global saved_values
+    saved_values = SavedValues(Float64, Tuple{Float64,Float64,Float64,Float64})
+    scb = SavingCallback(save_func, saved_values)
+    cbs = CallbackSet(cb, scb)
+
     # solve
-    sol = solve(newprob, Tsit5(), abstol = 1e-5, reltol = 1e-5, save_everystep = false, callback = cb)
+    sol = solve(newprob, Tsit5(), abstol = 1e-5, reltol = 1e-5, saveat = 0.001, callback = cbs)
 
     # cost 
     return cost(sol)
 end
 
 # cost function
-cost(sol) = 10(abs(VCMX - step_velocity(sol))) + abs(TSW - swing_time(sol))
+# cost(sol) = 10(abs(VCMX - step_velocity(sol))) + abs(TSW - swing_time(sol))
+function cost(sol)
+    global matching_data
+
+    sol.retcode ∉ [:Success, :Terminated] && return 1.0e6
+
+    # orientation and configuration angles
+    N = length(sol.t)
+    hip_mse = mse(view(sol, 3, :), view(matching_data, 1:N, 2))
+    hat_mse = mse(hang(sol), view(matching_data, 1:N, 3))
+    knee_mse = mse(hang(sol), view(matching_data, 1:N, 4))
+    ankle_mse = mse(hang(sol), view(matching_data, 1:N, 5))
+
+    angles_cost = hat_mse + hip_mse + knee_mse + ankle_mse
+
+    # stride parameters
+    # speed_cost = stride_velocity(sol)
+
+    return angles_cost
+
+
+end
+mse(x, y) = (x .- y) .^ 2 |> mean
 
 # converts input vector to parameters to be optimised and resets torque generators to inital values
 function updateParameters(p, x, u₀)
