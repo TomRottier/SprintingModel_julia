@@ -4,6 +4,7 @@
 struct SECParameters
     k::Float64  # SEC stiffness
 end
+SECParameters(d::Dict{Symbol,Float64}) = SECParameters(d[:k])
 
 # SEC struct
 mutable struct SEC
