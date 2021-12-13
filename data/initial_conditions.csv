@@ -1,2 +1,3 @@
-mtp X (m), mtp y (m), q3 (deg),mtp angle (deg),ankle angle (deg),knee angle (deg),hip angle (deg),CoM velocity x (m/s),CoM velocity y (m/s),u3,mtp angular velocity (deg/s),ankle angular velocity (deg/s),knee angular velocity (deg/s),hip angular velocity (deg/s)
-0.0, 0.0, 81.451,143.563,120.502,157.074,144.11,9.67406,-0.7203,-24.9253,1064.1,-650.361,-160.134,429.803
+mtp_x,mtp_y,q3,mtp_angle,ankle_angle,knee_angle,hip_angle,vcmx,vcmy,u3,mtp_angular_velocity,ankle_angular_velocity,knee_angular_velocity,hip_angular_velocity
+m,m,deg,deg,deg,deg,deg,m/s,m/s,deg/s,deg/s,deg/s,deg/s,deg/s
+0.0,0.0,81.451,143.563,120.502,157.074,144.11,9.67406,-0.7203,-24.9253,1064.1,-650.361,-160.134,429.803

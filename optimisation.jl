@@ -17,10 +17,11 @@ function simulate(x, p, prob, u₀)
     cbs = CallbackSet(cb, scb)
 
     # solve
-    sol = solve(newprob, Tsit5(), abstol = 1e-5, reltol = 1e-5, saveat = 0.001, callback = cbs)
+    sol = solve(newprob, Tsit5(), abstol = 1e-5, reltol = 1e-5, saveat = 0.001, callback = cbs, dense=false)
 
     # cost 
     return cost(sol)
+    # return sol
 end
 
 # cost function
@@ -28,21 +29,22 @@ end
 function cost(sol)
     global matching_data
 
-    sol.retcode ∉ [:Success, :Terminated] && return 1.0e6
+    # sol.retcode ∉ [:Success, :Terminated] && return 1.0e6
 
     # orientation and configuration angles
     N = length(sol.t)
-    hip_mse = mse(view(sol, 3, :), view(matching_data, 1:N, 2))
-    hat_mse = mse(hang(sol), view(matching_data, 1:N, 3))
-    knee_mse = mse(hang(sol), view(matching_data, 1:N, 4))
-    ankle_mse = mse(hang(sol), view(matching_data, 1:N, 5))
+    hat_mse = mse(hang(sol), view(matching_data[:lhat], 1:N))
+    hip_mse = mse(view(sol, 3, :), view(matching_data[:lhip], 1:N))
+    knee_mse = mse(hang(sol), view(matching_data[:lknee], 1:N))
+    ankle_mse = mse(hang(sol), view(matching_data[:lankle], 1:N))
 
-    angles_cost = hat_mse + hip_mse + knee_mse + ankle_mse
+    angles_cost = hat_mse + hip_mse + knee_mse #+ ankle_mse
 
     # stride parameters
     # speed_cost = stride_velocity(sol)
+    time_cost = 1000* abs(sol.t[end] - 0.484)
 
-    return angles_cost
+    return angles_cost #+ time_cost
 
 
 end
@@ -62,12 +64,18 @@ function updateParameters(p, x, u₀)
     ωa = u5
 
     # manually seperate out
-    he_α_p = ActivationProfile(x[1:7])
-    ke_α_p = ActivationProfile(x[8:14])
-    ae_α_p = ActivationProfile(x[15:21])
-    hf_α_p = ActivationProfile(x[22:28])
-    kf_α_p = ActivationProfile(x[29:35])
-    af_α_p = ActivationProfile(x[36:42])
+    # he_α_p = ActivationProfile(x[1:7])
+    # ke_α_p = ActivationProfile(x[8:14])
+    # ae_α_p = ActivationProfile(x[15:21])
+    # hf_α_p = ActivationProfile(x[22:28])
+    # kf_α_p = ActivationProfile(x[29:35])
+    # af_α_p = ActivationProfile(x[36:42])
+    he_α_p = ActivationProfile(x[1:10])
+    ke_α_p = ActivationProfile(x[11:20])
+    ae_α_p = ActivationProfile(x[21:30])
+    hf_α_p = ActivationProfile(x[31:40])
+    kf_α_p = ActivationProfile(x[41:50])
+    af_α_p = ActivationProfile(x[51:60])
 
     # torque generators with inital values and new activation parameters
     _he = TorqueGenerator(2π - θh, -ωh, he.cc.cc_p, he.sec.sec_p, he_α_p)
@@ -87,3 +95,24 @@ function updateParameters(p, x, u₀)
     return _p, _u₀
 end
 
+
+# compare joint angle plot
+function plot_jointangles(sol)
+    global matching_data
+
+    # simulated data
+    θhat = sol[3,:] .|> rad2deg
+    θhip = hang(sol) .|> rad2deg
+    θknee = kang(sol) .|> rad2deg
+    θankle = aang(sol) .|> rad2deg
+
+    # actual data
+    time = matching_data[:time]
+    data = [matching_data[:lhat] matching_data[:lhip] matching_data[:lknee] matching_data[:lankle]]
+
+    # plot
+    plt = plot(time, data, ls=:solid, labels=["hat" "hip" "knee" "ankle"])
+    plot!(sol.t, [θhat θhip θknee θankle], ls=:dash, lc=[1 2 3 4], label="")
+    title!("cost: $( round(cost(sol), digits=1) )")    
+    return plt
+end

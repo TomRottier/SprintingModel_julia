@@ -50,6 +50,8 @@ function affect_neg!(integrator, idx)
             _rx = [x[1] for x in saved_values.saveval]
             _ry = [x[2] for x in saved_values.saveval]
 
+            length(_t) < 10 && (terminate!(integrator), return)
+
             _vrx = Spline1D(_t, _rx)
             _vry = Spline1D(_t, _ry)
 

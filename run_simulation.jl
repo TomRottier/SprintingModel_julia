@@ -13,7 +13,7 @@ include("callbacks.jl")
 
 # set up model
 inputs = load_inputs()
-p, u₀ = load_from_results(inputs, "optimisations/matching/results.csv", 10.0)
+p, u₀ = load_from_results(inputs, "optimisations/matching/results.csv", 9.6704)
 const matching_data = inputs.matching_data
 
 # time span
@@ -41,13 +41,14 @@ function run_simulation(;
     swing = "data/matching_swing.csv",
     hat = "data/HAT.csv",
     speed = 0.0,
-    results = "")
+    results = "",
+    tspan=(0.0,0.484))
 
     # set up model
     inputs = load_inputs(parameters = parameters,
         initial_conditions = initial_conditions,
-        torque_generator_parameters = torque_generator_parameters,
-        activation_parameters = activation_parameters,
+        torque_generators = torque_generator_parameters,
+        activations = activation_parameters,
         swing = swing,
         hat = hat)
     if speed == 0
@@ -56,13 +57,15 @@ function run_simulation(;
         p, u₀ = load_from_results(inputs, results, speed)
     end
 
-    # time span
-    tspan = (0.0, 0.111)
+    # intialised saved values and callbacks
+    saved_values = SavedValues(Float64, Tuple{Float64,Float64,Float64,Float64})
+    scb = SavingCallback(save_func, saved_values)
+    cbs = CallbackSet(cb, scb)
 
     # set up problem
     prob = ODEProblem(eom, u₀, tspan, p)
 
     # solve
-    return solve(prob, Tsit5(), reltol = 1e-5, abstol = 1e-5, saveat = 0.001, callback = cb)
+    return solve(prob, Tsit5(), reltol = 1e-5, abstol = 1e-5, saveat = 0.001, callback = cbs, dense=false)
 
 end
