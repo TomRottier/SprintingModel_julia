@@ -1,32 +1,55 @@
+######
+# can pass a Dict to kwarg "userdata" in the solve function, this can be accessed via integrator.opts.userdata
+# may be useful for something
+######
+
 # functions for optimisations
+# simulate a stride from prob
+function simulate(prob)
+    global com_drop
 
-# update and run simulation with new parameters
-function simulate(x, p, prob, u₀)
-    # new parameter struct with updated parameters from x and reset torque generators
-    pnew, unew = updateParameters(p, x, u₀)
-    pnew.virtual[3] = false
+    # integrate step 1
+    sol1 = solve(prob, Tsit5(), callback = end_step1, abstol = 1e-5, reltol = 1e-5, saveat = 0.001)
 
-    # remake problem with updated parameters
+    # check if a second step will occur
+    pocmy(sol1, sol1.t[end]) ≤ com_drop && return 1e6 # or cost(sol1)
+
+    # fit splines to grf
+    T = sol1.t[end]
+    spl_x = Spline1D(sol1.t, rx(sol1))
+    spl_y = Spline1D(sol1.t, ry(sol1))
+    vrx(t) = evaluate(spl_x, t - T)
+    vry(t) = evaluate(spl_y, t - T)
+
+    # update parameters and initial conditions for step 2
+    pnew = setproperties(prob.p, (vrx = vrx, vry = vry))
+    unew = sol1.u[end]
+    tnew = (sol1.t[end], 0.5) # TODO: make the end of integration time a global variable?
+    newprob = remake(prob, u0 = unew, p = pnew, tspan = tnew)
+
+    # integrate step 2
+    saveats = sol1.t[end-1]+0.001:0.001:tnew[2] # start saving at next value after end of last integration
+    sol2 = solve(newprob, Tsit5(), callback = end_step2, abstol = 1e-5, reltol = 1e-5, saveat = saveats)
+
+    return cost(sol1, sol2)
+end
+
+# run a simulate with new parameters
+function simulate(x, prob)
+    # new parameter struct with updated parameters from x and reset torque generators, updated intial CC angles 
+    pnew, unew = updateParameters(prob.p, x, prob.u0)
+
+    # remake problem with updated parameters and initial conditions
     newprob = remake(prob, u0 = unew, p = pnew)
 
-    # TODO: means saved_values no longer accessible to outside this function e.g in affect_neg!
-    # reset values in saving callback
-    global saved_values
-    saved_values = SavedValues(Float64, Tuple{Float64,Float64,Float64,Float64})
-    scb = SavingCallback(save_func, saved_values)
-    cbs = CallbackSet(cb, scb)
-
-    # solve
-    sol = solve(newprob, Tsit5(), abstol = 1e-5, reltol = 1e-5, saveat = 0.001, callback = cbs, dense=false)
-
-    # cost 
-    return cost(sol)
-    # return sol
+    # integrate new problem
+    return simulate(newprob)
 end
 
 # cost function
 # cost(sol) = 10(abs(VCMX - step_velocity(sol))) + abs(TSW - swing_time(sol))
-function cost(sol)
+mse(x, y) = (x .- y) .^ 2 |> mean
+function cost(sol)::Float64
     global matching_data
 
     # sol.retcode ∉ [:Success, :Terminated] && return 1.0e6
@@ -42,14 +65,29 @@ function cost(sol)
 
     # stride parameters
     # speed_cost = stride_velocity(sol)
-    time_cost = 1000* abs(sol.t[end] - 0.484)
+    time_cost = 1000 * abs(sol.t[end] - 0.484)
 
     return angles_cost #+ time_cost
-
-
 end
-mse(x, y) = (x .- y) .^ 2 |> mean
 
+function cost(sol1, sol2)::Float64
+    full = [Array(sol1)[:, 1:end-1] Array(sol2)]
+    N = length(sol1.t) + length(sol2.t) - 1
+
+    θhat = view(full, 3, :)
+    θhip = π .+ view(full, 7, :)
+    θknee = π .- view(full, 6, :)
+    θankle = π .+ view(full, 5, :)
+
+    hat_mse = mse(θhat, view(matching_data[:lhat], 1:N))
+    hip_mse = mse(θhip, view(matching_data[:lhip], 1:N))
+    knee_mse = mse(θknee, view(matching_data[:lknee], 1:N))
+    # ankle_mse = mse(θankle, view(matching_data[:lankle], 1:N))
+
+    angles_cost = hat_mse + hip_mse + knee_mse #+ ankle_mse
+
+    return angles_cost
+end
 # converts input vector to parameters to be optimised and resets torque generators to inital values
 function updateParameters(p, x, u₀)
     @unpack he, ke, ae, hf, kf, af = p
@@ -93,26 +131,4 @@ function updateParameters(p, x, u₀)
     _p = setproperties(p, (he = _he, ke = _ke, ae = _ae, hf = _hf, kf = _kf, af = _af))
 
     return _p, _u₀
-end
-
-
-# compare joint angle plot
-function plot_jointangles(sol)
-    global matching_data
-
-    # simulated data
-    θhat = sol[3,:] .|> rad2deg
-    θhip = hang(sol) .|> rad2deg
-    θknee = kang(sol) .|> rad2deg
-    θankle = aang(sol) .|> rad2deg
-
-    # actual data
-    time = matching_data[:time]
-    data = [matching_data[:lhat] matching_data[:lhip] matching_data[:lknee] matching_data[:lankle]]
-
-    # plot
-    plt = plot(time, data, ls=:solid, labels=["hat" "hip" "knee" "ankle"])
-    plot!(sol.t, [θhat θhip θknee θankle], ls=:dash, lc=[1 2 3 4], label="")
-    title!("cost: $( round(cost(sol), digits=1) )")    
-    return plt
 end

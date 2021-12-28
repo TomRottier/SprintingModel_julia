@@ -48,27 +48,9 @@ end
 
 get_torque_generator(sol) = [get_torque_generator(sol, t) for t in sol.t]
 
-function plotTorques(t, v)
-
-    n = 6
-    plts = Vector{Any}(undef, n)
-    titles = ["he", "hf", "ke", "kf", "ae", "af"]
-    labels = ["α" "τ_θ" "τ_ω"]
-    for i = 1:n
-        data = hcat([tup[i] for tup in v]...)'
-        plts[i] = plot(t, data, label = labels, title = titles[i], legend = :outertopright, xaxis = "time (s)")
-    end
-
-    plot(size = (600, 600), plts..., layout = (3, 2), ylims = (-.1, 1.7), yticks = 0:0.3:1.5)
-
-end
-
-plotTorques(sol) = plotTorques(sol.t, get_torque_generator(sol))
-
-
 function get_forces(sol, t)
     @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7 = sol(t)
-    @unpack k1, k2, k3, k4, k5, k6, k7, k8, l2, pop1xi, pop2xi = sol.prob.p
+    @unpack k1, k2, k3, k4, k5, k6, k7, k8, l2, pop1xi, pop2xi, vrx, vry = sol.prob.p
 
     pop2y = q2 - l2 * sin(q3 - q4 - q5 - q6 - q7)
 
@@ -94,7 +76,10 @@ function get_forces(sol, t)
         ry2 = 0.0
     end
 
-    return rx1 + rx2, ry1 + ry2
+    vrx = vrx(t)
+    vry = vry(t)
+
+    return rx1 + rx2 + vrx, ry1 + ry2 + vry
 end
 
 get_forces(sol) = [get_forces(sol, t) for t in sol.t]

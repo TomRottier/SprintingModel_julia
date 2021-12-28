@@ -1,5 +1,5 @@
 # Automatically generated
-struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9}
+struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11}
     z::Vector{Float64}
     ea::F1
     fa::F2
@@ -59,8 +59,8 @@ struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9}
     mt::T
     u8::T
     u9::T
-    virtual::Vector{Any}
-
+    vrx::F10
+    vry::F11
 end
 
 # initialise with constant values
@@ -70,11 +70,8 @@ function Params(ea, fa, gs, eap, fap, gsp, eapp, fapp, gspp, ae, af, footang, g,
     u8 = 0.0
     u9 = 0.0
 
-    # need to make correct type
-    vrx = t -> 0.0 #evaluate(Spline1D(0:0.1:1.0, 0:10), t)
-    vry = t -> 0.0 #evaluate(Spline1D(0:0.1:1.0, 0:10), t)
-    virtual_stance = false
-    virtual = [vrx, vry, virtual_stance]
+    vrx = t -> 0.0
+    vry = t -> 0.0
 
     z[295] = l12 * mf
     z[15] = cos(footang)
@@ -201,5 +198,5 @@ function Params(ea, fa, gs, eap, fap, gsp, eapp, fapp, gspp, ae, af, footang, g,
     z[407] = ine + inf
     z[422] = l12 * l2 * mf
 
-    return Params(z, ea, fa, gs, eap, fap, gsp, eapp, fapp, gspp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi, mt, u8, u9, virtual)
+    return Params(z, ea, fa, gs, eap, fap, gsp, eapp, fapp, gspp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi, mt, u8, u9, vrx, vry)
 end

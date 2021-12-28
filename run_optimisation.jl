@@ -14,18 +14,18 @@ Nt = 1
 tol = 1.0
 
 # bounds and step length
-ub = repeat([1.2,  repeat([0.5, 0.5, 1.2 ], 3)...], 6)
+ub = repeat([1.2, repeat([0.5, 0.5, 1.2], 3)...], 6)
 lb = repeat([0.01, repeat([0.0, 0.1, 0.01], 3)...], 6) # constrain lb of activation to 0.01
 v = ub .- lb
 
 # initial guess
-x₀ = [rand(lb:0.001:ub) for (lb,ub) in zip(lb,ub)]
-f₀ = simulate(x₀, p, prob, u₀)
+x₀ = [rand(lb:0.001:ub) for (lb, ub) in zip(lb, ub)]
+f₀ = simulate(x₀, prob)
 
 # initial structs
-current = State(f=f₀, x=x₀, v=v, T=T₀)
-result = Result(fopt=f₀, xopt=x₀)
-options = Options(func = x -> simulate(x, p, prob, u₀), N = N, Ns = Ns, Nt = Nt, lb = lb, ub = ub, tol = tol, print_status = true)
+current = State(f = f₀, x = x₀, v = v, T = T₀)
+result = Result(fopt = f₀, xopt = x₀)
+options = Options(func = x -> simulate(x, prob), N = N, Ns = Ns, Nt = Nt, lb = lb, ub = ub, tol = tol, print_status = true)
 
 # optimisation loop
 submax_velocity = true
@@ -42,10 +42,10 @@ while submax_velocity
 
     # (re)initialise sa
     x₀ = result.xopt    # use previous optimal x as starting point for next optimisation
-    f₀ = simulate(x₀, p, prob, u₀)
-    current = State(f=f₀, x=x₀, v=v, T=T₀)
-    result = Result(fopt=f₀, xopt=x₀)
-    options = Options(func = x -> simulate(x, p, prob, u₀), N = N, Ns = Ns, Nt = Nt, lb = lb, ub = ub, tol = tol, print_status = true)
+    f₀ = simulate(x₀, prob)
+    current = State(f = f₀, x = x₀, v = v, T = T₀)
+    result = Result(fopt = f₀, xopt = x₀)
+    options = Options(func = x -> simulate(x₀, prob), N = N, Ns = Ns, Nt = Nt, lb = lb, ub = ub, tol = tol, print_status = true)
 
     # run sa
     @time sa!(current, result, options)
@@ -66,8 +66,8 @@ end
 # test using Optim.jl
 using Optim
 
-ub = repeat([1.2,  repeat([0.5, 0.5, 1.2 ], 3)...], 6)
+ub = repeat([1.2, repeat([0.5, 0.5, 1.2], 3)...], 6)
 lb = repeat([0.01, repeat([0.0, 0.1, 0.01], 3)...], 6) # constrain lb of activation to 0.01
-x₀ = [rand(lb:0.001:ub) for (lb,ub) in zip(lb,ub)]
+x₀ = [rand(lb:0.001:ub) for (lb, ub) in zip(lb, ub)]
 
-res = Optim.optimize(x -> simulate(x, p, prob, u₀), lb, ub, x₀, SAMIN(f_tol=1.0, verbosity=2), Optim.Options(iterations=10^6))
+res = Optim.optimize(x -> simulate(x, p, prob, u₀), lb, ub, x₀, SAMIN(f_tol = 1.0, verbosity = 2), Optim.Options(iterations = 10^6))
