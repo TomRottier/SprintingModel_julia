@@ -15,12 +15,13 @@ include("callbacks.jl")
 inputs = load_inputs()
 p, u₀ = load_from_results(inputs, "optimisations/matching/results.csv", 9.6704)
 const matching_data = inputs.matching_data
+const com_drop = 0.9 # amount com lowers to end step 1 early and skip step 2
 
 # time span
-tspan = (0.0, 0.484)
+tspan = (0.0, 0.1)
 
 # set up problem
-prob = ODEProblem(eom, u₀, tspan, p)
+prob = ODEProblem{false}(eom, u₀, tspan, p)
 
 # solve
 sol = solve(prob, Tsit5(), reltol = 1e-5, abstol = 1e-5, saveat = 0.001, callback = cbs)
@@ -42,7 +43,7 @@ function run_simulation(;
     hat = "data/HAT.csv",
     speed = 0.0,
     results = "",
-    tspan=(0.0,0.484))
+    tspan = (0.0, 0.484))
 
     # set up model
     inputs = load_inputs(parameters = parameters,
@@ -66,6 +67,6 @@ function run_simulation(;
     prob = ODEProblem(eom, u₀, tspan, p)
 
     # solve
-    return solve(prob, Tsit5(), reltol = 1e-5, abstol = 1e-5, saveat = 0.001, callback = cbs, dense=false)
+    return solve(prob, Tsit5(), reltol = 1e-5, abstol = 1e-5, saveat = 0.001, callback = cbs, dense = false)
 
 end

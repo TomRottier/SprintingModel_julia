@@ -17,6 +17,7 @@ include("optimisation.jl")
 inputs = load_inputs()
 p, u₀ = set_values(inputs)
 const matching_data = inputs.matching_data
+const com_drop = 0.9
 
 # time span
 tspan = (0.0, 0.484)
