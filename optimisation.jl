@@ -4,15 +4,18 @@
 ######
 
 # functions for optimisations
+# objective function
+objective(x) = cost(simulate(x, prob)...)
+
 # simulate a stride from prob
 function simulate(prob)
-    global com_drop
-
-    # integrate step 1
-    sol1 = solve(prob, Tsit5(), callback = end_step1, abstol = 1e-5, reltol = 1e-5, saveat = 0.001)
+    # integrate step 1 to touchdown of step 2
+    sol1 = solve(prob, Tsit5(), callback = end_step1, abstol = 1e-5, reltol = 1e-5, saveat = 0.001, verbose=false)
 
     # check if a second step will occur
-    pocmy(sol1, sol1.t[end]) ≤ com_drop && return 1e6 # or cost(sol1)
+    # pocmy(sol1, sol1.t[end]) ≤ com_drop && return 2e6 # or cost(sol1)
+    vocmy(sol1, sol1.t[end]) ≤ -1.0 && return sol1, -1
+    sol1.t[end] < 0.1 && return sol1, -1
 
     # fit splines to grf
     T = sol1.t[end]
@@ -29,9 +32,9 @@ function simulate(prob)
 
     # integrate step 2
     saveats = sol1.t[end-1]+0.001:0.001:tnew[2] # start saving at next value after end of last integration
-    sol2 = solve(newprob, Tsit5(), callback = end_step2, abstol = 1e-5, reltol = 1e-5, saveat = saveats)
+    sol2 = solve(newprob, Tsit5(), callback = end_step2, abstol = 1e-5, reltol = 1e-5, saveat = saveats, verbose=false)
 
-    return cost(sol1, sol2)
+    return sol1, sol2
 end
 
 # run a simulate with new parameters
@@ -45,6 +48,7 @@ function simulate(x, prob)
     # integrate new problem
     return simulate(newprob)
 end
+simulate(x::Vector{Float64}) = simulate(x, prob)
 
 # cost function
 # cost(sol) = 10(abs(VCMX - step_velocity(sol))) + abs(TSW - swing_time(sol))
@@ -61,7 +65,7 @@ function cost(sol)::Float64
     knee_mse = mse(hang(sol), view(matching_data[:lknee], 1:N))
     ankle_mse = mse(hang(sol), view(matching_data[:lankle], 1:N))
 
-    angles_cost = hat_mse + hip_mse + knee_mse #+ ankle_mse
+    angles_cost = #=hat_mse + =#hip_mse + knee_mse + ankle_mse
 
     # stride parameters
     # speed_cost = stride_velocity(sol)
@@ -71,23 +75,32 @@ function cost(sol)::Float64
 end
 
 function cost(sol1, sol2)::Float64
-    full = [Array(sol1)[:, 1:end-1] Array(sol2)]
-    N = length(sol1.t) + length(sol2.t) - 1
+    global matching_data
 
-    θhat = view(full, 3, :)
-    θhip = π .+ view(full, 7, :)
-    θknee = π .- view(full, 6, :)
-    θankle = π .+ view(full, 5, :)
+    # combine solutions into array
+    full = [Array(sol1)[:, 1:end-1] Array(sol2)]
+    Nsol = size(full, 2) # length of solution
+    Ndat = length(matching_data[:lhip]) # length of matching data
+    Ndat > Nsol ? N = Nsol : N = Ndat # use shortest length
+
+    θhat = view(full, 3, 1:N)
+    θhip = π .+ view(full, 7, 1:N)
+    θknee = π .- view(full, 6, 1:N)
+    θankle = π .+ view(full, 5, 1:N)
 
     hat_mse = mse(θhat, view(matching_data[:lhat], 1:N))
     hip_mse = mse(θhip, view(matching_data[:lhip], 1:N))
     knee_mse = mse(θknee, view(matching_data[:lknee], 1:N))
-    # ankle_mse = mse(θankle, view(matching_data[:lankle], 1:N))
+    ankle_mse = mse(θankle, view(matching_data[:lankle], 1:N))
 
-    angles_cost = hat_mse + hip_mse + knee_mse #+ ankle_mse
+    angles_cost = #=hat_mse +=# hip_mse + knee_mse + ankle_mse
 
-    return angles_cost
+    time_cost = 1000 * abs(sol2.t[end] - 0.484) # TODO: make global const
+
+    return angles_cost + time_cost
 end
+cost(sol1, err::Int) = cost(sol1) + 1e6
+
 # converts input vector to parameters to be optimised and resets torque generators to inital values
 function updateParameters(p, x, u₀)
     @unpack he, ke, ae, hf, kf, af = p
