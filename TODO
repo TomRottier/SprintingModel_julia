@@ -53,3 +53,11 @@
 [x] change simluation to two indiviual step simulations
     - [x] calculate cost for two different sol's
     - [x] sol.t of sol2 is at 0.001 s intervals after start time rather than at 0.001 intervals from 0.0
+
+[] add check if first simulation can be terminated early
+    - removing second callback from com_drop decreased simulate time from 594 ms to 490 ms (upstairs pc)
+    - benefit for optimisation of ending bad parameters early vs improved optimisation time
+
+[] plotting outputs for two sol's   
+
+[] simulated annealing not working in parallel for optimisation

@@ -69,3 +69,30 @@ function plot_jointangles(sol)
     title!("cost: $( round(cost(sol), digits=1) )")
     return plt
 end
+
+function plot_jointangles(sol1, sol2)
+    global matching_data
+
+    # combine solutions into array
+    full = [Array(sol1)[:, 1:end-1] Array(sol2)]
+    Nsol = size(full, 2) # length of solution
+    # Ndat = length(matching_data[:lhip]) # length of matching data
+    # Ndat > Nsol ? N = Nsol : N = Ndat # use shortest length
+
+    # simulation data
+    sim_time = range(0, step=0.001, length=Nsol)
+    θhat = view(full, 3, :) .|> rad2deg
+    θhip = π .+ view(full, 7, :) .|> rad2deg
+    θknee = π .- view(full, 6, :) .|> rad2deg
+    θankle = π .+ view(full, 5, :) .|> rad2deg
+
+    # actual data
+    time = matching_data[:time]
+    data = [matching_data[:lhat] matching_data[:lhip] matching_data[:lknee] matching_data[:lankle]]
+
+    # plot
+    plt = plot(time, data, ls = :solid, labels = ["hat" "hip" "knee" "ankle"])
+    plot!(sim_time, [θhat θhip θknee θankle], ls = :dash, lc = [1 2 3 4], label = "")
+    title!("cost: $( round(cost(sol1, sol2), digits=1) ) (only calculated to end of simulation time)")
+    return plt
+end

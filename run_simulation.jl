@@ -1,6 +1,6 @@
 using DelimitedFiles, Statistics
 using StaticArrays, Parameters, Dierckx, Setfield
-using OrdinaryDiffEq, Plots, DiffEqCallbacks
+using OrdinaryDiffEq, Plots
 
 include("musclemodel/torque_generator.jl")
 include("model/parameters.jl")
