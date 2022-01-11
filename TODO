@@ -23,4 +23,41 @@
 
 ## whole stride optimisations
 
-[] virtual second contact
+[x] virtual second contact
+    - [x] add a saving callback that saves the force (and any other variables of interest) produced at each timestep
+    - [x] fit a function to these variables e.g. rx/ry as functions of time
+    - [x] add flag to parameters to signal when second contact occuring
+    - [x] set values of virtual contact forces from function
+
+[] maybe need to add air resistance?
+    - e.g. initial velocity 10.0 m/s
+    - end of stance #1 velocity 10.05 m/s
+    - velocity at start of stance #2 10.05 m/s
+    - velocity at end of stance #2 = 10.1 m/s
+    - accelerating!
+
+[x] rmse comparison to data
+
+[] what to do when simulation time longer than matching data
+    - use and evaluate functions instead?
+
+[x] load_from_results needs to work with different length inputs
+
+[] reduce simulation time
+
+[] redo parameter struct making it more modular?
+
+[] want cc angular velocity to be more stable
+    - decrease tolerances, but make simulation slower
+
+[x] change simluation to two indiviual step simulations
+    - [x] calculate cost for two different sol's
+    - [x] sol.t of sol2 is at 0.001 s intervals after start time rather than at 0.001 intervals from 0.0
+
+[] add check if first simulation can be terminated early
+    - removing second callback from com_drop decreased simulate time from 594 ms to 490 ms (upstairs pc)
+    - benefit for optimisation of ending bad parameters early vs improved optimisation time
+
+[] plotting outputs for two sol's   
+
+[] simulated annealing not working in parallel for optimisation

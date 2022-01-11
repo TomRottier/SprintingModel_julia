@@ -10,7 +10,7 @@ struct ActivationProfile
     ramps::Vector{ActivationRamp}
 end
 ActivationProfile(a0, r::ActivationRamp) = ActivationProfile(a0, [r])
-ActivationProfile(a0, ramps...) = ActivationProfile(a0, [ActivationRamp(ramps[i:i + 2]...) for i in 1:3:length(ramps)])
+ActivationProfile(a0, ramps...) = ActivationProfile(a0, [ActivationRamp(ramps[i:i+2]...) for i = 1:3:length(ramps)])
 ActivationProfile(x::AbstractArray) = ActivationProfile(x[1], x[2:end]...)
 
 # ramp function - time relative to onset time (t-t0)
@@ -35,8 +35,12 @@ function activation(t, p::ActivationProfile)
     return p.ramps[end].a1
 end
 
+# find time activation goes on for
+time(p::ActivationProfile) = [r.t0 + r.r for r in p.ramps] |> sum
+
 # custom plotting
 Plots.plot(t, p::ActivationProfile) = plot(x -> activation(x, p), t)
+Plots.plot(p::ActivationProfile) = plot(t -> activation(t, p), 0.0, time(p))
 
 # convert ActivationProfile to vec
-Base.Vector(a::ActivationProfile) = [a.a0, vcat([[b.t0,b.r,b.a1] for b in a.ramps]...)... ]
+Base.Vector(a::ActivationProfile) = [a.a0, vcat([[b.t0, b.r, b.a1] for b in a.ramps]...)...]

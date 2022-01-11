@@ -12,6 +12,9 @@
     θopt
     R
 end
+# create from dictionary
+CCParameters(d::Dict{Symbol,Float64}) = CCParameters(Tmax=d[:Tmax], T0=d[:T0], ωmax=d[:wmax], ωc=d[:wc], Amin=d[:Amin], ω1=d[:w1], ωr=d[:wr], θopt=d[:theta_opt],R=d[:R])
+
 
 # CC struct
 mutable struct CC
@@ -33,6 +36,7 @@ mutable struct CC
         return new(α, τ, θ, ω, τ_θ, τ_ω, cc_p, α_p)
     end
 end
+
 
 
 # calculate torque from CC angle

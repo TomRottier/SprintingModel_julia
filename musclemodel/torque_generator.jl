@@ -129,11 +129,13 @@ function update_torque_generator!(tqgen::TorqueGenerator, t, θ, ω, θcc)
     tqgen.ω = ω
     
     # update CC angle 
+    θcc > tqgen.θ ? cc.θ = θcc : cc.θ = tqgen.θ
     cc.θ = θcc
 
     # calculate activation level
     α = activation(t, cc.α_p)
-    α < 0.01 && no_activation!(tqgen) 
+    cc.α = α
+    α < 0.01 && (α = 0.01) #no_activation!(tqgen) 
 
     ### when rising above α = 0.01 get sudden change in cc angle and angular velocity ###
 
@@ -156,8 +158,7 @@ function update_torque_generator!(tqgen::TorqueGenerator, t, θ, ω, θcc)
     
     # calculate τ-ω component from CC angular velocity
     cc.τ_ω = cc.τ / (cc_p.T0 * α * cc.τ_θ)   
-    Tmax_norm = cc_p.Tmax / cc_p.T0
-    cc.τ_ω > Tmax_norm && (cc.τ_ω = Tmax_norm)  # constrain τ_ω to realistic values
+    (cc.τ_ω * cc_p.T0) > cc_p.Tmax && (cc.τ_ω = cc_p.Tmax / cc_p.T0)  # constrain τ_ω to realistic values
     cc.τ_ω < 0.0 && (cc.τ_ω = 0.0)
 
     # calculate CC angular velocity (opposite sign to function)  

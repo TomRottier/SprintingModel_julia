@@ -1,22 +1,57 @@
+######
+# can pass a Dict to kwarg "userdata" in the solve function, this can be accessed via integrator.opts.userdata
+# may be useful for something
+######
+
 # functions for optimisations
+# objective function
+objective(x) = cost(simulate(x, prob)...)
 
-# update and run simulation with new parameters
-function simulate(x, p, prob, u₀)
-    # new parameter struct with updated parameters from x and reset torque generators
-    pnew, unew = updateParameters(p, x, u₀)
+# simulate a stride from prob
+simulate(prob) = solve(prob, Tsit5(), callback = end_step1, abstol = 1e-5, reltol = 1e-5, saveat = 0.001, verbose=false)
 
-    # remake problem with updated parameters
+# run a simulate with new parameters
+function simulate(x, prob)
+    # new parameter struct with updated parameters from x and reset torque generators, updated intial CC angles 
+    pnew, unew = updateParameters(prob.p, x, prob.u0)
+
+    # remake problem with updated parameters and initial conditions
     newprob = remake(prob, u0 = unew, p = pnew)
 
-    # solve
-    sol = solve(newprob, Tsit5(), callback = vcb, abstol = 1e-5, reltol = 1e-5, saveat = 0.001, verbose = false)
-
-    # cost 
-    return cost(sol)
+    # integrate new problem
+    return simulate(newprob)
 end
+simulate(x::Vector{Float64}) = simulate(x, prob)
 
 # cost function
-cost(sol) = 10(abs(VCMX - step_velocity(sol))) + abs(TSW - swing_time(sol))
+# cost(sol) = 10(abs(VCMX - step_velocity(sol))) + abs(TSW - swing_time(sol))
+mse(x, y) = (x .- y) .^ 2 |> mean
+function cost(sol)::Float64
+    global matching_data
+
+    ## match hip and knee angles
+    N = size(sol, 2)
+
+    # calculate hip and knee angles
+    θhip = π .+ view(sol, 7, :) .|> rad2deg
+    θknee = π .- view(sol, 6, :) .|> rad2deg
+
+    # calculate mse
+    hip_mse = mse(θhip, view(matching_data[:lhip], 1:N))
+    knee_mse = mse(θknee, view(matching_data[:lknee], 1:N))
+
+    # scale by range
+    sf_hip = view(matching_data[:lhip], :) |> extrema |> collect |> diff
+    sf_knee = view(matching_data[:lknee], :) |> extrema |> collect |> diff
+    hip_mse /= sf_hip[1]
+    knee_mse /= sf_knee[1]
+    
+    return hip_mse + knee_mse
+
+    # ## mse between start and end of simulation
+    # weights = [0.0, 0.0, 1.0, 0.1, 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.25, 0.7, 0.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # weights vector
+    # return ((sol.u[end] .- u₀).^2) .* weights |> mean
+end
 
 # converts input vector to parameters to be optimised and resets torque generators to inital values
 function updateParameters(p, x, u₀)
@@ -32,12 +67,24 @@ function updateParameters(p, x, u₀)
     ωa = u5
 
     # manually seperate out
-    he_α_p = ActivationProfile(x[1:7])
-    ke_α_p = ActivationProfile(x[8:14])
-    ae_α_p = ActivationProfile(x[15:21])
-    hf_α_p = ActivationProfile(x[22:28])
-    kf_α_p = ActivationProfile(x[29:35])
-    af_α_p = ActivationProfile(x[36:42])
+    # he_α_p = ActivationProfile(x[1:7])
+    # ke_α_p = ActivationProfile(x[8:14])
+    # ae_α_p = ActivationProfile(x[15:21])
+    # hf_α_p = ActivationProfile(x[22:28])
+    # kf_α_p = ActivationProfile(x[29:35])
+    # af_α_p = ActivationProfile(x[36:42])
+    he_α_p = ActivationProfile(x[1:10])
+    ke_α_p = ActivationProfile(x[11:20])
+    ae_α_p = ActivationProfile(x[21:30])
+    hf_α_p = ActivationProfile(x[31:40])
+    kf_α_p = ActivationProfile(x[41:50])
+    af_α_p = ActivationProfile(x[51:60])
+    # he_α_p = ActivationProfile(x[1:13])
+    # ke_α_p = ActivationProfile(x[14:26])
+    # ae_α_p = ActivationProfile(x[27:39])
+    # hf_α_p = ActivationProfile(x[40:52])
+    # kf_α_p = ActivationProfile(x[53:65])
+    # af_α_p = ActivationProfile(x[66:78])
 
     # torque generators with inital values and new activation parameters
     _he = TorqueGenerator(2π - θh, -ωh, he.cc.cc_p, he.sec.sec_p, he_α_p)
@@ -56,4 +103,3 @@ function updateParameters(p, x, u₀)
 
     return _p, _u₀
 end
-
