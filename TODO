@@ -61,3 +61,6 @@
 [] plotting outputs for two sol's   
 
 [] simulated annealing not working in parallel for optimisation
+
+[x] may need to limit spline fitting callback to one call
+    - [x] a flag to make sure the virtual force only gets applied seems to work

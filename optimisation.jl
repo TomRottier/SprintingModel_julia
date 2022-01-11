@@ -5,13 +5,14 @@
 
 # functions for optimisations
 # objective function
-objective(x) = cost(simulate(x, prob)...)
+objective(x) = cost(simulate(x, prob))
 
 # simulate a stride from prob
-simulate(prob) = solve(prob, Tsit5(), callback = end_step1, abstol = 1e-5, reltol = 1e-5, saveat = 0.001, verbose=false)
+simulate(prob) = solve(deepcopy(prob), Tsit5(), callback = vcb, abstol = 1e-5, reltol = 1e-5, saveat = 0.001, verbose=false)
 
 # run a simulate with new parameters
 function simulate(x, prob)
+    global prob
     # new parameter struct with updated parameters from x and reset torque generators, updated intial CC angles 
     pnew, unew = updateParameters(prob.p, x, prob.u0)
 

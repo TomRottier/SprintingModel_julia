@@ -19,7 +19,7 @@ const p, u₀ = set_values(inputs)
 const matching_data = inputs.matching_data
 
 # time span
-tspan = (0.0, 0.484) # only for first step, making shorter stops unecessarily long simulations, original .484
+tspan = (0.0, 0.484) 
 
 # initialise problem
 prob = ODEProblem(eom, u₀, tspan, p)
