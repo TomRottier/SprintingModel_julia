@@ -18,7 +18,7 @@ const p, u₀ = set_values(inputs)
 const matching_data = inputs.matching_data
 
 # time span
-const tspan = (0.0, 0.1)
+const tspan = (0.0, 0.484)
 
 # set up problem
 const prob = ODEProblem{false}(eom, u₀, tspan, p)
