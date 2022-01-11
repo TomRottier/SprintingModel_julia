@@ -1,13 +1,13 @@
 using Distributed
 
-addprocs(6, exeflags = "--project")   # create worker processes with current project activated
+addprocs(12, exeflags = "--project")   # create worker processes with current project activated
 @everywhere include("parallel_setup.jl")
 
 # simulated annealing parameters
 T₀ = 0.5
 N = 60
-Ns = 30
-Nt = 100
+Ns = 24
+Nt = 5
 tol = 1.0
 
 # bounds and step length

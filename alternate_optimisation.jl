@@ -36,8 +36,8 @@ res = Optim.optimize(objective, lb, ub, x₀, SAMIN(f_tol = 1.0, verbosity = 2),
 ## Evolutionary.jl
 using Evolutionary
 using Distributed, SharedArrays
-addprocs(6, exeflags = "--project")   # create worker processes with current project activated
-@everywhere include("parallel_setup.jl")
+addprocs(12, exeflags = "--project")   # create worker processes with current project activated
+@everywhere workers() include("parallel_setup.jl")
 
 # genetic algortihm options
 ga = GA(
@@ -71,6 +71,7 @@ end
 
 # optimise
 const plt = plot(title="optimisation", yaxis="cost", xaxis="iteration", legend=false)
+x₀ = vcat(map(x -> inputs.activation_parameters[x], [:he, :ke, :ae, :hf, :kf, :af])...)
 results = Evolutionary.optimize(objective, BoxConstraints(lb, ub), x₀, ga, opts)
 
 
