@@ -9,7 +9,7 @@ function simulate(x, p, prob, u₀)
     newprob = remake(prob, u0 = unew, p = pnew)
 
     # solve
-    sol = solve(newprob, Tsit5(), abstol = 1e-5, reltol = 1e-5, save_everystep = false, callback = cb)
+    sol = solve(newprob, Tsit5(), callback = vcb, abstol = 1e-5, reltol = 1e-5, saveat = 0.001, verbose = false)
 
     # cost 
     return cost(sol)

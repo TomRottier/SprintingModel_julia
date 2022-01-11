@@ -1,5 +1,5 @@
 # Automatically generated
-struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9}
+mutable struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9}
     z::Vector{Float64}
     ea::F1
 	fa::F2

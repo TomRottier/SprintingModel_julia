@@ -1,34 +1,55 @@
-# # condition for callbacks - save result for each callback in out at appropiate index
-# function condition(out, u, t, integrator)
+## callbacks for integration
+function condition(out, t, integrator)
+    # end of step 1 when com == touchdown
+    out[1] = pocmy(integrator.sol, t) - pocmy(integrator.sol, 0.0) 
+    # end of step 2 when q2 == 0 
+    out[2] == q2
+    # end of step 3 when pop2y == 0
+    out[3] == pop27(integrator.sol, t)
+end
 
-#     # stance ends when toe q2 ≥ 0 (mtp unlikely to ever lose contact last)
-#     out[1] = u[2]
+function affect!(integrator, idx) # postive crossing (-ve to +ve)
+    if out == 1
+        # do nothing
+        nothing
 
-# end
+    elseif out == 2
+        # do nothing
+        nothing
 
-# # affect integrator when condition met and upcrossing (-ve to +ve)
-# function affect!(integrator, idx)
-   
-#     if idx == 1
-#         # terminate simulation when stance ends
-#         terminate!(integrator)
-#     end
+    elseif out == 3
+        # do nothing
+        nothing
 
-# end
+    end
+end
 
-# # affect integrator when condition met and downcrossing
-# function affect_neg!(integrator, idx)
+function affect_neg!(integrator, idx) # negative crossings (+ve to -ve)
+    if out == 1
+        # end of step 1
+        # fit spline to force
+        sol = integrator.sol
+        T = integrator.t
+        splX = Spline1D(sol.t, rx(sol))
+        splY = Spline1D(sol.t, ry(sol))
+        vrx(t) = evaluate(splX, t - T)
+        vry(t) = evaluate(splY, t - T)
 
-#     if idx == 1
-#         return nothing
-#     end
-    
-# end
+        # update parameters
+        p.vrx = vrx
+        p.vry = vry
 
-# # callback function to pass 
-# cb = VectorContinuousCallback(condition, affect!, affect_neg!, 1, save_positions=(false, true))
 
-condition(u, t, integrator) = u[2]
-affect!(integrator) = terminate!(integrator)
-affect_neg!(integrator) = nothing
-cb = ContinuousCallback(condition, affect!, affect_neg!, save_positions=(false, true))
+    elseif out == 2
+        # end of step 2
+        terminate!(integrator)
+
+    elseif out == 3
+        # end of step 2
+        terminate!(integrator)
+
+    end
+end
+
+
+vcb = VectorContinuousCallback(condition, affect!, affect_neg!, 3, save_positions = (false, true))
