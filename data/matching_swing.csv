@@ -1,4 +1,5 @@
-time (s),hip angle (deg), knee angle (deg)
+time,hip_angle,knee_angle
+s,deg,deg
 0,165.5571931,47.38038068
 0.001,164.7816206,46.82731143
 0.002,163.9982731,46.28953028
