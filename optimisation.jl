@@ -27,7 +27,7 @@ function simulate(prob)
     # update parameters and initial conditions for step 2
     pnew = setproperties(prob.p, (vrx = vrx, vry = vry))
     unew = sol1.u[end]
-    tnew = (sol1.t[end], 0.5) # TODO: make the end of integration time a global variable?
+    tnew = (sol1.t[end], 0.484) # TODO: make the end of integration time a global variable?
     newprob = remake(prob, u0 = unew, p = pnew, tspan = tnew)
 
     # integrate step 2
@@ -56,50 +56,59 @@ mse(x, y) = (x .- y) .^ 2 |> mean
 function cost(sol)::Float64
     global matching_data
 
-    # sol.retcode ∉ [:Success, :Terminated] && return 1.0e6
+    ## match hip and knee angles
+    N = size(sol, 2)
 
-    # orientation and configuration angles
-    N = length(sol.t)
-    hat_mse = mse(hang(sol), view(matching_data[:lhat], 1:N))
-    hip_mse = mse(view(sol, 3, :), view(matching_data[:lhip], 1:N))
-    knee_mse = mse(hang(sol), view(matching_data[:lknee], 1:N))
-    ankle_mse = mse(hang(sol), view(matching_data[:lankle], 1:N))
+    # calculate hip and knee angles
+    θhip = π .+ view(sol, 7, :) .|> rad2deg
+    θknee = π .- view(sol, 6, :) .|> rad2deg
 
-    angles_cost = #=hat_mse + =#hip_mse + knee_mse + ankle_mse
+    # calculate mse
+    hip_mse = mse(θhip, view(matching_data[:lhip], 1:N))
+    knee_mse = mse(θknee, view(matching_data[:lknee], 1:N))
 
-    # stride parameters
-    # speed_cost = stride_velocity(sol)
-    time_cost = 1000 * abs(sol.t[end] - 0.484)
+    # scale by range
+    sf_hip = view(matching_data[:lhip], :) |> extrema |> collect |> diff
+    sf_knee = view(matching_data[:lknee], :) |> extrema |> collect |> diff
+    hip_mse /= sf_hip[1]
+    knee_mse /= sf_knee[1]
+    
+    return hip_mse + knee_mse
 
-    return angles_cost #+ time_cost
+    # ## mse between start and end of simulation
+    # weights = [0.0, 0.0, 1.0, 0.1, 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.25, 0.7, 0.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # weights vector
+    # return ((sol.u[end] .- u₀).^2) .* weights |> mean
 end
 
 function cost(sol1, sol2)::Float64
     global matching_data
 
-    # combine solutions into array
+    ## match hip and knee angles
+    # combine results into array
     full = [Array(sol1)[:, 1:end-1] Array(sol2)]
-    Nsol = size(full, 2) # length of solution
-    Ndat = length(matching_data[:lhip]) # length of matching data
-    Ndat > Nsol ? N = Nsol : N = Ndat # use shortest length
+    N = size(full, 2)
 
-    θhat = view(full, 3, 1:N)
-    θhip = π .+ view(full, 7, 1:N)
-    θknee = π .- view(full, 6, 1:N)
-    θankle = π .+ view(full, 5, 1:N)
+    # calculate hip and knee angles
+    θhip = π .+ view(full, 7, :) .|> rad2deg
+    θknee = π .- view(full, 6, :) .|> rad2deg
 
-    hat_mse = mse(θhat, view(matching_data[:lhat], 1:N))
+    # calculate mse
     hip_mse = mse(θhip, view(matching_data[:lhip], 1:N))
     knee_mse = mse(θknee, view(matching_data[:lknee], 1:N))
-    ankle_mse = mse(θankle, view(matching_data[:lankle], 1:N))
 
-    angles_cost = #=hat_mse +=# hip_mse + knee_mse + ankle_mse
+    # scale by range
+    sf_hip = view(matching_data[:lhip], :) |> extrema |> collect |> diff 
+    sf_knee = view(matching_data[:lknee], :) |> extrema |> collect |> diff
+    hip_mse /= sf_hip[1]
+    knee_mse /= sf_knee[1]
+    
+    return hip_mse + knee_mse
 
-    time_cost = 1000 * abs(sol2.t[end] - 0.484) # TODO: make global const
-
-    return angles_cost + time_cost
+    # ## mse between start and end of simulation
+    # weights = [0.0, 0.0, 1.0, 0.1, 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.25, 0.7, 0.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # weights vector
+    # return ((sol2.u[end] .- u₀).^2) .* weights |> mean
 end
-cost(sol1, err::Int) = cost(sol1) + 1e6
+cost(sol1, err::Int) = cost(sol1) + 100
 
 # converts input vector to parameters to be optimised and resets torque generators to inital values
 function updateParameters(p, x, u₀)
@@ -127,6 +136,12 @@ function updateParameters(p, x, u₀)
     hf_α_p = ActivationProfile(x[31:40])
     kf_α_p = ActivationProfile(x[41:50])
     af_α_p = ActivationProfile(x[51:60])
+    # he_α_p = ActivationProfile(x[1:13])
+    # ke_α_p = ActivationProfile(x[14:26])
+    # ae_α_p = ActivationProfile(x[27:39])
+    # hf_α_p = ActivationProfile(x[40:52])
+    # kf_α_p = ActivationProfile(x[53:65])
+    # af_α_p = ActivationProfile(x[66:78])
 
     # torque generators with inital values and new activation parameters
     _he = TorqueGenerator(2π - θh, -ωh, he.cc.cc_p, he.sec.sec_p, he_α_p)

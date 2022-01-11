@@ -11,7 +11,7 @@
 condition_end_step1(u, t, integrator) = pocmy(integrator.sol, t) - pocmy(integrator.sol, 0.0) # com at touchdown
 affect_step1!(integrator) = nothing
 affect_neg_step1!(integrator) = terminate!(integrator)
-end_step1 = ContinuousCallback(condition_end_step1, affect_step1!, affect_neg_step1!, save_positions = (false, true))
+end_step1 = ContinuousCallback(condition_end_step1, affect_step1!, affect_neg_step1!, save_positions = (false, false))
 
 ## end of step 2 callback
 function condition_end_step2(out, u, t, integrator)
@@ -21,4 +21,4 @@ function condition_end_step2(out, u, t, integrator)
 end
 affect_step2!(integrator, idx) = nothing
 affect_neg_step2!(integrator, idx) = terminate!(integrator)
-end_step2 = VectorContinuousCallback(condition_end_step2, affect_step2!, affect_neg_step2!, 2, save_positions = (false, true))
+end_step2 = VectorContinuousCallback(condition_end_step2, affect_step2!, affect_neg_step2!, 2, save_positions = (false, false))
