@@ -64,3 +64,12 @@
 
 [x] may need to limit spline fitting callback to one call
     - [x] a flag to make sure the virtual force only gets applied seems to work
+
+[] alternate-dynamics ~2x faster than main branch (850 ms vs 475 ms)
+    - [x] try making Params non-mutable with forces in vector - no difference
+    - [x] fix type of virutal forces in eom - improved to 650 ms -- might be able to speed up alternate-dynamics too?
+    - [x] Params mutable struct which contains field `virtual_stance` which is a tuple{Bool, Function, Function} - no real difference 646 ms, 3.66 MiB
+    - [x] pass parameters to ODEProblem as one element Params[] - 8s ??????
+    - [x] create virtual force type 
+        - [x] mutable type - no difference 860 ms, 193 MiB memory -- declaring types of vrx/y output in eom 640 ms 1.52 MiB
+        - [x] vector of immutable type with type declaration in eom - 630 ms 2.83 MiB

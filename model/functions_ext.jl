@@ -50,7 +50,7 @@ get_torque_generator(sol) = [get_torque_generator(sol, t) for t in sol.t]
 
 function get_forces(sol, t)
     @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7 = sol(t)
-    @unpack k1, k2, k3, k4, k5, k6, k7, k8, l2, pop1xi, pop2xi, vrx, vry = sol.prob.p
+    @unpack k1, k2, k3, k4, k5, k6, k7, k8, l2, pop1xi, pop2xi, virtual_force = sol.prob.p
 
     pop2y = q2 - l2 * sin(q3 - q4 - q5 - q6 - q7)
 
@@ -76,47 +76,11 @@ function get_forces(sol, t)
         ry2 = 0.0
     end
 
-    vrx = vrx(t)
-    vry = vry(t)
+    vrx::Float64 = virtual_force.flag ? virtual_force.vrx(t) : 0.0
+    vry::Float64 = virtual_force.flag ? virtual_force.vry(t) : 0.0
 
     return rx1 + rx2 + vrx, ry1 + ry2 + vry
 end
-
-function grf(sol, t)
-    @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7 = sol(t)
-    @unpack k1, k2, k3, k4, k5, k6, k7, k8, l2, pop1xi, pop2xi, vrx, vry = sol.prob.p
-
-    # applied forces
-    pop2y = q2 - l2 * sin(q3 - q4 - q5 - q6 - q7)
-
-    if q2 < 0.0
-        dp1x = q1 - pop1xi
-        ry1 = -k3 * q2 - k4 * abs(q2) * u2
-        rx1 = -ry1 * (k1 * dp1x + k2 * u1)
-
-    else
-        rx1 = 0.0
-        ry1 = 0.0
-    end
-
-    if pop2y < 0.0
-        pop2x = q1 - l2 * cos(q3 - q4 - q5 - q6 - q7)
-        vop2x = u1 - l2 * sin(q3 - q4 - q5 - q6 - q7) * (u3 - u4 - u5 - u6 - u7)
-        vop2y = u2 - l2 * cos(q3 - q4 - q5 - q6 - q7) * (u3 - u4 - u5 - u6 - u7)
-        dp2x = pop2x - pop2xi
-        ry2 = -k7 * pop2y - k8 * abs(pop2y) * vop2y
-        rx2 = -ry2 * (k5 * dp2x + k6 * vop2x)
-    else
-        rx2 = 0.0
-        ry2 = 0.0
-    end
-
-    # virtual force
-
-
-
-end
-
 
 
 get_forces(sol) = [get_forces(sol, t) for t in sol.t]

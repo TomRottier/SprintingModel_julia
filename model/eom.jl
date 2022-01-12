@@ -1,6 +1,6 @@
 # Automatically generated
 function eom(u, p, t)
-    @unpack ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi, mt, u8, u9, z, vrx, vry = p
+    @unpack ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi, mt, u8, u9, z, virtual_force = p
     @unpack ea, fa, gs, eap, fap, gsp, eapp, fapp, gspp = p
     @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7, θhe, θke, θae, θhf, θkf, θaf = u
 
@@ -68,8 +68,8 @@ function eom(u, p, t)
     end
 
     # virtual grf
-    vrx = vrx(t)
-    vry = vry(t)
+    vrx::Float64 = virtual_force.flag ? virtual_force.vrx(t) : 0.0
+    vry::Float64 = virtual_force.flag ? virtual_force.vry(t) : 0.0
 
     # z variables
     z[153] = ator + ktor
