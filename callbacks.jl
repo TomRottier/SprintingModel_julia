@@ -26,7 +26,7 @@ end
 
 function affect_neg!(integrator, idx) # negative crossings (+ve to -ve)
     if idx == 1
-        if integrator.sol.prob.p.virtual_stance == false
+        if integrator.sol.prob.p.virtual_force.flag == false
             # end of step 1
             # fit spline to force
             sol = integrator.sol
@@ -37,10 +37,9 @@ function affect_neg!(integrator, idx) # negative crossings (+ve to -ve)
             vry(t) = evaluate(splY, t - T)
 
             # update parameters
-            sol.prob.p.vrx = vrx
-            sol.prob.p.vry = vry
-
-            sol.prob.p.virtual_stance = true
+            sol.prob.p.virtual_force.flag = true
+            sol.prob.p.virtual_force.vrx = vrx
+            sol.prob.p.virtual_force.vry = vry 
         end
 
     elseif idx == 2 && integrator.t > 0.05 # q2 starts above the ground
