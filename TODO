@@ -10,7 +10,7 @@
 
 [x] compare performance of Dierckx.jl with other packages - no real difference
 
-[] find better way to run optimisations
+[x] find better way to run optimisations
     - [x] dont want to change initial_conditions.csv each time
     - [x] dont want to change parallel_setup.jl to change VCMX
     - still need to chane parallel_setup.jl to change swing data
@@ -43,11 +43,11 @@
 
 [x] load_from_results needs to work with different length inputs
 
-[] reduce simulation time
+[x] reduce simulation time
 
 [] redo parameter struct making it more modular?
 
-[] want cc angular velocity to be more stable
+[x] want cc angular velocity to be more stable
     - decrease tolerances, but make simulation slower
 
 [x] change simluation to two indiviual step simulations
@@ -60,7 +60,8 @@
 
 [] plotting outputs for two sol's   
 
-[] simulated annealing not working in parallel for optimisation
+[x] simulated annealing not working in parallel for optimisation
+    - lower tolerances mean the callback is missed
 
 [x] may need to limit spline fitting callback to one call
     - [x] a flag to make sure the virtual force only gets applied seems to work
@@ -73,3 +74,30 @@
     - [x] create virtual force type 
         - [x] mutable type - no difference 860 ms, 193 MiB memory -- declaring types of vrx/y output in eom 640 ms 1.52 MiB
         - [x] vector of immutable type with type declaration in eom - 630 ms 2.83 MiB
+
+[x] objective errors with some x values (xfail.txt)
+    - [x] callback not being found so q2 crosses 0.0 -> large forces/accelerations -> angles tend to Inf -> domain errror
+        - [x] check its not a tolerance issue - does fix it (both 1e-7) and catches callback
+
+[x] rerun best optimisation (17/01/2021) but with higher cost on hat match
+    - if still cant match with bounds at 3.0 then likley something in the model or cost function preventing it 
+    - trunk leans forward due to high hf torque
+    - try with shorter ramp limits - if stance is not long enough to extend and being flexing then maybe wobbling mass should be added?
+    - only ran for 0.1s
+
+[] remove end of simulation callback and instead run it for 0.484 s
+    - would expect simulated stride to be shorter due to rigidty 
+    - would make overall optimisation run longer as would be simulating dud parameters for full time 
+
+[] parameters for best opt give really low torque-angvel component for hip flexor because cc angle is basically the same as joint angle (1e-15 smaller so doesnt get caught) - must be getting initialised with a tiny sec angle...
+
+[x] still got out of domain error with lower tolerances
+    [x] include try catch block to prevent the optimisation from stopping completely - only errors with bad parameters anyway
+         - will allow tolerances to be higher now
+
+[] run optimisation to match joint angles without any ground contact or gravity (increase CoM position above ground, set initial vertical CoM velocity to zero and set gravity to zero)
+    - leave gravity on as it will affect joint torques
+    - EDITED: 
+        - tolerances in optimisation
+        - initial conditions of mtpy and vocmy
+        - hat moi

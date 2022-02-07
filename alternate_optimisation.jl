@@ -36,20 +36,24 @@ res = Optim.optimize(objective, lb, ub, x₀, SAMIN(f_tol = 1.0, verbosity = 2),
 ## Evolutionary.jl
 using Evolutionary
 using Distributed, SharedArrays
-addprocs(12, exeflags = "--project")   # create worker processes with current project activated
+addprocs(10, exeflags = "--project")   # create worker processes with current project activated
 @everywhere workers() include("parallel_setup.jl")
+@everywhere workers() using Evolutionary
 
 # genetic algortihm options
 ga = GA(
-    populationSize=200,
-    selection=uniformranking(3),
-    mutation=gaussian(),
-    crossover=uniformbin(),
-    metrics=ConvergenceMetric[Evolutionary.AbsDiff{Float64}(0.1)]
+    populationSize = 200,
+    selection = uniformranking(3),
+    mutation = gaussian(),
+    crossover = uniformbin(),
+    metrics = ConvergenceMetric[Evolutionary.AbsDiff{Float64}(0.1)]
 )
 
 # optimisation options
-opt_cb(record) = begin display(plot!(plt, [record.iteration], [record.value], st=:scatter, mc=:black)); return false; end
+opt_cb(record) = begin
+    display(plot!(plt, [record.iteration], [record.value], st = :scatter, mc = :black))
+    return false
+end
 opts = Evolutionary.Options(
     parallelization = :distributed, # :thread for multi-threaded but errors with model
     #time_limit = 3600.0, # 1 hour
@@ -59,8 +63,7 @@ opts = Evolutionary.Options(
 )
 
 # multi process function - needs to take the obj and calculate the fitness in F for each member in population in xs
-function Evolutionary.value!(obj::EvolutionaryObjective{TC,TF,TX,Val{:distributed}},
-                    F::AbstractVector, xs::AbstractVector{TX}) where {TC,TF<:Real,TX}
+function Evolutionary.value!(obj::EvolutionaryObjective{TC,TF,TX,Val{:distributed}}, F::AbstractVector, xs::AbstractVector{TX}) where {TC,TF<:Real,TX}
     n = length(xs)
     F_shared = SharedArray{Float64}(copy(F))
     @sync @distributed for i in 1:n
@@ -70,7 +73,7 @@ function Evolutionary.value!(obj::EvolutionaryObjective{TC,TF,TX,Val{:distribute
 end
 
 # optimise
-const plt = plot(title="optimisation", yaxis="cost", xaxis="iteration", legend=false)
+const plt = plot(title = "optimisation", yaxis = "cost", xaxis = "iteration", legend = false)
 x₀ = vcat(map(x -> inputs.activation_parameters[x], [:he, :ke, :ae, :hf, :kf, :af])...)
 results = Evolutionary.optimize(objective, BoxConstraints(lb, ub), x₀, ga, opts)
 
@@ -78,19 +81,19 @@ results = Evolutionary.optimize(objective, BoxConstraints(lb, ub), x₀, ga, opt
 
 # plot result
 xopt = Evolutionary.minimizer(results)
-sol1, sol2 = simulate(xopt, prob)
-animate_model(sol1, sol2)
+sol = simulate(xopt)
+animate_model(sol)
 
 # fortran best
 sol1_f, sol2_f = simulate(prob)
-cost(sol1_f, sol2_f)
+.
 animate_model(sol1_f, sol2_f)
 
 
 # test
-@everywhere f(x)=(x[1]+2x[2]-7)^2+(2x[1]+x[2]-5)^2
-ga = GA(populationSize=600,selection=uniformranking(3),
-        mutation=gaussian(),crossover=uniformbin(), metrics=ConvergenceMetric[Evolutionary.AbsDiff{Float64}(1e-10)])
-opts = Evolutionary.Options(parallelization=:distributed)
-x0 = [0., 0.]
+@everywhere f(x) = (x[1] + 2x[2] - 7)^2 + (2x[1] + x[2] - 5)^2
+ga = GA(populationSize = 600, selection = uniformranking(3),
+    mutation = gaussian(), crossover = uniformbin(), metrics = ConvergenceMetric[Evolutionary.AbsDiff{Float64}(1e-10)])
+opts = Evolutionary.Options(parallelization = :distributed)
+x0 = [0.0, 0.0]
 results = Evolutionary.optimize(f, x0, ga, opts)

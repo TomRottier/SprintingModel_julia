@@ -8,7 +8,13 @@
 objective(x) = cost(simulate(x, prob))
 
 # simulate a stride from prob
-simulate(prob) = solve(deepcopy(prob), Tsit5(), callback = vcb, abstol = 1e-5, reltol = 1e-5, saveat = 0.001, verbose=false)
+# Vern6() > Tsit5() > Vern7() > Vern8() > DP5()
+simulate(prob) =
+    try
+        solve(deepcopy(prob), Vern6(), callback = vcb, abstol = 1e-5, reltol = 1e-5, saveat = 0.001, verbose = false)
+    catch
+        return 10000.0
+    end
 
 # run a simulate with new parameters
 function simulate(x, prob)
@@ -36,18 +42,32 @@ function cost(sol)::Float64
     # calculate hip and knee angles
     θhip = π .+ view(sol, 7, :) .|> rad2deg
     θknee = π .- view(sol, 6, :) .|> rad2deg
+    θhat = view(sol, 3, :) .|> rad2deg
+    θankle = π .+ view(sol, 5, :) .|> rad2deg
 
     # calculate mse
     hip_mse = mse(θhip, view(matching_data[:lhip], 1:N))
     knee_mse = mse(θknee, view(matching_data[:lknee], 1:N))
+    hat_mse = mse(θhat, view(matching_data[:lhat], 1:N))
+    ankle_mse = mse(θankle, view(matching_data[:lankle], 1:N))
 
     # scale by range
     sf_hip = view(matching_data[:lhip], :) |> extrema |> collect |> diff
     sf_knee = view(matching_data[:lknee], :) |> extrema |> collect |> diff
+    sf_hat = view(matching_data[:lhat], :) |> extrema |> collect |> diff
     hip_mse /= sf_hip[1]
     knee_mse /= sf_knee[1]
-    
-    return hip_mse + knee_mse
+    hat_mse /= sf_hat[1]
+    angles_cost = hip_mse + knee_mse + hat_mse + ankle_mse
+
+    # time cost
+    time_cost = 1000abs(sol.t[end] - 0.484)
+
+    # periodicity cost
+    weights = [0.0, 1.0, 0.8, 0.2, 0.5, 1.0, 1.0, 0.5, 0.5, 0.4, 0.1, 0.25, 0.5, 0.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # weighting of state components
+    periodicity_cost = (sol.prob.u0 .- sol.u[end]) .^ 2 .* weights |> mean
+
+    return angles_cost #+ 0.5time_cost #+ 0.8periodicity_cost
 
     # ## mse between start and end of simulation
     # weights = [0.0, 0.0, 1.0, 0.1, 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.25, 0.7, 0.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # weights vector
@@ -67,7 +87,7 @@ function updateParameters(p, x, u₀)
     ωk = -u6
     ωa = u5
 
-    # manually seperate out
+    # manually separate out
     # he_α_p = ActivationProfile(x[1:7])
     # ke_α_p = ActivationProfile(x[8:14])
     # ae_α_p = ActivationProfile(x[15:21])
@@ -104,3 +124,6 @@ function updateParameters(p, x, u₀)
 
     return _p, _u₀
 end
+
+# reutns parameters from an Params struct
+get_parameters(p) = mapreduce(tqgen -> tqgen.cc.α_p |> Vector, vcat, [p.he, p.ke, p.ae, p.hf, p.kf, p.af])

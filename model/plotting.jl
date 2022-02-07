@@ -43,7 +43,7 @@ function plotTorques(t, v)
         plts[i] = plot(t, data, label = labels, title = titles[i], legend = :outertopright, xaxis = "time (s)")
     end
 
-    plot(size = (600, 600), plts..., layout = (3, 2), ylims = (-.1, 1.7), yticks = 0:0.3:1.5)
+    plot(size = (600, 600), plts..., layout = (3, 2), ylims = (-.1, 3.0))
 
 end
 plotTorques(sol) = plotTorques(sol.t, get_torque_generator(sol))
