@@ -6,17 +6,17 @@ addprocs(12, exeflags = "--project")   # create worker processes with current pr
 # simulated annealing parameters
 T₀ = 0.5
 N = 60
-Ns = 24
+Ns = 48
 Nt = 5
-tol = 1.0
+tol = 0.1
 
 # bounds and step length
-ub = repeat([3.0, repeat([0.5, 0.5, 3.0], 3)...], 6)
+ub = repeat([1.0, repeat([0.5, 0.5, 1.0], 3)...], 6)
 lb = repeat([0.01, repeat([0.0, 0.1, 0.01], 3)...], 6) # constrain lb of activation to 0.01
 v = ub .- lb
 
 # initial guess
-x₀ = [rand(lb:0.001:ub) for (lb, ub) in zip(lb, ub)]
+x₀ = [rand(lb:0.001:ub) for (lb, ub) in zip(lb, ub)] #=vcat(map(x -> inputs.activation_parameters[x], [:he, :ke, :ae, :hf, :kf, :af])...) =#
 f₀ = objective(x₀)
 
 # initial structs

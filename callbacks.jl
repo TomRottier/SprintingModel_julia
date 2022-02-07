@@ -5,7 +5,7 @@ function condition(out, u, t, int)
     # end of step 2 when q2 == 0 
     out[2] = u[2]
     # end of step 3 when pop2y == 0
-    out[3] = pop2y(u, t, int.sol.prob.p)
+    out[3] = pop2y(u, t, int.p)
 end
 
 function affect!(int, idx) # postive crossing (-ve to +ve)
@@ -43,9 +43,9 @@ function affect_neg!(int, idx) # negative crossings (+ve to -ve)
 
         end
 
-    elseif idx == 2 && int.t > 0.05 # q2 starts above the ground
+    elseif idx == 2
         # end of step 2
-        terminate!(int)
+        int.t > 0.05 ? terminate!(int) : nothing # q2 starts above the ground
 
     elseif idx == 3
         # end of step 2
@@ -55,7 +55,7 @@ function affect_neg!(int, idx) # negative crossings (+ve to -ve)
 end
 
 
-vcb = VectorContinuousCallback(condition, affect!, affect_neg!, 3, save_positions = (false, true))
+vcb = VectorContinuousCallback(condition, affect!, affect_neg!, 3, save_positions = (false, false))
 
 # pocmy and pop2y with u
 function pocmy(u, t, p)
