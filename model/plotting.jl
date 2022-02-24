@@ -2,13 +2,13 @@
 
 # plot model at time t
 function plot_model(sol, t)
-    fns = [pop1x, pop1y, pop2x, pop2y, pop3x, pop3y, pop4x, pop4y, pop5x, pop5y, pop6x, pop6y, pop7x, pop7y, pop8x, pop8y, pop9x, pop9y, pop10x, pop10y, pop11x, pop11y]
+    fns = [pop1x, pop1y, pop2x, pop2y, pop3x, pop3y, pop4x, pop4y, pop5x, pop5y, pop6x, pop6y, pop7x, pop7y, pop8x, pop8y, pop10x, pop10y]
     ps = [fn(sol, t) for fn in fns]
 
-    plot(legend = :none, grid = :off, xlims = (-.8, 5.0), ylims = (-.1, 5.7), axis = nothing, border = :none)
-    plot!(ps[1:2:16], ps[2:2:16], lw = 2, color = :black)       # main skeleton
-    plot!(ps[[11, 17]], ps[[12, 18]], lw = 2, color = :black)     # HAT
-    plot!(ps[[3, 7]], ps[[4, 8]], lw = 2, color = :black)         # connect foot
+    plot(legend = :none, grid = :off, xlims = (-0.8, 5.0), ylims = (-0.1, 5.7), axis = nothing, border = :none)
+    plot!(ps[1:2:17], ps[2:2:18], lw = 2, color = :black)       # main skeleton
+    # plot!(ps[[11, 19]], ps[[12, 20]], lw = 2, color = :black)     # HAT
+    # plot!(ps[[3, 7]], ps[[4, 8]], lw = 2, color = :black)         # connect foot
 
 end
 
@@ -43,7 +43,7 @@ function plotTorques(t, v)
         plts[i] = plot(t, data, label = labels, title = titles[i], legend = :outertopright, xaxis = "time (s)")
     end
 
-    plot(size = (600, 600), plts..., layout = (3, 2), ylims = (-.1, 3.0))
+    plot(size = (600, 600), plts..., layout = (3, 2), ylims = (-0.1, 3.0))
 
 end
 plotTorques(sol) = plotTorques(sol.t, get_torque_generator(sol))
@@ -80,7 +80,7 @@ function plot_jointangles(sol1, sol2)
     # Ndat > Nsol ? N = Nsol : N = Ndat # use shortest length
 
     # simulation data
-    sim_time = range(0, step=0.001, length=Nsol)
+    sim_time = range(0, step = 0.001, length = Nsol)
     θhat = view(full, 3, :) .|> rad2deg
     θhip = π .+ view(full, 7, :) .|> rad2deg
     θknee = π .- view(full, 6, :) .|> rad2deg
