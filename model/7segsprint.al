@@ -64,7 +64,7 @@ SIMPROT(G,E,3,2*PI-EA)    % Swing thigh about HAT
 SIMPROT(E,F,3,FA-PI)      % Swing shank about swing thigh
 SIMPROT(F,H,3,PI-HA)      % Swing rear foot about swing shank
 SIMPROT(H,I,3,PI-IA)      % Swing toes about swing rear foot   
-SIMPROT(Y,H,3,FOOTANG)    % Swing MTP-HEEL line about MTP-AJC line
+SIMPROT(H,Y,3,FOOTANG)    % Swing MTP-HEEL line about MTP-AJC line
 %
 % ------------------------------------------------------------------------------
 % Position vectors
