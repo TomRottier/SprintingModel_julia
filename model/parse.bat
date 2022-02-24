@@ -4,5 +4,5 @@ set a=%1.2.json
 dotnet "C:\Users\tomro\fortran parser\fortran-parser.dll" %1
 
 :: parse to julia
-julia "C:\Users\tomro\fortran parser\parse.jl" %a%
+julia --project="C:\Users\tomro\fortran parser" "C:\Users\tomro\fortran parser\parse.jl" %a%
 

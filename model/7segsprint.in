@@ -15,8 +15,10 @@ Constant:            INB                  KG.M^2          |  0.00301
 Constant:            INC                  KG.M^2          |  0.0808
 Constant:            IND                  KG.M^2          |  0.21645
 Constant:            INE                  KG.M^2          |  0.21645
-Constant:            INF                  KG.M^2          |  0.2411
+Constant:            INF                  KG.M^2          |  0.0808
 Constant:            ING                  KG.M^2          |  4.600
+Constant:            INH                  KG.M^2          |  0.00301
+Constant:            INI                  KG.M^2          |  0.00015
 Constant:            K1                   N/M             |  0.0
 Constant:            K2                   N/M/S^2         |  0.0
 Constant:            K3                   N/M             |  0.0
@@ -30,7 +32,6 @@ Constant:            KF                   UNITS           |  0.0
 Constant:            L1                   M               |  0.050
 Constant:            L10                  M               |  0.447
 Constant:            L11                  M               |  0.600
-Constant:            L12                  M               |  0.275
 Constant:            L2                   M               |  0.085
 Constant:            L3                   M               |  0.121
 Constant:            L4                   M               |  0.076
@@ -44,8 +45,10 @@ Constant:            MB                   KG              |  1.170
 Constant:            MC                   KG              |  5.375
 Constant:            MD                   KG              |  12.79
 Constant:            ME                   KG              |  12.79
-Constant:            MF                   KG              |  6.788
+Constant:            MF                   KG              |  5.375
 Constant:            MG                   KG              |  51.95
+Constant:            MH                   UNITS           |  1.170
+Constant:            MI                   UNITS           |  0.244
 Constant:            MTPB                 N/M/S^2         |  0.0
 Constant:            MTPK                 N/M             |  0.0
 Constant:            POP1XI               UNITS           |  0.0
