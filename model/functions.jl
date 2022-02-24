@@ -558,6 +558,32 @@ end
 pop11y(sol) = [pop11y(sol,t) for t in sol.t]
 
 
+function pop12x(sol, t)
+    @unpack l10, l11, l6, l8, l2 = sol.prob.p
+    
+    @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7 = sol(t)
+
+    
+    
+    return (q1 + l10 * (cos(q6) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7))) + sin(q6) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) + l11 * cos(q3) + l6 * (cos(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) + sin(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7))))) + l8 * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)))) - l2 * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))))
+end
+
+pop12x(sol) = [pop12x(sol,t) for t in sol.t]
+
+
+function pop12y(sol, t)
+    @unpack l10, l11, l6, l8, l2 = sol.prob.p
+    
+    @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7 = sol(t)
+
+    
+    
+    return (q2 + l10 * (cos(q6) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + sin(q6) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)))) + l11 * sin(q3) + l6 * (cos(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)))) + sin(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))))) + l8 * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) - l2 * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))))
+end
+
+pop12y(sol) = [pop12y(sol,t) for t in sol.t]
+
+
 function pocmx(sol, t)
     @unpack l7, mc, l8, md, me, mf, mg, mh, mi, ma, mb, l10, l9, l6, l4, l2, l1, l3, l5, footang = sol.prob.p
     @unpack ea, fa, ha, ia, gs = sol.prob.p
