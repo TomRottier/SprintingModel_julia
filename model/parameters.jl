@@ -87,10 +87,10 @@ function Params(ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap, eapp, fapp, gspp, h
     z = Vector{Float64}(undef, 687)
     mt = ma + mb + mc + md + me + mf + mg
 
-    u8 = 0
-    u9 = 0
-    u10 = 0
-    u11 = 0
+    u8 = 0.0
+    u9 = 0.0
+    u10 = 0.0
+    u11 = 0.0
 
     vrx(t) = 0.0
     vry(t) = 0.0
