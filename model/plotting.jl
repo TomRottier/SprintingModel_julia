@@ -6,7 +6,7 @@ function plot_model(sol, t)
     ps = [fn(sol, t) for fn in fns]
 
     plot(legend = :none, grid = :off, xlims = (-0.8, 5.0), ylims = (-0.1, 5.7), axis = nothing, border = :none)
-    plot!(ps[1:2:17], ps[2:2:18], lw = 2, color = :black)       # main skeleton
+    plot!(ps[1:2:18], ps[2:2:18], lw = 2, color = :black)       # main skeleton
     # plot!(ps[[11, 19]], ps[[12, 20]], lw = 2, color = :black)     # HAT
     # plot!(ps[[3, 7]], ps[[4, 8]], lw = 2, color = :black)         # connect foot
 
