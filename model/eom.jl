@@ -1,8 +1,8 @@
 # Automatically generated
 function eom(u, p, t)
-    @unpack ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, inh, ini, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mh, mi, mtpb, mtpk, pop1xi, pop2xi, mt, u8, u9, u10, u11, z = p
+    @unpack ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, inh, ini, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mh, mi, mtpb, mtpk, pop1xi, pop2xi, mt, u8, u9, u10, u11, z, virtual_force = p
     @unpack ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap, eapp, fapp, gspp, happ, iapp = p
-    @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7 = u
+    @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7, θhe, θke, θae, θhf, θkf, θaf = u
 
     # specified variables
     ea = ea(t)
@@ -23,32 +23,61 @@ function eom(u, p, t)
 
 
     # calculated variables
-    vrx1 = t
-    vrx2 = t
-    vry1 = t
-    vry2 = t
-    hetor = he * t
-    hftor = hf * t
-    ketor = ke * t
-    kftor = kf * t
-    aetor = ae * t
-    aftor = af * t
-    htor = hetor - hftor
-    ktor = ketor - kftor
-    ator = aetor - aftor
-    ry1 = -k3 * q2 - k4 * abs(q2) * u2
-    dp1x = q1 - pop1xi
-    rx1 = -ry1 * (k1 * dp1x + k2 * u1)
-    pop2y = q2 - l2 * z[37]
-    vop2y = u2 - l2 * z[39] * ((((u3 - u4) - u5) - u6) - u7)
-    ry2 = -k7 * pop2y - k8 * abs(pop2y) * vop2y
-    pop2x = q1 - l2 * z[36]
-    dp2x = pop2x - pop2xi
-    vop2x = u1 - l2 * z[38] * ((((u3 - u4) - u5) - u6) - u7)
-    rx2 = -ry2 * (k5 * dp2x + k6 * vop2x)
-    mang = q4
-    mangvel = u4
-    mtor = mtpk * (3.141592653589793 - mang) - mtpb * mangvel
+    θh = π + q7
+    θk = π - q6
+    θa = π + q5
+    θm = q4
+    ωh = u7
+    ωk = -u6
+    ωa = u5
+    ωm = u4
+    pop2y = q2 - l2 * sin(q3 - q4 - q5 - q6 - q7)
+
+    # torques
+    hetor = update_torque_generator!(he, t, 2π - θh, -ωh, θhe)
+    ketor = update_torque_generator!(ke, t, 2π - θk, -ωk, θke)
+    aetor = update_torque_generator!(ae, t, 2π - θa, -ωa, θae)
+    hftor = update_torque_generator!(hf, t, θh, ωh, θhf)
+    kftor = update_torque_generator!(kf, t, θk, ωk, θkf)
+    aftor = update_torque_generator!(af, t, θa, ωa, θaf)
+
+    # passive torques
+    hpass, kpass, apass = PEtorque(θh, θk, θa)
+    # hpass = 0.0
+
+    htor = hetor - hftor - hpass
+    ktor = ketor - kftor - kpass
+    ator = aetor - aftor + apass
+    mtor = mtpk * (π - θm) - mtpb * ωm
+
+    # grf
+    if q2 < 0.0
+        dp1x = q1 - pop1xi
+        ry1 = -k3 * q2 - k4 * abs(q2) * u2
+        rx1 = -ry1 * (k1 * dp1x + k2 * u1)
+
+    else
+        rx1 = 0.0
+        ry1 = 0.0
+    end
+
+    if pop2y < 0.0
+        pop2x = q1 - l2 * cos(q3 - q4 - q5 - q6 - q7)
+        vop2x = u1 - l2 * sin(q3 - q4 - q5 - q6 - q7) * (u3 - u4 - u5 - u6 - u7)
+        vop2y = u2 - l2 * cos(q3 - q4 - q5 - q6 - q7) * (u3 - u4 - u5 - u6 - u7)
+        dp2x = pop2x - pop2xi
+        ry2 = -k7 * pop2y - k8 * abs(pop2y) * vop2y
+        rx2 = -ry2 * (k5 * dp2x + k6 * vop2x)
+    else
+        rx2 = 0.0
+        ry2 = 0.0
+    end
+
+    # virtual grf
+    vrx1::Float64 = virtual_force.flag ? virtual_force.vrx1(t) : 0.0
+    vry1::Float64 = virtual_force.flag ? virtual_force.vry1(t) : 0.0
+    vrx2::Float64 = virtual_force.flag ? virtual_force.vrx2(t) : 0.0
+    vry2::Float64 = virtual_force.flag ? virtual_force.vry2(t) : 0.0
 
     # z variables
     z[227] = vrx2 + vry2
@@ -409,5 +438,5 @@ function eom(u, p, t)
     q7p = u7
     @inbounds u1p, u2p, u3p, u4p, u5p, u6p, u7p = coef \ rhs
 
-    return @SVector [q1p, q2p, q3p, q4p, q5p, q6p, q7p, u1p, u2p, u3p, u4p, u5p, u6p, u7p]
+    return @SVector [q1p, q2p, q3p, q4p, q5p, q6p, q7p, u1p, u2p, u3p, u4p, u5p, u6p, u7p, he.cc.ω, ke.cc.ω, ae.cc.ω, hf.cc.ω, kf.cc.ω, af.cc.ω]
 end
