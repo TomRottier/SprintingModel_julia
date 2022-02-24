@@ -18,7 +18,7 @@ AUTOZ ON          % May speed up simulation?
 NEWTONIAN N
 BODIES A,B,C,D,E,F,G,H,I
 FRAMES Z,Y            % Frame for rear foot
-POINTS O,P{11},CM,CMSTANCE,CMSWING,BO1,BO2,CO1,CO2
+POINTS O,P{12},CM,CMSTANCE,CMSWING,BO1,BO2,CO1,CO2
 % 
 % Mathematical declarations
 MASS A=MA, B=MB, C=MC, D=MD, E=ME, F=MF, G=MG, H=MH, I=MI
@@ -99,7 +99,7 @@ P_P9_P11> = L2*I1>                          % MTP to toe
 
 % hat
 P_P6_GO>  = GS*G1>                          % HJC to HAT CoM
-P_P6_P9>  = L11*G1>                         % HJC to APEX - does not affect model, just plot
+P_P6_P12>  = L11*G1>                         % HJC to APEX - does not affect model, just plot
 % 
 % Position of points relative to origin
 P_O_AO> = P_O_P1> + P_P1_AO>
@@ -147,6 +147,8 @@ POIOX = DOT(P_O_IO>,N1>)
 POIOY = DOT(P_O_IO>,N2>)
 POP11X = DOT(P_O_P11>,N1>)
 POP11Y = DOT(P_O_P11>,N2>)
+POP12X = DOT(P_O_P12>,N1>)
+POP12Y = DOT(P_O_P12>,N2>)
 %
 % Position of CoM of system
 P_O_CM> = CM(O)
