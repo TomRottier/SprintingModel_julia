@@ -265,8 +265,8 @@ function Params(ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap, eapp, fapp, gspp, h
     z[620] = l4 * z[8]
     z[621] = z[7] * z[24]
     z[622] = z[7] * z[25]
-    z[623] = z[8] * z[24]
-    z[624] = z[8] * z[25]
+    z[623] = z[8] * z[25]
+    z[624] = z[8] * z[24]
     z[626] = ina + ma * l1^2 + mb * l2^2 + mc * l2^2 + md * l2^2 + me * l2^2 + mf * l2^2 + mg * l2^2 + mh * l2^2 + mi * l2^2
     z[627] = ina + ma * l1^2
     z[632] = ina + inb + ma * l1^2
