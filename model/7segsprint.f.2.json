@@ -7,7 +7,7 @@
     { "DimensionStatement": [  { "VAR": "14" } ] },
     { "CommonStatement":  { 
    "Name": "CONSTNTS",
-   "Items": [ "AE", "AF", "FOOTANG", "G", "HE", "HF", "INA", "INB", "INC", "IND", "INE", "INF", "ING", "INH", "INI", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "KE", "KF", "L1", "L10", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "MA", "MB", "MC", "MD", "ME", "MF", "MG", "MH", "MI", "MTPB", "MTPK", "POP1XI", "POP2XI" ]
+   "Items": [ "AE", "AF", "FOOTANG", "G", "HE", "HF", "INA", "INB", "INC", "IND", "INE", "INF", "ING", "INH", "INI", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "KE", "KF", "L1", "L10", "L11", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "MA", "MB", "MC", "MD", "ME", "MF", "MG", "MH", "MI", "MTPB", "MTPK", "POP1XI", "POP2XI" ]
   }
   },
     { "CommonStatement":  { 
@@ -22,7 +22,7 @@
   },
     { "CommonStatement":  { 
    "Name": "ALGBRAIC",
-   "Items": [ "AANG", "AANGVEL", "AETOR", "AFTOR", "ATOR", "HANG", "HANGVEL", "HETOR", "HFTOR", "HTOR", "HZ", "KANG", "KANGVEL", "KECM", "KETOR", "KFTOR", "KTOR", "MANG", "MANGVEL", "MTOR", "PECM", "PX", "PY", "RX1", "RX2", "RY1", "RY2", "SATOR", "SHANG", "SHANGVEL", "SHTOR", "SKANG", "SKANGVEL", "SKTOR", "SMTOR", "TE", "U10", "U11", "U8", "U9", "VRX1", "VRX2", "VRY1", "VRY2", "Q1p", "Q2p", "Q3p", "Q4p", "Q5p", "Q6p", "Q7p", "U1p", "U2p", "U3p", "U4p", "U5p", "U6p", "U7p", "DP1X", "DP2X", "MT", "POCMSTANCEX", "POCMSTANCEY", "POCMSWINGX", "POCMSWINGY", "POCMX", "POCMY", "POGOX", "POGOY", "POP10X", "POP10Y", "POP11X", "POP11Y", "POP1X", "POP1Y", "POP2X", "POP2Y", "POP3X", "POP3Y", "POP4X", "POP4Y", "POP5X", "POP5Y", "POP6X", "POP6Y", "POP7X", "POP7Y", "POP8X", "POP8Y", "POP9X", "POP9Y", "PSTANCEX", "PSTANCEY", "PSWINGX", "PSWINGY", "SAANG", "SAANGVEL", "SMANG", "SMANGVEL", "VOCMSTANCEX", "VOCMSTANCEY", "VOCMSWINGX", "VOCMSWINGY", "VOCMX", "VOCMY", "VOP2X", "VOP2Y" ]
+   "Items": [ "AANG", "AANGVEL", "AETOR", "AFTOR", "ATOR", "HANG", "HANGVEL", "HETOR", "HFTOR", "HTOR", "HZ", "KANG", "KANGVEL", "KECM", "KETOR", "KFTOR", "KTOR", "MANG", "MANGVEL", "MTOR", "PECM", "PX", "PY", "RX1", "RX2", "RY1", "RY2", "SATOR", "SHANG", "SHANGVEL", "SHTOR", "SKANG", "SKANGVEL", "SKTOR", "SMTOR", "TE", "U10", "U11", "U8", "U9", "VRX1", "VRX2", "VRY1", "VRY2", "Q1p", "Q2p", "Q3p", "Q4p", "Q5p", "Q6p", "Q7p", "U1p", "U2p", "U3p", "U4p", "U5p", "U6p", "U7p", "DP1X", "DP2X", "MT", "POCMSTANCEX", "POCMSTANCEY", "POCMSWINGX", "POCMSWINGY", "POCMX", "POCMY", "POGOX", "POGOY", "POP10X", "POP10Y", "POP11X", "POP11Y", "POP12X", "POP12Y", "POP1X", "POP1Y", "POP2X", "POP2Y", "POP3X", "POP3Y", "POP4X", "POP4Y", "POP5X", "POP5Y", "POP6X", "POP6Y", "POP7X", "POP7Y", "POP8X", "POP8Y", "POP9X", "POP9Y", "PSTANCEX", "PSTANCEY", "PSWINGX", "PSWINGY", "SAANG", "SAANGVEL", "SMANG", "SMANGVEL", "VOCMSTANCEX", "VOCMSTANCEY", "VOCMSWINGX", "VOCMSWINGY", "VOCMX", "VOCMY", "VOP2X", "VOP2Y" ]
   }
   },
     { "CommonStatement":  { 
@@ -38,7 +38,7 @@
     { "OpenStatement": "OPEN ( UNIT = 25 , FILE = \u0027model/7segsprint.5\u0027 , STATUS = \u0027UNKNOWN\u0027 )" },
     { "OpenStatement": "OPEN ( UNIT = 26 , FILE = \u0027model/7segsprint.6\u0027 , STATUS = \u0027UNKNOWN\u0027 )" },
     { "ReadStatement": "READ ( 20 , 7000 , END = 7100 , ERR = 7101 ) ( MESSAGE ILOOP , ILOOP = 1 , 99 )" },
-    { "ReadStatement": "READ ( 20 , 7010 , END = 7100 , ERR = 7101 ) AE , AF , FOOTANG , G , HE , HF , INA , INB , INC , IND , INE , INF , ING , INH , INI , K1 , K2 , K3 , K4 , K5 , K6 , K7 , K8 , KE , KF , L1 , L10 , L2 , L3 , L4 , L5 , L6 , L7 , L8 , L9 , MA , MB , MC , MD , ME , MF , MG , MH , MI , MTPB , MTPK , POP1XI , POP2XI" },
+    { "ReadStatement": "READ ( 20 , 7010 , END = 7100 , ERR = 7101 ) AE , AF , FOOTANG , G , HE , HF , INA , INB , INC , IND , INE , INF , ING , INH , INI , K1 , K2 , K3 , K4 , K5 , K6 , K7 , K8 , KE , KF , L1 , L10 , L11 , L2 , L3 , L4 , L5 , L6 , L7 , L8 , L9 , MA , MB , MC , MD , ME , MF , MG , MH , MI , MTPB , MTPK , POP1XI , POP2XI" },
     { "ReadStatement": "READ ( 20 , 7010 , END = 7100 , ERR = 7101 ) Q1 , Q2 , Q3 , Q4 , Q5 , Q6 , Q7 , U1 , U2 , U3 , U4 , U5 , U6 , U7" },
     { "ReadStatement": "READ ( 20 , 7011 , END = 7100 , ERR = 7101 ) TINITIAL , TFINAL , INTEGSTP , PRINTINT , ABSERR , RELERR" },
     { "WriteStatement": "WRITE ( * , 6021 ) ( MESSAGE ILOOP , ILOOP = 1 , 99 )" },
@@ -2010,9 +2010,9 @@
     { "LABEL": "5930" },
     { "WriteStatement": "WRITE ( * , 6999 )" },
     { "LABEL": "6021" },
-    { "FormatStatement": "FORMAT ( 1X , \u0027FILE: model/7segsprint.1 \u0027 , / / 1X , \u0027*** \u0027 , 99A1 , / / / , 8X , \u0027T\u0027 , 12X , \u0027POP1X\u0027 , 10X , \u0027POP1Y\u0027 , 10X , \u0027POP2X\u0027 , 10X , \u0027POP2Y\u0027 , 10X , \u0027POP3X\u0027 , 10X , \u0027POP3Y\u0027 , 10X , \u0027POP4X\u0027 , 10X , \u0027POP4Y\u0027 , 10X , \u0027POP5X\u0027 , 10X , \u0027POP5Y\u0027 , 10X , \u0027POP6X\u0027 , 10X , \u0027POP6Y\u0027 , 10X , \u0027POP7X\u0027 , 10X , \u0027POP7Y\u0027 , 10X , \u0027POP8X\u0027 , 10X , \u0027POP8Y\u0027 , 10X , \u0027POP9X\u0027 , 10X , \u0027POP9Y\u0027 , 9X , \u0027POP10X\u0027 , 9X , \u0027POP10Y\u0027 , 9X , \u0027POP11X\u0027 , 9X , \u0027POP11Y\u0027 , 10X , \u0027POGOX\u0027 , 10X , \u0027POGOY\u0027 , / , 7X , \u0027(S)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , / )" },
+    { "FormatStatement": "FORMAT ( 1X , \u0027FILE: model/7segsprint.1 \u0027 , / / 1X , \u0027*** \u0027 , 99A1 , / / / , 8X , \u0027T\u0027 , 12X , \u0027POP1X\u0027 , 10X , \u0027POP1Y\u0027 , 10X , \u0027POP2X\u0027 , 10X , \u0027POP2Y\u0027 , 10X , \u0027POP3X\u0027 , 10X , \u0027POP3Y\u0027 , 10X , \u0027POP4X\u0027 , 10X , \u0027POP4Y\u0027 , 10X , \u0027POP5X\u0027 , 10X , \u0027POP5Y\u0027 , 10X , \u0027POP6X\u0027 , 10X , \u0027POP6Y\u0027 , 10X , \u0027POP7X\u0027 , 10X , \u0027POP7Y\u0027 , 10X , \u0027POP8X\u0027 , 10X , \u0027POP8Y\u0027 , 10X , \u0027POP9X\u0027 , 10X , \u0027POP9Y\u0027 , 9X , \u0027POP10X\u0027 , 9X , \u0027POP10Y\u0027 , 9X , \u0027POP11X\u0027 , 9X , \u0027POP11Y\u0027 , 9X , \u0027POP12X\u0027 , 9X , \u0027POP12Y\u0027 , / , 7X , \u0027(S)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 10X , \u0027(UNITS)\u0027 , 8X , \u0027(UNITS)\u0027 , / )" },
     { "LABEL": "6022" },
-    { "FormatStatement": "FORMAT ( 1X , \u0027FILE: model/7segsprint.2 \u0027 , / / 1X , \u0027*** \u0027 , 99A1 , / / / , 8X , \u0027T\u0027 , 9X , \u0027POCMSTANCEX\u0027 , 4X , \u0027POCMSTANCEY\u0027 , 4X , \u0027POCMSWINGX\u0027 , 5X , \u0027POCMSWINGY\u0027 , 8X , \u0027POCMX\u0027 , 10X , \u0027POCMY\u0027 , 10X , \u0027VOCMX\u0027 , 10X , \u0027VOCMY\u0027 , 8X , \u0027PSTANCEX\u0027 , 7X , \u0027PSTANCEY\u0027 , 8X , \u0027PSWINGX\u0027 , 8X , \u0027PSWINGY\u0027 , 6X , \u0027VOCMSTANCEX\u0027 , 4X , \u0027VOCMSTANCEY\u0027 , 4X , \u0027VOCMSWINGX\u0027 , 5X , \u0027VOCMSWINGY\u0027 , / , 7X , \u0027(S)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 11X , \u0027(M/S)\u0027 , 10X , \u0027(M/S)\u0027 , 9X , \u0027(UNITS)\u0027 , 8X , \u0027(UNITS)\u0027 , 8X , \u0027(UNITS)\u0027 , 8X , \u0027(UNITS)\u0027 , 9X , \u0027(M/S)\u0027 , 10X , \u0027(M/S)\u0027 , 10X , \u0027(M/S)\u0027 , 10X , \u0027(M/S)\u0027 , / )" },
+    { "FormatStatement": "FORMAT ( 1X , \u0027FILE: model/7segsprint.2 \u0027 , / / 1X , \u0027*** \u0027 , 99A1 , / / / , 8X , \u0027T\u0027 , 12X , \u0027POGOX\u0027 , 10X , \u0027POGOY\u0027 , 7X , \u0027POCMSTANCEX\u0027 , 4X , \u0027POCMSTANCEY\u0027 , 4X , \u0027POCMSWINGX\u0027 , 5X , \u0027POCMSWINGY\u0027 , 8X , \u0027POCMX\u0027 , 10X , \u0027POCMY\u0027 , 10X , \u0027VOCMX\u0027 , 10X , \u0027VOCMY\u0027 , 8X , \u0027PSTANCEX\u0027 , 7X , \u0027PSTANCEY\u0027 , 8X , \u0027PSWINGX\u0027 , 8X , \u0027PSWINGY\u0027 , 6X , \u0027VOCMSTANCEX\u0027 , 4X , \u0027VOCMSTANCEY\u0027 , 4X , \u0027VOCMSWINGX\u0027 , 5X , \u0027VOCMSWINGY\u0027 , / , 7X , \u0027(S)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 11X , \u0027(M/S)\u0027 , 10X , \u0027(M/S)\u0027 , 9X , \u0027(UNITS)\u0027 , 8X , \u0027(UNITS)\u0027 , 8X , \u0027(UNITS)\u0027 , 8X , \u0027(UNITS)\u0027 , 9X , \u0027(M/S)\u0027 , 10X , \u0027(M/S)\u0027 , 10X , \u0027(M/S)\u0027 , 10X , \u0027(M/S)\u0027 , / )" },
     { "LABEL": "6023" },
     { "FormatStatement": "FORMAT ( 1X , \u0027FILE: model/7segsprint.3 \u0027 , / / 1X , \u0027*** \u0027 , 99A1 , / / / , 8X , \u0027T\u0027 , 13X , \u0027Q1\u0027 , 13X , \u0027Q2\u0027 , 13X , \u0027Q3\u0027 , 13X , \u0027Q4\u0027 , 13X , \u0027Q5\u0027 , 13X , \u0027Q6\u0027 , 13X , \u0027Q7\u0027 , 13X , \u0027U1\u0027 , 13X , \u0027U2\u0027 , 13X , \u0027U3\u0027 , 13X , \u0027U4\u0027 , 13X , \u0027U5\u0027 , 13X , \u0027U6\u0027 , 13X , \u0027U7\u0027 , / , 7X , \u0027(S)\u0027 , 12X , \u0027(M)\u0027 , 12X , \u0027(M)\u0027 , 11X , \u0027(DEG)\u0027 , 10X , \u0027(DEG)\u0027 , 10X , \u0027(DEG)\u0027 , 10X , \u0027(DEG)\u0027 , 10X , \u0027(DEG)\u0027 , 10X , \u0027(M/S)\u0027 , 10X , \u0027(M/S)\u0027 , 9X , \u0027(DEG/S)\u0027 , 8X , \u0027(DEG/S)\u0027 , 8X , \u0027(DEG/S)\u0027 , 8X , \u0027(DEG/S)\u0027 , 8X , \u0027(DEG/S)\u0027 , / )" },
     { "LABEL": "6024" },
@@ -2051,7 +2051,7 @@
     { "DimensionStatement": [  { "VAR": "*" },  { "VARp": "*" } ] },
     { "CommonStatement":  { 
    "Name": "CONSTNTS",
-   "Items": [ "AE", "AF", "FOOTANG", "G", "HE", "HF", "INA", "INB", "INC", "IND", "INE", "INF", "ING", "INH", "INI", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "KE", "KF", "L1", "L10", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "MA", "MB", "MC", "MD", "ME", "MF", "MG", "MH", "MI", "MTPB", "MTPK", "POP1XI", "POP2XI" ]
+   "Items": [ "AE", "AF", "FOOTANG", "G", "HE", "HF", "INA", "INB", "INC", "IND", "INE", "INF", "ING", "INH", "INI", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "KE", "KF", "L1", "L10", "L11", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "MA", "MB", "MC", "MD", "ME", "MF", "MG", "MH", "MI", "MTPB", "MTPK", "POP1XI", "POP2XI" ]
   }
   },
     { "CommonStatement":  { 
@@ -2066,7 +2066,7 @@
   },
     { "CommonStatement":  { 
    "Name": "ALGBRAIC",
-   "Items": [ "AANG", "AANGVEL", "AETOR", "AFTOR", "ATOR", "HANG", "HANGVEL", "HETOR", "HFTOR", "HTOR", "HZ", "KANG", "KANGVEL", "KECM", "KETOR", "KFTOR", "KTOR", "MANG", "MANGVEL", "MTOR", "PECM", "PX", "PY", "RX1", "RX2", "RY1", "RY2", "SATOR", "SHANG", "SHANGVEL", "SHTOR", "SKANG", "SKANGVEL", "SKTOR", "SMTOR", "TE", "U10", "U11", "U8", "U9", "VRX1", "VRX2", "VRY1", "VRY2", "Q1p", "Q2p", "Q3p", "Q4p", "Q5p", "Q6p", "Q7p", "U1p", "U2p", "U3p", "U4p", "U5p", "U6p", "U7p", "DP1X", "DP2X", "MT", "POCMSTANCEX", "POCMSTANCEY", "POCMSWINGX", "POCMSWINGY", "POCMX", "POCMY", "POGOX", "POGOY", "POP10X", "POP10Y", "POP11X", "POP11Y", "POP1X", "POP1Y", "POP2X", "POP2Y", "POP3X", "POP3Y", "POP4X", "POP4Y", "POP5X", "POP5Y", "POP6X", "POP6Y", "POP7X", "POP7Y", "POP8X", "POP8Y", "POP9X", "POP9Y", "PSTANCEX", "PSTANCEY", "PSWINGX", "PSWINGY", "SAANG", "SAANGVEL", "SMANG", "SMANGVEL", "VOCMSTANCEX", "VOCMSTANCEY", "VOCMSWINGX", "VOCMSWINGY", "VOCMX", "VOCMY", "VOP2X", "VOP2Y" ]
+   "Items": [ "AANG", "AANGVEL", "AETOR", "AFTOR", "ATOR", "HANG", "HANGVEL", "HETOR", "HFTOR", "HTOR", "HZ", "KANG", "KANGVEL", "KECM", "KETOR", "KFTOR", "KTOR", "MANG", "MANGVEL", "MTOR", "PECM", "PX", "PY", "RX1", "RX2", "RY1", "RY2", "SATOR", "SHANG", "SHANGVEL", "SHTOR", "SKANG", "SKANGVEL", "SKTOR", "SMTOR", "TE", "U10", "U11", "U8", "U9", "VRX1", "VRX2", "VRY1", "VRY2", "Q1p", "Q2p", "Q3p", "Q4p", "Q5p", "Q6p", "Q7p", "U1p", "U2p", "U3p", "U4p", "U5p", "U6p", "U7p", "DP1X", "DP2X", "MT", "POCMSTANCEX", "POCMSTANCEY", "POCMSWINGX", "POCMSWINGY", "POCMX", "POCMY", "POGOX", "POGOY", "POP10X", "POP10Y", "POP11X", "POP11Y", "POP12X", "POP12Y", "POP1X", "POP1Y", "POP2X", "POP2Y", "POP3X", "POP3Y", "POP4X", "POP4Y", "POP5X", "POP5Y", "POP6X", "POP6Y", "POP7X", "POP7Y", "POP8X", "POP8Y", "POP9X", "POP9Y", "PSTANCEX", "PSTANCEY", "PSWINGX", "PSWINGY", "SAANG", "SAANGVEL", "SMANG", "SMANGVEL", "VOCMSTANCEX", "VOCMSTANCEY", "VOCMSWINGX", "VOCMSWINGY", "VOCMX", "VOCMY", "VOP2X", "VOP2Y" ]
   }
   },
     { "CommonStatement":  { 
@@ -18044,7 +18044,7 @@
     { "TypeStatement": "INTEGER ILOOP" },
     { "CommonStatement":  { 
    "Name": "CONSTNTS",
-   "Items": [ "AE", "AF", "FOOTANG", "G", "HE", "HF", "INA", "INB", "INC", "IND", "INE", "INF", "ING", "INH", "INI", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "KE", "KF", "L1", "L10", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "MA", "MB", "MC", "MD", "ME", "MF", "MG", "MH", "MI", "MTPB", "MTPK", "POP1XI", "POP2XI" ]
+   "Items": [ "AE", "AF", "FOOTANG", "G", "HE", "HF", "INA", "INB", "INC", "IND", "INE", "INF", "ING", "INH", "INI", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "KE", "KF", "L1", "L10", "L11", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "MA", "MB", "MC", "MD", "ME", "MF", "MG", "MH", "MI", "MTPB", "MTPK", "POP1XI", "POP2XI" ]
   }
   },
     { "CommonStatement":  { 
@@ -18059,7 +18059,7 @@
   },
     { "CommonStatement":  { 
    "Name": "ALGBRAIC",
-   "Items": [ "AANG", "AANGVEL", "AETOR", "AFTOR", "ATOR", "HANG", "HANGVEL", "HETOR", "HFTOR", "HTOR", "HZ", "KANG", "KANGVEL", "KECM", "KETOR", "KFTOR", "KTOR", "MANG", "MANGVEL", "MTOR", "PECM", "PX", "PY", "RX1", "RX2", "RY1", "RY2", "SATOR", "SHANG", "SHANGVEL", "SHTOR", "SKANG", "SKANGVEL", "SKTOR", "SMTOR", "TE", "U10", "U11", "U8", "U9", "VRX1", "VRX2", "VRY1", "VRY2", "Q1p", "Q2p", "Q3p", "Q4p", "Q5p", "Q6p", "Q7p", "U1p", "U2p", "U3p", "U4p", "U5p", "U6p", "U7p", "DP1X", "DP2X", "MT", "POCMSTANCEX", "POCMSTANCEY", "POCMSWINGX", "POCMSWINGY", "POCMX", "POCMY", "POGOX", "POGOY", "POP10X", "POP10Y", "POP11X", "POP11Y", "POP1X", "POP1Y", "POP2X", "POP2Y", "POP3X", "POP3Y", "POP4X", "POP4Y", "POP5X", "POP5Y", "POP6X", "POP6Y", "POP7X", "POP7Y", "POP8X", "POP8Y", "POP9X", "POP9Y", "PSTANCEX", "PSTANCEY", "PSWINGX", "PSWINGY", "SAANG", "SAANGVEL", "SMANG", "SMANGVEL", "VOCMSTANCEX", "VOCMSTANCEY", "VOCMSWINGX", "VOCMSWINGY", "VOCMX", "VOCMY", "VOP2X", "VOP2Y" ]
+   "Items": [ "AANG", "AANGVEL", "AETOR", "AFTOR", "ATOR", "HANG", "HANGVEL", "HETOR", "HFTOR", "HTOR", "HZ", "KANG", "KANGVEL", "KECM", "KETOR", "KFTOR", "KTOR", "MANG", "MANGVEL", "MTOR", "PECM", "PX", "PY", "RX1", "RX2", "RY1", "RY2", "SATOR", "SHANG", "SHANGVEL", "SHTOR", "SKANG", "SKANGVEL", "SKTOR", "SMTOR", "TE", "U10", "U11", "U8", "U9", "VRX1", "VRX2", "VRY1", "VRY2", "Q1p", "Q2p", "Q3p", "Q4p", "Q5p", "Q6p", "Q7p", "U1p", "U2p", "U3p", "U4p", "U5p", "U6p", "U7p", "DP1X", "DP2X", "MT", "POCMSTANCEX", "POCMSTANCEY", "POCMSWINGX", "POCMSWINGY", "POCMX", "POCMY", "POGOX", "POGOY", "POP10X", "POP10Y", "POP11X", "POP11Y", "POP12X", "POP12Y", "POP1X", "POP1Y", "POP2X", "POP2Y", "POP3X", "POP3Y", "POP4X", "POP4Y", "POP5X", "POP5Y", "POP6X", "POP6Y", "POP7X", "POP7Y", "POP8X", "POP8Y", "POP9X", "POP9Y", "PSTANCEX", "PSTANCEY", "PSWINGX", "PSWINGY", "SAANG", "SAANGVEL", "SMANG", "SMANGVEL", "VOCMSTANCEX", "VOCMSTANCEY", "VOCMSWINGX", "VOCMSWINGY", "VOCMX", "VOCMY", "VOP2X", "VOP2Y" ]
   }
   },
     { "CommonStatement":  { 
@@ -34602,6 +34602,62 @@
   }
   },
     { "AssignmentStatement":  { 
+   "lhs": "POP12X",
+   "rhs": [
+    "Q1",
+    "\u002B",
+    "L10",
+    "*",
+    [ "Z", 52 ],
+    "\u002B",
+    "L11",
+    "*",
+    [ "Z", 1 ],
+    "\u002B",
+    "L6",
+    "*",
+    [ "Z", 48 ],
+    "\u002B",
+    "L8",
+    "*",
+    [ "Z", 33 ],
+    "-",
+    "L2",
+    "*",
+    [ "Z", 37 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": "POP12Y",
+   "rhs": [
+    "Q2",
+    "\u002B",
+    "L10",
+    "*",
+    [ "Z", 53 ],
+    "\u002B",
+    "L11",
+    "*",
+    [ "Z", 2 ],
+    "\u002B",
+    "L6",
+    "*",
+    [ "Z", 49 ],
+    "\u002B",
+    "L8",
+    "*",
+    [ "Z", 34 ],
+    "-",
+    "L2",
+    "*",
+    [ "Z", 38 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
    "lhs": "POCMX",
    "rhs": [
     "Q1",
@@ -36317,9 +36373,9 @@
 
   }
   },
-    { "WriteStatement": "WRITE ( * , 6020 ) T , POP1X , POP1Y , POP2X , POP2Y , POP3X , POP3Y , POP4X , POP4Y , POP5X , POP5Y , POP6X , POP6Y , POP7X , POP7Y , POP8X , POP8Y , POP9X , POP9Y , POP10X , POP10Y , POP11X , POP11Y , POGOX , POGOY" },
-    { "WriteStatement": "WRITE ( 21 , 6020 ) T , POP1X , POP1Y , POP2X , POP2Y , POP3X , POP3Y , POP4X , POP4Y , POP5X , POP5Y , POP6X , POP6Y , POP7X , POP7Y , POP8X , POP8Y , POP9X , POP9Y , POP10X , POP10Y , POP11X , POP11Y , POGOX , POGOY" },
-    { "WriteStatement": "WRITE ( 22 , 6020 ) T , POCMSTANCEX , POCMSTANCEY , POCMSWINGX , POCMSWINGY , POCMX , POCMY , VOCMX , VOCMY , PSTANCEX , PSTANCEY , PSWINGX , PSWINGY , VOCMSTANCEX , VOCMSTANCEY , VOCMSWINGX , VOCMSWINGY" },
+    { "WriteStatement": "WRITE ( * , 6020 ) T , POP1X , POP1Y , POP2X , POP2Y , POP3X , POP3Y , POP4X , POP4Y , POP5X , POP5Y , POP6X , POP6Y , POP7X , POP7Y , POP8X , POP8Y , POP9X , POP9Y , POP10X , POP10Y , POP11X , POP11Y , POP12X , POP12Y" },
+    { "WriteStatement": "WRITE ( 21 , 6020 ) T , POP1X , POP1Y , POP2X , POP2Y , POP3X , POP3Y , POP4X , POP4Y , POP5X , POP5Y , POP6X , POP6Y , POP7X , POP7Y , POP8X , POP8Y , POP9X , POP9Y , POP10X , POP10Y , POP11X , POP11Y , POP12X , POP12Y" },
+    { "WriteStatement": "WRITE ( 22 , 6020 ) T , POGOX , POGOY , POCMSTANCEX , POCMSTANCEY , POCMSWINGX , POCMSWINGY , POCMX , POCMY , VOCMX , VOCMY , PSTANCEX , PSTANCEY , PSWINGX , PSWINGY , VOCMSTANCEX , VOCMSTANCEY , VOCMSWINGX , VOCMSWINGY" },
     { "WriteStatement": "WRITE ( 23 , 6020 ) T , Q1 , Q2 , ( Q3 * RADtoDEG ) , ( Q4 * RADtoDEG ) , ( Q5 * RADtoDEG ) , ( Q6 * RADtoDEG ) , ( Q7 * RADtoDEG ) , U1 , U2 , U3 , U4 , U5 , U6 , U7" },
     { "WriteStatement": "WRITE ( 24 , 6020 ) T , RX1 , RY1 , RX2 , RY2 , VRX1 , VRY1 , VRX2 , VRY2 , HTOR , KTOR , ATOR , MTOR , SHTOR , SKTOR , SATOR , SMTOR" },
     { "WriteStatement": "WRITE ( 25 , 6020 ) T , ( Q3 * RADtoDEG ) , ( HANG * RADtoDEG ) , ( KANG * RADtoDEG ) , ( AANG * RADtoDEG ) , ( MANG * RADtoDEG ) , ( SHANG * RADtoDEG ) , ( SKANG * RADtoDEG ) , SAANG , SMANG , U3 , HANGVEL , KANGVEL , AANGVEL , MANGVEL , SHANGVEL , SKANGVEL , SAANGVEL , SMANGVEL" },
