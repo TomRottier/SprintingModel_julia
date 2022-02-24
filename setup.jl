@@ -21,19 +21,19 @@ function load_inputs(;
 
     # load parameters
     input_p, headers_p = readdlm(parameters, ',', header = true)
-    input_p = Vector{Float64}(input_p[2,:]) # remove units row
-    p = Dict(Symbol(h) => v for (h,v) in zip(headers_p, input_p))
+    input_p = Vector{Float64}(input_p[2, :]) # remove units row
+    p = Dict(Symbol(h) => v for (h, v) in zip(headers_p, input_p))
 
     # load initial conditions
     input_u, headers_u = readdlm(initial_conditions, ',', header = true)
-    input_u = Vector{Float64}(input_u[2,:]) # remove units row
-    u = Dict(Symbol(h) => v for (h,v) in zip(headers_u,input_u))
+    input_u = Vector{Float64}(input_u[2, :]) # remove units row
+    u = Dict(Symbol(h) => v for (h, v) in zip(headers_u, input_u))
 
     # load torque generator parameters
-    input_tq, headers_tq = readdlm(torque_generators, ',', header=true)
-    tq =  Dict(
+    input_tq, headers_tq = readdlm(torque_generators, ',', header = true)
+    tq = Dict(
         Symbol(x[1]) => Dict(
-            Symbol(h) => Float64(v) for (h,v) in zip(headers_tq[2:end],x[2:end])
+            Symbol(h) => Float64(v) for (h, v) in zip(headers_tq[2:end], x[2:end])
         ) for x in eachrow(input_tq)
     )
 
@@ -42,17 +42,17 @@ function load_inputs(;
     α = Dict(Symbol(x[1]) => Vector{Float64}(x[2:end]) for x in eachrow(input_act))
 
     # load swing leg and HAT data
-    input_swing, headers_swing = readdlm(swing, ',', header=true)
-    input_swing = Matrix{Float64}(input_swing[2:end,:]) # remove units row
-    swing_data = Dict(Symbol(h) => ts for (h,ts) in zip(headers_swing, eachcol(input_swing)))
-    input_hat, headers_hat = readdlm(hat, ',', header=true)
-    input_hat = Matrix{Float64}(input_hat[2:end,:]) # remove units row
-    hat_data = Dict(Symbol(h) => ts for (h,ts) in zip(headers_hat, eachcol(input_hat)))
+    input_swing, headers_swing = readdlm(swing, ',', header = true)
+    input_swing = Matrix{Float64}(input_swing[2:end, :]) # remove units row
+    swing_data = Dict(Symbol(h) => ts for (h, ts) in zip(headers_swing, eachcol(input_swing)))
+    input_hat, headers_hat = readdlm(hat, ',', header = true)
+    input_hat = Matrix{Float64}(input_hat[2:end, :]) # remove units row
+    hat_data = Dict(Symbol(h) => ts for (h, ts) in zip(headers_hat, eachcol(input_hat)))
 
     # load matching data
     input_matching, headers_matching = readdlm(matching, ',', header = true)
-    input_matching = Matrix{Float64}(input_matching[2:end,:]) # remove units row
-    matching_data = Dict(Symbol(h) => ts for (h,ts) in zip(headers_matching, eachcol(input_matching)))
+    input_matching = Matrix{Float64}(input_matching[2:end, :]) # remove units row
+    matching_data = Dict(Symbol(h) => ts for (h, ts) in zip(headers_matching, eachcol(input_matching)))
 
     # return in struct
     return Inputs(p, u, tq, α, swing_data, hat_data, matching_data)
@@ -74,8 +74,9 @@ function load_from_results(inputs, fname, speed)
     _inputs = deepcopy(inputs)
     _inputs.initial_conditions[:vcmx] = speed
     # _inputs.activation_parameters[:, 2:end] = reshape(p, :, 6) |> permutedims # reshape to 6xn matrix, row major
-    n = length(p); m = n ÷ 6
-    [_inputs.activation_parameters[k] = p[i:i+m-1] for (k,i) in zip([:he,:ke,:ae,:hf,:kf,:af], collect(1:m:n))]
+    n = length(p)
+    m = n ÷ 6
+    [_inputs.activation_parameters[k] = p[i:i+m-1] for (k, i) in zip([:he, :ke, :ae, :hf, :kf, :af], collect(1:m:n))]
 
     p, u₀ = set_values(_inputs)
     return p, u₀
@@ -87,24 +88,26 @@ function set_values(inputs)
     initial_conditions = NamedTuple(initial_conditions)
 
     # set parameters
-    @inbounds (;footang, g, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi) = parameters
+    @inbounds (; footang, g, ina, inb, inc, ind, ine, inf, ing, inh, ini, k1, k2, k3, k4, k5, k6, k7, k8, l1, l10, l11, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mh, mi, mtpb, mtpk, pop1xi, pop2xi) = parameters
     mt = ma + mb + mc + md + me + mf + mg
-    u8 = u9 = 0.0
+    u8 = u9 = u10 = u11 = 0.0
     footang = deg2rad(footang)
 
     # set intial conditions
-    @inbounds (;mtp_x, mtp_y, q3, mtp_angle, ankle_angle, knee_angle, hip_angle, vcmx, vcmy, u3, mtp_angular_velocity, ankle_angular_velocity, knee_angular_velocity, hip_angular_velocity) = initial_conditions
+    @inbounds (; mtp_x, mtp_y, q3, mtp_angle, ankle_angle, knee_angle, hip_angle, vcmx, vcmy, u3, mtp_angular_velocity, ankle_angular_velocity, knee_angular_velocity, hip_angular_velocity) = initial_conditions
 
     # set torque parameters
-    tq_p = Dict(k => [CCParameters(v), SECParameters(v)] for (k,v) in torque_parameters)
+    tq_p = Dict(k => [CCParameters(v), SECParameters(v)] for (k, v) in torque_parameters)
 
     # load activation profiles
-    α_p = Dict(k => ActivationProfile(v) for (k,v) in activation_parameters)
+    α_p = Dict(k => ActivationProfile(v) for (k, v) in activation_parameters)
 
     # set swing and hat splines
     time = swing_data[:time]
     hip_spl = Spline1D(time, swing_data[:hip_angle], k = 5)
     knee_spl = Spline1D(time, swing_data[:knee_angle], k = 5)
+    ankle_spl = Spline1D(time, swing_data[:ankle_angle], k = 5)
+    mtp_spl = Spline1D(time, swing_data[:mtp_angle], k = 5)
     # swing thigh angle
     ea(t) = evaluate(hip_spl, t) |> deg2rad
     eap(t) = derivative(hip_spl, t, 1) |> deg2rad
@@ -118,6 +121,15 @@ function set_values(inputs)
     gs(t) = evaluate(hat_spl, t)
     gsp(t) = derivative(hat_spl, t, 1)
     gspp(t) = derivative(hat_spl, t, 2)
+    # swing ankle angle
+    ha(t) = evaluate(ankle_spl, t) |> deg2rad
+    hap(t) = derivative(ankle_spl, t, 1) |> deg2rad
+    happ(t) = derivative(ankle_spl, t, 2) |> deg2rad
+    # swing mtp angle
+    ia(t) = evaluate(mtp_spl, t) |> deg2rad
+    iap(t) = derivative(mtp_spl, t, 1) |> deg2rad
+    iapp(t) = derivative(mtp_spl, t, 2) |> deg2rad
+
 
     # convert initial conditions into generalised coordinates and speeds
     q3 = q3 |> deg2rad              # q3 = q3
@@ -137,14 +149,18 @@ function set_values(inputs)
     ea₀ = ea(0.0)
     fa₀ = fa(0.0)
     gs₀ = gs(0.0)
+    ha₀ = ha(0.0)
+    ia₀ = ia(0.0)
     eap₀ = eap(0.0)
     fap₀ = fap(0.0)
     gsp₀ = gsp(0.0)
+    hap₀ = hap(0.0)
+    iap₀ = iap(0.0)
 
-    u1_fun(ea, fa, gs, eap, fap, gsp) = vcmx - (((((((mg * gsp) / mt) * cos(q3) + ((l10 * me + l10 * mf + l10 * mg + l9 * md) / mt) * (cos(q6) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) - sin(q6) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)))) * (u3 - u7) + ((l7 * mc + l8 * md + l8 * me + l8 * mf + l8 * mg) / mt) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) * ((u3 - u6) - u7) + 0.5 * ((l4 * mb + 2 * l6 * mc + 2 * l6 * md + 2 * l6 * me + 2 * l6 * mf + 2 * l6 * mg) / mt) * (cos(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)))) - sin(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))))) * (((u3 - u5) - u6) - u7) + 0.5 * ((l3 * mb) / mt) * (((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) * (-(cos(footang)) * sin(q4) - sin(footang) * cos(q4)) + ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)))) * (cos(footang) * cos(q4) - sin(footang) * sin(q4))) * (((u3 - u5) - u6) - u7)) - ((mg * gs) / mt) * sin(q3) * u3) - (sin(ea) * cos(q3) - cos(ea) * sin(q3)) * ((((l10 * mf + me * (l10 - l9)) / mt) * eap - ((l10 * mf + me * (l10 - l9)) / mt) * u3) - ((l10 * mf + me * (l10 - l9)) / mt) * u8)) - ((l1 * ma + l2 * mb + l2 * mc + l2 * md + l2 * me + l2 * mf + l2 * mg) / mt) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)))) * ((((u3 - u4) - u5) - u6) - u7)) - (sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)) - cos(fa) * (sin(ea) * cos(q3) - cos(ea) * sin(q3))) * (((((l12 * mf) / mt) * (eap - fap) - ((l12 * mf) / mt) * u3) - ((l12 * mf) / mt) * u8) - ((l12 * mf) / mt) * u9))
-    u2_fun(ea, fa, gs, eap, fap, gsp) = vcmy - ((((((mg * gsp) / mt) * sin(q3) + ((mg * gs) / mt) * cos(q3) * u3 + ((l10 * me + l10 * mf + l10 * mg + l9 * md) / mt) * (cos(q6) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) - sin(q6) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) * (u3 - u7) + ((l7 * mc + l8 * md + l8 * me + l8 * mf + l8 * mg) / mt) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) * ((u3 - u6) - u7) + 0.5 * ((l4 * mb + 2 * l6 * mc + 2 * l6 * md + 2 * l6 * me + 2 * l6 * mf + 2 * l6 * mg) / mt) * (cos(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) - sin(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))))) * (((u3 - u5) - u6) - u7) + 0.5 * ((l3 * mb) / mt) * (((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)))) * (-(cos(footang)) * sin(q4) - sin(footang) * cos(q4)) + ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) * (cos(footang) * cos(q4) - sin(footang) * sin(q4))) * (((u3 - u5) - u6) - u7)) - (cos(ea) * cos(q3) + sin(ea) * sin(q3)) * ((((l10 * mf + me * (l10 - l9)) / mt) * eap - ((l10 * mf + me * (l10 - l9)) / mt) * u3) - ((l10 * mf + me * (l10 - l9)) / mt) * u8)) - ((l1 * ma + l2 * mb + l2 * mc + l2 * md + l2 * me + l2 * mf + l2 * mg) / mt) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) * ((((u3 - u4) - u5) - u6) - u7)) - (sin(fa) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - cos(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3))) * (((((l12 * mf) / mt) * (eap - fap) - ((l12 * mf) / mt) * u3) - ((l12 * mf) / mt) * u8) - ((l12 * mf) / mt) * u9))
-    u1 = u1_fun(ea₀, fa₀, gs₀, eap₀, fap₀, gsp₀)
-    u2 = u2_fun(ea₀, fa₀, gs₀, eap₀, fap₀, gsp₀)
+    u1_fun(ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap) = vcmx - (((((((mg * gsp) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * cos(q3) + ((l10 * me + l10 * mf + l10 * mg + l10 * mh + l10 * mi + l9 * md) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * (cos(q6) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) - sin(q6) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)))) * (u3 - u7) + ((l7 * mc + l8 * md + l8 * me + l8 * mf + l8 * mg + l8 * mh + l8 * mi) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) * ((u3 - u6) - u7) + 0.5 * ((l4 * mb + 2 * l6 * mc + 2 * l6 * md + 2 * l6 * me + 2 * l6 * mf + 2 * l6 * mg + 2 * l6 * mh + 2 * l6 * mi) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * (cos(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)))) - sin(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))))) * (((u3 - u5) - u6) - u7) + 0.5 * ((l3 * mb) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * (((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) * (-(cos(footang)) * sin(q4) - sin(footang) * cos(q4)) + ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)))) * (cos(footang) * cos(q4) - sin(footang) * sin(q4))) * (((u3 - u5) - u6) - u7) + (-(cos(ha)) * (sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)) - cos(fa) * (sin(ea) * cos(q3) - cos(ea) * sin(q3))) - sin(ha) * (-(cos(fa)) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)) - sin(fa) * (sin(ea) * cos(q3) - cos(ea) * sin(q3)))) * (((mh * (0.5l6 + 0.5 * (l6 - l4))) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * ((fap - eap) - hap) + ((mh * (0.5l6 + 0.5 * (l6 - l4))) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u10 + ((mh * (0.5l6 + 0.5 * (l6 - l4))) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u3 + ((mh * (0.5l6 + 0.5 * (l6 - l4))) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u8 + ((mh * (0.5l6 + 0.5 * (l6 - l4))) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u9) + (-(cos(ia)) * (-(cos(ha)) * (sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)) - cos(fa) * (sin(ea) * cos(q3) - cos(ea) * sin(q3))) - sin(ha) * (-(cos(fa)) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)) - sin(fa) * (sin(ea) * cos(q3) - cos(ea) * sin(q3)))) - sin(ia) * (sin(ha) * (sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)) - cos(fa) * (sin(ea) * cos(q3) - cos(ea) * sin(q3))) - cos(ha) * (-(cos(fa)) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)) - sin(fa) * (sin(ea) * cos(q3) - cos(ea) * sin(q3))))) * (((mi * (l2 - l1)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * ((fap - eap) - iap) + ((mi * (l2 - l1)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u11 + ((mi * (l2 - l1)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u3 + ((mi * (l2 - l1)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u8 + ((mi * (l2 - l1)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u9)) - ((l11 * mi + mg * gs) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * sin(q3) * u3) - (sin(ea) * cos(q3) - cos(ea) * sin(q3)) * ((((l10 * mf + l10 * mh + me * (l10 - l9)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * eap - ((l10 * mf + l10 * mh + me * (l10 - l9)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u3) - ((l10 * mf + l10 * mh + me * (l10 - l9)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u8)) - 0.5 * (cos(footang) * (-(cos(ha)) * (sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)) - cos(fa) * (sin(ea) * cos(q3) - cos(ea) * sin(q3))) - sin(ha) * (-(cos(fa)) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)) - sin(fa) * (sin(ea) * cos(q3) - cos(ea) * sin(q3)))) + sin(footang) * (sin(ha) * (sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)) - cos(fa) * (sin(ea) * cos(q3) - cos(ea) * sin(q3))) - cos(ha) * (-(cos(fa)) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)) - sin(fa) * (sin(ea) * cos(q3) - cos(ea) * sin(q3))))) * (((l3 * mh) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * ((fap - eap) - hap) + ((l3 * mh) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u10 + ((l3 * mh) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u3 + ((l3 * mh) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u8 + ((l3 * mh) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u9)) - ((l1 * ma + l2 * mb + l2 * mc + l2 * md + l2 * me + l2 * mf + l2 * mg + l2 * mh + l2 * mi) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)) - sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) - sin(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)))) * ((((u3 - u4) - u5) - u6) - u7)) - (sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)) - cos(fa) * (sin(ea) * cos(q3) - cos(ea) * sin(q3))) * (((((l8 * mh + mf * (l8 - l7)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * (eap - fap) - ((l8 * mh + mf * (l8 - l7)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u3) - ((l8 * mh + mf * (l8 - l7)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u8) - ((l8 * mh + mf * (l8 - l7)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u9)
+    u2_fun(ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap) = vcmy - ((((((mg * gsp) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * sin(q3) + ((l11 * mi + mg * gs) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * cos(q3) * u3 + ((l10 * me + l10 * mf + l10 * mg + l10 * mh + l10 * mi + l9 * md) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * (cos(q6) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) - sin(q6) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) * (u3 - u7) + ((l7 * mc + l8 * md + l8 * me + l8 * mf + l8 * mg + l8 * mh + l8 * mi) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) * ((u3 - u6) - u7) + 0.5 * ((l4 * mb + 2 * l6 * mc + 2 * l6 * md + 2 * l6 * me + 2 * l6 * mf + 2 * l6 * mg + 2 * l6 * mh + 2 * l6 * mi) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * (cos(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) - sin(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))))) * (((u3 - u5) - u6) - u7) + 0.5 * ((l3 * mb) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * (((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)))) * (-(cos(footang)) * sin(q4) - sin(footang) * cos(q4)) + ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) * (cos(footang) * cos(q4) - sin(footang) * sin(q4))) * (((u3 - u5) - u6) - u7) + (-(cos(ha)) * (sin(fa) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - cos(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3))) - sin(ha) * (-(cos(fa)) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)))) * (((mh * (0.5l6 + 0.5 * (l6 - l4))) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * ((fap - eap) - hap) + ((mh * (0.5l6 + 0.5 * (l6 - l4))) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u10 + ((mh * (0.5l6 + 0.5 * (l6 - l4))) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u3 + ((mh * (0.5l6 + 0.5 * (l6 - l4))) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u8 + ((mh * (0.5l6 + 0.5 * (l6 - l4))) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u9) + (-(cos(ia)) * (-(cos(ha)) * (sin(fa) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - cos(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3))) - sin(ha) * (-(cos(fa)) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)))) - sin(ia) * (sin(ha) * (sin(fa) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - cos(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3))) - cos(ha) * (-(cos(fa)) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3))))) * (((mi * (l2 - l1)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * ((fap - eap) - iap) + ((mi * (l2 - l1)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u11 + ((mi * (l2 - l1)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u3 + ((mi * (l2 - l1)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u8 + ((mi * (l2 - l1)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u9)) - (cos(ea) * cos(q3) + sin(ea) * sin(q3)) * ((((l10 * mf + l10 * mh + me * (l10 - l9)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * eap - ((l10 * mf + l10 * mh + me * (l10 - l9)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u3) - ((l10 * mf + l10 * mh + me * (l10 - l9)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u8)) - 0.5 * (cos(footang) * (-(cos(ha)) * (sin(fa) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - cos(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3))) - sin(ha) * (-(cos(fa)) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3)))) + sin(footang) * (sin(ha) * (sin(fa) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - cos(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3))) - cos(ha) * (-(cos(fa)) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3))))) * (((l3 * mh) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * ((fap - eap) - hap) + ((l3 * mh) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u10 + ((l3 * mh) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u3 + ((l3 * mh) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u8 + ((l3 * mh) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u9)) - ((l1 * ma + l2 * mb + l2 * mc + l2 * md + l2 * me + l2 * mf + l2 * mg + l2 * mh + l2 * mi) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) * ((((u3 - u4) - u5) - u6) - u7)) - (sin(fa) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - cos(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3))) * (((((l8 * mh + mf * (l8 - l7)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * (eap - fap) - ((l8 * mh + mf * (l8 - l7)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u3) - ((l8 * mh + mf * (l8 - l7)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u8) - ((l8 * mh + mf * (l8 - l7)) / (ma + mb + mc + md + me + mf + mg + mh + mi)) * u9)
+    u1 = u1_fun(ea₀, fa₀, gs₀, ha₀, ia₀, eap₀, fap₀, gsp₀, hap₀, iap₀)
+    u2 = u2_fun(ea₀, fa₀, gs₀, ha₀, ia₀, eap₀, fap₀, gsp₀, hap₀, iap₀)
 
     # set up torque generators
     he = TorqueGenerator(2π - deg2rad(hip_angle), deg2rad(-hip_angular_velocity), tq_p[:he][1], tq_p[:he][2], α_p[:he])
@@ -158,7 +174,7 @@ function set_values(inputs)
     θcc₀ = map(x -> x.cc.θ, [he, ke, ae, hf, kf, af])
 
     # parameters
-    p = Params(ea, fa, gs, eap, fap, gsp, eapp, fapp, gspp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi)
+    p = Params(ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap, eapp, fapp, gspp, happ, iapp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, inh, ini, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mh, mi, mtpb, mtpk, pop1xi, pop2xi)
 
     # intial conditions
     u₀ = SVector(q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7, θcc₀...)

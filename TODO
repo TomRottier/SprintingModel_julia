@@ -95,9 +95,12 @@
     [x] include try catch block to prevent the optimisation from stopping completely - only errors with bad parameters anyway
          - will allow tolerances to be higher now
 
-[] run optimisation to match joint angles without any ground contact or gravity (increase CoM position above ground, set initial vertical CoM velocity to zero and set gravity to zero)
+[x] run optimisation to match joint angles without any ground contact or gravity (increase CoM position above ground, set initial vertical CoM velocity to zero and set gravity to zero)
     - leave gravity on as it will affect joint torques
     - EDITED: 
         - tolerances in optimisation
         - initial conditions of mtpy and vocmy
         - hat moi
+
+[] new swing-leg
+    - [] accelerations are high for new angle driven joints, especially at the mtp - check its not a problem       
