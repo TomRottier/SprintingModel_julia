@@ -75,7 +75,7 @@ end
 
 # initialise with constant values
 function Params(ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap, eapp, fapp, gspp, happ, iapp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, inh, ini, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mh, mi, mtpb, mtpk, pop1xi, pop2xi)
-    z = Vector{Float64}(undef, 694)
+    z = Vector{Float64}(undef, 687)
     mt = ma + mb + mc + md + me + mf + mg
 	u8 = 0
 	u9 = 0
@@ -87,10 +87,10 @@ function Params(ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap, eapp, fapp, gspp, h
 	z[650] = inf + inh + ini
 	z[22] = l8 - l7
 	z[480] = mf * z[22]
-	z[225] = g * mh
-	z[7] = cos(footang)
+	z[659] = inh + ini
 	z[25] = l2 - l1
 	z[502] = mi * z[25]
+	z[7] = cos(footang)
 	z[8] = sin(footang)
 	z[23] = l6 - l4
 	z[24] = 0.5l6 + 0.5 * z[23]
@@ -129,6 +129,7 @@ function Params(ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap, eapp, fapp, gspp, h
 	z[221] = g * md
 	z[223] = g * mf
 	z[224] = g * mg
+	z[225] = g * mh
 	z[226] = g * mi
 	z[338] = z[75] - l1
 	z[339] = z[75] - l2
@@ -264,7 +265,7 @@ function Params(ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap, eapp, fapp, gspp, h
 	z[634] = ina + inb + inc + ma * l1 ^ 2
 	z[638] = ina + inb + inc + ind + ma * l1 ^ 2
 	z[641] = ine + inf + inh + ini
-	z[673] = l2 * mi * z[25]
+	z[674] = l2 * mi * z[25]
 
     return Params(z, ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap, eapp, fapp, gspp, happ, iapp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, inh, ini, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mh, mi, mtpb, mtpk, pop1xi, pop2xi, mt, u8, u9, u10, u11)
 end
