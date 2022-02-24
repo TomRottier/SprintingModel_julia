@@ -31,6 +31,7 @@ Constant:            KE                   UNITS           |  0.0
 Constant:            KF                   UNITS           |  0.0
 Constant:            L1                   M               |  0.050
 Constant:            L10                  M               |  0.447
+Constant:            L11                  M               |  0.600
 Constant:            L2                   M               |  0.085
 Constant:            L3                   M               |  0.121
 Constant:            L4                   M               |  0.076
