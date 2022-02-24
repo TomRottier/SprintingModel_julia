@@ -76,16 +76,22 @@ function get_forces(sol, t)
         ry2 = 0.0
     end
 
-    vrx::Float64 = virtual_force.flag ? virtual_force.vrx(t) : 0.0
-    vry::Float64 = virtual_force.flag ? virtual_force.vry(t) : 0.0
+    vrx1::Float64 = virtual_force.flag ? virtual_force.vrx1(t) : 0.0
+    vry1::Float64 = virtual_force.flag ? virtual_force.vry1(t) : 0.0
+    vrx2::Float64 = virtual_force.flag ? virtual_force.vrx2(t) : 0.0
+    vry2::Float64 = virtual_force.flag ? virtual_force.vry2(t) : 0.0
 
-    return rx1 + rx2 + vrx, ry1 + ry2 + vry
+    return rx1, ry1, rx2, ry2, vrx1, vry1, vrx2, vry2
 end
 
 
 get_forces(sol) = [get_forces(sol, t) for t in sol.t]
-rx(sol) = [first(x) for x in get_forces(sol)]
-ry(sol) = [last(x) for x in get_forces(sol)]
+rx(sol) = rx1(sol) .+ rx2(sol)
+ry(sol) = ry1(sol) .+ ry2(sol)
+rx1(sol) = [x[1] for x in get_forces(sol)]
+ry1(sol) = [x[2] for x in get_forces(sol)]
+rx2(sol) = [x[3] for x in get_forces(sol)]
+ry2(sol) = [x[4] for x in get_forces(sol)]
 
 
 ## for stance simulation

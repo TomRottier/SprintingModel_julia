@@ -31,15 +31,21 @@ function affect_neg!(int, idx) # negative crossings (+ve to -ve)
             # fit spline to force
             sol = int.sol
             T = int.t
-            splX = Spline1D(sol.t, rx(sol))
-            splY = Spline1D(sol.t, ry(sol))
-            vrx(t) = evaluate(splX, t - T)
-            vry(t) = evaluate(splY, t - T)
+            splX1 = Spline1D(sol.t, rx1(sol))
+            splY1 = Spline1D(sol.t, ry1(sol))
+            splX2 = Spline1D(sol.t, rx2(sol))
+            splY2 = Spline1D(sol.t, ry2(sol))
+            vrx1(t) = evaluate(splX1, t - T)
+            vry1(t) = evaluate(splY1, t - T)
+            vrx2(t) = evaluate(splX2, t - T)
+            vry2(t) = evaluate(splY2, t - T)
 
             # update parameters
             sol.prob.p.virtual_force.flag = true
-            sol.prob.p.virtual_force.vrx = vrx
-            sol.prob.p.virtual_force.vry = vry 
+            sol.prob.p.virtual_force.vrx1 = vrx1
+            sol.prob.p.virtual_force.vry1 = vry1
+            sol.prob.p.virtual_force.vrx2 = vrx2
+            sol.prob.p.virtual_force.vry2 = vry2
 
         end
 
@@ -63,12 +69,14 @@ function pocmy(u, t, p)
     @unpack ea, fa, gs = p
     @inbounds q1, q2, q3, q4, q5, q6, q7 = u
 
-    ea = ea(t); fa = fa(t); gs = gs(t)
+    ea = ea(t)
+    fa = fa(t)
+    gs = gs(t)
 
     return (q2 + ((l7 * mc + l8 * md + l8 * me + l8 * mf + l8 * mg) / mt) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + ((l10 * me + l10 * mf + l10 * mg + l9 * md) / mt) * (cos(q6) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + sin(q6) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)))) + ((l10 * mf + me * (l10 - l9)) / mt) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) + ((l12 * mf) / mt) * (-(cos(fa)) * (cos(ea) * sin(q3) - sin(ea) * cos(q3)) - sin(fa) * (cos(ea) * cos(q3) + sin(ea) * sin(q3))) + ((mg * gs) / mt) * sin(q3) + 0.5 * ((l4 * mb + 2 * l6 * mc + 2 * l6 * md + 2 * l6 * me + 2 * l6 * mf + 2 * l6 * mg) / mt) * (cos(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)))) + sin(q4) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))))) + 0.5 * ((l3 * mb) / mt) * (((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7)))) * (cos(footang) * cos(q4) - sin(footang) * sin(q4)) + ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))) + (cos(q4) * sin(q5) + sin(q4) * cos(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)))) * (cos(footang) * sin(q4) + sin(footang) * cos(q4)))) - ((l1 * ma + l2 * mb + l2 * mc + l2 * md + l2 * me + l2 * mf + l2 * mg) / mt) * ((cos(q4) * cos(q5) - sin(q4) * sin(q5)) * (cos(q3) * (-(cos(q6)) * sin(q7) - sin(q6) * cos(q7)) + sin(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7))) + (-(cos(q4)) * sin(q5) - sin(q4) * cos(q5)) * (cos(q3) * (cos(q6) * cos(q7) - sin(q6) * sin(q7)) + sin(q3) * (cos(q6) * sin(q7) + sin(q6) * cos(q7))))
 end
 
-function pop2y(u,t,p)
+function pop2y(u, t, p)
     @unpack l2 = p
     @inbounds q1, q2, q3, q4, q5, q6, q7 = u
 
