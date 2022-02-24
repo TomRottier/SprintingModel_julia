@@ -90,12 +90,12 @@ P_P6_P7>  = L10*E1>                         % HJC to KJC
 P_P7_FO>  = (L8-L7)*F1>                     % KJC to shank CoM - prox. to dist. length
 P_P7_P8>  = L8*F1>                          % KJC to AJC
 P_P8_CO1> = (L6-L4)*H1>                     % AJC to CoM position along AJC-MTP line
-P_P8_P9>  = L6*H1>                          % AJC to MTP
-P_P9_CO2> = -L3*Y1>                         % MTP to CoM position along MTP-HEEL line
+P_P8_P10> = L6*H1>                          % AJC to MTP
+P_P10_P9> = -L5*Y1>                         % MTP to heel
+P_P9_CO2> = L3*Y1>                         % MTP to CoM position along MTP-HEEL line
 P_P8_HO>  = (P_P8_CO1> + P_P8_CO2>) / 2      % AJC to rear foot CoM
-P_P9_P10> = -L5*Y1>                         % MTP to heel
-P_P9_IO>  = (L2-L1)*I1>                     % MTP to toe CoM
-P_P9_P11> = L2*I1>                          % MTP to toe
+P_P10_IO>  = (L2-L1)*I1>                     % MTP to toe CoM
+P_P10_P11> = L2*I1>                          % MTP to toe
 
 % hat
 P_P6_GO>  = GS*G1>                          % HJC to HAT CoM
