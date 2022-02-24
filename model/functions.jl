@@ -807,3 +807,19 @@ pstancey(sol) = [pstancey(sol,t) for t in sol.t]
 
 te(sol, t) = ke(sol, t) + pe(sol, t)
 te(sol) = [te(sol, t) for t in sol.t]
+
+function pop2x(sol,t)
+    @unpack l2 = sol.prob.p
+    @inbounds q1,q2,q3,q4,q5,q6,q7 = sol(t)
+
+    return q1-l2*cos(q3-q4-q5-q6-q7)
+end
+pop2x(sol) = [pop2x(sol,t) for t in sol.t]
+
+function pop2y(sol,t)
+    @unpack l2 = sol.prob.p
+    @inbounds q1,q2,q3,q4,q5,q6,q7 = sol(t)
+
+    return q2-l2*sin(q3-q4-q5-q6-q7)
+end
+pop2y(sol) = [pop2y(sol,t) for t in sol.t]
