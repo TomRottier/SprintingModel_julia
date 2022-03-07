@@ -219,8 +219,7 @@ V2PTS(N,Y,P8,P9)
 V2PTS(N,H,P8,P10)
 V2PTS(N,I,P10,IO)
 V2PTS(N,I,P10,P11)
-V_GO_G> = GS'*G1>
-V1PT(N,G,P6,GO)
+V_GO_N> = DT(P_O_GO>,N)
 V2PTS(N,G,P6,P12)
 V_CM_N> = DT(P_O_CM>,N)
 V_CMSTANCE_N> = DT(P_O_CMSTANCE>,N)
@@ -275,8 +274,7 @@ A2PTS(N,H,P8,P9)
 A2PTS(N,H,P8,P10)
 A2PTS(N,I,P10,IO)
 A2PTS(N,I,P10,P11)
-A_GO_G> = GS''*G1>
-A1PT(N,G,P6,GO)
+A_GO_N> = DT(V_GO_N>,N)
 A2PTS(N,G,P6,P12)
 %
 % ------------------------------------------------------------------------------
