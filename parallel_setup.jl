@@ -14,12 +14,12 @@ include("callbacks.jl")
 include("optimisation.jl")
 
 # set up initial model
-const inputs = load_inputs()
-const p, u₀ = set_values(inputs)
-const matching_data = inputs.matching_data
+inputs = load_inputs()#=const =#
+p, u₀ = set_values(inputs)#=const =#
+matching_data = inputs.matching_data#=const =#
 
 # time span
-tspan = (0.0, 0.484) 
+tspan = (0.0, 0.484)
 
 # initialise problem
 prob = ODEProblem(eom, u₀, tspan, p)
