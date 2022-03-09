@@ -58,7 +58,7 @@ function cost(sol)::Float64
     hip_mse /= sf_hip[1]
     knee_mse /= sf_knee[1]
     hat_mse /= sf_hat[1]
-    angles_cost = hip_mse + knee_mse + hat_mse + ankle_mse
+    angles_cost = hip_mse + knee_mse + hat_mse + 0.1ankle_mse
 
     # time cost
     time_cost = 1000abs(sol.t[end] - 0.484)

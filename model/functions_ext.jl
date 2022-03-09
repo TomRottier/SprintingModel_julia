@@ -92,6 +92,15 @@ rx1(sol) = [x[1] for x in get_forces(sol)]
 ry1(sol) = [x[2] for x in get_forces(sol)]
 rx2(sol) = [x[3] for x in get_forces(sol)]
 ry2(sol) = [x[4] for x in get_forces(sol)]
+vrx1(sol) = sol.prob.p.virtual_force.vrx1.(sol.t)
+vry1(sol) = sol.prob.p.virtual_force.vry1.(sol.t)
+vrx2(sol) = sol.prob.p.virtual_force.vrx2.(sol.t)
+vry2(sol) = sol.prob.p.virtual_force.vry2.(sol.t)
+vrx(sol) = vrx1(sol) .+ vrx2(sol)
+vry(sol) = vry1(sol) .+ vry2(sol)
+RX(sol) = rx(sol) .+ vrx(sol)
+RY(sol) = ry(sol) .+ vry(sol)
+
 
 
 ## for stance simulation

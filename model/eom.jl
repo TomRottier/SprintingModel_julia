@@ -43,7 +43,7 @@ function eom(u, p, t)
 
     # passive torques
     hpass, kpass, apass = PEtorque(θh, θk, θa)
-    # hpass = 0.0
+    hpass = 0.0
 
     htor = hetor - hftor - hpass
     ktor = ketor - kftor - kpass
