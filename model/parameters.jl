@@ -86,10 +86,10 @@ end
 function Params(ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap, eapp, fapp, gspp, happ, iapp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, inh, ini, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mh, mi, mtpb, mtpk, pop1xi, pop2xi)
     z = Vector{Float64}(undef, 884)
     mt = ma + mb + mc + md + me + mf + mg
-	u8 = 0
-	u9 = 0
-	u10 = 0
-	u11 = 0
+	u8 = 0.0
+	u9 = 0.0
+	u10 = 0.0
+	u11 = 0.0
 
     virtual_force = VirtualForce(false, () -> 0.0, () -> 0.0, () -> 0.0, () -> 0.0)
 

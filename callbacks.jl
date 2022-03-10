@@ -30,15 +30,16 @@ function affect_neg!(int, idx) # negative crossings (+ve to -ve)
             # end of step 1
             # fit spline to force
             sol = int.sol
+            t = sol.t[1]:0.001:int.t
             T = int.t
-            splX1 = Spline1D(sol.t, rx1(sol))
-            splY1 = Spline1D(sol.t, ry1(sol))
-            splX2 = Spline1D(sol.t, rx2(sol))
-            splY2 = Spline1D(sol.t, ry2(sol))
-            vrx1(t) = evaluate(splX1, t - T)
-            vry1(t) = evaluate(splY1, t - T)
-            vrx2(t) = evaluate(splX2, t - T)
-            vry2(t) = evaluate(splY2, t - T)
+            splX1 = CubicSplineInterpolation(t, rx1(sol))
+            splY1 = CubicSplineInterpolation(t, ry1(sol))
+            splX2 = CubicSplineInterpolation(t, rx2(sol))
+            splY2 = CubicSplineInterpolation(t, ry2(sol))
+            vrx1(t) = splX1(t - T)
+            vry1(t) = splY1(t - T)
+            vrx2(t) = splX2(t - T)
+            vry2(t) = splY2(t - T)
 
             # update parameters
             sol.prob.p.virtual_force.flag = true
