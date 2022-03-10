@@ -103,33 +103,85 @@ function set_values(inputs)
     α_p = Dict(k => ActivationProfile(v) for (k, v) in activation_parameters)
 
     # set swing and hat splines
+    # time = swing_data[:time]
+    # hip_spl = Spline1D(time, swing_data[:hip_angle], k = 5)
+    # knee_spl = Spline1D(time, swing_data[:knee_angle], k = 5)
+    # ankle_spl = Spline1D(time, swing_data[:ankle_angle], k = 5)
+    # mtp_spl = Spline1D(time, swing_data[:mtp_angle], k = 5)
+    # # swing thigh angle
+    # ea(t) = evaluate(hip_spl, t) |> deg2rad
+    # eap(t) = derivative(hip_spl, t, 1) |> deg2rad
+    # eapp(t) = derivative(hip_spl, t, 2) |> deg2rad
+    # # swing shank angle
+    # fa(t) = evaluate(knee_spl, t) |> deg2rad
+    # fap(t) = derivative(knee_spl, t, 1) |> deg2rad
+    # fapp(t) = derivative(knee_spl, t, 2) |> deg2rad
+    # # HAT CoM location
+    # hat_spl = Spline1D(hat_data[:time], hat_data[:hat_com_distance], k = 5)
+    # gs(t) = evaluate(hat_spl, t)
+    # gsp(t) = derivative(hat_spl, t, 1)
+    # gspp(t) = derivative(hat_spl, t, 2)
+    # # swing ankle angle
+    # ha(t) = evaluate(ankle_spl, t) |> deg2rad
+    # hap(t) = derivative(ankle_spl, t, 1) |> deg2rad
+    # happ(t) = derivative(ankle_spl, t, 2) |> deg2rad
+    # # swing mtp angle
+    # ia(t) = evaluate(mtp_spl, t) |> deg2rad
+    # iap(t) = derivative(mtp_spl, t, 1) |> deg2rad
+    # iapp(t) = derivative(mtp_spl, t, 2) |> deg2rad
+
+    # fit splines and evaluate derivatives 
     time = swing_data[:time]
     hip_spl = Spline1D(time, swing_data[:hip_angle], k = 5)
     knee_spl = Spline1D(time, swing_data[:knee_angle], k = 5)
     ankle_spl = Spline1D(time, swing_data[:ankle_angle], k = 5)
     mtp_spl = Spline1D(time, swing_data[:mtp_angle], k = 5)
-    # swing thigh angle
-    ea(t) = evaluate(hip_spl, t) |> deg2rad
-    eap(t) = derivative(hip_spl, t, 1) |> deg2rad
-    eapp(t) = derivative(hip_spl, t, 2) |> deg2rad
-    # swing shank angle
-    fa(t) = evaluate(knee_spl, t) |> deg2rad
-    fap(t) = derivative(knee_spl, t, 1) |> deg2rad
-    fapp(t) = derivative(knee_spl, t, 2) |> deg2rad
-    # HAT CoM location
-    hat_spl = Spline1D(hat_data[:time], hat_data[:hat_com_distance], k = 5)
-    gs(t) = evaluate(hat_spl, t)
-    gsp(t) = derivative(hat_spl, t, 1)
-    gspp(t) = derivative(hat_spl, t, 2)
-    # swing ankle angle
-    ha(t) = evaluate(ankle_spl, t) |> deg2rad
-    hap(t) = derivative(ankle_spl, t, 1) |> deg2rad
-    happ(t) = derivative(ankle_spl, t, 2) |> deg2rad
-    # swing mtp angle
-    ia(t) = evaluate(mtp_spl, t) |> deg2rad
-    iap(t) = derivative(mtp_spl, t, 1) |> deg2rad
-    iapp(t) = derivative(mtp_spl, t, 2) |> deg2rad
+    hat_spl = Spline1D(hat_data[:time], hat_data[:hat_com_distance])
+    # get data for 0,1,2 derivatives
+    swing = [swing_data[:hip_angle] swing_data[:knee_angle] swing_data[:ankle_angle] swing_data[:mtp_angle]]
+    swingp = [derivative(hip_spl, time, 1) derivative(knee_spl, time, 1) derivative(ankle_spl, time, 1) derivative(mtp_spl, time, 1)]
+    swingpp = [derivative(hip_spl, time, 2) derivative(knee_spl, time, 2) derivative(ankle_spl, time, 2) derivative(mtp_spl, time, 2)]
+    hat = [hat_data[:time] hat_data[:hat_com_distance]]
+    hatp = [hat_data[:time] derivative(hat_spl, hat_data[:time], 1)]
+    hatpp = [hat_data[:time] derivative(hat_spl, hat_data[:time], 2)]
 
+    # interpolate 0th derivatives
+    dt = time[2] - time[1]
+    t = time[1]:dt:time[end] # need x values as a range 
+    hip_spl = CubicSplineInterpolation(t, swing[:, 1])
+    knee_spl = CubicSplineInterpolation(t, swing[:, 2])
+    ankle_spl = CubicSplineInterpolation(t, swing[:, 3])
+    mtp_spl = CubicSplineInterpolation(t, swing[:, 4])
+    hat_spl = CubicSplineInterpolation(t, hat[:, 2])
+    # 1st derivatives
+    hipp_spl = CubicSplineInterpolation(t, swingp[:, 1])
+    kneep_spl = CubicSplineInterpolation(t, swingp[:, 2])
+    anklep_spl = CubicSplineInterpolation(t, swingp[:, 3])
+    mtpp_spl = CubicSplineInterpolation(t, swingp[:, 4])
+    hatp_spl = CubicSplineInterpolation(t, hatp[:, 2])
+    # 2nd dervatives
+    hippp_spl = CubicSplineInterpolation(t, swingpp[:, 1])
+    kneepp_spl = CubicSplineInterpolation(t, swingpp[:, 2])
+    anklepp_spl = CubicSplineInterpolation(t, swingpp[:, 3])
+    mtppp_spl = CubicSplineInterpolation(t, swingpp[:, 4])
+    hatpp_spl = CubicSplineInterpolation(t, hatpp[:, 2])
+
+    # evaluation functions
+    ea(t) = hip_spl(t) |> deg2rad
+    fa(t) = knee_spl(t) |> deg2rad
+    gs(t) = hat_spl(t) |> deg2rad
+    ha(t) = ankle_spl(t) |> deg2rad
+    ia(t) = mtp_spl(t) |> deg2rad
+    eap(t) = hipp_spl(t) |> deg2rad
+    fap(t) = kneep_spl(t) |> deg2rad
+    gsp(t) = hatp_spl(t) |> deg2rad
+    hap(t) = anklep_spl(t) |> deg2rad
+    iap(t) = mtpp_spl(t) |> deg2rad
+    eapp(t) = hippp_spl(t) |> deg2rad
+    fapp(t) = kneepp_spl(t) |> deg2rad
+    gspp(t) = hatpp_spl(t) |> deg2rad
+    happ(t) = anklepp_spl(t) |> deg2rad
+    iapp(t) = mtppp_spl(t) |> deg2rad
 
     # convert initial conditions into generalised coordinates and speeds
     q3 = q3 |> deg2rad              # q3 = q3
