@@ -1,6 +1,6 @@
 # packages and code loaded on all processes
 using DelimitedFiles, Statistics
-using StaticArrays, Parameters, Dierckx, SimulatedAnnealing, Setfield
+using StaticArrays, Parameters, Dierckx, SimulatedAnnealing, Setfield, Interpolations
 using OrdinaryDiffEq, Plots
 
 include("musclemodel/torque_generator.jl")

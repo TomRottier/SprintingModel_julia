@@ -5,16 +5,16 @@
 
 # functions for optimisations
 # objective function
-objective(x) = cost(simulate(x, prob))
-
-# simulate a stride from prob
-# Vern6() > Tsit5() > Vern7() > Vern8() > DP5()
-simulate(prob) =
+objective(x) =
     try
-        solve(deepcopy(prob), Vern6(), callback = vcb, abstol = 1e-5, reltol = 1e-5, saveat = 0.001, verbose = false)
+        cost(simulate(x, prob))
     catch
         return 10000.0
     end
+
+# simulate a stride from prob
+# Vern6() > Tsit5() > Vern7() > Vern8() > DP5()
+simulate(prob) = solve(deepcopy(prob), Vern6(), callback = vcb, abstol = 1e-5, reltol = 1e-5, saveat = 0.001, verbose = false)
 
 # run a simulate with new parameters
 function simulate(x, prob)
