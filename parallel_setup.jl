@@ -15,11 +15,12 @@ include("optimisation.jl")
 
 # set up initial model
 inputs = load_inputs()#=const =#
+inputs.initial_conditions[:vcmx] = 9.2
 p, u₀ = set_values(inputs)#=const =#
 matching_data = inputs.matching_data#=const =#
 
 # time span
-tspan = (0.0, 0.484)
+tspan = (0.0, 0.317)
 
 # initialise problem
 prob = ODEProblem(eom, u₀, tspan, p)

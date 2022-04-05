@@ -91,8 +91,8 @@ P_P7_FO>  = (L8-L7)*F1>                     % KJC to shank CoM - prox. to dist. 
 P_P7_P8>  = L8*F1>                          % KJC to AJC
 P_P8_CO1> = (L6-L4)*H1>                     % AJC to CoM position along AJC-MTP line
 P_P8_P10> = L6*H1>                          % AJC to MTP
+P_P9_CO2> = L3*Y1>                          % Heel to CoM position along MTP-HEEL line
 P_P10_P9> = -L5*Y1>                         % MTP to heel
-P_P9_CO2> = L3*Y1>                         % MTP to CoM position along MTP-HEEL line
 P_P8_HO>  = (P_P8_CO1> + P_P8_CO2>) / 2      % AJC to rear foot CoM
 P_P10_IO>  = (L2-L1)*I1>                     % MTP to toe CoM
 P_P10_P11> = L2*I1>                          % MTP to toe
@@ -344,8 +344,8 @@ ZEE_NOT = [SHTOR,SKTOR,SATOR,SMTOR]
 GRAVITY(G*N2>)
 FORCE(P1,RX1*N1>+RY1*N2>)
 FORCE(P2,RX2*N1>+RY2*N2>)
-FORCE(P9,VRX1*N1>+VRY1*N2>)
-FORCE(P11,VRX2*N2>+VRY2*N2>)
+FORCE(P11,VRX1*N1>+VRY1*N2>)
+FORCE(P10,VRX2*N2>+VRY2*N2>)
 TORQUE(A/B, MTOR*N3>)
 TORQUE(B/C, ATOR*N3>)
 TORQUE(D/C, KTOR*N3>)
@@ -413,4 +413,4 @@ UNITS G=M/S^2,FOOTANG=DEG
 UNITS K1=N/M,K2=N/M/S^2,K3=N/M,K4=N/M/S^2,K5=N/M,K6=N/M/S^2,K7=N/M,K8=N/M/S^2
 UNITS MTPK=N/M,MTPB=N/M/S^2
 %--------------------------------------------------------------
-CODE DYNAMICS() model/7segSprint.f, NOSUBS
+CODE DYNAMICS() 7segSprint.f, NOSUBS

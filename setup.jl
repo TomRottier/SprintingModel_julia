@@ -11,26 +11,26 @@ struct Inputs
 end
 
 function load_inputs(;
-    parameters = "data/parameters.csv",
-    initial_conditions = "data/initial_conditions.csv",
-    torque_generators = "data/torque_generator_parameters.csv",
-    activations = "data/activation_parameters.csv",
-    swing = "data/matching_swing.csv",
-    hat = "data/HAT.csv",
-    matching = "data/matchingData.csv")
+    parameters="data/parameters.csv",
+    initial_conditions="data/initial_conditions.csv",
+    torque_generators="data/torque_generator_parameters.csv",
+    activations="data/activation_parameters.csv",
+    swing="data/matching_swing.csv",
+    hat="data/HAT.csv",
+    matching="data/matchingData.csv")
 
     # load parameters
-    input_p, headers_p = readdlm(parameters, ',', header = true)
+    input_p, headers_p = readdlm(parameters, ',', header=true)
     input_p = Vector{Float64}(input_p[2, :]) # remove units row
     p = Dict(Symbol(h) => v for (h, v) in zip(headers_p, input_p))
 
     # load initial conditions
-    input_u, headers_u = readdlm(initial_conditions, ',', header = true)
+    input_u, headers_u = readdlm(initial_conditions, ',', header=true)
     input_u = Vector{Float64}(input_u[2, :]) # remove units row
     u = Dict(Symbol(h) => v for (h, v) in zip(headers_u, input_u))
 
     # load torque generator parameters
-    input_tq, headers_tq = readdlm(torque_generators, ',', header = true)
+    input_tq, headers_tq = readdlm(torque_generators, ',', header=true)
     tq = Dict(
         Symbol(x[1]) => Dict(
             Symbol(h) => Float64(v) for (h, v) in zip(headers_tq[2:end], x[2:end])
@@ -38,19 +38,19 @@ function load_inputs(;
     )
 
     # load activation profiles
-    input_act, headers_act = readdlm(activations, ',', header = true)
+    input_act, headers_act = readdlm(activations, ',', header=true)
     α = Dict(Symbol(x[1]) => Vector{Float64}(x[2:end]) for x in eachrow(input_act))
 
     # load swing leg and HAT data
-    input_swing, headers_swing = readdlm(swing, ',', header = true)
+    input_swing, headers_swing = readdlm(swing, ',', header=true)
     input_swing = Matrix{Float64}(input_swing[2:end, :]) # remove units row
     swing_data = Dict(Symbol(h) => ts for (h, ts) in zip(headers_swing, eachcol(input_swing)))
-    input_hat, headers_hat = readdlm(hat, ',', header = true)
+    input_hat, headers_hat = readdlm(hat, ',', header=true)
     input_hat = Matrix{Float64}(input_hat[2:end, :]) # remove units row
     hat_data = Dict(Symbol(h) => ts for (h, ts) in zip(headers_hat, eachcol(input_hat)))
 
     # load matching data
-    input_matching, headers_matching = readdlm(matching, ',', header = true)
+    input_matching, headers_matching = readdlm(matching, ',', header=true)
     input_matching = Matrix{Float64}(input_matching[2:end, :]) # remove units row
     matching_data = Dict(Symbol(h) => ts for (h, ts) in zip(headers_matching, eachcol(input_matching)))
 
@@ -60,7 +60,7 @@ end
 
 # returns the parameters for a given speed from a csv file
 function read_from_results(fname, speed)
-    p, header = readdlm(fname, ',', Float64, header = true)
+    p, header = readdlm(fname, ',', Float64, header=true)
     row = p[p[:, 1].==speed, :]
 
     return row[3:end]
@@ -132,10 +132,10 @@ function set_values(inputs)
 
     # fit splines and evaluate derivatives 
     time = swing_data[:time]
-    hip_spl = Spline1D(time, swing_data[:hip_angle], k = 5)
-    knee_spl = Spline1D(time, swing_data[:knee_angle], k = 5)
-    ankle_spl = Spline1D(time, swing_data[:ankle_angle], k = 5)
-    mtp_spl = Spline1D(time, swing_data[:mtp_angle], k = 5)
+    hip_spl = Spline1D(time, swing_data[:hip_angle], k=5)
+    knee_spl = Spline1D(time, swing_data[:knee_angle], k=5)
+    ankle_spl = Spline1D(time, swing_data[:ankle_angle], k=5)
+    mtp_spl = Spline1D(time, swing_data[:mtp_angle], k=5)
     hat_spl = Spline1D(hat_data[:time], hat_data[:hat_com_distance])
     # get data for 0,1,2 derivatives
     swing = [swing_data[:hip_angle] swing_data[:knee_angle] swing_data[:ankle_angle] swing_data[:mtp_angle]]
@@ -167,21 +167,21 @@ function set_values(inputs)
     hatpp_spl = CubicSplineInterpolation(t, hatpp[:, 2])
 
     # evaluation functions
-    ea(t) = hip_spl(t) |> deg2rad
-    fa(t) = knee_spl(t) |> deg2rad
-    gs(t) = hat_spl(t) |> deg2rad
-    ha(t) = ankle_spl(t) |> deg2rad
-    ia(t) = mtp_spl(t) |> deg2rad
-    eap(t) = hipp_spl(t) |> deg2rad
-    fap(t) = kneep_spl(t) |> deg2rad
-    gsp(t) = hatp_spl(t) |> deg2rad
-    hap(t) = anklep_spl(t) |> deg2rad
-    iap(t) = mtpp_spl(t) |> deg2rad
-    eapp(t) = hippp_spl(t) |> deg2rad
-    fapp(t) = kneepp_spl(t) |> deg2rad
-    gspp(t) = hatpp_spl(t) |> deg2rad
-    happ(t) = anklepp_spl(t) |> deg2rad
-    iapp(t) = mtppp_spl(t) |> deg2rad
+    ea(t)::Float64 = hip_spl(t) |> deg2rad
+    fa(t)::Float64 = knee_spl(t) |> deg2rad
+    gs(t)::Float64 = hat_spl(t) |> deg2rad
+    ha(t)::Float64 = ankle_spl(t) |> deg2rad
+    ia(t)::Float64 = mtp_spl(t) |> deg2rad
+    eap(t)::Float64 = hipp_spl(t) |> deg2rad
+    fap(t)::Float64 = kneep_spl(t) |> deg2rad
+    gsp(t)::Float64 = hatp_spl(t) |> deg2rad
+    hap(t)::Float64 = anklep_spl(t) |> deg2rad
+    iap(t)::Float64 = mtpp_spl(t) |> deg2rad
+    eapp(t)::Float64 = hippp_spl(t) |> deg2rad
+    fapp(t)::Float64 = kneepp_spl(t) |> deg2rad
+    gspp(t)::Float64 = hatpp_spl(t) |> deg2rad
+    happ(t)::Float64 = anklepp_spl(t) |> deg2rad
+    iapp(t)::Float64 = mtppp_spl(t) |> deg2rad
 
     # convert initial conditions into generalised coordinates and speeds
     q3 = q3 |> deg2rad              # q3 = q3
@@ -236,50 +236,50 @@ function set_values(inputs)
 end
 
 function setup(;
-    parameters = "data/parameters.csv",
-    initial_conditions = "data/initial_conditions.csv",
-    torque_generator_parameters = "data/torque_generator_parameters.csv",
-    activation_parameters = "data/activation_parameters.csv",
-    swing = "data/matching_swing.csv",
-    hat = "data/HAT.csv",
-    matching_data = "data/matchingData.csv")
+    parameters="data/parameters.csv",
+    initial_conditions="data/initial_conditions.csv",
+    torque_generator_parameters="data/torque_generator_parameters.csv",
+    activation_parameters="data/activation_parameters.csv",
+    swing="data/matching_swing.csv",
+    hat="data/HAT.csv",
+    matching_data="data/matchingData.csv")
 
     # load parameters
-    input_p, headers_p = readdlm(parameters, ',', Float64, header = true)
+    input_p, headers_p = readdlm(parameters, ',', Float64, header=true)
     @inbounds footang, g, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi = input_p
     mt = ma + mb + mc + md + me + mf + mg
     u8 = u9 = 0.0
     footang = deg2rad(footang)
 
     # load initial conditions
-    input_u, headers_u = readdlm(initial_conditions, ',', Float64, header = true)
+    input_u, headers_u = readdlm(initial_conditions, ',', Float64, header=true)
     @inbounds Xmtp, Ymtp, q3, θm, θa, θk, θh, vcmx, vcmy, u3, ωm, ωa, ωk, ωh = input_u
 
 
     # load torque generator parameters
-    tq_p, headers_tq = readdlm(torque_generator_parameters, ',', header = true)
+    tq_p, headers_tq = readdlm(torque_generator_parameters, ',', header=true)
     tq_p = map(eachrow(tq_p)) do x
         x = x[2:end] .|> Float64    # remove row names, convert to float
         [CCParameters(x[1:end-1]...), SECParameters(x[end])]
     end
 
     # load activation profiles
-    α_p, headers_α = readdlm(activation_parameters, ',', header = true)
+    α_p, headers_α = readdlm(activation_parameters, ',', header=true)
     α_p = map(eachrow(α_p)) do x
         x = x[2:end] .|> Float64    # remove row names, convert to float
         ActivationProfile(x...)
     end
 
     # load swing leg and HAT data
-    swing_data = readdlm(swing, ',', Float64, skipstart = 1)
-    hip_spl = Spline1D(swing_data[:, 1], swing_data[:, 2], k = 5)
-    knee_spl = Spline1D(swing_data[:, 1], swing_data[:, 3], k = 5)
+    swing_data = readdlm(swing, ',', Float64, skipstart=1)
+    hip_spl = Spline1D(swing_data[:, 1], swing_data[:, 2], k=5)
+    knee_spl = Spline1D(swing_data[:, 1], swing_data[:, 3], k=5)
     # set swing and hat splines
     time = swing_data[:time]
-    hip_spl = Spline1D(time, swing_data[:hip_angle], k = 5)
-    knee_spl = Spline1D(time, swing_data[:knee_angle], k = 5)
-    ankle_spl = Spline1D(time, swing_data[:ankle_angle], k = 5)
-    mtp_spl = Spline1D(time, swing_data[:mtp_angle], k = 5)
+    hip_spl = Spline1D(time, swing_data[:hip_angle], k=5)
+    knee_spl = Spline1D(time, swing_data[:knee_angle], k=5)
+    ankle_spl = Spline1D(time, swing_data[:ankle_angle], k=5)
+    mtp_spl = Spline1D(time, swing_data[:mtp_angle], k=5)
     # swing thigh angle
     ea(t) = evaluate(hip_spl, t) |> deg2rad
     eap(t) = derivative(hip_spl, t, 1) |> deg2rad
@@ -289,7 +289,7 @@ function setup(;
     fap(t) = derivative(knee_spl, t, 1) |> deg2rad
     fapp(t) = derivative(knee_spl, t, 2) |> deg2rad
     # HAT CoM location
-    hat_spl = Spline1D(hat_data[:time], hat_data[:hat_com_distance], k = 5)
+    hat_spl = Spline1D(hat_data[:time], hat_data[:hat_com_distance], k=5)
     gs(t) = evaluate(hat_spl, t)
     gsp(t) = derivative(hat_spl, t, 1)
     gspp(t) = derivative(hat_spl, t, 2)
@@ -303,7 +303,7 @@ function setup(;
     iapp(t) = derivative(mtp_spl, t, 2) |> deg2rad
 
     # load matching data
-    matching_data, headers_matching = readdlm(matching_data, ',', Float64, skipstart = 1, header = true)
+    matching_data, headers_matching = readdlm(matching_data, ',', Float64, skipstart=1, header=true)
     matching_data = matching_data[1:2:end-2] # only use left side data
 
     # convert initial conditions into generalised coordinates and speeds
