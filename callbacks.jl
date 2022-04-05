@@ -30,12 +30,17 @@ function affect_neg!(int, idx) # negative crossings (+ve to -ve)
             # end of step 1
             # fit spline to force
             sol = int.sol
-            t = sol.t[1]:0.001:int.t
             T = int.t
+            t = sol.t[1]:0.001:T
             splX1 = CubicSplineInterpolation(t, rx1(sol))
             splY1 = CubicSplineInterpolation(t, ry1(sol))
             splX2 = CubicSplineInterpolation(t, rx2(sol))
             splY2 = CubicSplineInterpolation(t, ry2(sol))
+
+            println(T)
+            println(t)
+            println(sol.t)
+
             vrx1(t) = splX1(t - T)
             vry1(t) = splY1(t - T)
             vrx2(t) = splX2(t - T)
@@ -62,13 +67,13 @@ function affect_neg!(int, idx) # negative crossings (+ve to -ve)
 end
 
 
-vcb = VectorContinuousCallback(condition, affect!, affect_neg!, 3, save_positions = (false, false))
+vcb = VectorContinuousCallback(condition, affect!, affect_neg!, 3, save_positions=(false, false))
 
 # pocmy and pop2y with u
 function pocmy(u, t, p)
     @unpack l7, mc, l8, md, me, mf, mg, mh, mi, ma, mb, l10, l9, l6, l4, l2, l1, l11, l3, footang = p
     @unpack ea, fa, ha, ia, gs = p
-    @inbounds q1, q2, q3, q4, q5, q6, q7, u1, u2, u3, u4, u5, u6, u7 = u
+    @inbounds q1, q2, q3, q4, q5, q6, q7 = u
 
     ea = ea(t)
     fa = fa(t)
@@ -86,3 +91,15 @@ function pop2y(u, t, p)
     return q2 - l2 * sin(q3 - q4 - q5 - q6 - q7)
 
 end
+
+
+## multi-simulation callbacks
+condition_step1(u, t, int) = pocmy(u, t, int.sol.prob.p) - pocmy(int.sol.prob.u0, 0.0, int.sol.prob.p)
+affect_step1!(int) = nothing
+affect_neg_step1!(int) = terminate!(int)
+cb1 = ContinuousCallback(condition_step1, affect_step1!, affect_neg_step1!, save_positions=(false, true))
+
+condition_step2(u, t, int) = u[2]
+affect_step2!(int) = nothing
+affect_neg_step2!(int) = int.t > 0.005 ? terminate!(int) : nothing # q2 starts above the ground
+cb2 = ContinuousCallback(condition_step2, affect_step2!, affect_neg_step2!; save_positions=(false, true))
