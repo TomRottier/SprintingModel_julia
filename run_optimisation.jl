@@ -11,7 +11,7 @@ Nt = 5
 tol = 1.0
 
 # bounds and step length
-ub = repeat([3.0, repeat([0.5, 0.5, 3.0], 3)...], 6)
+ub = repeat([1.0, repeat([0.5, 0.5, 1.0], 3)...], 6)
 lb = repeat([0.01, repeat([0.0, 0.1, 0.01], 3)...], 6) # constrain lb of activation to 0.01
 v = ub .- lb
 
@@ -27,7 +27,7 @@ options = Options(func=objective, N=N, Ns=Ns, Nt=Nt, lb=lb, ub=ub, tol=tol, prin
 @time sa!(current, result, options)
 
 open("optimisations/matching/results.csv", "a") do io
-    writedlm(io, [9.7604 result.fopt result.xopt...], ',')
+    writedlm(io, [inputs.initial_conditions[:vcmx] result.fopt result.xopt...], ',')
 end
 
 # # optimisation loop
