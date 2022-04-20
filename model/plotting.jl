@@ -108,7 +108,9 @@ end
 
 function plot_2sol(f, sol1, sol2)
     plt = plot(sol1.t, f(sol1), label="step 1")
-    plot!(sol2.t, f(sol2), label="step 2")
+    _time = [sol1.t[end], sol2.t...]
+    _data = [f(sol2, t) for t in _time]
+    plot!(_time, _data, label="step 2")
 
     return plt
 end

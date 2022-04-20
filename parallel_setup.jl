@@ -15,7 +15,7 @@ include("optimisation.jl")
 
 # set up initial model
 inputs = load_inputs()#=const =#
-inputs.initial_conditions[:vcmx] = 9.2
+inputs.initial_conditions[:vcmx] = 9.7
 p, u₀ = set_values(inputs)#=const =#
 matching_data = inputs.matching_data#=const =#
 

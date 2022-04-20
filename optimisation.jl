@@ -171,6 +171,7 @@ function updateParameters(p, x, u₀)
     # hf_α_p = ActivationProfile(x[40:52])
     # kf_α_p = ActivationProfile(x[53:65])
     # af_α_p = ActivationProfile(x[66:78])
+    _k1, _k2, _k3, _k4, _k5, _k6, _k7, _k8 = x[61:68]
 
     # torque generators with inital values and new activation parameters
     _he = TorqueGenerator(2π - θh, -ωh, he.cc.cc_p, he.sec.sec_p, he_α_p)
@@ -185,7 +186,7 @@ function updateParameters(p, x, u₀)
 
 
     # returns new Params struct with torque generators ready for next simulation
-    _p = setproperties(p, (he=_he, ke=_ke, ae=_ae, hf=_hf, kf=_kf, af=_af))
+    _p = setproperties(p, (he=_he, ke=_ke, ae=_ae, hf=_hf, kf=_kf, af=_af, k1=_k1, k2=_k2, k3=_k3, k4=_k4, k5=_k5, k6=_k6, k7=_k7, k8=_k8))
 
     return _p, _u₀
 end

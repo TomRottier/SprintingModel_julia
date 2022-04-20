@@ -115,7 +115,8 @@ vry(sol, t) = vry1(sol, t) + vry2(sol, t)
 
 RX(sol) = rx(sol) .+ vrx(sol)
 RY(sol) = ry(sol) .+ vry(sol)
-
+RX(sol, t) = rx(sol, t) + vrx(sol, t)
+RY(sol, t) = ry(sol, t) + vry(sol, t)
 
 
 ## for stance simulation
