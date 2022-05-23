@@ -1,0 +1,67 @@
+File: model/angle_driven/model_angle.in
+-----------------------------------------------------------------------------
+Replace this line with a message to appear on all output files.
+----------------------------------------------------------+------------------
+Description          Quantity             Units           | Value
+----------------------------------------------------------|------------------
+Constant:            FOOTANG              DEG             |  19.58
+Constant:            G                    M/S^2           | -9.81
+Constant:            IFF                  KG.M^2          |  0.00015
+Constant:            IHAT                 KG.M^2          |  4.600
+Constant:            IRF                  KG.M^2          |  0.00301
+Constant:            ISH                  KG.M^2          |  0.0808
+Constant:            ITH                  KG.M^2          |  0.21645
+Constant:            K1                   N/M             |  0.0
+Constant:            K2                   N/M/S^2         |  0.0
+Constant:            K3                   N/M             |  0.0
+Constant:            K4                   N/M/S^2         |  0.0
+Constant:            K5                   N/M             |  0.0
+Constant:            K6                   N/M/S^2         |  0.0
+Constant:            K7                   N/M             |  0.0
+Constant:            K8                   N/M/S^2         |  0.0
+Constant:            LFF                  M               |  0.085
+Constant:            LFFO                 M               |  0.050
+Constant:            LRF                  M               |  0.139
+Constant:            LRFF                 M               |  0.222
+Constant:            LRFFO                M               |  0.121
+Constant:            LRFO                 M               |  0.076
+Constant:            LSH                  M               |  0.453
+Constant:            LSHO                 M               |  0.261
+Constant:            LTH                  M               |  0.447
+Constant:            LTHO                 M               |  0.258
+Constant:            MFF                  KG              |  0.244
+Constant:            MHAT                 KG              |  51.95
+Constant:            MRF                  KG              |  1.170
+Constant:            MSH                  KG              |  5.375
+Constant:            MTH                  KG              |  12.79
+Constant:            MTPB                 N/M/S^2         |  0.0
+Constant:            MTPK                 N/M             |  0.0
+Constant:            RMTPXI               UNITS           |  0.0
+Constant:            RTOEXI               UNITS           |  0.0
+
+Initial Value:       Q1                   M               |  0.0
+Initial Value:       Q2                   M               |  0.0
+Initial Value:       Q3                   DEG             |  81.451
+Initial Value:       U1                   M/S             |  9.67406
+Initial Value:       U2                   M/S             | -0.72030
+Initial Value:       U3                   DEG/S           | -24.9253
+
+Initial Time:        TINITIAL             S               |  0.0
+Final Time:          TFINAL               S               |  0.2
+Integration Step:    INTEGSTP             S               |  0.001
+Print-Integer:       PRINTINT             Positive Integer|  1
+Absolute Error:      ABSERR                               |  1.0E-08
+Relative Error:      RELERR                               |  1.0E-07
+----------------------------------------------------------+------------------
+
+DANGER: Do not insert TABS while editing this file.
+
+Note:
+
+  INTEGSTP*PRINTINT is the time-interval for writing of output.
+
+  ABSERR should be set equal to 10^(-8)*Xsmall, where Xsmall is the estimated
+         smallest maximum absolute value of the variables being integrated.
+
+  RELERR should be set equal to 10^(-d), where d is the desired number of
+         significant digits of numerical integration results.
