@@ -1,6 +1,6 @@
 parameter,units,value
 footang,deg,19.58
-g,m/s^2,-9.81
+g,m/s^2,0.0
 iff,kg.m^2,0.00015
 irf,kg.m^2,0.00301
 ish,kg.m^2,0.0808
