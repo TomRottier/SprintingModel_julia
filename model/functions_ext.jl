@@ -40,7 +40,7 @@ function get_torque_generator(sol, t)
 
     # CC torque relevant values
     out = map([d_he, d_hf, d_ke, d_kf, d_ae, d_af]) do d
-        [d[:cc][:α], d[:cc][:τ_θ], d[:cc][:τ_ω]]
+        [d[:cc][:α], d[:cc][:τ_θ], d[:cc][:τ_ω], d[:cc][:α] * d[:cc][:τ_θ] * d[:cc][:τ_ω]]
     end
 
     return out
