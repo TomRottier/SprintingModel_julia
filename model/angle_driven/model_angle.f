@@ -1,6 +1,6 @@
 C**   The name of this program is model/angle_driven/model_ang
      &le.f
-C**   Created by AUTOLEV 3.2 on Sat May 21 19:27:46 2022
+C**   Created by AUTOLEV 3.2 on Thu May 26 19:12:47 2022
 
       IMPLICIT         DOUBLE PRECISION (A - Z)
       INTEGER          ILOOP, IPRINT, PRINTINT
@@ -8,8 +8,8 @@ C**   Created by AUTOLEV 3.2 on Sat May 21 19:27:46 2022
       EXTERNAL         EQNS1
       DIMENSION        VAR(6)
       COMMON/CONSTNTS/ FOOTANG,G,IFF,IHAT,IRF,ISH,ITH,K1,K2,K3,K4,K5,K6,
-     &K7,K8,LFF,LFFO,LRF,LRFF,LRFFO,LRFO,LSH,LSHO,LTH,LTHO,MFF,MHAT,MRF,
-     &MSH,MTH,MTPB,MTPK,RMTPXI,RTOEXI
+     &K7,K8,LFF,LFFO,LHAT,LMTPXI,LRF,LRFF,LRFFO,LRFO,LSH,LSHO,LTH,LTHO,L
+     &TOEXI,MFF,MHAT,MRF,MSH,MTH,MTPB,MTPK,RMTPXI,RTOEXI
       COMMON/SPECFIED/ HATO,LA,LH,LK,LMTP,RA,RH,RK,RMTP,HATOp,LAp,LHp,LK
      &p,LMTPp,RAp,RHp,RKp,RMTPp,HATOpp,LApp,LHpp,LKpp,LMTPpp,RApp,RHpp,R
      &Kpp,RMTPpp
@@ -17,10 +17,10 @@ C**   Created by AUTOLEV 3.2 on Sat May 21 19:27:46 2022
       COMMON/ALGBRAIC/ HZ,KECM,LATQ,LHTQ,LKTQ,LRX1,LRX2,LRY1,LRY2,PECM,P
      &X,PY,RATQ,RHTQ,RKTQ,RRX1,RRX2,RRY1,RRY2,TE,U4,U5,U6,U7,U8,U9,Q1p,Q
      &2p,Q3p,U1p,U2p,U3p,DLX1,DLX2,DRX1,DRX2,LMTQ,LRX,LRY,POCMX,POCMY,PO
-     &HATOX,POHATOY,POP10X,POP10Y,POP11X,POP11Y,POP1X,POP1Y,POP2X,POP2Y,
-     &POP3X,POP3Y,POP4X,POP4Y,POP5X,POP5Y,POP6X,POP6Y,POP7X,POP7Y,POP8X,
-     &POP8Y,POP9X,POP9Y,RMTQ,RRX,RRY,VOCMX,VOCMY,VOP10X,VOP10Y,VOP11X,VO
-     &P11Y,VOP2X,VOP2Y
+     &HATOX,POHATOY,POP10X,POP10Y,POP11X,POP11Y,POP12X,POP12Y,POP1X,POP1
+     &Y,POP2X,POP2Y,POP3X,POP3Y,POP4X,POP4Y,POP5X,POP5Y,POP6X,POP6Y,POP7
+     &X,POP7Y,POP8X,POP8Y,POP9X,POP9Y,RMTQ,RRX,RRY,VOCMX,VOCMY,VOP10X,VO
+     &P10Y,VOP11X,VOP11Y,VOP2X,VOP2Y
       COMMON/MISCLLNS/ PI,DEGtoRAD,RADtoDEG,Z(824),COEF(3,3),RHS(3)
 
 C**   Open input and output files
@@ -44,8 +44,8 @@ C**   Read message from input file
 
 C**   Read values of constants from input file
       READ(20,7010,END=7100,ERR=7101) FOOTANG,G,IFF,IHAT,IRF,ISH,ITH,K1,
-     &K2,K3,K4,K5,K6,K7,K8,LFF,LFFO,LRF,LRFF,LRFFO,LRFO,LSH,LSHO,LTH,LTH
-     &O,MFF,MHAT,MRF,MSH,MTH,MTPB,MTPK,RMTPXI,RTOEXI
+     &K2,K3,K4,K5,K6,K7,K8,LFF,LFFO,LHAT,LMTPXI,LRF,LRFF,LRFFO,LRFO,LSH,
+     &LSHO,LTH,LTHO,LTOEXI,MFF,MHAT,MRF,MSH,MTH,MTPB,MTPK,RMTPXI,RTOEXI
 
 C**   Read the initial value of each variable from input file
       READ(20,7010,END=7100,ERR=7101) Q1,Q2,Q3,U1,U2,U3
@@ -208,12 +208,13 @@ C**   Inform user of input and output filename(s)
      &'POP3X',10X,'POP3Y',10X,'POP4X',10X,'POP4Y',10X,'POP5X',10X,'POP5Y
      &',10X,'POP6X',10X,'POP6Y',10X,'POP7X',10X,'POP7Y',10X,'POP8X',10X,
      &'POP8Y',10X,'POP9X',10X,'POP9Y',9X,'POP10X',9X,'POP10Y',9X,'POP11X
-     &',9X,'POP11Y',9X,'POHATOX',8X,'POHATOY',9X,'POCMX',10X,'POCMY',10X
-     &,'VOCMX',10X,'VOCMY',/,7X,'(S)',12X,'(M)',12X,'(M)',12X,'(M)',12X,
-     &'(M)',12X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)',
+     &',9X,'POP11Y',9X,'POP12X',9X,'POP12Y',9X,'POHATOX',8X,'POHATOY',9X
+     &,'POCMX',10X,'POCMY',10X,'VOCMX',10X,'VOCMY',/,7X,'(S)',12X,'(M)',
      &12X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)',12X,'(
      &M)',12X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)',12
-     &X,'(M)',12X,'(M)',12X,'(M)',11X,'(M/S)',10X,'(M/S)',/)
+     &X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)',12X,'(M)
+     &',12X,'(M)',10X,'(UNITS)',8X,'(UNITS)',10X,'(M)',12X,'(M)',12X,'(M
+     &)',12X,'(M)',11X,'(M/S)',10X,'(M/S)',/)
 6022  FORMAT(1X,'FILE: model/angle_driven/model_angle.2 ',//1X,'*** ',99
      &A1,///,8X,'T',13X,'Q1',13X,'Q2',13X,'Q3',13X,'U1',13X,'U2',13X,'U3
      &',/,7X,'(S)',12X,'(M)',12X,'(M)',11X,'(DEG)',10X,'(M/S)',10X,'(M/S
@@ -267,8 +268,8 @@ C**********************************************************************
       INTEGER          BOUNDARY
       DIMENSION        VAR(*), VARp(*)
       COMMON/CONSTNTS/ FOOTANG,G,IFF,IHAT,IRF,ISH,ITH,K1,K2,K3,K4,K5,K6,
-     &K7,K8,LFF,LFFO,LRF,LRFF,LRFFO,LRFO,LSH,LSHO,LTH,LTHO,MFF,MHAT,MRF,
-     &MSH,MTH,MTPB,MTPK,RMTPXI,RTOEXI
+     &K7,K8,LFF,LFFO,LHAT,LMTPXI,LRF,LRFF,LRFFO,LRFO,LSH,LSHO,LTH,LTHO,L
+     &TOEXI,MFF,MHAT,MRF,MSH,MTH,MTPB,MTPK,RMTPXI,RTOEXI
       COMMON/SPECFIED/ HATO,LA,LH,LK,LMTP,RA,RH,RK,RMTP,HATOp,LAp,LHp,LK
      &p,LMTPp,RAp,RHp,RKp,RMTPp,HATOpp,LApp,LHpp,LKpp,LMTPpp,RApp,RHpp,R
      &Kpp,RMTPpp
@@ -276,10 +277,10 @@ C**********************************************************************
       COMMON/ALGBRAIC/ HZ,KECM,LATQ,LHTQ,LKTQ,LRX1,LRX2,LRY1,LRY2,PECM,P
      &X,PY,RATQ,RHTQ,RKTQ,RRX1,RRX2,RRY1,RRY2,TE,U4,U5,U6,U7,U8,U9,Q1p,Q
      &2p,Q3p,U1p,U2p,U3p,DLX1,DLX2,DRX1,DRX2,LMTQ,LRX,LRY,POCMX,POCMY,PO
-     &HATOX,POHATOY,POP10X,POP10Y,POP11X,POP11Y,POP1X,POP1Y,POP2X,POP2Y,
-     &POP3X,POP3Y,POP4X,POP4Y,POP5X,POP5Y,POP6X,POP6Y,POP7X,POP7Y,POP8X,
-     &POP8Y,POP9X,POP9Y,RMTQ,RRX,RRY,VOCMX,VOCMY,VOP10X,VOP10Y,VOP11X,VO
-     &P11Y,VOP2X,VOP2Y
+     &HATOX,POHATOY,POP10X,POP10Y,POP11X,POP11Y,POP12X,POP12Y,POP1X,POP1
+     &Y,POP2X,POP2Y,POP3X,POP3Y,POP4X,POP4Y,POP5X,POP5Y,POP6X,POP6Y,POP7
+     &X,POP7Y,POP8X,POP8Y,POP9X,POP9Y,RMTQ,RRX,RRY,VOCMX,VOCMY,VOP10X,VO
+     &P10Y,VOP11X,VOP11Y,VOP2X,VOP2Y
       COMMON/MISCLLNS/ PI,DEGtoRAD,RADtoDEG,Z(824),COEF(3,3),RHS(3)
 
 C**   Update variables after integration step
@@ -298,7 +299,6 @@ C**   Update variables after integration step
       RRX1 = -RRY1*(K1*DRX1+K2*U1)
       Z(1) = COS(Q3)
       Z(2) = SIN(Q3)
-      DLX1 = Q1 - RTOEXI
 
 C**   Quantities to be specified
       HATO = 0
@@ -403,12 +403,12 @@ C**   Quantities to be specified
       Z(189) = Z(183) + Z(187)
       Z(197) = Z(9)*Z(177) + Z(10)*Z(189)
       Z(205) = Z(9)*Z(189) - Z(10)*Z(177)
-      Z(206) = LHp + RKp
+      Z(206) = LHp + LKp
       Z(211) = LSH*Z(206)
       Z(214) = Z(205) + Z(211)
       Z(230) = Z(13)*Z(197) + Z(14)*Z(214)
       Z(239) = Z(13)*Z(214) - Z(14)*Z(197)
-      Z(215) = LAp + LHp + RKp
+      Z(215) = LAp + LHp + LKp
       Z(240) = LRF*Z(215)
       Z(244) = Z(239) + Z(240)
       Z(254) = Z(17)*Z(230) + Z(18)*Z(244)
@@ -492,7 +492,7 @@ C**   Quantities to be specified
       Z(252) = Z(17)*Z(228) + Z(18)*Z(238)
       Z(67) = Z(17)*Z(59) - Z(18)*Z(57)
       Z(264) = Z(17)*Z(244) - Z(18)*Z(230)
-      Z(265) = LAp + LHp + LMTPp + RKp
+      Z(265) = LAp + LHp + LKp + LMTPp
       Z(272) = LFF*Z(265)
       Z(277) = Z(264) + Z(272)
       Z(256) = Z(17)*Z(232) - Z(18)*Z(225)
@@ -519,6 +519,11 @@ C**   Quantities to be specified
       Z(56) = Z(13)*Z(52) + Z(14)*Z(54)
       Z(58) = Z(13)*Z(54) - Z(14)*Z(52)
       Z(64) = Z(17)*Z(56) + Z(18)*Z(58)
+      Z(42) = Z(11)*Z(27) + Z(12)*Z(29)
+      Z(46) = Z(3)*Z(1) - Z(4)*Z(2)
+      POP11X = Q1 + LFF*Z(64) + LRF*Z(56) + LSH*Z(52) + LTH*Z(49) - LFF*
+     &Z(31) - LRF*Z(42) - LSH*Z(27) - LTH*Z(46)
+      DLX1 = POP11X - LTOEXI
       Z(66) = Z(17)*Z(58) - Z(18)*Z(56)
       VOP11X = Z(64)*(Z(254)+Z(245)*U3+Z(246)*U4+Z(247)*U6+Z(248)*U8+Z(2
      &49)*U5+Z(250)*U7+Z(253)*U9+Z(251)*U1+Z(252)*U2) + Z(66)*(Z(277)+Z(
@@ -532,7 +537,9 @@ C**   Quantities to be specified
      &)*U8+Z(233)*U6+Z(234)*U4+Z(241)*U3+Z(242)*U5+Z(243)*U7+Z(237)*U1+Z
      &(238)*U2)
       LRY2 = -K7*POP10Y - K8*ABS(POP10Y)*VOP10Y
-      DLX2 = POP2X - RMTPXI
+      POP10X = Q1 + LRF*Z(56) + LSH*Z(52) + LTH*Z(49) - LFF*Z(31) - LRF*
+     &Z(42) - LSH*Z(27) - LTH*Z(46)
+      DLX2 = POP10X - LMTPXI
       VOP10X = Z(56)*(Z(230)+Z(222)*U3+Z(223)*U4+Z(224)*U6+Z(225)*U8+Z(2
      &26)*U5+Z(229)*U7+Z(227)*U1+Z(228)*U2) + Z(58)*(Z(244)+LRF*U9+Z(232
      &)*U8+Z(233)*U6+Z(234)*U4+Z(241)*U3+Z(242)*U5+Z(243)*U7+Z(237)*U1+Z
@@ -541,26 +548,24 @@ C**   Quantities to be specified
       Z(35) = Z(19)*Z(11) - Z(20)*Z(12)
       Z(37) = -Z(19)*Z(12) - Z(20)*Z(11)
       Z(41) = Z(35)*Z(30) + Z(37)*Z(28)
-      Z(42) = Z(11)*Z(27) + Z(12)*Z(29)
       Z(44) = Z(11)*Z(29) - Z(12)*Z(27)
       Z(45) = Z(11)*Z(30) - Z(12)*Z(28)
-      Z(46) = Z(3)*Z(1) - Z(4)*Z(2)
       Z(48) = -Z(3)*Z(2) - Z(4)*Z(1)
       Z(63) = Z(19)*Z(59) - Z(20)*Z(57)
       Z(83) = RHp + U4
       Z(84) = LHp + U5
       Z(86) = RHpp + RKpp
-      Z(88) = LHpp + RKpp
+      Z(88) = LHpp + LKpp
       Z(94) = RApp + RHpp + RKpp
       Z(96) = Z(1)*Z(44) + Z(2)*Z(45)
       Z(97) = Z(1)*Z(43) - Z(2)*Z(42)
       Z(98) = Z(1)*Z(45) - Z(2)*Z(44)
-      Z(100) = LApp + LHpp + RKpp
+      Z(100) = LApp + LHpp + LKpp
       Z(106) = RApp + RHpp + RKpp + RMTPpp
       Z(108) = Z(1)*Z(33) + Z(2)*Z(34)
       Z(109) = Z(1)*Z(32) - Z(2)*Z(31)
       Z(110) = Z(1)*Z(34) - Z(2)*Z(33)
-      Z(112) = LApp + LHpp + LMTPpp + RKpp
+      Z(112) = LApp + LHpp + LKpp + LMTPpp
       Z(118) = LFFO*Z(117)
       Z(120) = RAp + RHp + RKp
       Z(125) = LRFO*Z(120)
@@ -837,8 +842,8 @@ C**********************************************************************
       IMPLICIT         DOUBLE PRECISION (A - Z)
       INTEGER          ILOOP
       COMMON/CONSTNTS/ FOOTANG,G,IFF,IHAT,IRF,ISH,ITH,K1,K2,K3,K4,K5,K6,
-     &K7,K8,LFF,LFFO,LRF,LRFF,LRFFO,LRFO,LSH,LSHO,LTH,LTHO,MFF,MHAT,MRF,
-     &MSH,MTH,MTPB,MTPK,RMTPXI,RTOEXI
+     &K7,K8,LFF,LFFO,LHAT,LMTPXI,LRF,LRFF,LRFFO,LRFO,LSH,LSHO,LTH,LTHO,L
+     &TOEXI,MFF,MHAT,MRF,MSH,MTH,MTPB,MTPK,RMTPXI,RTOEXI
       COMMON/SPECFIED/ HATO,LA,LH,LK,LMTP,RA,RH,RK,RMTP,HATOp,LAp,LHp,LK
      &p,LMTPp,RAp,RHp,RKp,RMTPp,HATOpp,LApp,LHpp,LKpp,LMTPpp,RApp,RHpp,R
      &Kpp,RMTPpp
@@ -846,10 +851,10 @@ C**********************************************************************
       COMMON/ALGBRAIC/ HZ,KECM,LATQ,LHTQ,LKTQ,LRX1,LRX2,LRY1,LRY2,PECM,P
      &X,PY,RATQ,RHTQ,RKTQ,RRX1,RRX2,RRY1,RRY2,TE,U4,U5,U6,U7,U8,U9,Q1p,Q
      &2p,Q3p,U1p,U2p,U3p,DLX1,DLX2,DRX1,DRX2,LMTQ,LRX,LRY,POCMX,POCMY,PO
-     &HATOX,POHATOY,POP10X,POP10Y,POP11X,POP11Y,POP1X,POP1Y,POP2X,POP2Y,
-     &POP3X,POP3Y,POP4X,POP4Y,POP5X,POP5Y,POP6X,POP6Y,POP7X,POP7Y,POP8X,
-     &POP8Y,POP9X,POP9Y,RMTQ,RRX,RRY,VOCMX,VOCMY,VOP10X,VOP10Y,VOP11X,VO
-     &P11Y,VOP2X,VOP2Y
+     &HATOX,POHATOY,POP10X,POP10Y,POP11X,POP11Y,POP12X,POP12Y,POP1X,POP1
+     &Y,POP2X,POP2Y,POP3X,POP3Y,POP4X,POP4Y,POP5X,POP5Y,POP6X,POP6Y,POP7
+     &X,POP7Y,POP8X,POP8Y,POP9X,POP9Y,RMTQ,RRX,RRY,VOCMX,VOCMY,VOP10X,VO
+     &P10Y,VOP11X,VOP11Y,VOP2X,VOP2Y
       COMMON/MISCLLNS/ PI,DEGtoRAD,RADtoDEG,Z(824),COEF(3,3),RHS(3)
 
 C**   Evaluate output quantities
@@ -863,9 +868,9 @@ C**   Evaluate output quantities
       Z(269) = Z(68) + Z(261)
       Z(270) = Z(68) + Z(255)
       KECM = 0.5D0*IHAT*U3**2 + 0.5D0*ITH*(LHp+U3+U5)**2 + 0.5D0*ITH*(RH
-     &p+U3+U4)**2 + 0.5D0*ISH*(LHp+RKp+U3+U5+U7)**2 + 0.5D0*ISH*(RHp+RKp
-     &+U3+U4+U6)**2 + 0.5D0*IRF*(LAp+LHp+RKp+U3+U5+U7+U9)**2 + 0.5D0*IRF
-     &*(RAp+RHp+RKp+U3+U4+U6+U8)**2 + 0.5D0*IFF*(LAp+LHp+LMTPp+RKp+U3+U5
+     &p+U3+U4)**2 + 0.5D0*ISH*(LHp+LKp+U3+U5+U7)**2 + 0.5D0*ISH*(RHp+RKp
+     &+U3+U4+U6)**2 + 0.5D0*IRF*(LAp+LHp+LKp+U3+U5+U7+U9)**2 + 0.5D0*IRF
+     &*(RAp+RHp+RKp+U3+U4+U6+U8)**2 + 0.5D0*IFF*(LAp+LHp+LKp+LMTPp+U3+U5
      &+U7+U9)**2 + 0.5D0*IFF*(RAp+RHp+RKp+RMTPp+U3+U4+U6+U8)**2 + 0.5D0*
      &MFF*((Z(31)*U1+Z(32)*U2)**2+(Z(118)+LFFO*U3+LFFO*U4+LFFO*U6+LFFO*U
      &8-Z(33)*U1-Z(34)*U2)**2) + 0.5D0*MSH*((Z(141)+Z(138)*U3+Z(138)*U4+
@@ -1588,10 +1593,10 @@ C**   Evaluate output quantities
      &(42) - LRFF*Z(60) - LSH*Z(27) - LTH*Z(46)
       POP9Y = Q2 + LRF*Z(57) + LSH*Z(53) + LTH*Z(50) - LFF*Z(32) - LRF*Z
      &(43) - LRFF*Z(61) - LSH*Z(28) - LTH*Z(47)
-      POP10X = Q1 + LRF*Z(56) + LSH*Z(52) + LTH*Z(49) - LFF*Z(31) - LRF*
-     &Z(42) - LSH*Z(27) - LTH*Z(46)
-      POP11X = Q1 + LFF*Z(64) + LRF*Z(56) + LSH*Z(52) + LTH*Z(49) - LFF*
-     &Z(31) - LRF*Z(42) - LSH*Z(27) - LTH*Z(46)
+      POP12X = Q1 + LHAT*Z(1) - LFF*Z(31) - LRF*Z(42) - LSH*Z(27) - LTH*
+     &Z(46)
+      POP12Y = Q2 + LHAT*Z(2) - LFF*Z(32) - LRF*Z(43) - LSH*Z(28) - LTH*
+     &Z(47)
       POHATOX = Q1 + HATO*Z(1) - LFF*Z(31) - LRF*Z(42) - LSH*Z(27) - LTH
      &*Z(46)
       POHATOY = Q2 + HATO*Z(2) - LFF*Z(32) - LRF*Z(43) - LSH*Z(28) - LTH
@@ -1600,10 +1605,10 @@ C**   Evaluate output quantities
      & + Z(73)*Z(1) - Z(79)*Z(31) - Z(81)*Z(27) - Z(82)*Z(46) - 0.5D0*Z(
      &76)*Z(38) - 0.5D0*Z(76)*Z(60) - 0.5D0*Z(80)*Z(42)
       Z(281) = MHAT*HATOp/Z(72)
-      Z(282) = Z(74)*(LAp+LHp+LMTPp+RKp)
-      Z(283) = Z(75)*(LAp+LHp+RKp)
-      Z(284) = Z(76)*(LAp+LHp+RKp)
-      Z(285) = Z(77)*(LHp+RKp)
+      Z(282) = Z(74)*(LAp+LHp+LKp+LMTPp)
+      Z(283) = Z(75)*(LAp+LHp+LKp)
+      Z(284) = Z(76)*(LAp+LHp+LKp)
+      Z(285) = Z(77)*(LHp+LKp)
       Z(286) = Z(78)*LHp
       Z(287) = Z(79)*(RAp+RHp+RKp+RMTPp)
       Z(288) = Z(80)*(RAp+RHp+RKp)
@@ -1638,10 +1643,12 @@ C**   Evaluate output quantities
 C**   Write output to screen and to output file(s)
       WRITE(*, 6020) T,POP1X,POP1Y,POP2X,POP2Y,POP3X,POP3Y,POP4X,POP4Y,P
      &OP5X,POP5Y,POP6X,POP6Y,POP7X,POP7Y,POP8X,POP8Y,POP9X,POP9Y,POP10X,
-     &POP10Y,POP11X,POP11Y,POHATOX,POHATOY,POCMX,POCMY,VOCMX,VOCMY
+     &POP10Y,POP11X,POP11Y,POP12X,POP12Y,POHATOX,POHATOY,POCMX,POCMY,VOC
+     &MX,VOCMY
       WRITE(21,6020) T,POP1X,POP1Y,POP2X,POP2Y,POP3X,POP3Y,POP4X,POP4Y,P
      &OP5X,POP5Y,POP6X,POP6Y,POP7X,POP7Y,POP8X,POP8Y,POP9X,POP9Y,POP10X,
-     &POP10Y,POP11X,POP11Y,POHATOX,POHATOY,POCMX,POCMY,VOCMX,VOCMY
+     &POP10Y,POP11X,POP11Y,POP12X,POP12Y,POHATOX,POHATOY,POCMX,POCMY,VOC
+     &MX,VOCMY
       WRITE(22,6020) T,Q1,Q2,(Q3*RADtoDEG),U1,U2,U3
       WRITE(23,6020) T,RRX,RRY,LRX,LRY,RRX1,RRY1,RRX2,RRY2,LRX1,LRX2,LRY
      &1,LRY2

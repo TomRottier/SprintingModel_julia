@@ -3,8 +3,8 @@
 %
 % tom rottier 2022
 % ------------------------------------------------------------------------------
-degrees off         % sometimes get problems with using pi if not specified
 autoz on          
+degrees off         % sometimes get problems with using pi if not specified
 % physical declarations
 newtonian n
 bodies rff,rrf,rsh,rth,lff,lrf,lsh,lth,hat
@@ -132,7 +132,7 @@ w_hat_n> = u3*n3>
 w_rth_hat> = rh'*n3> + u4*n3>
 w_lth_hat> = lh'*n3> + u5*n3>
 w_rsh_rth> = rk'*n3> + u6*n3>
-w_lsh_lth> = rk'*n3> + u7*n3>
+w_lsh_lth> = lk'*n3> + u7*n3>
 w_rrf_rsh> = ra'*n3> + u8*n3>
 w_lrf_lsh> = la'*n3> + u9*n3>
 w_rff_rrf> = rmtp'*n3>
@@ -221,8 +221,8 @@ rrx1 = (-k1*drx1-k2*vop1x)*rry1
 rry2 = -k7*pop2y-k8*vop2y*abs(pop2y)         % mtp
 rrx2 = (-k5*drx2-k6*vop2x)*rry2
 % left foot
-dlx1 = pop1x - rtoexi
-dlx2 = pop2x - rmtpxi
+dlx1 = pop11x - ltoexi
+dlx2 = pop10x - lmtpxi
 lry1 = -k3*pop11y-k4*vop11y*abs(pop11y)         % toe
 lrx1 = (-k1*dlx1-k2*vop11x)*lry1
 lry2 = -k7*pop10y-k8*vop10y*abs(pop10y)         % mtp
@@ -283,7 +283,7 @@ input mff=0.244,mrf=1.170,msh=5.375,mth=12.79,mhat=51.95
 input footang=19.58
 input q1=0.0,q2=0.0,q3=81.451, u1=9.67406,u2=-0.72030,u3=-24.9253
 %
-output t,pop1x,pop1y,pop2x,pop2y,pop3x,pop3y,pop4x,pop4y,pop5x,pop5y,pop6x,pop6y,pop7x,pop7y,pop8x,pop8y,pop9x,pop9y,pop10x,pop10y,pop11x,pop11y,pohatox,pohatoy,pocmx,pocmy,vocmx,vocmy
+output t,pop1x,pop1y,pop2x,pop2y,pop3x,pop3y,pop4x,pop4y,pop5x,pop5y,pop6x,pop6y,pop7x,pop7y,pop8x,pop8y,pop9x,pop9y,pop10x,pop10y,pop11x,pop11y,pop12x,pop12y,pohatox,pohatoy,pocmx,pocmy,vocmx,vocmy
 output t,q1,q2,q3,u1,u2,u3
 output t,rrx,rry,lrx,lry,rrx1,rry1,rrx2,rry2,lrx1,lrx2,lry1,lry2
 output t,rhtq,lhtq,rktq,lktq,ratq,latq,rmtq,lmtq

@@ -21,6 +21,8 @@ Constant:            K7                   N/M             |  0.0
 Constant:            K8                   N/M/S^2         |  0.0
 Constant:            LFF                  M               |  0.085
 Constant:            LFFO                 M               |  0.050
+Constant:            LHAT                 M               |  0.600
+Constant:            LMTPXI               UNITS           |  0.0
 Constant:            LRF                  M               |  0.139
 Constant:            LRFF                 M               |  0.222
 Constant:            LRFFO                M               |  0.121
@@ -29,6 +31,7 @@ Constant:            LSH                  M               |  0.453
 Constant:            LSHO                 M               |  0.261
 Constant:            LTH                  M               |  0.447
 Constant:            LTHO                 M               |  0.258
+Constant:            LTOEXI               UNITS           |  0.0
 Constant:            MFF                  KG              |  0.244
 Constant:            MHAT                 KG              |  51.95
 Constant:            MRF                  KG              |  1.170
