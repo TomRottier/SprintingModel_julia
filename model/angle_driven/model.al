@@ -42,14 +42,14 @@ specified hato''         % distance from hip to hat com
 % ------------------------------------------------------------------------------
 % geometry
 simprot(n,hat,3,q3)         % global orientation/trunk angle
-simprot(hat,rth,3,rh)
-simprot(hat,lth,3,lh)
-simprot(rth,rsh,3,rk)
-simprot(lth,lsh,3,lk)
-simprot(rsh,rrf,3,ra)
-simprot(lsh,lrf,3,la)
-simprot(rrf,rff,3,rmtp)
-simprot(lrf,lff,3,lmtp)
+simprot(hat,rth,3,2*pi - rh)
+simprot(hat,lth,3,2*pi - lh)
+simprot(rth,rsh,3,rk - pi)
+simprot(lth,lsh,3,lk - pi)
+simprot(rsh,rrf,3,pi - ra)
+simprot(lsh,lrf,3,pi - la)
+simprot(rrf,rff,3,pi - rmtp)
+simprot(lrf,lff,3,pi - lmtp)
 
 simprot(rrf,rrff,3,footang)    % rear foot frame rotated about rear foot
 simprot(lrf,lrff,3,footang)
@@ -129,14 +129,14 @@ q3' = u3
 % ------------------------------------------------------------------------------
 % angular velocities and accelerations
 w_hat_n> = u3*n3>
-w_rth_hat> = rh'*n3> + u4*n3>
-w_lth_hat> = lh'*n3> + u5*n3>
+w_rth_hat> = -rh'*n3> + u4*n3>
+w_lth_hat> = -lh'*n3> + u5*n3>
 w_rsh_rth> = rk'*n3> + u6*n3>
 w_lsh_lth> = lk'*n3> + u7*n3>
-w_rrf_rsh> = ra'*n3> + u8*n3>
-w_lrf_lsh> = la'*n3> + u9*n3>
-w_rff_rrf> = rmtp'*n3>
-w_lff_lrf> = lmtp'*n3>
+w_rrf_rsh> = -ra'*n3> + u8*n3>
+w_lrf_lsh> = -la'*n3> + u9*n3>
+w_rff_rrf> = -rmtp'*n3>
+w_lff_lrf> = -lmtp'*n3>
 w_rrff_rrf> = 0>
 w_lrff_lrf> = 0>
 

@@ -1,4 +1,19 @@
 ## fit splines to angle data to drive joints
+using Dierckx, Interpolations
+
+# fit quintic splines to data
+joint_data = readdlm("data\\matchingData.csv", ',', Float64, skipstart=2)
+hat_data = readdlm("data\\HAT.csv", ',', Float64, skipstart=2)
+_time = joint_data[:, 1]
+rh_spl = Spline1D(_time, joint_data[:, 4], k=5, s=0.0)
+lh_spl = Spline1D(_time, joint_data[:, 5], k=5, s=0.0)
+rk_spl = Spline1D(_time, joint_data[:, 6], k=5, s=0.0)
+lk_spl = Spline1D(_time, joint_data[:, 7], k=5, s=0.0)
+ra_spl = Spline1D(_time, joint_data[:, 8], k=5, s=0.0)
+la_spl = Spline1D(_time, joint_data[:, 9], k=5, s=0.0)
+rmtp_spl = Spline1D(_time, joint_data[:, 10], k=5, s=0.0)
+lmtp_spl = Spline1D(_time, joint_data[:, 11], k=5, s=0.0)
+hat_spl = Spline1D(hat_data[:, 1], hat_data[:, 2], k=5, s=0.0)
 
 # get data for 1st and 2nd derivatives then interpolate
 function fit_spl(time, spl; d2r=true)

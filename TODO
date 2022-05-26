@@ -122,3 +122,8 @@
     - [x] change optimisation.jl functions    
     - ### SPECIFYING OUTPUT TYPE OF SPLINE FUNCTIONS MAKES FUNCTIONS TYPE STABLE ###
 
+
+## Angle driven model
+[] angle definitions 
+
+[] initial x positions for left foot

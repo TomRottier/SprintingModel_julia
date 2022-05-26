@@ -1,5 +1,5 @@
 using DelimitedFiles
-using StaticArrays, Parameters, Dierckx
+using StaticArrays, Parameters
 using OrdinaryDiffEq, Plots
 
 include("eom.jl")
@@ -8,8 +8,6 @@ include("specifieds.jl")
 include("functions.jl")
 include("../plotting.jl")
 include("setup.jl")
-include("../../callbacks.jl")
-include("model/functions_ext.jl")
 
 # set up model
 p, u₀ = setup()
