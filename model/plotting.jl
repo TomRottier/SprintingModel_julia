@@ -5,7 +5,7 @@ function plot_model(sol, t)
     fns = [pop1x, pop1y, pop2x, pop2y, pop3x, pop3y, pop4x, pop4y, pop5x, pop5y, pop6x, pop6y, pop7x, pop7y, pop8x, pop8y, pop9x, pop9y, pop10x, pop10y, pop11x, pop11y, pop12x, pop12y]
     ps = [fn(sol, t) for fn in fns]
 
-    plot(legend=:none, grid=:off, xlims=(-1.0, 4.0), ylims=(-0.1, 4.9), axis=nothing, border=:none)
+    plot(legend=:none, grid=:off, xlims=(-1.0, 5.0), ylims=(-0.1, 5.9), axis=nothing, border=:none)
     plot!(ps[1:2:22], ps[2:2:22], lw=2, color=:black)       # main skeleton
     plot!(ps[[11, 23]], ps[[12, 24]], lw=2, color=:black)     # HAT
     plot!(ps[[3, 7]], ps[[4, 8]], lw=2, color=:black)         # connect foot
@@ -33,12 +33,12 @@ function animate_model(sol1, sol2; fps=60)
 end
 
 # plot torque generator activation and components
-function plotTorques(t, v)
+function _plotTorques(t, v)
 
     n = 6
     plts = Vector{Any}(undef, n)
     titles = ["he", "hf", "ke", "kf", "ae", "af"]
-    labels = ["α" "τ_θ" "τ_ω"]
+    labels = ["α" "τ_θ" "τ_ω" "τ"]
     for i = 1:n
         data = hcat([tup[i] for tup in v]...)'
         plts[i] = plot(t, data, label=labels, title=titles[i], legend=:outertopright, xaxis="time (s)")
@@ -47,7 +47,9 @@ function plotTorques(t, v)
     plot(size=(600, 600), plts..., layout=(3, 2), ylims=(-0.1, 3.0))
 
 end
-plotTorques(sol) = plotTorques(sol.t, get_torque_generator(sol))
+plotTorques(sol) = _plotTorques(sol.t, get_torque_generator(sol))
+
+plotTorques(sol1, sol2) = _plotTorques(vcat(sol1.t, sol2.t), vcat(get_torque_generator(sol1), get_torque_generator(sol2)))
 
 
 # compare joint angle plot

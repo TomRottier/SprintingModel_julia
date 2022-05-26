@@ -6,14 +6,14 @@ addprocs(12, exeflags="--project")   # create worker processes with current proj
 # simulated annealing parameters
 T₀ = 0.5
 N = 68
-Ns = 24
-Nt = 5
+Ns = 36
+Nt = 10
 tol = 1.0
 
 # bounds and step length
 ub = repeat([1.0, repeat([0.5, 0.5, 1.0], 3)...], 6)
 lb = repeat([0.01, repeat([0.0, 0.1, 0.01], 3)...], 6) # constrain lb of activation to 0.01
-append!(ub, [10_000, 1000, 200_000, 100_000, 10_000, 1000, 200_000, 100_000])
+append!(ub, [20_000, 2000, 200_000, 100_000, 20_000, 1000, 200_000, 100_000])
 append!(lb, zeros(8))
 v = ub .- lb
 
