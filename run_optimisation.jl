@@ -1,31 +1,37 @@
 using Distributed
 
-addprocs(12, exeflags = "--project")   # create worker processes with current project activated
+addprocs(12, exeflags="--project")   # create worker processes with current project activated
 @everywhere include("parallel_setup.jl")
 
 # simulated annealing parameters
 T₀ = 0.5
-N = 60
-Ns = 48
-Nt = 5
-tol = 0.1
+N = 68
+Ns = 36
+Nt = 10
+tol = 1.0
 
 # bounds and step length
 ub = repeat([1.0, repeat([0.5, 0.5, 1.0], 3)...], 6)
 lb = repeat([0.01, repeat([0.0, 0.1, 0.01], 3)...], 6) # constrain lb of activation to 0.01
+append!(ub, [20_000, 2000, 200_000, 100_000, 20_000, 1000, 200_000, 100_000])
+append!(lb, zeros(8))
 v = ub .- lb
 
 # initial guess
+randx(lb, ub) = [rand(lb:0.001:ub) for (lb, ub) in zip(lb, ub)]
 x₀ = [rand(lb:0.001:ub) for (lb, ub) in zip(lb, ub)] #=vcat(map(x -> inputs.activation_parameters[x], [:he, :ke, :ae, :hf, :kf, :af])...) =#
+x₀ = [vcat(map(x -> inputs.activation_parameters[x], [:he, :ke, :ae, :hf, :kf, :af])...)..., p.k1, p.k2, p.k3, p.k4, p.k5, p.k6, p.k7, p.k8]
 f₀ = objective(x₀)
 
 # initial structs
-current = State(f = f₀, x = x₀, v = v, T = T₀)
-result = Result(fopt = f₀, xopt = x₀)
-options = Options(func = objective, N = N, Ns = Ns, Nt = Nt, lb = lb, ub = ub, tol = tol, print_status = true)
+current = State(f=f₀, x=x₀, v=v, T=T₀)
+result = Result(fopt=f₀, xopt=x₀)
+options = Options(func=objective, N=N, Ns=Ns, Nt=Nt, lb=lb, ub=ub, tol=tol, print_status=true)
 @time sa!(current, result, options)
 
-
+open("optimisations/matching/results.csv", "a") do io
+    writedlm(io, [inputs.initial_conditions[:vcmx] result.fopt result.xopt...], ',')
+end
 
 # # optimisation loop
 # submax_velocity = true
@@ -53,9 +59,9 @@ options = Options(func = objective, N = N, Ns = Ns, Nt = Nt, lb = lb, ub = ub, t
 #     @time sa!(current, result, options)
 
 #     # write results to file
-#     open("optimisations/matching/results.csv", "a") do io
-#         writedlm(io, [VCMX result.fopt result.xopt...], ',')
-#     end
+# open("optimisations/matching/results.csv", "a") do io
+# writedlm(io, [VCMX result.fopt result.xopt...], ',')
+# end
 #     submax_velocity = false
 
 #     # check if conditions met to be able to run at VCMX

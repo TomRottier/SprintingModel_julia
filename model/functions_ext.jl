@@ -40,7 +40,7 @@ function get_torque_generator(sol, t)
 
     # CC torque relevant values
     out = map([d_he, d_hf, d_ke, d_kf, d_ae, d_af]) do d
-        [d[:cc][:α], d[:cc][:τ_θ], d[:cc][:τ_ω]]
+        [d[:cc][:α], d[:cc][:τ_θ], d[:cc][:τ_ω], d[:cc][:α] * d[:cc][:τ_θ] * d[:cc][:τ_ω]]
     end
 
     return out
@@ -57,7 +57,7 @@ function get_forces(sol, t)
     if q2 < 0.0
         dp1x = q1 - pop1xi
         ry1 = -k3 * q2 - k4 * abs(q2) * u2
-        rx1 = -ry1 * (k1 * dp1x + k2 * u1)
+        rx1 = ry1 * (-k1 * dp1x - k2 * u1)
 
     else
         rx1 = 0.0
@@ -70,22 +70,53 @@ function get_forces(sol, t)
         vop2y = u2 - l2 * cos(q3 - q4 - q5 - q6 - q7) * (u3 - u4 - u5 - u6 - u7)
         dp2x = pop2x - pop2xi
         ry2 = -k7 * pop2y - k8 * abs(pop2y) * vop2y
-        rx2 = -ry2 * (k5 * dp2x + k6 * vop2x)
+        rx2 = ry2 * (-k5 * dp2x - k6 * vop2x)
     else
         rx2 = 0.0
         ry2 = 0.0
     end
 
-    vrx::Float64 = virtual_force.flag ? virtual_force.vrx(t) : 0.0
-    vry::Float64 = virtual_force.flag ? virtual_force.vry(t) : 0.0
+    vrx1::Float64 = virtual_force.vrx1(t)
+    vry1::Float64 = virtual_force.vry1(t)
+    vrx2::Float64 = virtual_force.vrx2(t)
+    vry2::Float64 = virtual_force.vry2(t)
 
-    return rx1 + rx2 + vrx, ry1 + ry2 + vry
+    return rx1, ry1, rx2, ry2, vrx1, vry1, vrx2, vry2
 end
 
 
 get_forces(sol) = [get_forces(sol, t) for t in sol.t]
-rx(sol) = [first(x) for x in get_forces(sol)]
-ry(sol) = [last(x) for x in get_forces(sol)]
+rx(sol) = rx1(sol) .+ rx2(sol)
+ry(sol) = ry1(sol) .+ ry2(sol)
+rx1(sol) = [x[1] for x in get_forces(sol)]
+ry1(sol) = [x[2] for x in get_forces(sol)]
+rx2(sol) = [x[3] for x in get_forces(sol)]
+ry2(sol) = [x[4] for x in get_forces(sol)]
+vry(sol) = vry1(sol) .+ vry2(sol)
+vrx(sol) = vrx1(sol) .+ vrx2(sol)
+vrx1(sol) = [x[5] for x in get_forces(sol)]
+vry1(sol) = [x[6] for x in get_forces(sol)]
+vrx2(sol) = [x[7] for x in get_forces(sol)]
+vry2(sol) = [x[8] for x in get_forces(sol)]
+
+rx1(sol, t) = get_forces(sol, t)[1]
+ry1(sol, t) = get_forces(sol, t)[2]
+rx2(sol, t) = get_forces(sol, t)[3]
+ry2(sol, t) = get_forces(sol, t)[4]
+rx(sol, t) = rx1(sol, t) + rx2(sol, t)
+ry(sol, t) = ry1(sol, t) + ry2(sol, t)
+
+vrx1(sol, t) = get_forces(sol, t)[5]
+vry1(sol, t) = get_forces(sol, t)[6]
+vrx2(sol, t) = get_forces(sol, t)[7]
+vry2(sol, t) = get_forces(sol, t)[8]
+vrx(sol, t) = vrx1(sol, t) + vrx2(sol, t)
+vry(sol, t) = vry1(sol, t) + vry2(sol, t)
+
+RX(sol) = rx(sol) .+ vrx(sol)
+RY(sol) = ry(sol) .+ vry(sol)
+RX(sol, t) = rx(sol, t) + vrx(sol, t)
+RY(sol, t) = ry(sol, t) + vry(sol, t)
 
 
 ## for stance simulation

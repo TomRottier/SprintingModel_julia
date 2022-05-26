@@ -95,9 +95,30 @@
     [x] include try catch block to prevent the optimisation from stopping completely - only errors with bad parameters anyway
          - will allow tolerances to be higher now
 
-[] run optimisation to match joint angles without any ground contact or gravity (increase CoM position above ground, set initial vertical CoM velocity to zero and set gravity to zero)
+[x] run optimisation to match joint angles without any ground contact or gravity (increase CoM position above ground, set initial vertical CoM velocity to zero and set gravity to zero)
     - leave gravity on as it will affect joint torques
     - EDITED: 
         - tolerances in optimisation
         - initial conditions of mtpy and vocmy
         - hat moi
+
+[] new swing-leg
+    - [] accelerations are high for new angle driven joints, especially at the mtp - check its not a problem
+
+[x] remove use of Dierckx.jl
+    - [x] numerically differentate input swing data in setup.jl - what to do about initial timepoints use dierckx splines initially to get values
+    - [x] fit interpolation object to each derivative 
+    - [x] add function calling evaluation to Parameter struct
+    - 3x faster on evaluating 0th derivative and  40, 70x faster on 1st and 2nd derivative
+    - 22 vs 22 micro seconds for eom with interpolations - interpolations has more allocations though?
+    - 20s vs 10 s for simulate(prob)
+    - [x] remove use for virtual forces too
+    - 2.3 s for simulate(prob) now??
+
+[x] running simulation no longer produces identical results
+    - some give error from try/catch block - which implies cost or simulate erroring    
+
+[x] convert back to two simulation simulation
+    - [x] change optimisation.jl functions    
+    - ### SPECIFYING OUTPUT TYPE OF SPLINE FUNCTIONS MAKES FUNCTIONS TYPE STABLE ###
+

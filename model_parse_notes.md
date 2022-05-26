@@ -9,6 +9,7 @@
 - calculated parameters e.g. mt,u8,u9 don't get unpacked in functions.jl [X]
 
 - functions in parameters struct need their own paramteric types - big performance increase [X]
+    - don't need to put specified functions inside parameter struct
 
 - could add option to specify which files get output []
 
@@ -21,3 +22,6 @@
 - may be useful to have some functions also in z form e.g. when calculating pocmy in eom
 
 - angle-driven joint torque functions need up's and vrx/y
+
+- dont need to unwind IO functions can just have call to eom to set Z array
+ - wont have correct values in Z for values set in IO

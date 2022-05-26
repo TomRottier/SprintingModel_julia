@@ -1,21 +1,28 @@
 # Automatically generated
-mutable struct VirtualForce
-    flag::Bool
-    vrx::Function
-    vry::Function
+struct VirtualForce{F1<:Function,F2<:Function,F3<:Function,F4<:Function}
+    vrx1::F1
+    vry1::F2
+    vrx2::F3
+    vry2::F4
 end
 
-struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9}
+struct Params{T,F1<:Function,F2<:Function,F3<:Function,F4<:Function,F5<:Function,F6<:Function,F7<:Function,F8<:Function,F9<:Function,F10<:Function,F11<:Function,F12<:Function,F13<:Function,F14<:Function,F15<:Function}
     z::Vector{Float64}
     ea::F1
     fa::F2
     gs::F3
-    eap::F4
-    fap::F5
-    gsp::F6
-    eapp::F7
-    fapp::F8
-    gspp::F9
+    ha::F4
+    ia::F5
+    eap::F6
+    fap::F7
+    gsp::F8
+    hap::F9
+    iap::F10
+    eapp::F11
+    fapp::F12
+    gspp::F13
+    happ::F14
+    iapp::F15
     ae::TorqueGenerator
     af::TorqueGenerator
     footang::T
@@ -29,6 +36,8 @@ struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9}
     ine::T
     inf::T
     ing::T
+    inh::T
+    ini::T
     k1::T
     k2::T
     k3::T
@@ -42,7 +51,6 @@ struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9}
     l1::T
     l10::T
     l11::T
-    l12::T
     l2::T
     l3::T
     l4::T
@@ -58,6 +66,8 @@ struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9}
     me::T
     mf::T
     mg::T
+    mh::T
+    mi::T
     mtpb::T
     mtpk::T
     pop1xi::T
@@ -65,145 +75,141 @@ struct Params{T,F1,F2,F3,F4,F5,F6,F7,F8,F9}
     mt::T
     u8::T
     u9::T
+    u10::T
+    u11::T
     virtual_force::VirtualForce
 end
 
-
 # initialise with constant values
-function Params(ea, fa, gs, eap, fap, gsp, eapp, fapp, gspp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi)
-    z = zeros(435) #Vector{Float64}(undef, 435)
+function Params(ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap, eapp, fapp, gspp, happ, iapp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, inh, ini, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mh, mi, mtpb, mtpk, pop1xi, pop2xi)
+    z = Vector{Float64}(undef, 884)
     mt = ma + mb + mc + md + me + mf + mg
     u8 = 0.0
     u9 = 0.0
+    u10 = 0.0
+    u11 = 0.0
 
-    vrx(t) = 0.0
-    vry(t) = 0.0
-    virtual_force = VirtualForce(false, vrx, vry)
+    virtual_force = VirtualForce(t -> 0.0, t -> 0.0, t -> 0.0, t -> 0.0)
 
-    z[295] = l12 * mf
-    z[15] = cos(footang)
-    z[16] = sin(footang)
-    z[17] = l10 - l9
-    z[54] = (l1 * ma + l2 * mb + l2 * mc + l2 * md + l2 * me + l2 * mf + l2 * mg) / mt
-    z[55] = (l4 * mb + 2 * l6 * mc + 2 * l6 * md + 2 * l6 * me + 2 * l6 * mf + 2 * l6 * mg) / mt
-    z[56] = (l7 * mc + l8 * md + l8 * me + l8 * mf + l8 * mg) / mt
-    z[57] = (l10 * me + l10 * mf + l10 * mg + l9 * md) / mt
-    z[58] = (l10 * mf + me * z[17]) / mt
-    z[59] = (l12 * mf) / mt
-    z[61] = (l3 * mb) / mt
-    z[62] = ma + mb + mc + md
-    z[63] = (l1 * ma + l2 * mb + l2 * mc + l2 * md) / z[62]
-    z[64] = (l4 * mb + 2 * l6 * mc + 2 * l6 * md) / z[62]
-    z[65] = (l7 * mc + l8 * md) / z[62]
-    z[66] = (l9 * md) / z[62]
-    z[67] = (l3 * mb) / z[62]
-    z[68] = me + mf
-    z[69] = (l2 * (me + mf)) / z[68]
-    z[70] = (l6 * (me + mf)) / z[68]
-    z[71] = (l8 * (me + mf)) / z[68]
-    z[72] = (l10 * (me + mf)) / z[68]
-    z[73] = (l10 * mf + me * z[17]) / z[68]
-    z[74] = (l12 * mf) / z[68]
-    z[145] = g * ma
-    z[146] = g * mb
-    z[147] = g * mc
-    z[148] = g * md
-    z[149] = g * me
-    z[150] = g * mf
-    z[151] = g * mg
-    z[200] = z[54] - l1
-    z[201] = z[54] - l2
-    z[202] = 0.5l4 - 0.5 * z[55]
-    z[203] = 0.5l3 - 0.5 * z[61]
-    z[219] = l6 - 0.5 * z[55]
-    z[220] = l7 - z[56]
-    z[221] = l8 - z[56]
-    z[222] = l9 - z[57]
-    z[223] = l10 - z[57]
-    z[224] = z[17] - z[58]
-    z[225] = l10 - z[58]
-    z[226] = l12 - z[59]
-    z[232] = z[202] + z[15] * z[203]
-    z[234] = z[203] + z[15] * z[202]
-    z[239] = z[15] * z[61]
-    z[273] = l1 * ma
-    z[274] = l2 * mb
-    z[275] = l4 * mb
-    z[276] = l3 * mb
-    z[277] = l2 * mc
-    z[278] = l6 * mc
-    z[279] = l7 * mc
-    z[280] = l2 * md
-    z[281] = l6 * md
-    z[282] = l8 * md
-    z[283] = l9 * md
-    z[284] = l2 * me
-    z[285] = l6 * me
-    z[286] = l8 * me
-    z[287] = l10 * me
-    z[288] = me * z[17]
-    z[290] = l2 * mf
-    z[291] = l6 * mf
-    z[292] = l8 * mf
-    z[293] = l10 * mf
-    z[297] = l2 * mg
-    z[298] = l6 * mg
-    z[299] = l8 * mg
-    z[300] = l10 * mg
-    z[304] = z[145] + z[146] + z[147] + z[148] + z[149] + z[150] + z[151]
-    z[306] = l1 * z[145]
-    z[308] = l2 * z[146]
-    z[309] = l2 * z[147]
-    z[310] = l2 * z[148]
-    z[311] = l2 * z[149]
-    z[312] = l2 * z[150]
-    z[313] = l2 * z[151]
-    z[318] = z[17] * z[149]
-    z[320] = l12 * z[150]
-    z[335] = l1 * ma + l2 * mb + l2 * mc + l2 * md + l2 * me + l2 * mf + l2 * mg
-    z[347] = ina + inb + inc + ind + ine + inf + ing + ma * l1^2
-    z[348] = l3^2 + l4^2 + 4 * l2^2 + 2 * l3 * l4 * z[15]
-    z[349] = l2 * l3
-    z[350] = l2 * l4
-    z[351] = l2 * l6
-    z[352] = l2 * l7
-    z[353] = l2^2
-    z[354] = l6^2
-    z[355] = l7^2
-    z[356] = l6 * l7
-    z[357] = l2 * l8
-    z[358] = l2 * l9
-    z[359] = l8^2
-    z[360] = l9^2
-    z[361] = l6 * l8
-    z[362] = l6 * l9
-    z[363] = l8 * l9
-    z[364] = l10 * l2
-    z[365] = l2 * z[17]
-    z[366] = l10^2
-    z[367] = z[17]^2
-    z[368] = l10 * l6
-    z[369] = l10 * l8
-    z[370] = l10 * z[17]
-    z[371] = l6 * z[17]
-    z[372] = l8 * z[17]
-    z[373] = l10 * l12
-    z[374] = l12 * l2
-    z[375] = l12^2
-    z[376] = l12 * l6
-    z[377] = l12 * l8
-    z[379] = -ina - ma * l1^2
-    z[381] = ma * l1^2
-    z[385] = l3 * z[16]
-    z[386] = l4 * z[16]
-    z[388] = ina + ma * l1^2 + mb * l2^2 + mc * l2^2 + md * l2^2 + me * l2^2 + mf * l2^2 + mg * l2^2
-    z[389] = ina + ma * l1^2
-    z[394] = ina + inb + ma * l1^2
-    z[395] = l2^2 + l6^2
-    z[400] = ina + inb + inc + ma * l1^2
-    z[404] = ina + inb + inc + ind + ma * l1^2
-    z[407] = ine + inf
-    z[422] = l12 * l2 * mf
+    z[21] = l10 - l9
+    z[394] = g * me
+    z[749] = z[21] * z[394]
+    z[846] = inf + inh + ini
+    z[22] = l8 - l7
+    z[677] = mf * z[22]
+    z[857] = inh + ini
+    z[26] = l2 - l1
+    z[727] = mi * z[26]
+    z[7] = cos(footang)
+    z[8] = sin(footang)
+    z[23] = l6 - l4
+    z[24] = 0.5l6 + 0.5 * z[23]
+    z[25] = 0.5l3 - 0.5l5
+    z[75] = ma + mb + mc + md + me + mf + mg + mh + mi
+    z[76] = (l1 * ma + l2 * mb + l2 * mc + l2 * md + l2 * me + l2 * mf + l2 * mg + l2 * mh + l2 * mi) / z[75]
+    z[77] = (l4 * mb + 2 * l6 * mc + 2 * l6 * md + 2 * l6 * me + 2 * l6 * mf + 2 * l6 * mg + 2 * l6 * mh + 2 * l6 * mi) / z[75]
+    z[78] = (l7 * mc + l8 * md + l8 * me + l8 * mf + l8 * mg + l8 * mh + l8 * mi) / z[75]
+    z[79] = (l10 * me + l10 * mf + l10 * mg + l10 * mh + l10 * mi + l9 * md) / z[75]
+    z[80] = (l10 * mf + l10 * mh + l10 * mi + me * z[21]) / z[75]
+    z[81] = (l8 * mh + l8 * mi + mf * z[22]) / z[75]
+    z[83] = (l6 * mi + mh * z[24]) / z[75]
+    z[84] = (mi * z[26]) / z[75]
+    z[85] = (mh * z[25]) / z[75]
+    z[86] = (l3 * mb) / z[75]
+    z[87] = ma + mb + mc + md
+    z[88] = (l1 * ma + l2 * mb + l2 * mc + l2 * md) / z[87]
+    z[89] = (l4 * mb + 2 * l6 * mc + 2 * l6 * md) / z[87]
+    z[90] = (l7 * mc + l8 * md) / z[87]
+    z[91] = (l9 * md) / z[87]
+    z[92] = (l3 * mb) / z[87]
+    z[93] = me + mf + mh + mi
+    z[94] = (l2 * (me + mf + mh + mi)) / z[93]
+    z[95] = (l6 * (me + mf + mh + mi)) / z[93]
+    z[96] = (l8 * (me + mf + mh + mi)) / z[93]
+    z[97] = (l10 * (me + mf + mh + mi)) / z[93]
+    z[98] = (l10 * mf + l10 * mh + l10 * mi + me * z[21]) / z[93]
+    z[99] = (l8 * mh + l8 * mi + mf * z[22]) / z[93]
+    z[100] = (l6 * mi + mh * z[24]) / z[93]
+    z[101] = (mi * z[26]) / z[93]
+    z[102] = (mh * z[25]) / z[93]
+    z[390] = g * ma
+    z[391] = g * mb
+    z[392] = g * mc
+    z[393] = g * md
+    z[395] = g * mf
+    z[396] = g * mg
+    z[397] = g * mh
+    z[398] = g * mi
+    z[438] = z[76] - l1
+    z[443] = z[76] - l2
+    z[444] = 0.5l4 - 0.5 * z[77]
+    z[445] = 0.5l3 - 0.5 * z[86]
+    z[516] = 2l6 - z[77]
+    z[517] = l2 - z[76]
+    z[538] = l8 - z[78]
+    z[554] = l10 - z[79]
+    z[562] = l10 - z[80]
+    z[567] = l6 - 0.5 * z[77]
+    z[569] = l8 - z[81]
+    z[570] = z[24] - z[83]
+    z[571] = z[25] - z[85]
+    z[578] = l6 - z[83]
+    z[587] = z[444] + z[7] * z[445]
+    z[589] = z[445] + z[7] * z[444]
+    z[600] = z[7] * z[86]
+    z[610] = 2 * z[570] + 2 * z[7] * z[571]
+    z[612] = 2 * z[571] + 2 * z[7] * z[570]
+    z[618] = l1 * ma
+    z[623] = l2 * mb
+    z[626] = l4 * mb
+    z[627] = l3 * mb
+    z[659] = me * z[21]
+    z[687] = l2 * mg
+    z[688] = l6 * mg
+    z[689] = l8 * mg
+    z[690] = l10 * mg
+    z[702] = l8 * mh
+    z[712] = mh * z[24]
+    z[714] = mh * z[25]
+    z[741] = l1 * z[390]
+    z[743] = l2 * z[391]
+    z[744] = l2 * z[396]
+    z[751] = z[22] * z[395]
+    z[754] = z[26] * z[398]
+    z[787] = ina + inb + inc + ind + ine + inf + ing + inh + ini + ma * l1^2
+    z[788] = l3^2 + l4^2 + 4 * l2^2 + 2 * l3 * l4 * z[7]
+    z[789] = l2 * l3
+    z[790] = l2 * l4
+    z[791] = z[24]^2
+    z[792] = z[25]^2
+    z[793] = z[7] * z[24] * z[25]
+    z[794] = l10 * l2
+    z[795] = l2 * l6
+    z[796] = l2 * l8
+    z[797] = l10^2
+    z[798] = l2^2
+    z[799] = l6^2
+    z[800] = l8^2
+    z[801] = l10 * l6
+    z[802] = l10 * l8
+    z[803] = l6 * l8
+    z[805] = ma * l1^2
+    z[810] = l3 * z[8]
+    z[811] = l4 * z[8]
+    z[812] = z[7] * z[24]
+    z[813] = z[7] * z[25]
+    z[814] = z[8] * z[25]
+    z[815] = z[8] * z[24]
+    z[817] = ina + ma * l1^2 + mb * l2^2 + mg * l2^2
+    z[819] = ina + ma * l1^2
+    z[824] = ina + inb + ma * l1^2
+    z[825] = l2^2 + l6^2
+    z[830] = ina + inb + inc + ma * l1^2
+    z[834] = ina + inb + inc + ind + ma * l1^2
+    z[837] = ine + inf + inh + ini
+    z[847] = l8 * z[24]
+    z[848] = l8 * z[25]
 
-    return Params(z, ea, fa, gs, eap, fap, gsp, eapp, fapp, gspp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l12, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mtpb, mtpk, pop1xi, pop2xi, mt, u8, u9, virtual_force)
+
+    return Params(z, ea, fa, gs, ha, ia, eap, fap, gsp, hap, iap, eapp, fapp, gspp, happ, iapp, ae, af, footang, g, he, hf, ina, inb, inc, ind, ine, inf, ing, inh, ini, k1, k2, k3, k4, k5, k6, k7, k8, ke, kf, l1, l10, l11, l2, l3, l4, l5, l6, l7, l8, l9, ma, mb, mc, md, me, mf, mg, mh, mi, mtpb, mtpk, pop1xi, pop2xi, mt, u8, u9, u10, u11, virtual_force)
 end
