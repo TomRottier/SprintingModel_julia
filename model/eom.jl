@@ -43,11 +43,7 @@ function eom(u, p, t)
 
     # passive torques
     hpass, kpass, apass = PEtorque(θh, θk, θa)
-<<<<<<< HEAD
-    # hpass = 0.0
-=======
     hpass = 0.0
->>>>>>> swing-leg2
 
     htor = hetor - hftor - hpass
     ktor = ketor - kftor - kpass
