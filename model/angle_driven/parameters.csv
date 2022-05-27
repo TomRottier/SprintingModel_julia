@@ -32,7 +32,7 @@ mth,kg,12.79
 mhat,kg,51.95
 mtpb,N.m.s/rad,0.701068939
 mtpk,N.m/rad,6.463830463
-rtoexi,m,0.083614267
-rmtpxi,m,0.0
-ltoexi,m,0.0
+ltoexi,m,0.083614267
 lmtpxi,m,0.0
+rtoexi,m,0.0
+rmtpxi,m,0.0

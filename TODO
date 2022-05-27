@@ -114,6 +114,7 @@
     - 20s vs 10 s for simulate(prob)
     - [x] remove use for virtual forces too
     - 2.3 s for simulate(prob) now??
+    - ### loses some accuracy when fitting spline to derivatives
 
 [x] running simulation no longer produces identical results
     - some give error from try/catch block - which implies cost or simulate erroring    
@@ -124,6 +125,8 @@
 
 
 ## Angle driven model
-[] angle definitions 
+[x] angle definitions 
 
 [] initial x positions for left foot
+
+[] optimisations

@@ -19,14 +19,16 @@ hat_spl = Spline1D(hat_data[:, 1], hat_data[:, 2], k=5, s=0.0)
 function fit_spl(time, spl; d2r=true)
     # evaluate 0th, 1st and 2nd derivative over time
     if d2r
-        data0 = evaluate(spl, time) .|> deg2rad
-        data1 = derivative(spl, time, 1) .|> deg2rad
-        data2 = derivative(spl, time, 2) .|> deg2rad
+        data0 = t -> evaluate(spl, t) .|> deg2rad
+        data1 = t -> derivative(spl, t, 1) .|> deg2rad
+        data2 = t -> derivative(spl, t, 2) .|> deg2rad
     else
-        data0 = evaluate(spl, time)
-        data1 = derivative(spl, time, 1)
-        data2 = derivative(spl, time, 2)
+        data0 = t -> evaluate(spl, t)
+        data1 = t -> derivative(spl, t, 1)
+        data2 = t -> derivative(spl, t, 2)
     end
+
+    return data0, data1, data2
 
     # interpolate over data
     spl0 = CubicSplineInterpolation(time, data0, extrapolation_bc=Flat())
@@ -47,4 +49,3 @@ _la, _lap, _lapp = fit_spl(new_time, la_spl)
 _rmtp, _rmtpp, _rmtppp = fit_spl(new_time, rmtp_spl)
 _lmtp, _lmtpp, _lmtppp = fit_spl(new_time, lmtp_spl)
 _hato, _hatop, _hatopp = fit_spl(new_time, hat_spl, d2r=false)
-
