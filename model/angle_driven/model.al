@@ -60,31 +60,31 @@ p_o_p1>   = q1*n1> + q2*n2>		            % origin to toes
 p_p6_hato> = hato*hat1>
 p_p6_p12> = lhat*hat1>
 
-% right leg
-p_p1_rffo> = -lffo*rff1>
-p_p1_p2> = -lff*rff1>
-p_p2_rrf1o> = -lrfo*rrf1>   % mtp to position along mtp-ajc line
-p_p2_rrf2o> = -lrffo*rrff1> % mtp to position along mtp-heel line
-p_p2_rrfo> = (p_p2_rrf1o> + p_p2_rrf2o>) / 2 % com of rear foot as average between two points
-p_p2_p3> = -lrff*rrff1>     % mtp to heel
-p_p2_p4> = -lrf*rrf1>       % mtp to ajc
-p_p4_rsho> = -lsho*rsh1>
-p_p4_p5> = -lsh*rsh1>
-p_p5_rtho> = -ltho*rth1>
-p_p5_p6> = -lth*rth1>
+% left leg - initially stance
+p_p1_lffo> = -lffo*lff1>
+p_p1_p2> = -lff*lff1>
+p_p2_lrf1o> = -lrfo*lrf1>   % mtp to position along mtp-ajc line
+p_p2_lrf2o> = -lrffo*lrff1> % mtp to position along mtp-heel line
+p_p2_lrfo> = (p_p2_lrf1o> + p_p2_lrf2o>) / 2 % com of rear foot as average between two points
+p_p2_p3> = -lrff*lrff1>     % mtp to heel
+p_p2_p4> = -lrf*lrf1>       % mtp to ajc
+p_p4_lsho> = -lsho*lsh1>
+p_p4_p5> = -lsh*lsh1>
+p_p5_ltho> = -ltho*lth1>
+p_p5_p6> = -lth*lth1>
 
-% left leg
-p_p7_ltho> = -ltho*lth1>
-p_p7_p6> = -lth*lth1>
-p_p8_lsho> = -lsho*lsh1>
-p_p8_p7> = -lsh*lsh1>
-p_p10_lrf1o> = -lrfo*lrf1>
-p_p10_lrf2o> = -lrffo*lrff1>
-p_p10_lrfo> = (p_p10_lrf1o> + p_p10_lrf2o>) / 2
-p_p10_p9> = -lrff*lrff1>
-p_p10_p8> = -lrf*lrf1>
-p_p11_lffo> = -lffo*lff1>
-p_p11_p10> = -lff*lff1>
+% right leg - intially swing
+p_p7_rtho> = -ltho*rth1>
+p_p7_p6> = -lth*rth1>
+p_p8_rsho> = -lsho*rsh1>
+p_p8_p7> = -lsh*rsh1>
+p_p10_rrf1o> = -lrfo*rrf1>
+p_p10_rrf2o> = -lrffo*rrff1>
+p_p10_rrfo> = (p_p10_rrf1o> + p_p10_rrf2o>) / 2
+p_p10_p9> = -lrff*rrff1>
+p_p10_p8> = -lrf*rrf1>
+p_p11_rffo> = -lffo*rff1>
+p_p11_p10> = -lff*rff1>
 
 %
 % xy of points
@@ -156,22 +156,22 @@ alf_lrff_lrf> = 0>
 % linear velocities and accelerations
 v_o_n> = 0>
 v_p1_n> = dt(p_o_p1>,n)
-v2pts(n,rff,p1,rffo)
-v2pts(n,rff,p1,p2)
-v2pts(n,rrf,p2,rrfo)
-v2pts(n,rff,p2,p4)
-v2pts(n,rsh,p4,rsho)
-v2pts(n,rsh,p4,p5)
-v2pts(n,rth,p5,rtho)
-v2pts(n,rth,p5,p6)
-v2pts(n,lth,p6,ltho)
-v2pts(n,lth,p6,p7)
-v2pts(n,lsh,p7,lsho)
-v2pts(n,lsh,p7,p8)
-v2pts(n,lrf,p8,lrfo)
-v2pts(n,lrf,p8,p10)
-v2pts(n,lff,p10,lffo)
-v2pts(n,lff,p10,p11)
+v2pts(n,lff,p1,lffo)
+v2pts(n,lff,p1,p2)
+v2pts(n,lrf,p2,lrfo)
+v2pts(n,lrf,p2,p4)
+v2pts(n,lsh,p4,lsho)
+v2pts(n,lsh,p4,p5)
+v2pts(n,lth,p5,ltho)
+v2pts(n,lth,p5,p6)
+v2pts(n,rth,p6,rtho)
+v2pts(n,rth,p6,p7)
+v2pts(n,rsh,p7,rsho)
+v2pts(n,rsh,p7,p8)
+v2pts(n,rrf,p8,rrfo)
+v2pts(n,rrf,p8,p10)
+v2pts(n,rff,p10,rffo)
+v2pts(n,rff,p10,p11)
 v_hato_n> = dt(p_o_hato>,n)
 v_cm_n> = dt(p_o_cm>,n)
 %
@@ -188,22 +188,22 @@ vocmy = dot(v_cm_n>,n2>)
 %
 a_o_n> = 0>
 a_p1_n> = dt(v_p1_n>,n)
-a2pts(n,rff,p1,rffo)
-a2pts(n,rff,p1,p2)
-a2pts(n,rrf,p2,rrfo)
-a2pts(n,rff,p2,p4)
-a2pts(n,rsh,p4,rsho)
-a2pts(n,rsh,p4,p5)
-a2pts(n,rth,p5,rtho)
-a2pts(n,rth,p5,p6)
-a2pts(n,lth,p6,ltho)
-a2pts(n,lth,p6,p7)
-a2pts(n,lsh,p7,lsho)
-a2pts(n,lsh,p7,p8)
-a2pts(n,lrf,p8,lrfo)
-a2pts(n,lrf,p8,p10)
-a2pts(n,lff,p10,lffo)
-a2pts(n,lff,p10,p11)
+a2pts(n,lff,p1,lffo)
+a2pts(n,lff,p1,p2)
+a2pts(n,lrf,p2,lrfo)
+a2pts(n,lrf,p2,p4)
+a2pts(n,lsh,p4,lsho)
+a2pts(n,lsh,p4,p5)
+a2pts(n,lth,p5,ltho)
+a2pts(n,lth,p5,p6)
+a2pts(n,rth,p6,rtho)
+a2pts(n,rth,p6,p7)
+a2pts(n,rsh,p7,rsho)
+a2pts(n,rsh,p7,p8)
+a2pts(n,rrf,p8,rrfo)
+a2pts(n,rrf,p8,p10)
+a2pts(n,rff,p10,rffo)
+a2pts(n,rff,p10,p11)
 a_hato_n> = dt(v_hato_n>,n)
 %
 % ------------------------------------------------------------------------------
@@ -213,20 +213,20 @@ rmtq = mtpk*(pi-rmtp) - mtpb*rmtp'
 lmtq = mtpk*(pi-lmtp) - mtpb*lmtp'
 %
 % reaction forces
-% right foot
-drx1 = pop1x - rtoexi
-drx2 = pop2x - rmtpxi
-rry1 = -k3*pop1y-k4*vop1y*abs(pop1y)         % toe
-rrx1 = (-k1*drx1-k2*vop1x)*rry1
-rry2 = -k7*pop2y-k8*vop2y*abs(pop2y)         % mtp
-rrx2 = (-k5*drx2-k6*vop2x)*rry2
 % left foot
-dlx1 = pop11x - ltoexi
-dlx2 = pop10x - lmtpxi
-lry1 = -k3*pop11y-k4*vop11y*abs(pop11y)         % toe
-lrx1 = (-k1*dlx1-k2*vop11x)*lry1
-lry2 = -k7*pop10y-k8*vop10y*abs(pop10y)         % mtp
-lrx2 = (-k5*dlx2-k6*vop10x)*lry2
+dlx1 = pop1x - ltoexi
+dlx2 = pop2x - lmtpxi
+lry1 = -k3*pop1y-k4*vop1y*abs(pop1y)         % toe
+lrx1 = (-k1*dlx1-k2*vop1x)*lry1
+lry2 = -k7*pop2y-k8*vop2y*abs(pop2y)         % mtp
+lrx2 = (-k5*dlx2-k6*vop2x)*lry2
+% right foot
+drx1 = pop11x - rtoexi
+drx2 = pop10x - rmtpxi
+rry1 = -k3*pop11y-k4*vop11y*abs(pop11y)         % toe
+rrx1 = (-k1*drx1-k2*vop11x)*rry1
+rry2 = -k7*pop10y-k8*vop10y*abs(pop10y)         % mtp
+rrx2 = (-k5*drx2-k6*vop10x)*rry2
 
 rrx = rrx1+rrx2
 rry = rry1+rry2
@@ -235,10 +235,10 @@ lry = lry1+lry2
 %
 % apply forces/torques
 gravity(g*n2>)
-force(p1,rrx1*n1>+rry1*n2>)
-force(p2,rrx2*n1>+rry2*n2>)
-force(p11,lrx1*n1>+lry1*n2>)
-force(p10,lrx2*n1>+lry2*n2>)
+force(p1,lrx1*n1>+lry1*n2>)
+force(p2,lrx2*n1>+lry2*n2>)
+force(p11,rrx1*n1>+rry1*n2>)
+force(p10,rrx2*n1>+rry2*n2>)
 torque(hat/rth, rhtq*n3>)
 torque(hat/lth, lhtq*n3>)
 torque(rth/rsh, rktq*n3>)
