@@ -19,7 +19,7 @@ struct Params{T}
     lff::T
     lffo::T
     lhat::T
-    lmtpxi::T
+    lmtpxi::MVector{1,T}
     lrf::T
     lrff::T
     lrffo::T
@@ -28,7 +28,7 @@ struct Params{T}
     lsho::T
     lth::T
     ltho::T
-    ltoexi::T
+    ltoexi::MVector{1,T}
     mff::T
     mhat::T
     mrf::T
@@ -36,8 +36,8 @@ struct Params{T}
     mth::T
     mtpb::T
     mtpk::T
-    rmtpxi::T
-    rtoexi::T
+    rmtpxi::MVector{1,T}
+    rtoexi::MVector{1,T}
     u4::T
     u5::T
     u6::T
@@ -50,6 +50,10 @@ end
 # initialise with constant values
 function Params(footang, g, iff, ihat, irf, ish, ith, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, mff, mhat, mrf, msh, mth, mtpb, mtpk, rmtpxi, rtoexi)
     z = Vector{Float64}(undef, 827)
+    ltoexi = MVector{1}([ltoexi])
+    rtoexi = MVector{1}([rtoexi])
+    lmtpxi = MVector{1}([lmtpxi])
+    rmtpxi = MVector{1}([rmtpxi])
     u4 = 0.0
     u5 = 0.0
     u6 = 0.0

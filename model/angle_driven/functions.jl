@@ -663,7 +663,7 @@ function io(sol, t)
     hatopp = _hatopp(t)
 
     # calculated variables
-    lrx1, lry1, lrx2, lry2, rrx1, rry1, rrx2, rry2 = zeros(8) # contact_forces(u,p,t)
+    lrx1, lry1, lrx2, lry2, rrx1, rry1, rrx2, rry2 = contact_forces(SA[q1, q2, q3, u1, u2, u3], p, t)
 
     u4 = 0
     u5 = 0
@@ -1163,3 +1163,22 @@ function pop11y(sol, t)
 end
 
 pop11y(sol) = [pop11y(sol, t) for t in sol.t]
+
+rrx1(sol, t) = contact_forces(sol(t), sol.prob.p, t)[1]
+rry1(sol, t) = contact_forces(sol(t), sol.prob.p, t)[2]
+rrx2(sol, t) = contact_forces(sol(t), sol.prob.p, t)[3]
+rry2(sol, t) = contact_forces(sol(t), sol.prob.p, t)[4]
+lrx1(sol, t) = contact_forces(sol(t), sol.prob.p, t)[5]
+lry1(sol, t) = contact_forces(sol(t), sol.prob.p, t)[6]
+lrx2(sol, t) = contact_forces(sol(t), sol.prob.p, t)[7]
+lry2(sol, t) = contact_forces(sol(t), sol.prob.p, t)[8]
+
+rrx(sol, t) = rrx1(sol, t) + rrx2(sol, t)
+rry(sol, t) = rry1(sol, t) + rry2(sol, t)
+lrx(sol, t) = lrx1(sol, t) + lrx2(sol, t)
+lry(sol, t) = lry1(sol, t) + lry2(sol, t)
+
+rx(sol) = [rrx(sol, t) + lrx(sol, t) for t in sol.t]
+ry(sol) = [rry(sol, t) + lry(sol, t) for t in sol.t]
+
+
