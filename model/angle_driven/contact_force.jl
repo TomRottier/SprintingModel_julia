@@ -25,9 +25,10 @@ function contact_forces(u, p, t)
     pop10y = q2 + lth * sin(lh - q3) + lsh * sin(rh - rk - q3) + lrf * sin(la + lh - lk - q3) - lth * sin(rh - q3) - lsh * sin(lh - lk - q3) - lrf * sin(ra + rh - rk - q3) - lff * sin(la + lh + lmtp - lk - q3)
     pop11y = q2 + lth * sin(lh - q3) + lsh * sin(rh - rk - q3) + lrf * sin(la + lh - lk - q3) + lff * sin(ra + rh + rmtp - rk - q3) - lth * sin(rh - q3) - lsh * sin(lh - lk - q3) - lrf * sin(ra + rh - rk - q3) - lff * sin(la + lh + lmtp - lk - q3)
 
+
     # left foot 
     if q2 < 0.0
-        dp1x = q1 - ltoexi
+        dp1x = q1 - ltoexi[1]
         lry1 = -k3 * q2 - k4 * abs(q2) * u2
         lrx1 = lry1 * (-k1 * dp1x - k2 * u1) # (-k1*(q1-pop1xi) - k2*u1)*ry1
     else
@@ -39,7 +40,7 @@ function contact_forces(u, p, t)
         pop2x = q1 + lff * cos(la + lh + lmtp - lk - q3)
         vop2x = u1 - lff * sin(la + lh + lmtp - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9)
         vop2y = u2 - lff * cos(la + lh + lmtp - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9)
-        dp2x = pop2x - lmtpxi
+        dp2x = pop2x - lmtpxi[1]
         lry2 = -k7 * pop2y - k8 * abs(pop2y) * vop2y
         lrx2 = lry2 * (-k5 * dp2x - k6 * vop2x)
     else
@@ -52,7 +53,7 @@ function contact_forces(u, p, t)
         pop11x = q1 + lth * cos(rh - q3) + lsh * cos(lh - lk - q3) + lrf * cos(ra + rh - rk - q3) + lff * cos(la + lh + lmtp - lk - q3) - lth * cos(lh - q3) - lsh * cos(rh - rk - q3) - lrf * cos(la + lh - lk - q3) - lff * cos(ra + rh + rmtp - rk - q3)
         vop11x = u1 + lth * sin(lh - q3) * (lhp - u3 - u5) + lsh * sin(rh - rk - q3) * (rhp - rkp - u3 - u4 - u6) + lrf * sin(la + lh - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9) + lff * sin(ra + rh + rmtp - rk - q3) * (rap + rhp + rmtpp - rkp - u3 - u4 - u6 - u8) - lth * sin(rh - q3) * (rhp - u3 - u4) - lsh * sin(lh - lk - q3) * (lhp - lkp - u3 - u5 - u7) - lrf * sin(ra + rh - rk - q3) * (rap + rhp - rkp - u3 - u4 - u6 - u8) - lff * sin(la + lh + lmtp - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9)
         vop11y = u2 + lth * cos(lh - q3) * (lhp - u3 - u5) + lsh * cos(rh - rk - q3) * (rhp - rkp - u3 - u4 - u6) + lrf * cos(la + lh - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9) + lff * cos(ra + rh + rmtp - rk - q3) * (rap + rhp + rmtpp - rkp - u3 - u4 - u6 - u8) - lth * cos(rh - q3) * (rhp - u3 - u4) - lsh * cos(lh - lk - q3) * (lhp - lkp - u3 - u5 - u7) - lrf * cos(ra + rh - rk - q3) * (rap + rhp - rkp - u3 - u4 - u6 - u8) - lff * cos(la + lh + lmtp - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9)
-        dp11x = pop11x - rtoexi
+        dp11x = pop11x - rtoexi[1]
         rry1 = -k3 * pop11y - k4 * abs(pop11y) * vop11y
         rrx1 = rry1 * (-k1 * dp11x - k2 * vop11x) # (-k1*(q1-pop1xi) - k2*u1)*ry1
     else
@@ -64,7 +65,7 @@ function contact_forces(u, p, t)
         pop10x = q1 + lth * cos(rh - q3) + lsh * cos(lh - lk - q3) + lrf * cos(ra + rh - rk - q3) + lff * cos(la + lh + lmtp - lk - q3) - lth * cos(lh - q3) - lsh * cos(rh - rk - q3) - lrf * cos(la + lh - lk - q3)
         vop10x = u1 + lth * sin(lh - q3) * (lhp - u3 - u5) + lsh * sin(rh - rk - q3) * (rhp - rkp - u3 - u4 - u6) + lrf * sin(la + lh - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9) - lth * sin(rh - q3) * (rhp - u3 - u4) - lsh * sin(lh - lk - q3) * (lhp - lkp - u3 - u5 - u7) - lrf * sin(ra + rh - rk - q3) * (rap + rhp - rkp - u3 - u4 - u6 - u8) - lff * sin(la + lh + lmtp - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9)
         vop10y = u2 + lth * cos(lh - q3) * (lhp - u3 - u5) + lsh * cos(rh - rk - q3) * (rhp - rkp - u3 - u4 - u6) + lrf * cos(la + lh - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9) - lth * cos(rh - q3) * (rhp - u3 - u4) - lsh * cos(lh - lk - q3) * (lhp - lkp - u3 - u5 - u7) - lrf * cos(ra + rh - rk - q3) * (rap + rhp - rkp - u3 - u4 - u6 - u8) - lff * cos(la + lh + lmtp - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9)
-        dp10x = pop10x - rmtpxi
+        dp10x = pop10x - rmtpxi[1]
         rry2 = -k7 * pop10y - k8 * abs(pop10y) * vop10y
         rrx2 = rry2 * (-k5 * dp10x - k6 * vop10x)
     else

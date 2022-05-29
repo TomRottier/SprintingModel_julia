@@ -34,7 +34,7 @@ function eom(u, p, t)
 
 
     # calculated variables
-    lrx1, lry1, lrx2, lry2, rrx1, rry1, rrx2, rry2 = zeros(8) # contact_forces(u,p,t)
+    lrx1, lry1, lrx2, lry2, rrx1, rry1, rrx2, rry2 = contact_forces(u, p, t)
 
     # z variables
     z[1] = cos(q3)

@@ -138,7 +138,7 @@ function setup(;
     inputs = readdlm(parameters, ',', header=true)
     input_p, headers_p = convert(Vector{Float64}, inputs[1][:, 3]), Symbol.(inputs[1][:, 1])
 
-    footang, g, iff, irf, ish, ith, ihat, k1, k2, k3, k4, k5, k6, k7, k8, lffo, lff, lrffo, lrfo, lrff, lrf, lsho, lsh, ltho, lth, lhat, mff, mrf, msh, mth, mhat, mtpb, mtpk, rtoexi, rmtpxi, ltoexi, lmtpxi = input_p
+    footang, g, iff, irf, ish, ith, ihat, k1, k2, k3, k4, k5, k6, k7, k8, lffo, lff, lrffo, lrfo, lrff, lrf, lsho, lsh, ltho, lth, lhat, mff, mrf, msh, mth, mhat, mtpb, mtpk, ltoexi, lmtpxi, rtoexi, rmtpxi = input_p
     u4 = u5 = u6 = u6 = u7 = u8 = u9 = 0.0
     footang = deg2rad(footang)
 
