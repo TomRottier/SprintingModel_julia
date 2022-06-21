@@ -13,6 +13,7 @@ ProfileView = "c46f51b8-102a-5cf2-8d2c-8597cb0e0da7"
 Setfield = "efcf1570-3423-57d1-acb7-fd33fddbac46"
 SimulatedAnnealing = "15bc398e-2416-4ff5-8102-551df81d6bf8"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+TerminalLoggers = "5d786b92-1e48-4d6f-9151-6b4477ca9bed"
 
 [extras]
 CPUSummary = "2a0fbf3d-bb9c-48f3-b0a9-814d99fd7ab9"

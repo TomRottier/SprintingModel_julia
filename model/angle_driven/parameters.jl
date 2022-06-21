@@ -1,6 +1,6 @@
 # Automatically generated
 struct Params{T}
-    z::Vector{Float64}
+    z::Vector{T}
     footang::T
     g::T
     iff::T

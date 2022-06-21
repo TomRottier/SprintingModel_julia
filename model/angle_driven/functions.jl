@@ -15,7 +15,7 @@ kecm(sol) = [kecm(sol, t) for t in sol.t]
 
 
 function pocmy(sol, t)
-
+    @unpack z = sol.prob.p
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
@@ -105,12 +105,12 @@ py(sol) = [py(sol, t) for t in sol.t]
 
 
 function rhtq(sol, t)
-
+    @unpack z = sol.prob.p
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[821] + z[778] * u3p + z[779] * u1p + z[780] * u2p
@@ -120,12 +120,12 @@ rhtq(sol) = [rhtq(sol, t) for t in sol.t]
 
 
 function lhtq(sol, t)
-
+    @unpack z = sol.prob.p
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[822] + z[783] * u3p + z[784] * u1p + z[785] * u2p
@@ -135,12 +135,12 @@ lhtq(sol) = [lhtq(sol, t) for t in sol.t]
 
 
 function rktq(sol, t)
-
+    @unpack z = sol.prob.p
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[823] + z[790] * u3p + z[791] * u1p + z[792] * u2p
@@ -150,12 +150,12 @@ rktq(sol) = [rktq(sol, t) for t in sol.t]
 
 
 function lktq(sol, t)
-
+    @unpack z = sol.prob.p
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[824] + z[796] * u3p + z[797] * u1p + z[798] * u2p
@@ -165,12 +165,12 @@ lktq(sol) = [lktq(sol, t) for t in sol.t]
 
 
 function ratq(sol, t)
-
+    @unpack z = sol.prob.p
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[825] + z[802] * u3p + z[803] * u1p + z[804] * u2p
@@ -180,12 +180,12 @@ ratq(sol) = [ratq(sol, t) for t in sol.t]
 
 
 function latq(sol, t)
-
+    @unpack z = sol.prob.p
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[826] + z[808] * u3p + z[809] * u1p + z[810] * u2p
@@ -195,7 +195,7 @@ latq(sol) = [latq(sol, t) for t in sol.t]
 
 
 function pop1x(sol, t)
-
+    @unpack z = sol.prob.p
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
@@ -210,7 +210,7 @@ pop1x(sol) = [pop1x(sol, t) for t in sol.t]
 
 
 function pop1y(sol, t)
-
+    @unpack z = sol.prob.p
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
@@ -1164,14 +1164,14 @@ end
 
 pop11y(sol) = [pop11y(sol, t) for t in sol.t]
 
-rrx1(sol, t) = contact_forces(sol(t), sol.prob.p, t)[1]
-rry1(sol, t) = contact_forces(sol(t), sol.prob.p, t)[2]
-rrx2(sol, t) = contact_forces(sol(t), sol.prob.p, t)[3]
-rry2(sol, t) = contact_forces(sol(t), sol.prob.p, t)[4]
-lrx1(sol, t) = contact_forces(sol(t), sol.prob.p, t)[5]
-lry1(sol, t) = contact_forces(sol(t), sol.prob.p, t)[6]
-lrx2(sol, t) = contact_forces(sol(t), sol.prob.p, t)[7]
-lry2(sol, t) = contact_forces(sol(t), sol.prob.p, t)[8]
+lrx1(sol, t) = contact_forces(sol(t), sol.prob.p, t)[1]
+lry1(sol, t) = contact_forces(sol(t), sol.prob.p, t)[2]
+lrx2(sol, t) = contact_forces(sol(t), sol.prob.p, t)[3]
+lry2(sol, t) = contact_forces(sol(t), sol.prob.p, t)[4]
+rrx1(sol, t) = contact_forces(sol(t), sol.prob.p, t)[5]
+rry1(sol, t) = contact_forces(sol(t), sol.prob.p, t)[6]
+rrx2(sol, t) = contact_forces(sol(t), sol.prob.p, t)[7]
+rry2(sol, t) = contact_forces(sol(t), sol.prob.p, t)[8]
 
 rrx(sol, t) = rrx1(sol, t) + rrx2(sol, t)
 rry(sol, t) = rry1(sol, t) + rry2(sol, t)

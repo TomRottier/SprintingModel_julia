@@ -90,4 +90,4 @@ function affect_neg!(int, idx)
 end
 
 # callback
-vcb = VectorContinuousCallback(condition, affect!, affect_neg!, 2, save_positions=(false, false))
+vcb = VectorContinuousCallback(condition, affect!, affect_neg!, 2, save_positions=(false, false), repeat_nudge=1 // 1)

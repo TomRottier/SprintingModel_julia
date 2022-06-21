@@ -127,6 +127,8 @@
 ## Angle driven model
 [x] angle definitions 
 
-[] initial x positions for left foot
+[x] initial x positions for right foot
+    - seems to fail with callback on some parameter sets
+        - setting repeat_nudge > 1//100 seems to fix problem
 
 [] optimisations

@@ -11,8 +11,6 @@ end
 function load_inputs(;
     parameters="data/parameters.csv",
     initial_conditions="data/initial_conditions.csv",
-    torque_generators="data/torque_generator_parameters.csv",
-    activations="data/activation_parameters.csv",
     matching="data/matchingData.csv")
 
     # load parameters
@@ -25,20 +23,8 @@ function load_inputs(;
     input_u = Vector{Float64}(input_u[2, :]) # remove units row
     u = Dict(Symbol(h) => v for (h, v) in zip(headers_u, input_u))
 
-    # load torque generator parameters
-    input_tq, headers_tq = readdlm(torque_generators, ',', header=true)
-    tq = Dict(
-        Symbol(x[1]) => Dict(
-            Symbol(h) => Float64(v) for (h, v) in zip(headers_tq[2:end], x[2:end])
-        ) for x in eachrow(input_tq)
-    )
-
-    # load activation profiles
-    input_act, headers_act = readdlm(activations, ',', header=true)
-    α = Dict(Symbol(x[1]) => Vector{Float64}(x[2:end]) for x in eachrow(input_act))
-
     # load matching data
-    input_matching, headers_matching = readdlm(matching, ',', header=true)
+    input_matching, headers_matching = readdlm(matching_data, ',', header=true)
     input_matching = Matrix{Float64}(input_matching[2:end, :]) # remove units row
     matching_data = Dict(Symbol(h) => ts for (h, ts) in zip(headers_matching, eachcol(input_matching)))
 
@@ -83,12 +69,6 @@ function set_values(inputs)
 
     # set intial conditions
     @inbounds (; mtp_x, mtp_y, q3, mtp_angle, ankle_angle, knee_angle, hip_angle, vcmx, vcmy, u3, mtp_angular_velocity, ankle_angular_velocity, knee_angular_velocity, hip_angular_velocity) = initial_conditions
-
-    # set torque parameters
-    tq_p = Dict(k => [CCParameters(v), SECParameters(v)] for (k, v) in torque_parameters)
-
-    # load activation profiles
-    α_p = Dict(k => ActivationProfile(v) for (k, v) in activation_parameters)
 
     # convert initial conditions into generalised coordinates and speeds
     q3 = q3 |> deg2rad              # q3 = q3
@@ -148,8 +128,9 @@ function setup(;
     @inbounds Xmtp, Ymtp, q3, vcmx, vcmy, u3 = input_u
 
     # load matching data
-    matching_data, headers_matching = readdlm(matching_data, ',', Float64, skipstart=1, header=true)
-    matching_data = matching_data[1:2:end-2] # only use left side data
+    input_matching, headers_matching = readdlm(matching_data, ',', header=true)
+    input_matching = Matrix{Float64}(input_matching[2:end, :]) # remove units row
+    matching_data = Dict(Symbol(h) => ts for (h, ts) in zip(headers_matching, eachcol(input_matching)))
 
     # intial specified angles
     rmtp₀ = _rmtp(0.0)

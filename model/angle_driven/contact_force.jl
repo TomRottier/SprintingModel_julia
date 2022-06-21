@@ -73,5 +73,8 @@ function contact_forces(u, p, t)
         rry2 = 0.0
     end
 
-    return lrx1, lry1, lrx2, lry2, rrx1, rry1, rrx2, rry2
+    return SA[lrx1, lry1, lrx2, lry2, rrx1, rry1, rrx2, rry2]
 end
+
+contact_forces(sol, t) = contact_forces(sol(t), sol.prob.p, t)
+contact_forces(sol) = [contact_forces(sol, t) for t in sol.t]
