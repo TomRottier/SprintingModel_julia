@@ -1,5 +1,6 @@
 [deps]
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+DSP = "717857b8-e6f2-59f4-9121-6e50c889abd2"
 Dierckx = "39dd38d3-220a-591b-8e3c-4c3a8c710a94"
 Evolutionary = "86b6b26d-c046-49b6-aa0b-5f0f74682bd6"
 GalacticOptim = "a75be94c-b780-496d-a8a9-0878b188d577"
