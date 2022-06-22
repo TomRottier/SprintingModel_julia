@@ -11,7 +11,7 @@ bodies rff,rrf,rsh,rth,lff,lrf,lsh,lth,hat,rua,rla,lua,lla
 frames rrff,lrff            % frame for rear foot
 points o,p{16},cm,rrf{2}o,lrf{2}o
 mass rff=mff,rrf=mrf,rsh=msh,rth=mth,lff=mff,lrf=mrf,lsh=msh,lth=mth,hat=mhat
-mass rua=mrua,rla=mrla,lua=mlua,lla=mlla
+mass rua=mua,rla=mla,lua=mua,lla=mla
 inertia rff,0,0,iff
 inertia rrf,0,0,irf
 inertia rsh,0,0,ish
@@ -21,10 +21,10 @@ inertia lrf,0,0,irf
 inertia lsh,0,0,ish
 inertia lth,0,0,ith
 inertia hat,0,0,ihat
-inertia rua,0,0,irua
-inertia rla,0,0,irla
-inertia lua,0,0,ilua
-inertia lla,0,0,illa
+inertia rua,0,0,iua
+inertia rla,0,0,ila
+inertia lua,0,0,iua
+inertia lla,0,0,ila
 
 % 
 % mathematical declarations
@@ -55,10 +55,10 @@ simprot(rsh,rrf,3,pi - ra)
 simprot(lsh,lrf,3,pi - la)
 simprot(rrf,rff,3,pi - rmtp)
 simprot(lrf,lff,3,pi - lmtp)
-simprot(hat,rua,3,rs)
-simprot(hat,lua,3,ls)
-simprot(rua,rla,3,re)
-simprot(lua,lla,3,le)
+simprot(hat,rua,3,pi - rs)
+simprot(hat,lua,3,pi - ls)
+simprot(rua,rla,3,re - pi)
+simprot(lua,lla,3,le - pi)
 
 simprot(rrf,rrff,3,footang)    % rear foot frame rotated about rear foot
 simprot(lrf,lrff,3,footang)
@@ -164,8 +164,8 @@ w_rrf_rsh> = -ra'*n3> + u8*n3>
 w_lrf_lsh> = -la'*n3> + u9*n3>
 w_rff_rrf> = -rmtp'*n3>
 w_lff_lrf> = -lmtp'*n3>
-w_rua_hat> = rs'*n3> + u10*n3>
-w_lua_hat> = ls'*n3> + u11*n3>
+w_rua_hat> = -rs'*n3> + u10*n3>
+w_lua_hat> = -ls'*n3> + u11*n3>
 w_rla_rua> = re'*n3> + u12*n3>
 w_lla_lua> = le'*n3> + u13*n3>
 w_rrff_rrf> = 0>
@@ -350,4 +350,4 @@ output t,rh,lh,rk,lk,ra,la,rmtp,lmtp,rs,ls,re,le,rh',lh',rk',lk',ra',la',rmtp',l
 output t,kecm,hz,px,py
 %
 %--------------------------------------------------------------
-code dynamics() model/arms/model_angle.f, nosubs
+code dynamics() model/13seg_ad/model_ad.f, nosubs

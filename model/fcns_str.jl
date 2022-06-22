@@ -28,8 +28,18 @@ fcns_str = """# Automatically generated
            $(join([fcns_fn(x, constants, variables, specifieds) for x in io_as if !isZ(x.args[1])], "\n\n"))
            
            function io(sol, t)
-               @unpack z, $(join(vcat([uses(_x,constants) for _x in filter(assignZ, io_as)]...) |> unique, ", ")) = sol.prob.p
-               @inbounds $(join(variables, ", ")) = sol(t)
+            @unpack $(join(constants, ", "))$( isempty(z_as) ? "" : ", z") = sol.prob.p
+            @inbounds $(join(variables, ", ")) = sol(t)
+
+               # specified variables
+               $( begin 
+                   str = string.(uses(filter(x -> x.args[1] isa Expr && x.args[1].args[1] in [:z, :coef, :rhs], eqns_as), specifieds)) .|>
+                   x -> "$x = _$x(t)"
+                   join(str, "; ")
+               end)
+
+               # calculated variables
+               lrx1, lry1, lrx2, lry2, rrx1, rry1, rrx2, rry2 = contact_forces(sol(t), p, t)
 
                $( join(const_as, "\n"))
                $( join(filter(assignZ, io_as), "\n") )

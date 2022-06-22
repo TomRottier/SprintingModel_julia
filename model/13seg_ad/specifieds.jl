@@ -2,23 +2,22 @@
 using Dierckx, Interpolations
 
 # fit quintic splines to data
-joint_data = readdlm("data\\matchingData.csv", ',', Float64, skipstart=2)
-hat_data = readdlm("data\\HAT.csv", ',', Float64, skipstart=2)
+joint_data = readdlm("data\\matching_data.csv", ',', Float64, skipstart=2)
 
 ## define functions
 const _time = joint_data[:, 1]
-const rh_spl = Spline1D(_time, joint_data[:, 4], k=5, s=0.0)
-const lh_spl = Spline1D(_time, joint_data[:, 5], k=5, s=0.0)
-const rk_spl = Spline1D(_time, joint_data[:, 6], k=5, s=0.0)
-const lk_spl = Spline1D(_time, joint_data[:, 7], k=5, s=0.0)
-const ra_spl = Spline1D(_time, joint_data[:, 8], k=5, s=0.0)
-const la_spl = Spline1D(_time, joint_data[:, 9], k=5, s=0.0)
-const rmtp_spl = Spline1D(_time, joint_data[:, 10], k=5, s=0.0)
-const lmtp_spl = Spline1D(_time, joint_data[:, 11], k=5, s=0.0)
-const rs_spl = Spline1D(_time, joint_data[:, 8], k=5, s=0.0)
-const ls_spl = Spline1D(_time, joint_data[:, 9], k=5, s=0.0)
-const re_spl = Spline1D(_time, joint_data[:, 8], k=5, s=0.0)
-const le_spl = Spline1D(_time, joint_data[:, 9], k=5, s=0.0)
+const rh_spl = Spline1D(_time, joint_data[:, 3], k=5, s=0.0)
+const lh_spl = Spline1D(_time, joint_data[:, 4], k=5, s=0.0)
+const rk_spl = Spline1D(_time, joint_data[:, 5], k=5, s=0.0)
+const lk_spl = Spline1D(_time, joint_data[:, 6], k=5, s=0.0)
+const ra_spl = Spline1D(_time, joint_data[:, 7], k=5, s=0.0)
+const la_spl = Spline1D(_time, joint_data[:, 8], k=5, s=0.0)
+const rmtp_spl = Spline1D(_time, joint_data[:, 9], k=5, s=0.0)
+const lmtp_spl = Spline1D(_time, joint_data[:, 10], k=5, s=0.0)
+const rs_spl = Spline1D(_time, joint_data[:, 11], k=5, s=0.0)
+const ls_spl = Spline1D(_time, joint_data[:, 12], k=5, s=0.0)
+const re_spl = Spline1D(_time, joint_data[:, 13], k=5, s=0.0)
+const le_spl = Spline1D(_time, joint_data[:, 14], k=5, s=0.0)
 
 ## using Dierckx.jl
 # _rh(t) = evaluate(rh_spl, t) .|> deg2rad
@@ -165,16 +164,55 @@ _lmtp(t) = lmtp_spl0(t) |> deg2rad
 _lmtpp(t) = lmtp_spl1(t) |> deg2rad
 _lmtppp(t) = lmtp_spl2(t) |> deg2rad
 
-# hat com
-data0 = evaluate(hat_spl, new_time)
-data1 = derivative(hat_spl, new_time, 1)
-data2 = derivative(hat_spl, new_time, 2)
+# right shoulder
+data0 = evaluate(rs_spl, new_time)
+data1 = derivative(rs_spl, new_time, 1)
+data2 = derivative(rs_spl, new_time, 2)
 
-const hat_spl0 = CubicSplineInterpolation(new_time, data0)
-const hat_spl1 = CubicSplineInterpolation(new_time, data1)
-const hat_spl2 = CubicSplineInterpolation(new_time, data2)
+const rs_spl0 = CubicSplineInterpolation(new_time, data0)
+const rs_spl1 = CubicSplineInterpolation(new_time, data1)
+const rs_spl2 = CubicSplineInterpolation(new_time, data2)
 
-_hato(t) = hat_spl0(t)
-_hatop(t) = hat_spl1(t)
-_hatopp(t) = hat_spl2(t)
+_rs(t) = rs_spl0(t) |> deg2rad
+_rsp(t) = rs_spl1(t) |> deg2rad
+_rspp(t) = rs_spl2(t) |> deg2rad
 
+# left shoulder
+data0 = evaluate(ls_spl, new_time)
+data1 = derivative(ls_spl, new_time, 1)
+data2 = derivative(ls_spl, new_time, 2)
+
+const ls_spl0 = CubicSplineInterpolation(new_time, data0)
+const ls_spl1 = CubicSplineInterpolation(new_time, data1)
+const ls_spl2 = CubicSplineInterpolation(new_time, data2)
+
+_ls(t) = ls_spl0(t) |> deg2rad
+_lsp(t) = ls_spl1(t) |> deg2rad
+_lspp(t) = ls_spl2(t) |> deg2rad
+
+
+# right elbow
+data0 = evaluate(re_spl, new_time)
+data1 = derivative(re_spl, new_time, 1)
+data2 = derivative(re_spl, new_time, 2)
+
+const re_spl0 = CubicSplineInterpolation(new_time, data0)
+const re_spl1 = CubicSplineInterpolation(new_time, data1)
+const re_spl2 = CubicSplineInterpolation(new_time, data2)
+
+_re(t) = re_spl0(t) |> deg2rad
+_rep(t) = re_spl1(t) |> deg2rad
+_repp(t) = re_spl2(t) |> deg2rad
+
+# left elbow
+data0 = evaluate(le_spl, new_time)
+data1 = derivative(le_spl, new_time, 1)
+data2 = derivative(le_spl, new_time, 2)
+
+const le_spl0 = CubicSplineInterpolation(new_time, data0)
+const le_spl1 = CubicSplineInterpolation(new_time, data1)
+const le_spl2 = CubicSplineInterpolation(new_time, data2)
+
+_le(t) = le_spl0(t) |> deg2rad
+_lep(t) = le_spl1(t) |> deg2rad
+_lepp(t) = le_spl2(t) |> deg2rad
