@@ -69,8 +69,11 @@ lelb = 180 .+ lla - lua
 # centre of mass velocity
 vcom = data["Average"]["CoM"]["Data"]["Avg"][:, 2:3, 2] .+ [9.7 0.0]
 
+# force
+force = data["Average"]["Force"]["Data"]["Avg"][:, 2:3]
+
 # output
-header = ["time" "torso" "rhip" "lhip" "rknee" "lknee" "rankle" "lankle" "rmtp" "lmtp" "rshoulder" "lshoulder" "relbow" "lelbow" "vcmx" "vcmy"]
+header = ["time" "ht" "rhip" "lhip" "rknee" "lknee" "rankle" "lankle" "rmtp" "lmtp" "rshoulder" "lshoulder" "relbow" "lelbow" "vcmx" "vcmy"]
 units = ["s" fill("deg", 1, 13) "m/s" "m/s"]
 time = range(0, step=0.001, length=size(points, 1))
 open("data\\matching_data.csv", "w") do io

@@ -13,7 +13,7 @@ include("callbacks.jl")
 include("optimisation.jl")
 
 # set up model
-const p, u₀, matching_data = setup()
+const p, u₀, matching_data = setup(matching_data="data\\matching_data.csv")
 
 # time span
 const tspan = (0.0, 0.484)

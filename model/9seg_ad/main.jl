@@ -57,10 +57,6 @@ result = Result(fopt=f₀, xopt=x₀)
 options = Options(func=objective, N=N, Ns=Ns, Nt=Nt, lb=lb, ub=ub, tol=tol, print_status=true)
 @time sa!(current, result, options)
 
-open("model\\angle_driven\\results.csv", "a") do io
+open("model\\9seg_ad\\results.csv", "a") do io
     writedlm(io, [result.fopt result.xopt...], ',')
 end
-
-x_broken = [7812.966, 1132.816, 41799.709, 9315.251, 14642.844, 615.068, 78583.638, 87395.747]
-x_broken = [2485.413, 959.797, 191384.276, 52362.824, 12128.12, 322.839, 19558.24, 76850.179]
-

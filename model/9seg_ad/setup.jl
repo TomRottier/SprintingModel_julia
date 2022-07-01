@@ -110,8 +110,8 @@ function set_values(inputs)
 end
 
 function setup(;
-    parameters="model/angle_driven/parameters.csv",
-    initial_conditions="model/angle_driven/initial_conditions.csv",
+    parameters="model/9seg_ad/parameters.csv",
+    initial_conditions="model/9seg_ad/initial_conditions.csv",
     matching_data="data/matchingData.csv")
 
     # load parameters
