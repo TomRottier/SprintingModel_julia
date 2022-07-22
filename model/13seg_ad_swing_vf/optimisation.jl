@@ -12,12 +12,12 @@ then add progress=true and progress_steps=x to solve call
 =#
 
 # objective
-objective(x) = cost(simulate(prob, x)...)
-# try
-#     cost(simulate(prob, x))
-# catch
-#     return 10000.0
-# end
+objective(x) = #cost(simulate(prob, x)...)
+    try
+        cost(simulate(prob, x)...)
+    catch
+        return 10000.0
+    end
 
 # simulate with new parameters
 function simulate(prob::ODEProblem, x)

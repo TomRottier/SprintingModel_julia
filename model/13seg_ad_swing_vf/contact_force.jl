@@ -16,7 +16,7 @@ function contact_forces(u, p, t)
     pop2y = q2 - lff * sin(la + lh + lmtp - lk - q3)
 
     if q2 < 0.0
-        dp1x = q1 - ltoexi[1]
+        dp1x = q1 - toexi[1]
         ry1 = -k3 * q2 - k4 * abs(q2) * u2
         rx1 = ry1 * (-k1 * dp1x - k2 * u1) # (-k1*(q1-pop1xi) - k2*u1)*ry1
     else
@@ -28,7 +28,7 @@ function contact_forces(u, p, t)
         pop2x = q1 + lff * cos(la + lh + lmtp - lk - q3)
         vop2x = u1 - lff * sin(la + lh + lmtp - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9)
         vop2y = u2 - lff * cos(la + lh + lmtp - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9)
-        dp2x = pop2x - lmtpxi[1]
+        dp2x = pop2x - mtpxi[1]
         ry2 = -k7 * pop2y - k8 * abs(pop2y) * vop2y
         rx2 = ry2 * (-k5 * dp2x - k6 * vop2x)
     else

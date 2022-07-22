@@ -1699,3 +1699,44 @@ function vocmy(u, p, t)
 
     return u2 - 0.5 * (2 * llao * mla * cos(ls - le - q3) * (lsp - lep - u11 - u13 - u3) + 2 * llao * mla * cos(rs - re - q3) * (rsp - rep - u10 - u12 - u3) + 2 * (lth * mff + lth * mrf + lth * msh + mth * (lth - ltho)) * cos(rh - q3) * (rhp - u3 - u4) + (2 * lrf * mff + mrf * (2 * lrf - lrfo)) * cos(ra + rh - rk - q3) * (rap + rhp - rkp - u3 - u4 - u6 - u8) + 2 * (lsh * mff + lsh * mhat + lsh * mrf + lsh * msh + lsho * msh + 2 * lsh * mla + 2 * lsh * mth + 2 * lsh * mua) * cos(lh - lk - q3) * (lhp - lkp - u3 - u5 - u7) + 2 * (lff * mff + lff * mhat + lffo * mff + 2 * lff * mla + 2 * lff * mrf + 2 * lff * msh + 2 * lff * mth + 2 * lff * mua) * cos(la + lh + lmtp - lk - q3) * (lap + lhp + lmtpp - lkp - u3 - u5 - u7 - u9) - 2 * (lhato * mhat + 2 * lhat * mla + 2 * lhat * mua) * cos(q3) * u3 - 2 * (lua * mla + luao * mua) * cos(ls - q3) * (lsp - u11 - u3) - 2 * (lua * mla + luao * mua) * cos(rs - q3) * (rsp - u10 - u3) - lrffo * mrf * cos(la + lh - footang - lk - q3) * (lap + lhp - lkp - u3 - u5 - u7 - u9) - lrffo * mrf * cos(ra + rh - footang - rk - q3) * (rap + rhp - rkp - u3 - u4 - u6 - u8) - 2 * (lsh * mff + lsh * mrf + msh * (lsh - lsho)) * cos(rh - rk - q3) * (rhp - rkp - u3 - u4 - u6) - 2 * mff * (lff - lffo) * cos(ra + rh + rmtp - rk - q3) * (rap + rhp + rmtpp - rkp - u3 - u4 - u6 - u8) - 2 * (lth * mff + lth * mhat + lth * mrf + lth * msh + lth * mth + ltho * mth + 2 * lth * mla + 2 * lth * mua) * cos(lh - q3) * (lhp - u3 - u5) - (lrfo * mrf + 2 * lrf * mff + 2 * lrf * mhat + 2 * lrf * mrf + 4 * lrf * mla + 4 * lrf * msh + 4 * lrf * mth + 4 * lrf * mua) * cos(la + lh - lk - q3) * (lap + lhp - lkp - u3 - u5 - u7 - u9)) / (mhat + 2 * mff + 2 * mla + 2 * mrf + 2 * msh + 2 * mth + 2 * mua)
 end
+
+function pocmx(u, p, t)
+    @unpack footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, rmtpxi, rtoexi, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, z = p
+    @inbounds q1, q2, q3, u1, u2, u3 = u
+
+    # specified variables
+    la = _la(t)
+    le = _le(t)
+    lh = _lh(t)
+    lk = _lk(t)
+    lmtp = _lmtp(t)
+    ls = _ls(t)
+    ra = _ra(t)
+    re = _re(t)
+    rh = _rh(t)
+    rk = _rk(t)
+    rmtp = _rmtp(t)
+    rs = _rs(t)
+
+    return q1 + 0.5 * (2 * llao * mla * cos(ls - le - q3) + 2 * llao * mla * cos(rs - re - q3) + 2 * (lhato * mhat + 2 * lhat * mla + 2 * lhat * mua) * cos(q3) + (2 * lrf * mff + mrf * (2 * lrf - lrfo)) * cos(ra + rh - rk - q3) + 2 * (lth * mff + lth * mrf + lth * msh + mth * (lth - ltho)) * cos(rh - q3) + 2 * (lsh * mff + lsh * mhat + lsh * mrf + lsh * msh + lsho * msh + 2 * lsh * mla + 2 * lsh * mth + 2 * lsh * mua) * cos(lh - lk - q3) + 2 * (lff * mff + lff * mhat + lffo * mff + 2 * lff * mla + 2 * lff * mrf + 2 * lff * msh + 2 * lff * mth + 2 * lff * mua) * cos(la + lh + lmtp - lk - q3) - 2 * (lua * mla + luao * mua) * cos(ls - q3) - 2 * (lua * mla + luao * mua) * cos(rs - q3) - lrffo * mrf * cos(la + lh - footang - lk - q3) - lrffo * mrf * cos(ra + rh - footang - rk - q3) - 2 * mff * (lff - lffo) * cos(ra + rh + rmtp - rk - q3) - 2 * (lsh * mff + lsh * mrf + msh * (lsh - lsho)) * cos(rh - rk - q3) - 2 * (lth * mff + lth * mhat + lth * mrf + lth * msh + lth * mth + ltho * mth + 2 * lth * mla + 2 * lth * mua) * cos(lh - q3) - (lrfo * mrf + 2 * lrf * mff + 2 * lrf * mhat + 2 * lrf * mrf + 4 * lrf * mla + 4 * lrf * msh + 4 * lrf * mth + 4 * lrf * mua) * cos(la + lh - lk - q3)) / (mhat + 2 * mff + 2 * mla + 2 * mrf + 2 * msh + 2 * mth + 2 * mua)
+end
+function pocmy(u, p, t)
+    @unpack footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, rmtpxi, rtoexi, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, z = p
+    @inbounds q1, q2, q3, u1, u2, u3 = u
+
+    # specified variables
+    la = _la(t)
+    le = _le(t)
+    lh = _lh(t)
+    lk = _lk(t)
+    lmtp = _lmtp(t)
+    ls = _ls(t)
+    ra = _ra(t)
+    re = _re(t)
+    rh = _rh(t)
+    rk = _rk(t)
+    rmtp = _rmtp(t)
+    rs = _rs(t)
+
+    return q2 - 0.5 * (2 * llao * mla * sin(ls - le - q3) + 2 * llao * mla * sin(rs - re - q3) + (2 * lrf * mff + mrf * (2 * lrf - lrfo)) * sin(ra + rh - rk - q3) + 2 * (lth * mff + lth * mrf + lth * msh + mth * (lth - ltho)) * sin(rh - q3) + 2 * (lsh * mff + lsh * mhat + lsh * mrf + lsh * msh + lsho * msh + 2 * lsh * mla + 2 * lsh * mth + 2 * lsh * mua) * sin(lh - lk - q3) + 2 * (lff * mff + lff * mhat + lffo * mff + 2 * lff * mla + 2 * lff * mrf + 2 * lff * msh + 2 * lff * mth + 2 * lff * mua) * sin(la + lh + lmtp - lk - q3) - 2 * (lua * mla + luao * mua) * sin(ls - q3) - 2 * (lua * mla + luao * mua) * sin(rs - q3) - 2 * (lhato * mhat + 2 * lhat * mla + 2 * lhat * mua) * sin(q3) - lrffo * mrf * sin(la + lh - footang - lk - q3) - lrffo * mrf * sin(ra + rh - footang - rk - q3) - 2 * mff * (lff - lffo) * sin(ra + rh + rmtp - rk - q3) - 2 * (lsh * mff + lsh * mrf + msh * (lsh - lsho)) * sin(rh - rk - q3) - 2 * (lth * mff + lth * mhat + lth * mrf + lth * msh + lth * mth + ltho * mth + 2 * lth * mla + 2 * lth * mua) * sin(lh - q3) - (lrfo * mrf + 2 * lrf * mff + 2 * lrf * mhat + 2 * lrf * mrf + 4 * lrf * mla + 4 * lrf * msh + 4 * lrf * mth + 4 * lrf * mua) * sin(la + lh - lk - q3)) / (mhat + 2 * mff + 2 * mla + 2 * mrf + 2 * msh + 2 * mth + 2 * mua)
+end

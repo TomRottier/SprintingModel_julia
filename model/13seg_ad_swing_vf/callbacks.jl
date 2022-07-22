@@ -1,6 +1,6 @@
 ## callbacks for integration
-condition_step1(u, t, int) = pocmy(int.sol, t) - pocmy(int.sol, 0.0)
-affect_step1!(int) = nothing
+condition_step1(u, t, int) = pocmy(u, int.p, t) - pocmy(u, int.p, 0.0)
+affect_step1!(int) = nothing # println("+ve crossing")
 affect_neg_step1!(int) = terminate!(int)
 cb1 = ContinuousCallback(condition_step1, affect_step1!, affect_neg_step1!, save_positions=(false, true), repeat_nudge=1 // 10)
 

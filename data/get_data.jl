@@ -54,7 +54,7 @@ lla = seg_angle(_lejc, _lwjc)
 
 # joint angles
 rmtp = 180 .- rff + rrf
-lmtp = 180 .- lff + lrf
+lmtp = 180 .- lff + lrf .- 360
 rank = 180 .- rrf + rsh
 lank = 180 .- lrf + lsh
 rkne = 180 .+ rsh - rth

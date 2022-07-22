@@ -62,3 +62,4 @@ open("model\\13seg_ad_swing_vf\\results.csv", "a") do io
     writedlm(io, [result.fopt result.xopt...], ',')
 end
 
+xfail = [10439.361, 1233.33, 60349.687, 98505.517, 12915.36, 723.547, 136851.274, 9057.667]

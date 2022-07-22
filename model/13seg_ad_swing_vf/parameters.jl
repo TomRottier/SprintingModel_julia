@@ -24,7 +24,7 @@
     lhato::T
     lla::T
     llao::T
-    lmtpxi::MVector{1,T}
+    mtpxi::T
     lrf::T
     lrff::T
     lrffo::T
@@ -33,7 +33,7 @@
     lsho::T
     lth::T
     ltho::T
-    ltoexi::MVector{1,T}
+    toexi::T
     lua::T
     luao::T
     mff::T
@@ -45,8 +45,6 @@
     mtpb::T
     mtpk::T
     mua::T
-    rmtpxi::MVector{1,T}
-    rtoexi::MVector{1,T}
     u4::T
     u5::T
     u6::T
@@ -65,12 +63,8 @@
 end
 
 # initialise with constant values
-function Params(footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, rmtpxi, rtoexi)
+function Params(footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua)
     z = Vector{Float64}(undef, 1287)
-    ltoexi = MVector{1}([ltoexi])
-    rtoexi = MVector{1}([rtoexi])
-    lmtpxi = MVector{1}([lmtpxi])
-    rmtpxi = MVector{1}([rmtpxi])
     vrx1(t) = 0.0
     vry1(t) = 0.0
     vrx2(t) = 0.0
@@ -172,5 +166,5 @@ function Params(footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, 
     z[1244] = iff + irf + mff * lffo^2
     z[1249] = ila + iua
 
-    return Params(z, footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, rmtpxi, rtoexi, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, vrx1, vry1, vrx2, vry2)
+    return Params(z, footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, mtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, toexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, vrx1, vry1, vrx2, vry2)
 end

@@ -17,7 +17,7 @@ function setup(;
     inputs = readdlm(parameters, ',', header=true)
     input_p, headers_p = convert(Vector{Float64}, inputs[1][:, 3]), Symbol.(inputs[1][:, 1])
 
-    lff, mff, lffo, iff, lrf, mrf, lrfo, irf, lsh, msh, lsho, ish, lth, mth, ltho, ith, lhat, mhat, lhato, ihat, lua, mua, luao, iua, lla, mla, llao, ila, footang, g, k1, k2, k3, k4, k5, k6, k7, k8, mtpb, mtpk, ltoexi, rtoexi, lmtpxi, rmtpxi, lrffo, lrff = input_p
+    lff, mff, lffo, iff, lrf, mrf, lrfo, irf, lsh, msh, lsho, ish, lth, mth, ltho, ith, lhat, mhat, lhato, ihat, lua, mua, luao, iua, lla, mla, llao, ila, footang, g, k1, k2, k3, k4, k5, k6, k7, k8, mtpb, mtpk, toexi, mtpxi, lrffo, lrff = input_p
     u4 = u5 = u6 = u6 = u7 = u8 = u9 = u10 = u11 = u12 = u13 = 0.0
     footang = deg2rad(footang)
 
@@ -71,7 +71,7 @@ function setup(;
     u2 = u2_fun(rmtp₀, lmtp₀, ra₀, la₀, rk₀, lk₀, rh₀, lh₀, rs₀, ls₀, re₀, le₀, rmtpp₀, lmtpp₀, rap₀, lap₀, rkp₀, lkp₀, rhp₀, lhp₀, rsp₀, lsp₀, rep₀, lep₀)
 
     # parameters
-    p = Params(footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, rmtpxi, rtoexi)
+    p = Params(footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, mtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, toexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua)
 
     # intial conditions
     u₀ = SVector(q1, q2, q3, u1, u2, u3)

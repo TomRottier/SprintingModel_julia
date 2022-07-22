@@ -15,7 +15,7 @@ lth,m,0.447
 mth,kg,12.787230000000001
 ltho,m,0.189
 ith,kg.m^2,0.216495
-lht,m,0.869
+lht,m,0.6
 mht,kg,40.903999999999996
 lhto,m,0.42744315959319384
 iht,kg.m^2,1.4890305458460542
@@ -39,9 +39,7 @@ k7,N/m,149018.3201
 k8,N.s/m,66196.28963
 mtpb,N.m.s/rad,0.701068939
 mtpk,N.m/rad,6.463830463
-ltoexi,m,0.083614267
-rtoexi,m,0.0
-lmtpxi,m,0.0
-rmtpxi,m,0.0
+toexi,m,0.083614267
+mtpxi,m,0.0
 lrffo,m,0.121
 lrff,m,0.222
