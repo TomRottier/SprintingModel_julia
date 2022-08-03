@@ -72,3 +72,10 @@ spl_fy = CubicSplineInterpolation(tnorm, avg_stride[:forces][:, 2])
 spl_fz = CubicSplineInterpolation(tnorm, avg_stride[:forces][:, 3])
 
 avg_forces = hcat(spl_fy.(step_times), spl_fz.(step_times))
+
+# write to file
+old_data = readdlm("data\\matching_data.csv", ',')
+new_data = hcat(old_data, [["fx" "fy"]; ["N" "N"]; [0.0 0.0]; avg_forces; avg_forces])
+open("data\\matching_data.csv", "w") do io
+    writedlm(io, new_data, ',')
+end
