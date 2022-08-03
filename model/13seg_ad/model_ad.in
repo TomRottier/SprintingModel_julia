@@ -1,0 +1,79 @@
+File: model/13seg_ad/model_ad.in
+-----------------------------------------------------------------------------
+Replace this line with a message to appear on all output files.
+----------------------------------------------------------+------------------
+Description          Quantity             Units           | Value
+----------------------------------------------------------|------------------
+Constant:            FOOTANG              UNITS           |  19.58
+Constant:            G                    UNITS           | -9.81
+Constant:            IFF                  UNITS           |  0.00015
+Constant:            IHAT                 UNITS           |  4.600
+Constant:            ILA                  UNITS           |  0.0
+Constant:            IRF                  UNITS           |  0.00301
+Constant:            ISH                  UNITS           |  0.0808
+Constant:            ITH                  UNITS           |  0.21645
+Constant:            IUA                  UNITS           |  0.0
+Constant:            K1                   UNITS           |  0.0
+Constant:            K2                   UNITS           |  0.0
+Constant:            K3                   UNITS           |  0.0
+Constant:            K4                   UNITS           |  0.0
+Constant:            K5                   UNITS           |  0.0
+Constant:            K6                   UNITS           |  0.0
+Constant:            K7                   UNITS           |  0.0
+Constant:            K8                   UNITS           |  0.0
+Constant:            LFF                  UNITS           |  0.085
+Constant:            LFFO                 UNITS           |  0.050
+Constant:            LHAT                 UNITS           |  0.600
+Constant:            LHATO                UNITS           |  0.0
+Constant:            LLA                  UNITS           |  0.0
+Constant:            LLAO                 UNITS           |  0.0
+Constant:            LMTPXI               UNITS           |  0.0
+Constant:            LRF                  UNITS           |  0.139
+Constant:            LRFF                 UNITS           |  0.222
+Constant:            LRFFO                UNITS           |  0.121
+Constant:            LRFO                 UNITS           |  0.076
+Constant:            LSH                  UNITS           |  0.453
+Constant:            LSHO                 UNITS           |  0.261
+Constant:            LTH                  UNITS           |  0.447
+Constant:            LTHO                 UNITS           |  0.258
+Constant:            LTOEXI               UNITS           |  0.0
+Constant:            LUA                  UNITS           |  0.0
+Constant:            LUAO                 UNITS           |  0.0
+Constant:            MFF                  UNITS           |  0.244
+Constant:            MHAT                 UNITS           |  51.95
+Constant:            MLA                  UNITS           |  0.0
+Constant:            MRF                  UNITS           |  1.170
+Constant:            MSH                  UNITS           |  5.375
+Constant:            MTH                  UNITS           |  12.79
+Constant:            MTPB                 UNITS           |  0.0
+Constant:            MTPK                 UNITS           |  0.0
+Constant:            MUA                  UNITS           |  0.0
+Constant:            RMTPXI               UNITS           |  0.0
+Constant:            RTOEXI               UNITS           |  0.0
+
+Initial Value:       Q1                   UNITS           |  0.0
+Initial Value:       Q2                   UNITS           |  0.0
+Initial Value:       Q3                   UNITS           |  81.451
+Initial Value:       U1                   UNITS           |  9.67406
+Initial Value:       U2                   UNITS           | -0.72030
+Initial Value:       U3                   UNITS           | -24.9253
+
+Initial Time:        TINITIAL             UNITS           |  0.0
+Final Time:          TFINAL               UNITS           |  0.2
+Integration Step:    INTEGSTP             UNITS           |  0.001
+Print-Integer:       PRINTINT             Positive Integer|  1
+Absolute Error:      ABSERR                               |  1.0E-08
+Relative Error:      RELERR                               |  1.0E-07
+----------------------------------------------------------+------------------
+
+DANGER: Do not insert TABS while editing this file.
+
+Note:
+
+  INTEGSTP*PRINTINT is the time-interval for writing of output.
+
+  ABSERR should be set equal to 10^(-8)*Xsmall, where Xsmall is the estimated
+         smallest maximum absolute value of the variables being integrated.
+
+  RELERR should be set equal to 10^(-d), where d is the desired number of
+         significant digits of numerical integration results.

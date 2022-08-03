@@ -25,26 +25,48 @@ objective(x) =
 function cost(sim_data)
     global matching_data
 
-    # CoM position and HAT orientation
-    # sim_cmx = pocmx(sim_data)
-    sim_cmy = pocmy(sim_data)
+    # # CoM position and HAT orientation
+    # # sim_cmx = pocmx(sim_data)
+    # sim_cmy = pocmy(sim_data)
+    # sim_θ = sim_data[3, :] .|> rad2deg
+    # # exp_cmx = matching_data[:cmx]
+    # exp_cmy = matching_data[:cmy]
+    # exp_θ = matching_data[:lhat]
+
+    # # mse between simulation and experimental data
+    # cmx_mse = 0.0 #mse(sim_cmx, exp_cmx)
+    # cmy_mse = mse(sim_cmy, exp_cmy)
+    # θ_mse = mse(sim_θ, exp_θ)
+
+    # # scale by range 
+    # # cmx_mse /= abs(reduce(-, extrema(sim_cmx)))
+    # cmy_mse /= abs(reduce(-, extrema(sim_cmy)))
+    # θ_mse /= abs(reduce(-, extrema(sim_θ)))
+
+    # # cost function
+    # return cmx_mse + cmy_mse + θ_mse
+
+    # CoM velocity and HAT orientation
+    sim_vcmx = vocmx(sim_data)
+    sim_vcmy = vocmy(sim_data)
     sim_θ = sim_data[3, :] .|> rad2deg
-    # exp_cmx = matching_data[:cmx]
-    exp_cmy = matching_data[:cmy]
-    exp_θ = matching_data[:lhat]
+    exp_vcmx = matching_data[:vcmx]
+    exp_vcmy = matching_data[:vcmy]
+    exp_θ = matching_data[:ht]
 
     # mse between simulation and experimental data
-    cmx_mse = 0.0 #mse(sim_cmx, exp_cmx)
-    cmy_mse = mse(sim_cmy, exp_cmy)
+    vcmx_mse = 0.0 #mse(sim_cmx, exp_cmx)
+    vcmy_mse = mse(sim_vcmy, exp_vcmy)
     θ_mse = mse(sim_θ, exp_θ)
 
     # scale by range 
-    # cmx_mse /= abs(reduce(-, extrema(sim_cmx)))
-    cmy_mse /= abs(reduce(-, extrema(sim_cmy)))
+    vcmx_mse /= abs(reduce(-, extrema(sim_vcmx)))
+    vcmy_mse /= abs(reduce(-, extrema(sim_vcmy)))
     θ_mse /= abs(reduce(-, extrema(sim_θ)))
 
     # cost function
-    return cmx_mse + cmy_mse + θ_mse
+    return vcmx_mse + vcmy_mse + θ_mse
+
 end
 
 # simulate a stride from prob

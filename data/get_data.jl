@@ -1,4 +1,4 @@
-using MAT, DSP
+using MAT, DSP, DelimitedFiles
 
 # load data 
 data = matread("data\\data.mat")["dout"]
@@ -54,86 +54,28 @@ lla = seg_angle(_lejc, _lwjc)
 
 # joint angles
 rmtp = 180 .- rff + rrf
-lmtp = 180 .- lff + lrf
+lmtp = 180 .- lff + lrf .- 360
 rank = 180 .- rrf + rsh
 lank = 180 .- lrf + lsh
 rkne = 180 .+ rsh - rth
 lkne = 180 .+ lsh - lth
-rhip = 180 .- rth + tr
-lhip = 180 .- lth + tr
-rsho = 180 .- tr + rua
-lsho = 180 .- tr + rua
+rhip = 180 .- rth + tor
+lhip = 180 .- lth + tor
+rsho = 180 .- tor + rua
+lsho = 180 .- tor + lua
 relb = 180 .+ rla - rua
-lelb = 180 .+ rla - rua
+lelb = 180 .+ lla - lua
 
-## forces
-function event_detection(data, threshold)
-      i = 1
-      n = size(data, 1)
-      events = []
+# centre of mass velocity
+vcom = data["Average"]["CoM"]["Data"]["Avg"][:, 2:3, 2] .+ [9.7 0.0]
 
-      # check if starting above or below threshold
-      findfirst(data .> threshold) == 1 ? above_thresh = true : above_thresh = false
-      above_thresh && push!(events, [-1, -1])
-
-      while i < n
-            if above_thresh
-                  I = findfirst(data[i:n] .< threshold)
-                  if I !== nothing
-                        idx = (i - 1) + I # actual index into data
-                        events[end][2] = idx # add to output
-                        i = idx # update starting point
-                        above_thresh = false
-                  else
-                        break # no more crossings so break from loop
-                  end
-
-            else
-                  I = findfirst(data[i:n] .> threshold)
-                  if I !== nothing
-                        idx = (i - 1) + I
-                        push!(events, [idx, -1])
-                        i = idx
-                        above_thresh = true
-                  else
-                        break # no more crossings so break from loop
-                  end
-            end
-      end
-
-      return events
-end
-
-# forces = readdlm("C:/Users/rottier/Desktop/laptop/Data/Treadmill/Force9.7_1000_unfiltered.csv", ',')
-forces = readdlm("data/force.tsv")[:, 1:3] # only fx,fy,fz
-
-# get events - only larger than 50 frames (0.025 s)
-events = event_detection(forces[:, 3], 80)
-filter!(events) do (td, to)
-      return (to - td) > 50
-end
-
-
-# remove any data not durings events
-forces_clean = similar(forces)
-for i in 1:size(forces, 1)
-      forces_clean[i, :] .= any(first.(events) .≤ i .≤ last.(events)) ? forces[i, :] : 0.0
-end
-
-# separate out into strides, only use six strides (12 event pairs)
-events_used = events[10:end-3]
-start1 = map(first, events_used[1:2:end-2])
-end1 = map(first, events_used[3:2:end-1])
-stride1 = [forces_clean[s:e-1, :] for (s, e) in zip(start1, end1)]
-start2 = map(first, events_used[2:2:end-1])
-end2 = map(first, events_used[4:2:end])
-stride2 = [forces_clean[s:e-1, :] for (s, e) in zip(start2, end2)]
-
-
+# force
+force = data["Average"]["Force"]["Data"]["Avg"][:, 2:3]
 
 # output
-header = ["time" "torso" "rhip" "lhip" "rknee" "lknee" "rankle" "lankle" "rmtp" "lmtp" "rshoulder" "lshoulder" "relbow" "lelbow"]
+header = ["time" "ht" "rhip" "lhip" "rknee" "lknee" "rankle" "lankle" "rmtp" "lmtp" "rshoulder" "lshoulder" "relbow" "lelbow" "vcmx" "vcmy"]
+units = ["s" fill("deg", 1, 13) "m/s" "m/s"]
 time = range(0, step=0.001, length=size(points, 1))
-open("matching_data.csv", 'w') do io
-      write(io, [header; [time tor rhip lhip rkne lkne rank lank rmtp lmtp rsho lsho relb lelb]])
+open("data\\matching_data.csv", "w") do io
+      writedlm(io, [header; units; [time tor rhip lhip rkne lkne rank lank rmtp lmtp rsho lsho relb lelb vcom]], ',')
 end

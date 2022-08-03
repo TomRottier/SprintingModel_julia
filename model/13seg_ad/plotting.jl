@@ -2,14 +2,20 @@
 
 # plot model at time t
 function plot_model(sol, t)
-    fns = [pop1x, pop1y, pop2x, pop2y, pop3x, pop3y, pop4x, pop4y, pop5x, pop5y, pop6x, pop6y, pop7x, pop7y, pop8x, pop8y, pop9x, pop9y, pop10x, pop10y, pop11x, pop11y, pop12x, pop12y]
-    ps = [fn(sol, t) for fn in fns]
+    legs_fns = [pop1x, pop1y, pop2x, pop2y, pop3x, pop3y, pop4x, pop4y, pop5x, pop5y, pop6x, pop6y, pop7x, pop7y, pop8x, pop8y, pop9x, pop9y, pop10x, pop10y, pop11x, pop11y]
+    arms_fns = [pop16x, pop16y, pop15x, pop15y, pop12x, pop12y, pop13x, pop13y, pop14x, pop14y]
+    torso_fns = [pop6x, pop6y, pop12x, pop12y]
+    legs = [fn(sol, t) for fn in legs_fns]
+    arms = [fn(sol, t) for fn in arms_fns]
+    torso = [fn(sol, t) for fn in torso_fns]
+
 
     plot(legend=:none, xlims=(-1.0, 5.0), ylims=(-0.1, 5.9),)#grid=:off, axis=nothing, border=:none)
-    plot!(ps[1:2:22], ps[2:2:22], lw=2, color=:black)       # main skeleton
-    plot!(ps[[11, 23]], ps[[12, 24]], lw=2, color=:black)     # HAT
-    plot!(ps[[3, 7]], ps[[4, 8]], lw=2, color=:black)         # connect foot
-    plot!(ps[[19, 15]], ps[[20, 16]], lw=2, color=:black)         # connect foot
+    plot!(legs[1:2:end], legs[2:2:end], lw=2, color=:black)       # legs
+    plot!(arms[1:2:end], arms[2:2:end], lw=2, color=:black)   # arms
+    plot!(torso[1:2:end], torso[2:2:end], lw=2, color=:black)   # torso
+    plot!(legs[[3, 7]], legs[[4, 8]], lw=2, color=:black)         # connect foot
+    plot!(legs[[19, 15]], legs[[20, 16]], lw=2, color=:black)         # connect foot
 
 end
 
