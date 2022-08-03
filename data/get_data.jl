@@ -38,7 +38,7 @@ angle(Δ) = atand.(Δ[3], Δ[2])
 seg_angle = unwrap ∘ angle ∘ Δ
 
 # segment angles
-tor = seg_angle(_hjc, _sjc)
+tr = seg_angle(_hjc, _sjc)
 rff = seg_angle(_rtoe, _rmtp)
 lff = seg_angle(_ltoe, _lmtp)
 rrf = seg_angle(_rmtp, _rajc)
@@ -59,12 +59,76 @@ rank = 180 .- rrf + rsh
 lank = 180 .- lrf + lsh
 rkne = 180 .+ rsh - rth
 lkne = 180 .+ lsh - lth
-rhip = 180 .- rth + rtr
-lhip = 180 .- lth + ltr
-rsho = 180 .- rtr + rua
-lsho = 180 .- rtr + rua
+rhip = 180 .- rth + tr
+lhip = 180 .- lth + tr
+rsho = 180 .- tr + rua
+lsho = 180 .- tr + rua
 relb = 180 .+ rla - rua
 lelb = 180 .+ rla - rua
+
+## forces
+function event_detection(data, threshold)
+      i = 1
+      n = size(data, 1)
+      events = []
+
+      # check if starting above or below threshold
+      findfirst(data .> threshold) == 1 ? above_thresh = true : above_thresh = false
+      above_thresh && push!(events, [-1, -1])
+
+      while i < n
+            if above_thresh
+                  I = findfirst(data[i:n] .< threshold)
+                  if I !== nothing
+                        idx = (i - 1) + I # actual index into data
+                        events[end][2] = idx # add to output
+                        i = idx # update starting point
+                        above_thresh = false
+                  else
+                        break # no more crossings so break from loop
+                  end
+
+            else
+                  I = findfirst(data[i:n] .> threshold)
+                  if I !== nothing
+                        idx = (i - 1) + I
+                        push!(events, [idx, -1])
+                        i = idx
+                        above_thresh = true
+                  else
+                        break # no more crossings so break from loop
+                  end
+            end
+      end
+
+      return events
+end
+
+# forces = readdlm("C:/Users/rottier/Desktop/laptop/Data/Treadmill/Force9.7_1000_unfiltered.csv", ',')
+forces = readdlm("data/force.tsv")[:, 1:3] # only fx,fy,fz
+
+# get events - only larger than 50 frames (0.025 s)
+events = event_detection(forces[:, 3], 80)
+filter!(events) do (td, to)
+      return (to - td) > 50
+end
+
+
+# remove any data not durings events
+forces_clean = similar(forces)
+for i in 1:size(forces, 1)
+      forces_clean[i, :] .= any(first.(events) .≤ i .≤ last.(events)) ? forces[i, :] : 0.0
+end
+
+# separate out into strides, only use six strides (12 event pairs)
+events_used = events[10:end-3]
+start1 = map(first, events_used[1:2:end-2])
+end1 = map(first, events_used[3:2:end-1])
+stride1 = [forces_clean[s:e-1, :] for (s, e) in zip(start1, end1)]
+start2 = map(first, events_used[2:2:end-1])
+end2 = map(first, events_used[4:2:end])
+stride2 = [forces_clean[s:e-1, :] for (s, e) in zip(start2, end2)]
+
 
 
 # output
@@ -73,43 +137,3 @@ time = range(0, step=0.001, length=size(points, 1))
 open("matching_data.csv", 'w') do io
       write(io, [header; [time tor rhip lhip rkne lkne rank lank rmtp lmtp rsho lsho relb lelb]])
 end
-
-
-
-# # dx,dy
-# rd1 = rMTP - rTOE; ld1 = lMTP - lTOE;
-# rd2 = rAJC - rMTP; ld2 = lAJC - lMTP;
-# rd3 = rKJC - rAJC; ld3 = lKJC - lAJC;
-# rd4 = HJC - rKJC;  ld4 = HJC - lKJC;    # Combined HJC
-# rd5 = hatCM - rHJC; ld5 = hatCM - lHJC; # HAT CoM
-
-# # Segment angles
-# rFFoot  = atan2d(rd1(:,3), rd1(:,2)); rFFoot(rFFoot < 0) = rFFoot(rFFoot < 0) + 360;
-# lFFoot  = atan2d(ld1(:,3), ld1(:,2)); lFFoot(lFFoot < 0) = lFFoot(lFFoot < 0) + 360;
-# rRFoot  = atan2d(rd2(:,3), rd2(:,2)); rRFoot(rRFoot < 0) = rRFoot(rRFoot < 0) + 360;
-# lRFoot  = atan2d(ld2(:,3), ld2(:,2)); lRFoot(lRFoot < 0) = lRFoot(lRFoot < 0) + 360;
-# rShank = atan2d(rd3(:,3), rd3(:,2)); #rShank(rShank < 0) = rShank(rShank < 0) + 360;
-# lShank = atan2d(ld3(:,3), ld3(:,2)); #lShank(lShank < 0) = lShank(lShank < 0) + 360;
-# rThigh = atan2d(rd4(:,3), rd4(:,2)); 
-# lThigh = atan2d(ld4(:,3), ld4(:,2)); 
-# rHAT = atan2d(rd5(:,3), rd5(:,2)); 
-# lHAT = atan2d(ld5(:,3), ld5(:,2));
-
-# segs = cat(2, rHAT,lHAT,rThigh,lThigh,rShank,lShank,rRFoot,lRFoot,rFFoot,lFFoot);
-# segsvel = tr_diff(segs, dt);
-
-# # Joint angles - both hips defined relative to stance side (lHAT)
-# rMTPa = 180 - rFFoot + rRFoot; lMTPa = 180 - lFFoot + lRFoot;
-# rAnkle = 180 - rRFoot + rShank; lAnkle = 180 - lRFoot + lShank;
-# rKnee = 180 + rShank - rThigh; lKnee = 180 + lShank - lThigh;
-# rHip = 180 - rThigh + lHAT; lHip = 180 - lThigh + lHAT; 
-# joints =  cat(2, rHip,lHip,rKnee,lKnee,rAnkle,lAnkle,rMTPa,lMTPa);
-# jointvel = tr_diff(joints, dt);
-
-
-# # Output
-# n = size(points, 1); m = size(joints, 2) + 3;
-# out = [n m strings(1,m-2); 
-#       ["Time","rHAT","lHAT","RHip","LHip","RKnee","LKnee","RAnkle","LAnkle","RMTP","LMTP"];
-#       time_10 rHAT lHAT joints]; 
-# writematrix(out, 'matchingData2_10.csv');
