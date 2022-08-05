@@ -27,7 +27,6 @@ Constant:            LHAT                 UNITS           |  0.600
 Constant:            LHATO                UNITS           |  0.0
 Constant:            LLA                  UNITS           |  0.0
 Constant:            LLAO                 UNITS           |  0.0
-Constant:            LMTPXI               UNITS           |  0.0
 Constant:            LRF                  UNITS           |  0.139
 Constant:            LRFF                 UNITS           |  0.222
 Constant:            LRFFO                UNITS           |  0.121
@@ -36,7 +35,6 @@ Constant:            LSH                  UNITS           |  0.453
 Constant:            LSHO                 UNITS           |  0.261
 Constant:            LTH                  UNITS           |  0.447
 Constant:            LTHO                 UNITS           |  0.258
-Constant:            LTOEXI               UNITS           |  0.0
 Constant:            LUA                  UNITS           |  0.0
 Constant:            LUAO                 UNITS           |  0.0
 Constant:            MFF                  UNITS           |  0.244
@@ -47,9 +45,9 @@ Constant:            MSH                  UNITS           |  5.375
 Constant:            MTH                  UNITS           |  12.79
 Constant:            MTPB                 UNITS           |  0.0
 Constant:            MTPK                 UNITS           |  0.0
+Constant:            MTPXI                UNITS           |  0.0
 Constant:            MUA                  UNITS           |  0.0
-Constant:            RMTPXI               UNITS           |  0.0
-Constant:            RTOEXI               UNITS           |  0.0
+Constant:            TOEXI                UNITS           |  0.0
 
 Initial Value:       Q1                   UNITS           |  0.0
 Initial Value:       Q2                   UNITS           |  0.0

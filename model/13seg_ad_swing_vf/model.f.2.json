@@ -7,7 +7,7 @@
     { "DimensionStatement": [  { "VAR": "6" } ] },
     { "CommonStatement":  { 
    "Name": "CONSTNTS",
-   "Items": [ "FOOTANG", "G", "IFF", "IHAT", "ILA", "IRF", "ISH", "ITH", "IUA", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "LFF", "LFFO", "LHAT", "LHATO", "LLA", "LLAO", "LMTPXI", "LRF", "LRFF", "LRFFO", "LRFO", "LSH", "LSHO", "LTH", "LTHO", "LTOEXI", "LUA", "LUAO", "MFF", "MHAT", "MLA", "MRF", "MSH", "MTH", "MTPB", "MTPK", "MUA", "RMTPXI", "RTOEXI" ]
+   "Items": [ "FOOTANG", "G", "IFF", "IHAT", "ILA", "IRF", "ISH", "ITH", "IUA", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "LFF", "LFFO", "LHAT", "LHATO", "LLA", "LLAO", "LRF", "LRFF", "LRFFO", "LRFO", "LSH", "LSHO", "LTH", "LTHO", "LUA", "LUAO", "MFF", "MHAT", "MLA", "MRF", "MSH", "MTH", "MTPB", "MTPK", "MTPXI", "MUA", "TOEXI" ]
   }
   },
     { "CommonStatement":  { 
@@ -22,7 +22,7 @@
   },
     { "CommonStatement":  { 
    "Name": "ALGBRAIC",
-   "Items": [ "HZ", "KECM", "LATQ", "LETQ", "LHTQ", "LKTQ", "LSTQ", "PX", "PY", "RATQ", "RETQ", "RHTQ", "RKTQ", "RSTQ", "RX1", "RX2", "RY1", "RY2", "U10", "U11", "U12", "U13", "U4", "U5", "U6", "U7", "U8", "U9", "VRX1", "VRX2", "VRY1", "VRY2", "Q1p", "Q2p", "Q3p", "U1p", "U2p", "U3p", "DLX1", "DLX2", "DRX1", "DRX2", "LMTQ", "POCMX", "POCMY", "POP10X", "POP10Y", "POP11X", "POP11Y", "POP12X", "POP12Y", "POP13X", "POP13Y", "POP14X", "POP14Y", "POP15X", "POP15Y", "POP16X", "POP16Y", "POP1X", "POP1Y", "POP2X", "POP2Y", "POP3X", "POP3Y", "POP4X", "POP4Y", "POP5X", "POP5Y", "POP6X", "POP6Y", "POP7X", "POP7Y", "POP8X", "POP8Y", "POP9X", "POP9Y", "RMTQ", "RX", "RY", "VOCMX", "VOCMY", "VOP10X", "VOP10Y", "VOP11X", "VOP11Y", "VOP2X", "VOP2Y", "VRX", "VRY" ]
+   "Items": [ "HZ", "KECM", "LATQ", "LETQ", "LHTQ", "LKTQ", "LSTQ", "PX", "PY", "RATQ", "RETQ", "RHTQ", "RKTQ", "RSTQ", "RX1", "RX2", "RY1", "RY2", "U10", "U11", "U12", "U13", "U4", "U5", "U6", "U7", "U8", "U9", "VRX1", "VRX2", "VRY1", "VRY2", "Q1p", "Q2p", "Q3p", "U1p", "U2p", "U3p", "DLX1", "DLX2", "LMTQ", "POCMX", "POCMY", "POP10X", "POP10Y", "POP11X", "POP11Y", "POP12X", "POP12Y", "POP13X", "POP13Y", "POP14X", "POP14Y", "POP15X", "POP15Y", "POP16X", "POP16Y", "POP1X", "POP1Y", "POP2X", "POP2Y", "POP3X", "POP3Y", "POP4X", "POP4Y", "POP5X", "POP5Y", "POP6X", "POP6Y", "POP7X", "POP7Y", "POP8X", "POP8Y", "POP9X", "POP9Y", "RMTQ", "RX", "RY", "VOCMX", "VOCMY", "VOP2X", "VOP2Y", "VRX", "VRY" ]
   }
   },
     { "CommonStatement":  { 
@@ -38,7 +38,7 @@
     { "OpenStatement": "OPEN ( UNIT = 25 , FILE = \u0027model/13seg_ad_swing_vf/model.5\u0027 , STATUS = \u0027UNKNOWN\u0027 )" },
     { "OpenStatement": "OPEN ( UNIT = 26 , FILE = \u0027model/13seg_ad_swing_vf/model.6\u0027 , STATUS = \u0027UNKNOWN\u0027 )" },
     { "ReadStatement": "READ ( 20 , 7000 , END = 7100 , ERR = 7101 ) ( MESSAGE ILOOP , ILOOP = 1 , 99 )" },
-    { "ReadStatement": "READ ( 20 , 7010 , END = 7100 , ERR = 7101 ) FOOTANG , G , IFF , IHAT , ILA , IRF , ISH , ITH , IUA , K1 , K2 , K3 , K4 , K5 , K6 , K7 , K8 , LFF , LFFO , LHAT , LHATO , LLA , LLAO , LMTPXI , LRF , LRFF , LRFFO , LRFO , LSH , LSHO , LTH , LTHO , LTOEXI , LUA , LUAO , MFF , MHAT , MLA , MRF , MSH , MTH , MTPB , MTPK , MUA , RMTPXI , RTOEXI" },
+    { "ReadStatement": "READ ( 20 , 7010 , END = 7100 , ERR = 7101 ) FOOTANG , G , IFF , IHAT , ILA , IRF , ISH , ITH , IUA , K1 , K2 , K3 , K4 , K5 , K6 , K7 , K8 , LFF , LFFO , LHAT , LHATO , LLA , LLAO , LRF , LRFF , LRFFO , LRFO , LSH , LSHO , LTH , LTHO , LUA , LUAO , MFF , MHAT , MLA , MRF , MSH , MTH , MTPB , MTPK , MTPXI , MUA , TOEXI" },
     { "ReadStatement": "READ ( 20 , 7010 , END = 7100 , ERR = 7101 ) Q1 , Q2 , Q3 , U1 , U2 , U3" },
     { "ReadStatement": "READ ( 20 , 7011 , END = 7100 , ERR = 7101 ) TINITIAL , TFINAL , INTEGSTP , PRINTINT , ABSERR , RELERR" },
     { "WriteStatement": "WRITE ( * , 6021 ) ( MESSAGE ILOOP , ILOOP = 1 , 99 )" },
@@ -1211,7 +1211,7 @@
     { "DimensionStatement": [  { "VAR": "*" },  { "VARp": "*" } ] },
     { "CommonStatement":  { 
    "Name": "CONSTNTS",
-   "Items": [ "FOOTANG", "G", "IFF", "IHAT", "ILA", "IRF", "ISH", "ITH", "IUA", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "LFF", "LFFO", "LHAT", "LHATO", "LLA", "LLAO", "LMTPXI", "LRF", "LRFF", "LRFFO", "LRFO", "LSH", "LSHO", "LTH", "LTHO", "LTOEXI", "LUA", "LUAO", "MFF", "MHAT", "MLA", "MRF", "MSH", "MTH", "MTPB", "MTPK", "MUA", "RMTPXI", "RTOEXI" ]
+   "Items": [ "FOOTANG", "G", "IFF", "IHAT", "ILA", "IRF", "ISH", "ITH", "IUA", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "LFF", "LFFO", "LHAT", "LHATO", "LLA", "LLAO", "LRF", "LRFF", "LRFFO", "LRFO", "LSH", "LSHO", "LTH", "LTHO", "LUA", "LUAO", "MFF", "MHAT", "MLA", "MRF", "MSH", "MTH", "MTPB", "MTPK", "MTPXI", "MUA", "TOEXI" ]
   }
   },
     { "CommonStatement":  { 
@@ -1226,7 +1226,7 @@
   },
     { "CommonStatement":  { 
    "Name": "ALGBRAIC",
-   "Items": [ "HZ", "KECM", "LATQ", "LETQ", "LHTQ", "LKTQ", "LSTQ", "PX", "PY", "RATQ", "RETQ", "RHTQ", "RKTQ", "RSTQ", "RX1", "RX2", "RY1", "RY2", "U10", "U11", "U12", "U13", "U4", "U5", "U6", "U7", "U8", "U9", "VRX1", "VRX2", "VRY1", "VRY2", "Q1p", "Q2p", "Q3p", "U1p", "U2p", "U3p", "DLX1", "DLX2", "DRX1", "DRX2", "LMTQ", "POCMX", "POCMY", "POP10X", "POP10Y", "POP11X", "POP11Y", "POP12X", "POP12Y", "POP13X", "POP13Y", "POP14X", "POP14Y", "POP15X", "POP15Y", "POP16X", "POP16Y", "POP1X", "POP1Y", "POP2X", "POP2Y", "POP3X", "POP3Y", "POP4X", "POP4Y", "POP5X", "POP5Y", "POP6X", "POP6Y", "POP7X", "POP7Y", "POP8X", "POP8Y", "POP9X", "POP9Y", "RMTQ", "RX", "RY", "VOCMX", "VOCMY", "VOP10X", "VOP10Y", "VOP11X", "VOP11Y", "VOP2X", "VOP2Y", "VRX", "VRY" ]
+   "Items": [ "HZ", "KECM", "LATQ", "LETQ", "LHTQ", "LKTQ", "LSTQ", "PX", "PY", "RATQ", "RETQ", "RHTQ", "RKTQ", "RSTQ", "RX1", "RX2", "RY1", "RY2", "U10", "U11", "U12", "U13", "U4", "U5", "U6", "U7", "U8", "U9", "VRX1", "VRX2", "VRY1", "VRY2", "Q1p", "Q2p", "Q3p", "U1p", "U2p", "U3p", "DLX1", "DLX2", "LMTQ", "POCMX", "POCMY", "POP10X", "POP10Y", "POP11X", "POP11Y", "POP12X", "POP12Y", "POP13X", "POP13Y", "POP14X", "POP14Y", "POP15X", "POP15Y", "POP16X", "POP16Y", "POP1X", "POP1Y", "POP2X", "POP2Y", "POP3X", "POP3Y", "POP4X", "POP4Y", "POP5X", "POP5Y", "POP6X", "POP6Y", "POP7X", "POP7Y", "POP8X", "POP8Y", "POP9X", "POP9Y", "RMTQ", "RX", "RY", "VOCMX", "VOCMY", "VOP2X", "VOP2Y", "VRX", "VRY" ]
   }
   },
     { "CommonStatement":  { 
@@ -1283,6 +1283,26 @@
   }
   },
     { "AssignmentStatement":  { 
+   "lhs": "VRX1",
+   "rhs": [ "T", "**", 3 ]
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": "VRX2",
+   "rhs": [ "T", "**", 3 ]
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": "VRY1",
+   "rhs": [ "T", "**", 3 ]
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": "VRY2",
+   "rhs": [ "T", "**", 3 ]
+  }
+  },
+    { "AssignmentStatement":  { 
    "lhs": "Q1p",
    "rhs": [ "U1" ]
   }
@@ -1316,7 +1336,7 @@
   },
     { "AssignmentStatement":  { 
    "lhs": "DLX1",
-   "rhs": [ "Q1", "-", "LTOEXI" ]
+   "rhs": [ "Q1", "-", "TOEXI" ]
   }
   },
     { "AssignmentStatement":  { 
@@ -1531,170 +1551,6 @@
   }
   },
     { "AssignmentStatement":  { 
-   "lhs": [ "Z", 16 ],
-   "rhs": [
-    [ "SIN",  { "VarRef": "RMTP" } ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 11 ],
-   "rhs": [
-    [ "COS",  { "VarRef": "RA" } ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 8 ],
-   "rhs": [
-    [ "SIN",  { "VarRef": "RK" } ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 3 ],
-   "rhs": [
-    [ "COS",  { "VarRef": "RH" } ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 4 ],
-   "rhs": [
-    [ "SIN",  { "VarRef": "RH" } ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 58 ],
-   "rhs": [
-    [ "Z", 3 ],
-    "*",
-    [ "Z", 2 ],
-    "-",
-    [ "Z", 4 ],
-    "*",
-    [ "Z", 1 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 7 ],
-   "rhs": [
-    [ "COS",  { "VarRef": "RK" } ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 57 ],
-   "rhs": [
-    [ "Z", 3 ],
-    "*",
-    [ "Z", 1 ],
-    "\u002B",
-    [ "Z", 4 ],
-    "*",
-    [ "Z", 2 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 63 ],
-   "rhs": [
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 58 ],
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 57 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 12 ],
-   "rhs": [
-    [ "SIN",  { "VarRef": "RA" } ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 61 ],
-   "rhs": [
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 58 ],
-    "-",
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 57 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 67 ],
-   "rhs": [
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 63 ],
-    "-",
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 61 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 15 ],
-   "rhs": [
-    [ "COS",  { "VarRef": "RMTP" } ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 65 ],
-   "rhs": [
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 63 ],
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 61 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 73 ],
-   "rhs": [
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 67 ],
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 65 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
    "lhs": [ "Z", 13 ],
    "rhs": [
     [ "COS",  { "VarRef": "LA" } ]
@@ -1873,1109 +1729,13 @@
   }
   },
     { "AssignmentStatement":  { 
-   "lhs": [ "Z", 51 ],
-   "rhs": [
-    [ "Z", 14 ],
-    "*",
-    [ "Z", 38 ],
-    "-",
-    [ "Z", 13 ],
-    "*",
-    [ "Z", 36 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 55 ],
-   "rhs": [
-    [ "Z", 5 ],
-    "*",
-    [ "Z", 2 ],
-    "-",
-    [ "Z", 6 ],
-    "*",
-    [ "Z", 1 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "POP11Y",
+   "lhs": "POP2Y",
    "rhs": [
     "Q2",
-    "\u002B",
-    "LFF",
-    "*",
-    [ "Z", 73 ],
-    "\u002B",
-    "LRF",
-    "*",
-    [ "Z", 65 ],
-    "\u002B",
-    "LSH",
-    "*",
-    [ "Z", 61 ],
-    "\u002B",
-    "LTH",
-    "*",
-    [ "Z", 58 ],
     "-",
     "LFF",
     "*",
-    [ "Z", 40 ],
-    "-",
-    "LRF",
-    "*",
-    [ "Z", 51 ],
-    "-",
-    "LSH",
-    "*",
-    [ "Z", 36 ],
-    "-",
-    "LTH",
-    "*",
-    [ "Z", 55 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 207 ],
-   "rhs": [
-    [ "Z", 3 ],
-    "*",
-    [ "Z", 5 ],
-    "\u002B",
-    [ "Z", 4 ],
-    "*",
-    [ "Z", 6 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 155 ],
-   "rhs": [ "LKp", "-", "LAp", "-", "LHp", "-", "LMTPp" ]
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 157 ],
-   "rhs": [
-    "LFF",
-    "*",
-    [ "Z", 155 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 168 ],
-   "rhs": [
-    [ "Z", 18 ],
-    "*",
-    [ "Z", 157 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 172 ],
-   "rhs": [
-    [ "Z", 17 ],
-    "*",
-    [ "Z", 157 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 158 ],
-   "rhs": [ "LKp", "-", "LAp", "-", "LHp" ]
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 173 ],
-   "rhs": [
-    "LRF",
-    "*",
-    [ "Z", 158 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 175 ],
-   "rhs": [
-    [ "Z", 172 ],
-    "-",
-    [ "Z", 173 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 183 ],
-   "rhs": [
-    [ "Z", 14 ],
-    "*",
-    [ "Z", 168 ],
-    "-",
-    [ "Z", 13 ],
-    "*",
-    [ "Z", 175 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 184 ],
-   "rhs": [ "LKp", "-", "LHp" ]
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 188 ],
-   "rhs": [
-    "LSH",
-    "*",
-    [ "Z", 184 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 190 ],
-   "rhs": [
-    [ "Z", 183 ],
-    "-",
-    [ "Z", 188 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 179 ],
-   "rhs": [
-    "-",
-    [ "Z", 13 ],
-    "*",
-    [ "Z", 168 ],
-    "-",
-    [ "Z", 14 ],
-    "*",
-    [ "Z", 175 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 195 ],
-   "rhs": [
-    [ "Z", 10 ],
-    "*",
-    [ "Z", 190 ],
-    "-",
-    [ "Z", 9 ],
-    "*",
-    [ "Z", 179 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 209 ],
-   "rhs": [
-    [ "Z", 3 ],
-    "*",
-    [ "Z", 6 ],
-    "-",
-    [ "Z", 4 ],
-    "*",
-    [ "Z", 5 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 200 ],
-   "rhs": [
-    "-",
-    [ "Z", 9 ],
-    "*",
-    [ "Z", 190 ],
-    "-",
-    [ "Z", 10 ],
-    "*",
-    [ "Z", 179 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 204 ],
-   "rhs": [ "LTH", "*", "LHp" ]
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 206 ],
-   "rhs": [
-    [ "Z", 200 ],
-    "\u002B",
-    [ "Z", 204 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 215 ],
-   "rhs": [
-    [ "Z", 207 ],
-    "*",
-    [ "Z", 195 ],
-    "\u002B",
-    [ "Z", 209 ],
-    "*",
-    [ "Z", 206 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 208 ],
-   "rhs": [
-    [ "Z", 4 ],
-    "*",
-    [ "Z", 5 ],
-    "-",
-    [ "Z", 3 ],
-    "*",
-    [ "Z", 6 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 221 ],
-   "rhs": [
-    [ "Z", 207 ],
-    "*",
-    [ "Z", 206 ],
-    "\u002B",
-    [ "Z", 208 ],
-    "*",
-    [ "Z", 195 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 225 ],
-   "rhs": [ "LTH", "*", "RHp" ]
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 227 ],
-   "rhs": [
-    [ "Z", 221 ],
-    "-",
-    [ "Z", 225 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 243 ],
-   "rhs": [
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 215 ],
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 227 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 244 ],
-   "rhs": [ "RKp", "-", "RHp" ]
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 249 ],
-   "rhs": [
-    "LSH",
-    "*",
-    [ "Z", 244 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 252 ],
-   "rhs": [
-    [ "Z", 243 ],
-    "\u002B",
-    [ "Z", 249 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 235 ],
-   "rhs": [
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 215 ],
-    "-",
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 227 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 277 ],
-   "rhs": [
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 252 ],
-    "-",
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 235 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 253 ],
-   "rhs": [ "RKp", "-", "RAp", "-", "RHp" ]
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 278 ],
-   "rhs": [
-    "LRF",
-    "*",
-    [ "Z", 253 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 282 ],
-   "rhs": [
-    [ "Z", 277 ],
-    "\u002B",
-    [ "Z", 278 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 268 ],
-   "rhs": [
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 252 ],
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 235 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 292 ],
-   "rhs": [
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 282 ],
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 268 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 283 ],
-   "rhs": [
-    "LRF",
-    "*",
-    [ "Z", 16 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 165 ],
-   "rhs": [
-    "LFF",
-    "*",
-    [ "Z", 18 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 171 ],
-   "rhs": [
-    "LFF",
-    "*",
-    [ "Z", 17 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 174 ],
-   "rhs": [
-    [ "Z", 171 ],
-    "-",
-    "LRF"
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 180 ],
-   "rhs": [
-    [ "Z", 14 ],
-    "*",
-    [ "Z", 165 ],
-    "-",
-    [ "Z", 13 ],
-    "*",
-    [ "Z", 174 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 176 ],
-   "rhs": [
-    "-",
-    [ "Z", 13 ],
-    "*",
-    [ "Z", 165 ],
-    "-",
-    [ "Z", 14 ],
-    "*",
-    [ "Z", 174 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 191 ],
-   "rhs": [
-    [ "Z", 10 ],
-    "*",
-    [ "Z", 180 ],
-    "-",
-    [ "Z", 9 ],
-    "*",
-    [ "Z", 176 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 196 ],
-   "rhs": [
-    "-",
-    [ "Z", 9 ],
-    "*",
-    [ "Z", 180 ],
-    "-",
-    [ "Z", 10 ],
-    "*",
-    [ "Z", 176 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 210 ],
-   "rhs": [
-    [ "Z", 191 ],
-    "*",
-    [ "Z", 207 ],
-    "\u002B",
-    [ "Z", 196 ],
-    "*",
-    [ "Z", 209 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 216 ],
-   "rhs": [
-    [ "Z", 191 ],
-    "*",
-    [ "Z", 208 ],
-    "\u002B",
-    [ "Z", 196 ],
-    "*",
-    [ "Z", 207 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 236 ],
-   "rhs": [
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 210 ],
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 216 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 228 ],
-   "rhs": [
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 210 ],
-    "-",
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 216 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 270 ],
-   "rhs": [
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 236 ],
-    "-",
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 228 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 261 ],
-   "rhs": [
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 236 ],
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 228 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 284 ],
-   "rhs": [
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 270 ],
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 261 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 189 ],
-   "rhs": [
-    [ "Z", 180 ],
-    "-",
-    "LSH"
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 192 ],
-   "rhs": [
-    [ "Z", 10 ],
-    "*",
-    [ "Z", 189 ],
-    "-",
-    [ "Z", 9 ],
-    "*",
-    [ "Z", 176 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 197 ],
-   "rhs": [
-    "-",
-    [ "Z", 9 ],
-    "*",
-    [ "Z", 189 ],
-    "-",
-    [ "Z", 10 ],
-    "*",
-    [ "Z", 176 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 205 ],
-   "rhs": [
-    [ "Z", 197 ],
-    "-",
-    "LTH"
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 211 ],
-   "rhs": [
-    [ "Z", 192 ],
-    "*",
-    [ "Z", 207 ],
-    "\u002B",
-    [ "Z", 205 ],
-    "*",
-    [ "Z", 209 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 218 ],
-   "rhs": [
-    [ "Z", 192 ],
-    "*",
-    [ "Z", 208 ],
-    "\u002B",
-    [ "Z", 205 ],
-    "*",
-    [ "Z", 207 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 238 ],
-   "rhs": [
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 211 ],
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 218 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 230 ],
-   "rhs": [
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 211 ],
-    "-",
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 218 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 272 ],
-   "rhs": [
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 238 ],
-    "-",
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 230 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 262 ],
-   "rhs": [
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 238 ],
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 230 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 285 ],
-   "rhs": [
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 272 ],
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 262 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 212 ],
-   "rhs": [
-    [ "Z", 192 ],
-    "*",
-    [ "Z", 207 ],
-    "\u002B",
-    [ "Z", 197 ],
-    "*",
-    [ "Z", 209 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 217 ],
-   "rhs": [
-    [ "Z", 192 ],
-    "*",
-    [ "Z", 208 ],
-    "\u002B",
-    [ "Z", 197 ],
-    "*",
-    [ "Z", 207 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 239 ],
-   "rhs": [
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 212 ],
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 217 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 231 ],
-   "rhs": [
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 212 ],
-    "-",
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 217 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 273 ],
-   "rhs": [
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 239 ],
-    "-",
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 231 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 263 ],
-   "rhs": [
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 239 ],
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 231 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 286 ],
-   "rhs": [
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 273 ],
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 263 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 226 ],
-   "rhs": [
-    "LTH",
-    "\u002B",
-    [ "Z", 218 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 237 ],
-   "rhs": [
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 211 ],
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 226 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 250 ],
-   "rhs": [
-    "LSH",
-    "\u002B",
-    [ "Z", 237 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 229 ],
-   "rhs": [
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 211 ],
-    "-",
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 226 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 271 ],
-   "rhs": [
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 250 ],
-    "-",
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 229 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 279 ],
-   "rhs": [
-    "LRF",
-    "\u002B",
-    [ "Z", 271 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 264 ],
-   "rhs": [
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 250 ],
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 229 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 287 ],
-   "rhs": [
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 279 ],
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 264 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 234 ],
-   "rhs": [
-    "LTH",
-    "*",
-    [ "Z", 8 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 242 ],
-   "rhs": [
-    "LTH",
-    "*",
-    [ "Z", 7 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 251 ],
-   "rhs": [
-    "LSH",
-    "-",
-    [ "Z", 242 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 269 ],
-   "rhs": [
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 234 ],
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 251 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 280 ],
-   "rhs": [
-    "LRF",
-    "\u002B",
-    [ "Z", 269 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 265 ],
-   "rhs": [
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 234 ],
-    "\u002B",
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 251 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 288 ],
-   "rhs": [
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 280 ],
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 265 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 276 ],
-   "rhs": [
-    "LSH",
-    "*",
-    [ "Z", 11 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 281 ],
-   "rhs": [
-    "LRF",
-    "-",
-    [ "Z", 276 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 260 ],
-   "rhs": [
-    "LSH",
-    "*",
-    [ "Z", 12 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 289 ],
-   "rhs": [
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 281 ],
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 260 ]
+    [ "Z", 40 ]
     ]
 
   }
@@ -3037,207 +1797,6 @@
   }
   },
     { "AssignmentStatement":  { 
-   "lhs": [ "Z", 41 ],
-   "rhs": [
-    [ "Z", 29 ],
-    "*",
-    [ "Z", 37 ],
-    "\u002B",
-    [ "Z", 31 ],
-    "*",
-    [ "Z", 35 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 166 ],
-   "rhs": [
-    "-",
-    [ "Z", 17 ],
-    "*",
-    [ "Z", 39 ],
-    "-",
-    [ "Z", 18 ],
-    "*",
-    [ "Z", 41 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 169 ],
-   "rhs": [
-    [ "Z", 18 ],
-    "*",
-    [ "Z", 39 ],
-    "-",
-    [ "Z", 17 ],
-    "*",
-    [ "Z", 41 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 181 ],
-   "rhs": [
-    [ "Z", 14 ],
-    "*",
-    [ "Z", 166 ],
-    "-",
-    [ "Z", 13 ],
-    "*",
-    [ "Z", 169 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 177 ],
-   "rhs": [
-    "-",
-    [ "Z", 13 ],
-    "*",
-    [ "Z", 166 ],
-    "-",
-    [ "Z", 14 ],
-    "*",
-    [ "Z", 169 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 193 ],
-   "rhs": [
-    [ "Z", 10 ],
-    "*",
-    [ "Z", 181 ],
-    "-",
-    [ "Z", 9 ],
-    "*",
-    [ "Z", 177 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 198 ],
-   "rhs": [
-    "-",
-    [ "Z", 9 ],
-    "*",
-    [ "Z", 181 ],
-    "-",
-    [ "Z", 10 ],
-    "*",
-    [ "Z", 177 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 213 ],
-   "rhs": [
-    [ "Z", 207 ],
-    "*",
-    [ "Z", 193 ],
-    "\u002B",
-    [ "Z", 209 ],
-    "*",
-    [ "Z", 198 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 219 ],
-   "rhs": [
-    [ "Z", 207 ],
-    "*",
-    [ "Z", 198 ],
-    "\u002B",
-    [ "Z", 208 ],
-    "*",
-    [ "Z", 193 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 240 ],
-   "rhs": [
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 213 ],
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 219 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 232 ],
-   "rhs": [
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 213 ],
-    "-",
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 219 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 274 ],
-   "rhs": [
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 240 ],
-    "-",
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 232 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 266 ],
-   "rhs": [
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 240 ],
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 232 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 290 ],
-   "rhs": [
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 274 ],
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 266 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
    "lhs": [ "Z", 42 ],
    "rhs": [
     [ "Z", 29 ],
@@ -3252,1072 +1811,30 @@
   }
   },
     { "AssignmentStatement":  { 
-   "lhs": [ "Z", 167 ],
-   "rhs": [
-    "-",
-    [ "Z", 17 ],
-    "*",
-    [ "Z", 40 ],
-    "-",
-    [ "Z", 18 ],
-    "*",
-    [ "Z", 42 ]
-    ]
-
+   "lhs": [ "Z", 155 ],
+   "rhs": [ "LKp", "-", "LAp", "-", "LHp", "-", "LMTPp" ]
   }
   },
     { "AssignmentStatement":  { 
-   "lhs": [ "Z", 170 ],
-   "rhs": [
-    [ "Z", 18 ],
-    "*",
-    [ "Z", 40 ],
-    "-",
-    [ "Z", 17 ],
-    "*",
-    [ "Z", 42 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 182 ],
-   "rhs": [
-    [ "Z", 14 ],
-    "*",
-    [ "Z", 167 ],
-    "-",
-    [ "Z", 13 ],
-    "*",
-    [ "Z", 170 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 178 ],
-   "rhs": [
-    "-",
-    [ "Z", 13 ],
-    "*",
-    [ "Z", 167 ],
-    "-",
-    [ "Z", 14 ],
-    "*",
-    [ "Z", 170 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 194 ],
-   "rhs": [
-    [ "Z", 10 ],
-    "*",
-    [ "Z", 182 ],
-    "-",
-    [ "Z", 9 ],
-    "*",
-    [ "Z", 178 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 199 ],
-   "rhs": [
-    "-",
-    [ "Z", 9 ],
-    "*",
-    [ "Z", 182 ],
-    "-",
-    [ "Z", 10 ],
-    "*",
-    [ "Z", 178 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 214 ],
-   "rhs": [
-    [ "Z", 207 ],
-    "*",
-    [ "Z", 194 ],
-    "\u002B",
-    [ "Z", 209 ],
-    "*",
-    [ "Z", 199 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 220 ],
-   "rhs": [
-    [ "Z", 207 ],
-    "*",
-    [ "Z", 199 ],
-    "\u002B",
-    [ "Z", 208 ],
-    "*",
-    [ "Z", 194 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 241 ],
-   "rhs": [
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 214 ],
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 220 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 233 ],
-   "rhs": [
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 214 ],
-    "-",
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 220 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 275 ],
-   "rhs": [
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 241 ],
-    "-",
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 233 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 267 ],
-   "rhs": [
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 241 ],
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 233 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 291 ],
-   "rhs": [
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 275 ],
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 267 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 75 ],
-   "rhs": [
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 67 ],
-    "-",
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 65 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 302 ],
-   "rhs": [
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 282 ],
-    "-",
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 268 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 303 ],
-   "rhs": [ "RKp", "-", "RAp", "-", "RHp", "-", "RMTPp" ]
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 310 ],
+   "lhs": [ "Z", 157 ],
    "rhs": [
     "LFF",
     "*",
-    [ "Z", 303 ]
+    [ "Z", 155 ]
     ]
 
   }
   },
     { "AssignmentStatement":  { 
-   "lhs": [ "Z", 315 ],
+   "lhs": [ "Z", 41 ],
    "rhs": [
-    [ "Z", 302 ],
-    "\u002B",
-    [ "Z", 310 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 294 ],
-   "rhs": [
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 270 ],
-    "-",
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 261 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 295 ],
-   "rhs": [
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 272 ],
-    "-",
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 262 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 296 ],
-   "rhs": [
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 273 ],
-    "-",
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 263 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 297 ],
-   "rhs": [
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 279 ],
-    "-",
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 264 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 311 ],
-   "rhs": [
-    "LFF",
-    "\u002B",
-    [ "Z", 297 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 298 ],
-   "rhs": [
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 280 ],
-    "-",
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 265 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 312 ],
-   "rhs": [
-    "LFF",
-    "\u002B",
-    [ "Z", 298 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 293 ],
-   "rhs": [
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 281 ],
-    "-",
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 260 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 313 ],
-   "rhs": [
-    "LFF",
-    "\u002B",
-    [ "Z", 293 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 301 ],
-   "rhs": [
-    "LRF",
-    "*",
-    [ "Z", 15 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 314 ],
-   "rhs": [
-    "LFF",
-    "-",
-    [ "Z", 301 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 299 ],
-   "rhs": [
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 274 ],
-    "-",
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 266 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 300 ],
-   "rhs": [
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 275 ],
-    "-",
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 267 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "VOP11Y",
-   "rhs": [
-    [ "Z", 73 ],
-    "*",
-    "(",
-    [ "Z", 292 ],
-    "\u002B",
-    [ "Z", 283 ],
-    "*",
-    "U8",
-    "\u002B",
-    [ "Z", 284 ],
-    "*",
-    "U9",
-    "\u002B",
-    [ "Z", 285 ],
-    "*",
-    "U5",
-    "\u002B",
-    [ "Z", 286 ],
-    "*",
-    "U7",
-    "\u002B",
-    [ "Z", 287 ],
-    "*",
-    "U3",
-    "\u002B",
-    [ "Z", 288 ],
-    "*",
-    "U4",
-    "\u002B",
-    [ "Z", 289 ],
-    "*",
-    "U6",
-    "\u002B",
-    [ "Z", 290 ],
-    "*",
-    "U1",
-    "\u002B",
-    [ "Z", 291 ],
-    "*",
-    "U2",
-    ")",
-    "\u002B",
-    [ "Z", 75 ],
-    "*",
-    "(",
-    [ "Z", 315 ],
-    "\u002B",
-    [ "Z", 294 ],
-    "*",
-    "U9",
-    "\u002B",
-    [ "Z", 295 ],
-    "*",
-    "U5",
-    "\u002B",
-    [ "Z", 296 ],
-    "*",
-    "U7",
-    "\u002B",
-    [ "Z", 311 ],
-    "*",
-    "U3",
-    "\u002B",
-    [ "Z", 312 ],
-    "*",
-    "U4",
-    "\u002B",
-    [ "Z", 313 ],
-    "*",
-    "U6",
-    "\u002B",
-    [ "Z", 314 ],
-    "*",
-    "U8",
-    "\u002B",
-    [ "Z", 299 ],
-    "*",
-    "U1",
-    "\u002B",
-    [ "Z", 300 ],
-    "*",
-    "U2",
-    ")"
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "VRY1",
-   "rhs": [
-    "-",
-    "K3",
-    "*",
-    "POP11Y",
-    "-",
-    "K4",
-    "*",
-    [ "ABS",  { "VarRef": "POP11Y" } ],
-    "*",
-    "VOP11Y"
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 59 ],
-   "rhs": [
-    [ "Z", 4 ],
-    "*",
-    [ "Z", 1 ],
-    "-",
-    [ "Z", 3 ],
-    "*",
-    [ "Z", 2 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 62 ],
-   "rhs": [
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 57 ],
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 59 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 60 ],
-   "rhs": [
-    "-",
-    [ "Z", 7 ],
-    "*",
-    [ "Z", 57 ],
-    "-",
-    [ "Z", 8 ],
-    "*",
-    [ "Z", 59 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 66 ],
-   "rhs": [
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 62 ],
-    "-",
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 60 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 64 ],
-   "rhs": [
-    [ "Z", 12 ],
-    "*",
-    [ "Z", 62 ],
-    "-",
-    [ "Z", 11 ],
-    "*",
-    [ "Z", 60 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 72 ],
-   "rhs": [
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 66 ],
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 64 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 50 ],
-   "rhs": [
-    [ "Z", 14 ],
+    [ "Z", 29 ],
     "*",
     [ "Z", 37 ],
-    "-",
-    [ "Z", 13 ],
+    "\u002B",
+    [ "Z", 31 ],
     "*",
     [ "Z", 35 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 54 ],
-   "rhs": [
-    [ "Z", 5 ],
-    "*",
-    [ "Z", 1 ],
-    "\u002B",
-    [ "Z", 6 ],
-    "*",
-    [ "Z", 2 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "POP11X",
-   "rhs": [
-    "Q1",
-    "\u002B",
-    "LFF",
-    "*",
-    [ "Z", 72 ],
-    "\u002B",
-    "LRF",
-    "*",
-    [ "Z", 64 ],
-    "\u002B",
-    "LSH",
-    "*",
-    [ "Z", 60 ],
-    "\u002B",
-    "LTH",
-    "*",
-    [ "Z", 57 ],
-    "-",
-    "LFF",
-    "*",
-    [ "Z", 39 ],
-    "-",
-    "LRF",
-    "*",
-    [ "Z", 50 ],
-    "-",
-    "LSH",
-    "*",
-    [ "Z", 35 ],
-    "-",
-    "LTH",
-    "*",
-    [ "Z", 54 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "DRX1",
-   "rhs": [ "POP11X", "-", "RTOEXI" ]
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": [ "Z", 74 ],
-   "rhs": [
-    "-",
-    [ "Z", 15 ],
-    "*",
-    [ "Z", 66 ],
-    "-",
-    [ "Z", 16 ],
-    "*",
-    [ "Z", 64 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "VOP11X",
-   "rhs": [
-    [ "Z", 72 ],
-    "*",
-    "(",
-    [ "Z", 292 ],
-    "\u002B",
-    [ "Z", 283 ],
-    "*",
-    "U8",
-    "\u002B",
-    [ "Z", 284 ],
-    "*",
-    "U9",
-    "\u002B",
-    [ "Z", 285 ],
-    "*",
-    "U5",
-    "\u002B",
-    [ "Z", 286 ],
-    "*",
-    "U7",
-    "\u002B",
-    [ "Z", 287 ],
-    "*",
-    "U3",
-    "\u002B",
-    [ "Z", 288 ],
-    "*",
-    "U4",
-    "\u002B",
-    [ "Z", 289 ],
-    "*",
-    "U6",
-    "\u002B",
-    [ "Z", 290 ],
-    "*",
-    "U1",
-    "\u002B",
-    [ "Z", 291 ],
-    "*",
-    "U2",
-    ")",
-    "\u002B",
-    [ "Z", 74 ],
-    "*",
-    "(",
-    [ "Z", 315 ],
-    "\u002B",
-    [ "Z", 294 ],
-    "*",
-    "U9",
-    "\u002B",
-    [ "Z", 295 ],
-    "*",
-    "U5",
-    "\u002B",
-    [ "Z", 296 ],
-    "*",
-    "U7",
-    "\u002B",
-    [ "Z", 311 ],
-    "*",
-    "U3",
-    "\u002B",
-    [ "Z", 312 ],
-    "*",
-    "U4",
-    "\u002B",
-    [ "Z", 313 ],
-    "*",
-    "U6",
-    "\u002B",
-    [ "Z", 314 ],
-    "*",
-    "U8",
-    "\u002B",
-    [ "Z", 299 ],
-    "*",
-    "U1",
-    "\u002B",
-    [ "Z", 300 ],
-    "*",
-    "U2",
-    ")"
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "VRX1",
-   "rhs": [ "-", "VRY1", "*", "(", "K1", "*", "DRX1", "\u002B", "K2", "*", "VOP11X", ")" ]
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "POP10Y",
-   "rhs": [
-    "Q2",
-    "\u002B",
-    "LRF",
-    "*",
-    [ "Z", 65 ],
-    "\u002B",
-    "LSH",
-    "*",
-    [ "Z", 61 ],
-    "\u002B",
-    "LTH",
-    "*",
-    [ "Z", 58 ],
-    "-",
-    "LFF",
-    "*",
-    [ "Z", 40 ],
-    "-",
-    "LRF",
-    "*",
-    [ "Z", 51 ],
-    "-",
-    "LSH",
-    "*",
-    [ "Z", 36 ],
-    "-",
-    "LTH",
-    "*",
-    [ "Z", 55 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "VOP10Y",
-   "rhs": [
-    [ "Z", 65 ],
-    "*",
-    "(",
-    [ "Z", 268 ],
-    "\u002B",
-    [ "Z", 260 ],
-    "*",
-    "U6",
-    "\u002B",
-    [ "Z", 261 ],
-    "*",
-    "U9",
-    "\u002B",
-    [ "Z", 262 ],
-    "*",
-    "U5",
-    "\u002B",
-    [ "Z", 263 ],
-    "*",
-    "U7",
-    "\u002B",
-    [ "Z", 264 ],
-    "*",
-    "U3",
-    "\u002B",
-    [ "Z", 265 ],
-    "*",
-    "U4",
-    "\u002B",
-    [ "Z", 266 ],
-    "*",
-    "U1",
-    "\u002B",
-    [ "Z", 267 ],
-    "*",
-    "U2",
-    ")",
-    "\u002B",
-    [ "Z", 67 ],
-    "*",
-    "(",
-    [ "Z", 282 ],
-    "\u002B",
-    "LRF",
-    "*",
-    "U8",
-    "\u002B",
-    [ "Z", 270 ],
-    "*",
-    "U9",
-    "\u002B",
-    [ "Z", 272 ],
-    "*",
-    "U5",
-    "\u002B",
-    [ "Z", 273 ],
-    "*",
-    "U7",
-    "\u002B",
-    [ "Z", 279 ],
-    "*",
-    "U3",
-    "\u002B",
-    [ "Z", 280 ],
-    "*",
-    "U4",
-    "\u002B",
-    [ "Z", 281 ],
-    "*",
-    "U6",
-    "\u002B",
-    [ "Z", 274 ],
-    "*",
-    "U1",
-    "\u002B",
-    [ "Z", 275 ],
-    "*",
-    "U2",
-    ")"
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "VRY2",
-   "rhs": [
-    "-",
-    "K7",
-    "*",
-    "POP10Y",
-    "-",
-    "K8",
-    "*",
-    [ "ABS",  { "VarRef": "POP10Y" } ],
-    "*",
-    "VOP10Y"
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "POP10X",
-   "rhs": [
-    "Q1",
-    "\u002B",
-    "LRF",
-    "*",
-    [ "Z", 64 ],
-    "\u002B",
-    "LSH",
-    "*",
-    [ "Z", 60 ],
-    "\u002B",
-    "LTH",
-    "*",
-    [ "Z", 57 ],
-    "-",
-    "LFF",
-    "*",
-    [ "Z", 39 ],
-    "-",
-    "LRF",
-    "*",
-    [ "Z", 50 ],
-    "-",
-    "LSH",
-    "*",
-    [ "Z", 35 ],
-    "-",
-    "LTH",
-    "*",
-    [ "Z", 54 ]
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "DRX2",
-   "rhs": [ "POP10X", "-", "RMTPXI" ]
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "VOP10X",
-   "rhs": [
-    [ "Z", 64 ],
-    "*",
-    "(",
-    [ "Z", 268 ],
-    "\u002B",
-    [ "Z", 260 ],
-    "*",
-    "U6",
-    "\u002B",
-    [ "Z", 261 ],
-    "*",
-    "U9",
-    "\u002B",
-    [ "Z", 262 ],
-    "*",
-    "U5",
-    "\u002B",
-    [ "Z", 263 ],
-    "*",
-    "U7",
-    "\u002B",
-    [ "Z", 264 ],
-    "*",
-    "U3",
-    "\u002B",
-    [ "Z", 265 ],
-    "*",
-    "U4",
-    "\u002B",
-    [ "Z", 266 ],
-    "*",
-    "U1",
-    "\u002B",
-    [ "Z", 267 ],
-    "*",
-    "U2",
-    ")",
-    "\u002B",
-    [ "Z", 66 ],
-    "*",
-    "(",
-    [ "Z", 282 ],
-    "\u002B",
-    "LRF",
-    "*",
-    "U8",
-    "\u002B",
-    [ "Z", 270 ],
-    "*",
-    "U9",
-    "\u002B",
-    [ "Z", 272 ],
-    "*",
-    "U5",
-    "\u002B",
-    [ "Z", 273 ],
-    "*",
-    "U7",
-    "\u002B",
-    [ "Z", 279 ],
-    "*",
-    "U3",
-    "\u002B",
-    [ "Z", 280 ],
-    "*",
-    "U4",
-    "\u002B",
-    [ "Z", 281 ],
-    "*",
-    "U6",
-    "\u002B",
-    [ "Z", 274 ],
-    "*",
-    "U1",
-    "\u002B",
-    [ "Z", 275 ],
-    "*",
-    "U2",
-    ")"
-    ]
-
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "VRX2",
-   "rhs": [ "-", "VRY2", "*", "(", "K5", "*", "DRX2", "\u002B", "K6", "*", "VOP10X", ")" ]
-  }
-  },
-    { "AssignmentStatement":  { 
-   "lhs": "POP2Y",
-   "rhs": [
-    "Q2",
-    "-",
-    "LFF",
-    "*",
-    [ "Z", 40 ]
     ]
 
   }
@@ -4401,7 +1918,7 @@
   },
     { "AssignmentStatement":  { 
    "lhs": "DLX2",
-   "rhs": [ "POP2X", "-", "LMTPXI" ]
+   "rhs": [ "POP2X", "-", "MTPXI" ]
   }
   },
     { "AssignmentStatement":  { 
@@ -4455,6 +1972,70 @@
     { "AssignmentStatement":  { 
    "lhs": "RX2",
    "rhs": [ "-", "RY2", "*", "(", "K5", "*", "DLX2", "\u002B", "K6", "*", "VOP2X", ")" ]
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 3 ],
+   "rhs": [
+    [ "COS",  { "VarRef": "RH" } ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 4 ],
+   "rhs": [
+    [ "SIN",  { "VarRef": "RH" } ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 7 ],
+   "rhs": [
+    [ "COS",  { "VarRef": "RK" } ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 8 ],
+   "rhs": [
+    [ "SIN",  { "VarRef": "RK" } ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 11 ],
+   "rhs": [
+    [ "COS",  { "VarRef": "RA" } ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 12 ],
+   "rhs": [
+    [ "SIN",  { "VarRef": "RA" } ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 15 ],
+   "rhs": [
+    [ "COS",  { "VarRef": "RMTP" } ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 16 ],
+   "rhs": [
+    [ "SIN",  { "VarRef": "RMTP" } ]
+    ]
+
   }
   },
     { "AssignmentStatement":  { 
@@ -4580,6 +2161,192 @@
   }
   },
     { "AssignmentStatement":  { 
+   "lhs": [ "Z", 54 ],
+   "rhs": [
+    [ "Z", 5 ],
+    "*",
+    [ "Z", 1 ],
+    "\u002B",
+    [ "Z", 6 ],
+    "*",
+    [ "Z", 2 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 55 ],
+   "rhs": [
+    [ "Z", 5 ],
+    "*",
+    [ "Z", 2 ],
+    "-",
+    [ "Z", 6 ],
+    "*",
+    [ "Z", 1 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 57 ],
+   "rhs": [
+    [ "Z", 3 ],
+    "*",
+    [ "Z", 1 ],
+    "\u002B",
+    [ "Z", 4 ],
+    "*",
+    [ "Z", 2 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 58 ],
+   "rhs": [
+    [ "Z", 3 ],
+    "*",
+    [ "Z", 2 ],
+    "-",
+    [ "Z", 4 ],
+    "*",
+    [ "Z", 1 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 59 ],
+   "rhs": [
+    [ "Z", 4 ],
+    "*",
+    [ "Z", 1 ],
+    "-",
+    [ "Z", 3 ],
+    "*",
+    [ "Z", 2 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 60 ],
+   "rhs": [
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 57 ],
+    "-",
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 59 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 61 ],
+   "rhs": [
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 58 ],
+    "-",
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 57 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 62 ],
+   "rhs": [
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 57 ],
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 59 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 63 ],
+   "rhs": [
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 58 ],
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 57 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 64 ],
+   "rhs": [
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 62 ],
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 60 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 65 ],
+   "rhs": [
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 63 ],
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 61 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 66 ],
+   "rhs": [
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 62 ],
+    "-",
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 60 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 67 ],
+   "rhs": [
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 63 ],
+    "-",
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 61 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
    "lhs": [ "Z", 71 ],
    "rhs": [
     [ "Z", 27 ],
@@ -4587,6 +2354,64 @@
     [ "Z", 67 ],
     "-",
     [ "Z", 28 ],
+    "*",
+    [ "Z", 65 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 72 ],
+   "rhs": [
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 66 ],
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 64 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 73 ],
+   "rhs": [
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 67 ],
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 65 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 74 ],
+   "rhs": [
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 66 ],
+    "-",
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 64 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 75 ],
+   "rhs": [
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 67 ],
+    "-",
+    [ "Z", 16 ],
     "*",
     [ "Z", 65 ]
     ]
@@ -4780,6 +2605,11 @@
   }
   },
     { "AssignmentStatement":  { 
+   "lhs": [ "Z", 158 ],
+   "rhs": [ "LKp", "-", "LAp", "-", "LHp" ]
+  }
+  },
+    { "AssignmentStatement":  { 
    "lhs": [ "Z", 163 ],
    "rhs": [
     "LRFO",
@@ -4797,6 +2627,196 @@
     [ "Z", 158 ]
     ]
 
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 165 ],
+   "rhs": [
+    "LFF",
+    "*",
+    [ "Z", 18 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 166 ],
+   "rhs": [
+    "-",
+    [ "Z", 17 ],
+    "*",
+    [ "Z", 39 ],
+    "-",
+    [ "Z", 18 ],
+    "*",
+    [ "Z", 41 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 167 ],
+   "rhs": [
+    "-",
+    [ "Z", 17 ],
+    "*",
+    [ "Z", 40 ],
+    "-",
+    [ "Z", 18 ],
+    "*",
+    [ "Z", 42 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 169 ],
+   "rhs": [
+    [ "Z", 18 ],
+    "*",
+    [ "Z", 39 ],
+    "-",
+    [ "Z", 17 ],
+    "*",
+    [ "Z", 41 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 170 ],
+   "rhs": [
+    [ "Z", 18 ],
+    "*",
+    [ "Z", 40 ],
+    "-",
+    [ "Z", 17 ],
+    "*",
+    [ "Z", 42 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 171 ],
+   "rhs": [
+    "LFF",
+    "*",
+    [ "Z", 17 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 173 ],
+   "rhs": [
+    "LRF",
+    "*",
+    [ "Z", 158 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 174 ],
+   "rhs": [
+    [ "Z", 171 ],
+    "-",
+    "LRF"
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 176 ],
+   "rhs": [
+    "-",
+    [ "Z", 13 ],
+    "*",
+    [ "Z", 165 ],
+    "-",
+    [ "Z", 14 ],
+    "*",
+    [ "Z", 174 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 177 ],
+   "rhs": [
+    "-",
+    [ "Z", 13 ],
+    "*",
+    [ "Z", 166 ],
+    "-",
+    [ "Z", 14 ],
+    "*",
+    [ "Z", 169 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 178 ],
+   "rhs": [
+    "-",
+    [ "Z", 13 ],
+    "*",
+    [ "Z", 167 ],
+    "-",
+    [ "Z", 14 ],
+    "*",
+    [ "Z", 170 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 180 ],
+   "rhs": [
+    [ "Z", 14 ],
+    "*",
+    [ "Z", 165 ],
+    "-",
+    [ "Z", 13 ],
+    "*",
+    [ "Z", 174 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 181 ],
+   "rhs": [
+    [ "Z", 14 ],
+    "*",
+    [ "Z", 166 ],
+    "-",
+    [ "Z", 13 ],
+    "*",
+    [ "Z", 169 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 182 ],
+   "rhs": [
+    [ "Z", 14 ],
+    "*",
+    [ "Z", 167 ],
+    "-",
+    [ "Z", 13 ],
+    "*",
+    [ "Z", 170 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 184 ],
+   "rhs": [ "LKp", "-", "LHp" ]
   }
   },
     { "AssignmentStatement":  { 
@@ -4820,6 +2840,113 @@
   }
   },
     { "AssignmentStatement":  { 
+   "lhs": [ "Z", 188 ],
+   "rhs": [
+    "LSH",
+    "*",
+    [ "Z", 184 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 189 ],
+   "rhs": [
+    [ "Z", 180 ],
+    "-",
+    "LSH"
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 192 ],
+   "rhs": [
+    [ "Z", 10 ],
+    "*",
+    [ "Z", 189 ],
+    "-",
+    [ "Z", 9 ],
+    "*",
+    [ "Z", 176 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 193 ],
+   "rhs": [
+    [ "Z", 10 ],
+    "*",
+    [ "Z", 181 ],
+    "-",
+    [ "Z", 9 ],
+    "*",
+    [ "Z", 177 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 194 ],
+   "rhs": [
+    [ "Z", 10 ],
+    "*",
+    [ "Z", 182 ],
+    "-",
+    [ "Z", 9 ],
+    "*",
+    [ "Z", 178 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 197 ],
+   "rhs": [
+    "-",
+    [ "Z", 9 ],
+    "*",
+    [ "Z", 189 ],
+    "-",
+    [ "Z", 10 ],
+    "*",
+    [ "Z", 176 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 198 ],
+   "rhs": [
+    "-",
+    [ "Z", 9 ],
+    "*",
+    [ "Z", 181 ],
+    "-",
+    [ "Z", 10 ],
+    "*",
+    [ "Z", 177 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 199 ],
+   "rhs": [
+    "-",
+    [ "Z", 9 ],
+    "*",
+    [ "Z", 182 ],
+    "-",
+    [ "Z", 10 ],
+    "*",
+    [ "Z", 178 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
    "lhs": [ "Z", 201 ],
    "rhs": [ "LTHO", "*", "LHp" ]
   }
@@ -4830,6 +2957,147 @@
     [ "Z", 197 ],
     "-",
     "LTHO"
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 204 ],
+   "rhs": [ "LTH", "*", "LHp" ]
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 205 ],
+   "rhs": [
+    [ "Z", 197 ],
+    "-",
+    "LTH"
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 207 ],
+   "rhs": [
+    [ "Z", 3 ],
+    "*",
+    [ "Z", 5 ],
+    "\u002B",
+    [ "Z", 4 ],
+    "*",
+    [ "Z", 6 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 208 ],
+   "rhs": [
+    [ "Z", 4 ],
+    "*",
+    [ "Z", 5 ],
+    "-",
+    [ "Z", 3 ],
+    "*",
+    [ "Z", 6 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 209 ],
+   "rhs": [
+    [ "Z", 3 ],
+    "*",
+    [ "Z", 6 ],
+    "-",
+    [ "Z", 4 ],
+    "*",
+    [ "Z", 5 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 211 ],
+   "rhs": [
+    [ "Z", 192 ],
+    "*",
+    [ "Z", 207 ],
+    "\u002B",
+    [ "Z", 205 ],
+    "*",
+    [ "Z", 209 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 213 ],
+   "rhs": [
+    [ "Z", 207 ],
+    "*",
+    [ "Z", 193 ],
+    "\u002B",
+    [ "Z", 209 ],
+    "*",
+    [ "Z", 198 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 214 ],
+   "rhs": [
+    [ "Z", 207 ],
+    "*",
+    [ "Z", 194 ],
+    "\u002B",
+    [ "Z", 209 ],
+    "*",
+    [ "Z", 199 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 218 ],
+   "rhs": [
+    [ "Z", 192 ],
+    "*",
+    [ "Z", 208 ],
+    "\u002B",
+    [ "Z", 205 ],
+    "*",
+    [ "Z", 207 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 219 ],
+   "rhs": [
+    [ "Z", 207 ],
+    "*",
+    [ "Z", 198 ],
+    "\u002B",
+    [ "Z", 208 ],
+    "*",
+    [ "Z", 193 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 220 ],
+   "rhs": [
+    [ "Z", 207 ],
+    "*",
+    [ "Z", 199 ],
+    "\u002B",
+    [ "Z", 208 ],
+    "*",
+    [ "Z", 194 ]
     ]
 
   }
@@ -4855,6 +3123,113 @@
   }
   },
     { "AssignmentStatement":  { 
+   "lhs": [ "Z", 225 ],
+   "rhs": [ "LTH", "*", "RHp" ]
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 226 ],
+   "rhs": [
+    "LTH",
+    "\u002B",
+    [ "Z", 218 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 229 ],
+   "rhs": [
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 211 ],
+    "-",
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 226 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 232 ],
+   "rhs": [
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 213 ],
+    "-",
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 219 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 233 ],
+   "rhs": [
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 214 ],
+    "-",
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 220 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 237 ],
+   "rhs": [
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 211 ],
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 226 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 240 ],
+   "rhs": [
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 213 ],
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 219 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 241 ],
+   "rhs": [
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 214 ],
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 220 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 244 ],
+   "rhs": [ "RKp", "-", "RHp" ]
+  }
+  },
+    { "AssignmentStatement":  { 
    "lhs": [ "Z", 245 ],
    "rhs": [
     [ "Z", 92 ],
@@ -4872,6 +3247,31 @@
     [ "Z", 237 ]
     ]
 
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 249 ],
+   "rhs": [
+    "LSH",
+    "*",
+    [ "Z", 244 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 250 ],
+   "rhs": [
+    "LSH",
+    "\u002B",
+    [ "Z", 237 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 253 ],
+   "rhs": [ "RKp", "-", "RAp", "-", "RHp" ]
   }
   },
     { "AssignmentStatement":  { 
@@ -4895,6 +3295,205 @@
   }
   },
     { "AssignmentStatement":  { 
+   "lhs": [ "Z", 264 ],
+   "rhs": [
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 250 ],
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 229 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 266 ],
+   "rhs": [
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 240 ],
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 232 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 267 ],
+   "rhs": [
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 241 ],
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 233 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 271 ],
+   "rhs": [
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 250 ],
+    "-",
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 229 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 274 ],
+   "rhs": [
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 240 ],
+    "-",
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 232 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 275 ],
+   "rhs": [
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 241 ],
+    "-",
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 233 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 278 ],
+   "rhs": [
+    "LRF",
+    "*",
+    [ "Z", 253 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 279 ],
+   "rhs": [
+    "LRF",
+    "\u002B",
+    [ "Z", 271 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 287 ],
+   "rhs": [
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 279 ],
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 264 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 290 ],
+   "rhs": [
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 274 ],
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 266 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 291 ],
+   "rhs": [
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 275 ],
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 267 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 297 ],
+   "rhs": [
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 279 ],
+    "-",
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 264 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 299 ],
+   "rhs": [
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 274 ],
+    "-",
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 266 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 300 ],
+   "rhs": [
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 275 ],
+    "-",
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 267 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 303 ],
+   "rhs": [ "RKp", "-", "RAp", "-", "RHp", "-", "RMTPp" ]
+  }
+  },
+    { "AssignmentStatement":  { 
    "lhs": [ "Z", 304 ],
    "rhs": [
     [ "Z", 90 ],
@@ -4908,6 +3507,16 @@
    "lhs": [ "Z", 305 ],
    "rhs": [
     [ "Z", 90 ],
+    "\u002B",
+    [ "Z", 297 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 311 ],
+   "rhs": [
+    "LFF",
     "\u002B",
     [ "Z", 297 ]
     ]
@@ -10159,7 +8768,7 @@
     { "TypeStatement": "INTEGER ILOOP" },
     { "CommonStatement":  { 
    "Name": "CONSTNTS",
-   "Items": [ "FOOTANG", "G", "IFF", "IHAT", "ILA", "IRF", "ISH", "ITH", "IUA", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "LFF", "LFFO", "LHAT", "LHATO", "LLA", "LLAO", "LMTPXI", "LRF", "LRFF", "LRFFO", "LRFO", "LSH", "LSHO", "LTH", "LTHO", "LTOEXI", "LUA", "LUAO", "MFF", "MHAT", "MLA", "MRF", "MSH", "MTH", "MTPB", "MTPK", "MUA", "RMTPXI", "RTOEXI" ]
+   "Items": [ "FOOTANG", "G", "IFF", "IHAT", "ILA", "IRF", "ISH", "ITH", "IUA", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "LFF", "LFFO", "LHAT", "LHATO", "LLA", "LLAO", "LRF", "LRFF", "LRFFO", "LRFO", "LSH", "LSHO", "LTH", "LTHO", "LUA", "LUAO", "MFF", "MHAT", "MLA", "MRF", "MSH", "MTH", "MTPB", "MTPK", "MTPXI", "MUA", "TOEXI" ]
   }
   },
     { "CommonStatement":  { 
@@ -10174,12 +8783,120 @@
   },
     { "CommonStatement":  { 
    "Name": "ALGBRAIC",
-   "Items": [ "HZ", "KECM", "LATQ", "LETQ", "LHTQ", "LKTQ", "LSTQ", "PX", "PY", "RATQ", "RETQ", "RHTQ", "RKTQ", "RSTQ", "RX1", "RX2", "RY1", "RY2", "U10", "U11", "U12", "U13", "U4", "U5", "U6", "U7", "U8", "U9", "VRX1", "VRX2", "VRY1", "VRY2", "Q1p", "Q2p", "Q3p", "U1p", "U2p", "U3p", "DLX1", "DLX2", "DRX1", "DRX2", "LMTQ", "POCMX", "POCMY", "POP10X", "POP10Y", "POP11X", "POP11Y", "POP12X", "POP12Y", "POP13X", "POP13Y", "POP14X", "POP14Y", "POP15X", "POP15Y", "POP16X", "POP16Y", "POP1X", "POP1Y", "POP2X", "POP2Y", "POP3X", "POP3Y", "POP4X", "POP4Y", "POP5X", "POP5Y", "POP6X", "POP6Y", "POP7X", "POP7Y", "POP8X", "POP8Y", "POP9X", "POP9Y", "RMTQ", "RX", "RY", "VOCMX", "VOCMY", "VOP10X", "VOP10Y", "VOP11X", "VOP11Y", "VOP2X", "VOP2Y", "VRX", "VRY" ]
+   "Items": [ "HZ", "KECM", "LATQ", "LETQ", "LHTQ", "LKTQ", "LSTQ", "PX", "PY", "RATQ", "RETQ", "RHTQ", "RKTQ", "RSTQ", "RX1", "RX2", "RY1", "RY2", "U10", "U11", "U12", "U13", "U4", "U5", "U6", "U7", "U8", "U9", "VRX1", "VRX2", "VRY1", "VRY2", "Q1p", "Q2p", "Q3p", "U1p", "U2p", "U3p", "DLX1", "DLX2", "LMTQ", "POCMX", "POCMY", "POP10X", "POP10Y", "POP11X", "POP11Y", "POP12X", "POP12Y", "POP13X", "POP13Y", "POP14X", "POP14Y", "POP15X", "POP15Y", "POP16X", "POP16Y", "POP1X", "POP1Y", "POP2X", "POP2Y", "POP3X", "POP3Y", "POP4X", "POP4Y", "POP5X", "POP5Y", "POP6X", "POP6Y", "POP7X", "POP7Y", "POP8X", "POP8Y", "POP9X", "POP9Y", "RMTQ", "RX", "RY", "VOCMX", "VOCMY", "VOP2X", "VOP2Y", "VRX", "VRY" ]
   }
   },
     { "CommonStatement":  { 
    "Name": "MISCLLNS",
    "Items": [ "PI", "DEGtoRAD", "RADtoDEG", "Z(1287)", "COEF(3,3)", "RHS(3)" ]
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 168 ],
+   "rhs": [
+    [ "Z", 18 ],
+    "*",
+    [ "Z", 157 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 172 ],
+   "rhs": [
+    [ "Z", 17 ],
+    "*",
+    [ "Z", 157 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 175 ],
+   "rhs": [
+    [ "Z", 172 ],
+    "-",
+    [ "Z", 173 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 183 ],
+   "rhs": [
+    [ "Z", 14 ],
+    "*",
+    [ "Z", 168 ],
+    "-",
+    [ "Z", 13 ],
+    "*",
+    [ "Z", 175 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 190 ],
+   "rhs": [
+    [ "Z", 183 ],
+    "-",
+    [ "Z", 188 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 179 ],
+   "rhs": [
+    "-",
+    [ "Z", 13 ],
+    "*",
+    [ "Z", 168 ],
+    "-",
+    [ "Z", 14 ],
+    "*",
+    [ "Z", 175 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 195 ],
+   "rhs": [
+    [ "Z", 10 ],
+    "*",
+    [ "Z", 190 ],
+    "-",
+    [ "Z", 9 ],
+    "*",
+    [ "Z", 179 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 200 ],
+   "rhs": [
+    "-",
+    [ "Z", 9 ],
+    "*",
+    [ "Z", 190 ],
+    "-",
+    [ "Z", 10 ],
+    "*",
+    [ "Z", 179 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 206 ],
+   "rhs": [
+    [ "Z", 200 ],
+    "\u002B",
+    [ "Z", 204 ]
+    ]
+
   }
   },
     { "AssignmentStatement":  { 
@@ -10192,6 +8909,35 @@
     [ "Z", 6 ],
     "*",
     [ "Z", 206 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 191 ],
+   "rhs": [
+    [ "Z", 10 ],
+    "*",
+    [ "Z", 180 ],
+    "-",
+    [ "Z", 9 ],
+    "*",
+    [ "Z", 176 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 196 ],
+   "rhs": [
+    "-",
+    [ "Z", 9 ],
+    "*",
+    [ "Z", 180 ],
+    "-",
+    [ "Z", 10 ],
+    "*",
+    [ "Z", 176 ]
     ]
 
   }
@@ -10287,11 +9033,95 @@
   }
   },
     { "AssignmentStatement":  { 
+   "lhs": [ "Z", 215 ],
+   "rhs": [
+    [ "Z", 207 ],
+    "*",
+    [ "Z", 195 ],
+    "\u002B",
+    [ "Z", 209 ],
+    "*",
+    [ "Z", 206 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 210 ],
+   "rhs": [
+    [ "Z", 191 ],
+    "*",
+    [ "Z", 207 ],
+    "\u002B",
+    [ "Z", 196 ],
+    "*",
+    [ "Z", 209 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 212 ],
+   "rhs": [
+    [ "Z", 192 ],
+    "*",
+    [ "Z", 207 ],
+    "\u002B",
+    [ "Z", 197 ],
+    "*",
+    [ "Z", 209 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 221 ],
+   "rhs": [
+    [ "Z", 207 ],
+    "*",
+    [ "Z", 206 ],
+    "\u002B",
+    [ "Z", 208 ],
+    "*",
+    [ "Z", 195 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
    "lhs": [ "Z", 224 ],
    "rhs": [
     [ "Z", 221 ],
     "-",
     [ "Z", 222 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 216 ],
+   "rhs": [
+    [ "Z", 191 ],
+    "*",
+    [ "Z", 208 ],
+    "\u002B",
+    [ "Z", 196 ],
+    "*",
+    [ "Z", 207 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 217 ],
+   "rhs": [
+    [ "Z", 192 ],
+    "*",
+    [ "Z", 208 ],
+    "\u002B",
+    [ "Z", 197 ],
+    "*",
+    [ "Z", 207 ]
     ]
 
   }
@@ -10549,11 +9379,540 @@
   }
   },
     { "AssignmentStatement":  { 
+   "lhs": [ "Z", 227 ],
+   "rhs": [
+    [ "Z", 221 ],
+    "-",
+    [ "Z", 225 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 243 ],
+   "rhs": [
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 215 ],
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 227 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 252 ],
+   "rhs": [
+    [ "Z", 243 ],
+    "\u002B",
+    [ "Z", 249 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 235 ],
+   "rhs": [
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 215 ],
+    "-",
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 227 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 277 ],
+   "rhs": [
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 252 ],
+    "-",
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 235 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 282 ],
+   "rhs": [
+    [ "Z", 277 ],
+    "\u002B",
+    [ "Z", 278 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 268 ],
+   "rhs": [
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 252 ],
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 235 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 292 ],
+   "rhs": [
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 282 ],
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 268 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 283 ],
+   "rhs": [
+    "LRF",
+    "*",
+    [ "Z", 16 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 236 ],
+   "rhs": [
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 210 ],
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 216 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 228 ],
+   "rhs": [
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 210 ],
+    "-",
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 216 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 270 ],
+   "rhs": [
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 236 ],
+    "-",
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 228 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 261 ],
+   "rhs": [
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 236 ],
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 228 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 284 ],
+   "rhs": [
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 270 ],
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 261 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 238 ],
+   "rhs": [
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 211 ],
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 218 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 230 ],
+   "rhs": [
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 211 ],
+    "-",
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 218 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 272 ],
+   "rhs": [
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 238 ],
+    "-",
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 230 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 262 ],
+   "rhs": [
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 238 ],
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 230 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 285 ],
+   "rhs": [
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 272 ],
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 262 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 239 ],
+   "rhs": [
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 212 ],
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 217 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 231 ],
+   "rhs": [
+    "-",
+    [ "Z", 7 ],
+    "*",
+    [ "Z", 212 ],
+    "-",
+    [ "Z", 8 ],
+    "*",
+    [ "Z", 217 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 273 ],
+   "rhs": [
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 239 ],
+    "-",
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 231 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 263 ],
+   "rhs": [
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 239 ],
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 231 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 286 ],
+   "rhs": [
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 273 ],
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 263 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 234 ],
+   "rhs": [
+    "LTH",
+    "*",
+    [ "Z", 8 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 242 ],
+   "rhs": [
+    "LTH",
+    "*",
+    [ "Z", 7 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 251 ],
+   "rhs": [
+    "LSH",
+    "-",
+    [ "Z", 242 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 269 ],
+   "rhs": [
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 234 ],
+    "-",
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 251 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 280 ],
+   "rhs": [
+    "LRF",
+    "\u002B",
+    [ "Z", 269 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 265 ],
+   "rhs": [
+    [ "Z", 11 ],
+    "*",
+    [ "Z", 234 ],
+    "\u002B",
+    [ "Z", 12 ],
+    "*",
+    [ "Z", 251 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 288 ],
+   "rhs": [
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 280 ],
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 265 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 276 ],
+   "rhs": [
+    "LSH",
+    "*",
+    [ "Z", 11 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 281 ],
+   "rhs": [
+    "LRF",
+    "-",
+    [ "Z", 276 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 260 ],
+   "rhs": [
+    "LSH",
+    "*",
+    [ "Z", 12 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 289 ],
+   "rhs": [
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 281 ],
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 260 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 302 ],
+   "rhs": [
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 282 ],
+    "-",
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 268 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
    "lhs": [ "Z", 309 ],
    "rhs": [
     [ "Z", 302 ],
     "\u002B",
     [ "Z", 304 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 294 ],
+   "rhs": [
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 270 ],
+    "-",
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 261 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 295 ],
+   "rhs": [
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 272 ],
+    "-",
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 262 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 296 ],
+   "rhs": [
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 273 ],
+    "-",
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 263 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 298 ],
+   "rhs": [
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 280 ],
+    "-",
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 265 ]
     ]
 
   }
@@ -10569,11 +9928,36 @@
   }
   },
     { "AssignmentStatement":  { 
+   "lhs": [ "Z", 293 ],
+   "rhs": [
+    "-",
+    [ "Z", 15 ],
+    "*",
+    [ "Z", 281 ],
+    "-",
+    [ "Z", 16 ],
+    "*",
+    [ "Z", 260 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
    "lhs": [ "Z", 307 ],
    "rhs": [
     [ "Z", 90 ],
     "\u002B",
     [ "Z", 293 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 301 ],
+   "rhs": [
+    "LRF",
+    "*",
+    [ "Z", 15 ]
     ]
 
   }
@@ -12986,6 +12370,34 @@
     [ "Z", 2 ],
     "*",
     [ "Z", 40 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 50 ],
+   "rhs": [
+    [ "Z", 14 ],
+    "*",
+    [ "Z", 37 ],
+    "-",
+    [ "Z", 13 ],
+    "*",
+    [ "Z", 35 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 51 ],
+   "rhs": [
+    [ "Z", 14 ],
+    "*",
+    [ "Z", 38 ],
+    "-",
+    [ "Z", 13 ],
+    "*",
+    [ "Z", 36 ]
     ]
 
   }
@@ -23868,6 +23280,16 @@
   }
   },
     { "AssignmentStatement":  { 
+   "lhs": [ "Z", 312 ],
+   "rhs": [
+    "LFF",
+    "\u002B",
+    [ "Z", 298 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
    "lhs": [ "Z", 1279 ],
    "rhs": [
     [ "Z", 546 ],
@@ -25532,6 +24954,16 @@
   }
   },
     { "AssignmentStatement":  { 
+   "lhs": [ "Z", 313 ],
+   "rhs": [
+    "LFF",
+    "\u002B",
+    [ "Z", 293 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
    "lhs": [ "Z", 1281 ],
    "rhs": [
     0.5,
@@ -27049,6 +26481,16 @@
     "*",
     [ "Z", 481 ],
     ")"
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": [ "Z", 314 ],
+   "rhs": [
+    "LFF",
+    "-",
+    [ "Z", 301 ]
     ]
 
   }
@@ -29205,6 +28647,158 @@
     "LRFF",
     "*",
     [ "Z", 69 ],
+    "-",
+    "LSH",
+    "*",
+    [ "Z", 36 ],
+    "-",
+    "LTH",
+    "*",
+    [ "Z", 55 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": "POP10X",
+   "rhs": [
+    "Q1",
+    "\u002B",
+    "LRF",
+    "*",
+    [ "Z", 64 ],
+    "\u002B",
+    "LSH",
+    "*",
+    [ "Z", 60 ],
+    "\u002B",
+    "LTH",
+    "*",
+    [ "Z", 57 ],
+    "-",
+    "LFF",
+    "*",
+    [ "Z", 39 ],
+    "-",
+    "LRF",
+    "*",
+    [ "Z", 50 ],
+    "-",
+    "LSH",
+    "*",
+    [ "Z", 35 ],
+    "-",
+    "LTH",
+    "*",
+    [ "Z", 54 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": "POP10Y",
+   "rhs": [
+    "Q2",
+    "\u002B",
+    "LRF",
+    "*",
+    [ "Z", 65 ],
+    "\u002B",
+    "LSH",
+    "*",
+    [ "Z", 61 ],
+    "\u002B",
+    "LTH",
+    "*",
+    [ "Z", 58 ],
+    "-",
+    "LFF",
+    "*",
+    [ "Z", 40 ],
+    "-",
+    "LRF",
+    "*",
+    [ "Z", 51 ],
+    "-",
+    "LSH",
+    "*",
+    [ "Z", 36 ],
+    "-",
+    "LTH",
+    "*",
+    [ "Z", 55 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": "POP11X",
+   "rhs": [
+    "Q1",
+    "\u002B",
+    "LFF",
+    "*",
+    [ "Z", 72 ],
+    "\u002B",
+    "LRF",
+    "*",
+    [ "Z", 64 ],
+    "\u002B",
+    "LSH",
+    "*",
+    [ "Z", 60 ],
+    "\u002B",
+    "LTH",
+    "*",
+    [ "Z", 57 ],
+    "-",
+    "LFF",
+    "*",
+    [ "Z", 39 ],
+    "-",
+    "LRF",
+    "*",
+    [ "Z", 50 ],
+    "-",
+    "LSH",
+    "*",
+    [ "Z", 35 ],
+    "-",
+    "LTH",
+    "*",
+    [ "Z", 54 ]
+    ]
+
+  }
+  },
+    { "AssignmentStatement":  { 
+   "lhs": "POP11Y",
+   "rhs": [
+    "Q2",
+    "\u002B",
+    "LFF",
+    "*",
+    [ "Z", 73 ],
+    "\u002B",
+    "LRF",
+    "*",
+    [ "Z", 65 ],
+    "\u002B",
+    "LSH",
+    "*",
+    [ "Z", 61 ],
+    "\u002B",
+    "LTH",
+    "*",
+    [ "Z", 58 ],
+    "-",
+    "LFF",
+    "*",
+    [ "Z", 40 ],
+    "-",
+    "LRF",
+    "*",
+    [ "Z", 51 ],
     "-",
     "LSH",
     "*",

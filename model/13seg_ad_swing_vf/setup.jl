@@ -71,7 +71,7 @@ function setup(;
     u2 = u2_fun(rmtp₀, lmtp₀, ra₀, la₀, rk₀, lk₀, rh₀, lh₀, rs₀, ls₀, re₀, le₀, rmtpp₀, lmtpp₀, rap₀, lap₀, rkp₀, lkp₀, rhp₀, lhp₀, rsp₀, lsp₀, rep₀, lep₀)
 
     # parameters
-    p = Params(footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, mtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, toexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua)
+    p = Params(footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mtpxi, mua, toexi)
 
     # intial conditions
     u₀ = SVector(q1, q2, q3, u1, u2, u3)

@@ -24,7 +24,6 @@
     lhato::T
     lla::T
     llao::T
-    mtpxi::T
     lrf::T
     lrff::T
     lrffo::T
@@ -33,7 +32,6 @@
     lsho::T
     lth::T
     ltho::T
-    toexi::T
     lua::T
     luao::T
     mff::T
@@ -44,7 +42,9 @@
     mth::T
     mtpb::T
     mtpk::T
+    mtpxi::T
     mua::T
+    toexi::T
     u4::T
     u5::T
     u6::T
@@ -59,12 +59,11 @@
     vry1::F2
     vrx2::F3
     vry2::F4
-
 end
 
 # initialise with constant values
-function Params(footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua)
-    z = Vector{Float64}(undef, 1287)
+function Params(footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mtpxi, mua, toexi)
+    z = Vector{typeof(footang)}(undef, 1287)
     vrx1(t) = 0.0
     vry1(t) = 0.0
     vrx2(t) = 0.0
@@ -166,5 +165,5 @@ function Params(footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, 
     z[1244] = iff + irf + mff * lffo^2
     z[1249] = ila + iua
 
-    return Params(z, footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, mtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, toexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, vrx1, vry1, vrx2, vry2)
+    return Params(z, footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mtpxi, mua, toexi, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, vrx1, vry1, vrx2, vry2)
 end

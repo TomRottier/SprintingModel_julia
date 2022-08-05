@@ -1,6 +1,6 @@
 C**   The name of this program is model/13seg_ad_swing_vf/mode
      &l.f
-C**   Created by AUTOLEV 3.2 on Fri Jul 08 21:20:48 2022
+C**   Created by AUTOLEV 3.2 on Thu Aug 04 18:22:14 2022
 
       IMPLICIT         DOUBLE PRECISION (A - Z)
       INTEGER          ILOOP, IPRINT, PRINTINT
@@ -8,21 +8,20 @@ C**   Created by AUTOLEV 3.2 on Fri Jul 08 21:20:48 2022
       EXTERNAL         EQNS1
       DIMENSION        VAR(6)
       COMMON/CONSTNTS/ FOOTANG,G,IFF,IHAT,ILA,IRF,ISH,ITH,IUA,K1,K2,K3,K
-     &4,K5,K6,K7,K8,LFF,LFFO,LHAT,LHATO,LLA,LLAO,LMTPXI,LRF,LRFF,LRFFO,L
-     &RFO,LSH,LSHO,LTH,LTHO,LTOEXI,LUA,LUAO,MFF,MHAT,MLA,MRF,MSH,MTH,MTP
-     &B,MTPK,MUA,RMTPXI,RTOEXI
+     &4,K5,K6,K7,K8,LFF,LFFO,LHAT,LHATO,LLA,LLAO,LRF,LRFF,LRFFO,LRFO,LSH
+     &,LSHO,LTH,LTHO,LUA,LUAO,MFF,MHAT,MLA,MRF,MSH,MTH,MTPB,MTPK,MTPXI,M
+     &UA,TOEXI
       COMMON/SPECFIED/ LA,LE,LH,LK,LMTP,LS,RA,RE,RH,RK,RMTP,RS,LAp,LEp,L
      &Hp,LKp,LMTPp,LSp,RAp,REp,RHp,RKp,RMTPp,RSp,LApp,LEpp,LHpp,LKpp,LMT
      &Ppp,LSpp,RApp,REpp,RHpp,RKpp,RMTPpp,RSpp
       COMMON/VARIBLES/ Q1,Q2,Q3,U1,U2,U3
       COMMON/ALGBRAIC/ HZ,KECM,LATQ,LETQ,LHTQ,LKTQ,LSTQ,PX,PY,RATQ,RETQ,
      &RHTQ,RKTQ,RSTQ,RX1,RX2,RY1,RY2,U10,U11,U12,U13,U4,U5,U6,U7,U8,U9,V
-     &RX1,VRX2,VRY1,VRY2,Q1p,Q2p,Q3p,U1p,U2p,U3p,DLX1,DLX2,DRX1,DRX2,LMT
-     &Q,POCMX,POCMY,POP10X,POP10Y,POP11X,POP11Y,POP12X,POP12Y,POP13X,POP
-     &13Y,POP14X,POP14Y,POP15X,POP15Y,POP16X,POP16Y,POP1X,POP1Y,POP2X,PO
-     &P2Y,POP3X,POP3Y,POP4X,POP4Y,POP5X,POP5Y,POP6X,POP6Y,POP7X,POP7Y,PO
-     &P8X,POP8Y,POP9X,POP9Y,RMTQ,RX,RY,VOCMX,VOCMY,VOP10X,VOP10Y,VOP11X,
-     &VOP11Y,VOP2X,VOP2Y,VRX,VRY
+     &RX1,VRX2,VRY1,VRY2,Q1p,Q2p,Q3p,U1p,U2p,U3p,DLX1,DLX2,LMTQ,POCMX,PO
+     &CMY,POP10X,POP10Y,POP11X,POP11Y,POP12X,POP12Y,POP13X,POP13Y,POP14X
+     &,POP14Y,POP15X,POP15Y,POP16X,POP16Y,POP1X,POP1Y,POP2X,POP2Y,POP3X,
+     &POP3Y,POP4X,POP4Y,POP5X,POP5Y,POP6X,POP6Y,POP7X,POP7Y,POP8X,POP8Y,
+     &POP9X,POP9Y,RMTQ,RX,RY,VOCMX,VOCMY,VOP2X,VOP2Y,VRX,VRY
       COMMON/MISCLLNS/ PI,DEGtoRAD,RADtoDEG,Z(1287),COEF(3,3),RHS(3)
 
 C**   Open input and output files
@@ -46,9 +45,9 @@ C**   Read message from input file
 
 C**   Read values of constants from input file
       READ(20,7010,END=7100,ERR=7101) FOOTANG,G,IFF,IHAT,ILA,IRF,ISH,ITH
-     &,IUA,K1,K2,K3,K4,K5,K6,K7,K8,LFF,LFFO,LHAT,LHATO,LLA,LLAO,LMTPXI,L
-     &RF,LRFF,LRFFO,LRFO,LSH,LSHO,LTH,LTHO,LTOEXI,LUA,LUAO,MFF,MHAT,MLA,
-     &MRF,MSH,MTH,MTPB,MTPK,MUA,RMTPXI,RTOEXI
+     &,IUA,K1,K2,K3,K4,K5,K6,K7,K8,LFF,LFFO,LHAT,LHATO,LLA,LLAO,LRF,LRFF
+     &,LRFFO,LRFO,LSH,LSHO,LTH,LTHO,LUA,LUAO,MFF,MHAT,MLA,MRF,MSH,MTH,MT
+     &PB,MTPK,MTPXI,MUA,TOEXI
 
 C**   Read the initial value of each variable from input file
       READ(20,7010,END=7100,ERR=7101) Q1,Q2,Q3,U1,U2,U3
@@ -284,21 +283,20 @@ C**********************************************************************
       INTEGER          BOUNDARY
       DIMENSION        VAR(*), VARp(*)
       COMMON/CONSTNTS/ FOOTANG,G,IFF,IHAT,ILA,IRF,ISH,ITH,IUA,K1,K2,K3,K
-     &4,K5,K6,K7,K8,LFF,LFFO,LHAT,LHATO,LLA,LLAO,LMTPXI,LRF,LRFF,LRFFO,L
-     &RFO,LSH,LSHO,LTH,LTHO,LTOEXI,LUA,LUAO,MFF,MHAT,MLA,MRF,MSH,MTH,MTP
-     &B,MTPK,MUA,RMTPXI,RTOEXI
+     &4,K5,K6,K7,K8,LFF,LFFO,LHAT,LHATO,LLA,LLAO,LRF,LRFF,LRFFO,LRFO,LSH
+     &,LSHO,LTH,LTHO,LUA,LUAO,MFF,MHAT,MLA,MRF,MSH,MTH,MTPB,MTPK,MTPXI,M
+     &UA,TOEXI
       COMMON/SPECFIED/ LA,LE,LH,LK,LMTP,LS,RA,RE,RH,RK,RMTP,RS,LAp,LEp,L
      &Hp,LKp,LMTPp,LSp,RAp,REp,RHp,RKp,RMTPp,RSp,LApp,LEpp,LHpp,LKpp,LMT
      &Ppp,LSpp,RApp,REpp,RHpp,RKpp,RMTPpp,RSpp
       COMMON/VARIBLES/ Q1,Q2,Q3,U1,U2,U3
       COMMON/ALGBRAIC/ HZ,KECM,LATQ,LETQ,LHTQ,LKTQ,LSTQ,PX,PY,RATQ,RETQ,
      &RHTQ,RKTQ,RSTQ,RX1,RX2,RY1,RY2,U10,U11,U12,U13,U4,U5,U6,U7,U8,U9,V
-     &RX1,VRX2,VRY1,VRY2,Q1p,Q2p,Q3p,U1p,U2p,U3p,DLX1,DLX2,DRX1,DRX2,LMT
-     &Q,POCMX,POCMY,POP10X,POP10Y,POP11X,POP11Y,POP12X,POP12Y,POP13X,POP
-     &13Y,POP14X,POP14Y,POP15X,POP15Y,POP16X,POP16Y,POP1X,POP1Y,POP2X,PO
-     &P2Y,POP3X,POP3Y,POP4X,POP4Y,POP5X,POP5Y,POP6X,POP6Y,POP7X,POP7Y,PO
-     &P8X,POP8Y,POP9X,POP9Y,RMTQ,RX,RY,VOCMX,VOCMY,VOP10X,VOP10Y,VOP11X,
-     &VOP11Y,VOP2X,VOP2Y,VRX,VRY
+     &RX1,VRX2,VRY1,VRY2,Q1p,Q2p,Q3p,U1p,U2p,U3p,DLX1,DLX2,LMTQ,POCMX,PO
+     &CMY,POP10X,POP10Y,POP11X,POP11Y,POP12X,POP12Y,POP13X,POP13Y,POP14X
+     &,POP14Y,POP15X,POP15Y,POP16X,POP16Y,POP1X,POP1Y,POP2X,POP2Y,POP3X,
+     &POP3Y,POP4X,POP4Y,POP5X,POP5Y,POP6X,POP6Y,POP7X,POP7Y,POP8X,POP8Y,
+     &POP9X,POP9Y,RMTQ,RX,RY,VOCMX,VOCMY,VOP2X,VOP2Y,VRX,VRY
       COMMON/MISCLLNS/ PI,DEGtoRAD,RADtoDEG,Z(1287),COEF(3,3),RHS(3)
 
 C**   Update variables after integration step
@@ -309,11 +307,16 @@ C**   Update variables after integration step
       U2 = VAR(5)
       U3 = VAR(6)
 
+      VRX1 = T**3
+      VRX2 = T**3
+      VRY1 = T**3
+      VRY2 = T**3
+
       Q1p = U1
       Q2p = U2
       Q3p = U3
       RY1 = -K3*Q2 - K4*ABS(Q2)*U2
-      DLX1 = Q1 - LTOEXI
+      DLX1 = Q1 - TOEXI
       RX1 = -RY1*(K1*DLX1+K2*U1)
       Z(1) = COS(Q3)
       Z(2) = SIN(Q3)
@@ -358,21 +361,6 @@ C**   Quantities to be specified
       RMTPpp = 0
       RSpp = 0
 
-      Z(16) = SIN(RMTP)
-      Z(11) = COS(RA)
-      Z(8) = SIN(RK)
-      Z(3) = COS(RH)
-      Z(4) = SIN(RH)
-      Z(58) = Z(3)*Z(2) - Z(4)*Z(1)
-      Z(7) = COS(RK)
-      Z(57) = Z(3)*Z(1) + Z(4)*Z(2)
-      Z(63) = Z(8)*Z(58) - Z(7)*Z(57)
-      Z(12) = SIN(RA)
-      Z(61) = -Z(7)*Z(58) - Z(8)*Z(57)
-      Z(67) = -Z(11)*Z(63) - Z(12)*Z(61)
-      Z(15) = COS(RMTP)
-      Z(65) = Z(12)*Z(63) - Z(11)*Z(61)
-      Z(73) = Z(16)*Z(67) - Z(15)*Z(65)
       Z(13) = COS(LA)
       Z(17) = COS(LMTP)
       Z(14) = SIN(LA)
@@ -389,192 +377,31 @@ C**   Quantities to be specified
       Z(34) = Z(5)*Z(10) - Z(6)*Z(9)
       Z(38) = Z(32)*Z(1) + Z(34)*Z(2)
       Z(40) = Z(29)*Z(36) + Z(30)*Z(38)
-      Z(51) = Z(14)*Z(38) - Z(13)*Z(36)
-      Z(55) = Z(5)*Z(2) - Z(6)*Z(1)
-      POP11Y = Q2 + LFF*Z(73) + LRF*Z(65) + LSH*Z(61) + LTH*Z(58) - LFF*
-     &Z(40) - LRF*Z(51) - LSH*Z(36) - LTH*Z(55)
-      Z(207) = Z(3)*Z(5) + Z(4)*Z(6)
-      Z(155) = LKp - LAp - LHp - LMTPp
-      Z(157) = LFF*Z(155)
-      Z(168) = Z(18)*Z(157)
-      Z(172) = Z(17)*Z(157)
-      Z(158) = LKp - LAp - LHp
-      Z(173) = LRF*Z(158)
-      Z(175) = Z(172) - Z(173)
-      Z(183) = Z(14)*Z(168) - Z(13)*Z(175)
-      Z(184) = LKp - LHp
-      Z(188) = LSH*Z(184)
-      Z(190) = Z(183) - Z(188)
-      Z(179) = -Z(13)*Z(168) - Z(14)*Z(175)
-      Z(195) = Z(10)*Z(190) - Z(9)*Z(179)
-      Z(209) = Z(3)*Z(6) - Z(4)*Z(5)
-      Z(200) = -Z(9)*Z(190) - Z(10)*Z(179)
-      Z(204) = LTH*LHp
-      Z(206) = Z(200) + Z(204)
-      Z(215) = Z(207)*Z(195) + Z(209)*Z(206)
-      Z(208) = Z(4)*Z(5) - Z(3)*Z(6)
-      Z(221) = Z(207)*Z(206) + Z(208)*Z(195)
-      Z(225) = LTH*RHp
-      Z(227) = Z(221) - Z(225)
-      Z(243) = Z(8)*Z(215) - Z(7)*Z(227)
-      Z(244) = RKp - RHp
-      Z(249) = LSH*Z(244)
-      Z(252) = Z(243) + Z(249)
-      Z(235) = -Z(7)*Z(215) - Z(8)*Z(227)
-      Z(277) = -Z(11)*Z(252) - Z(12)*Z(235)
-      Z(253) = RKp - RAp - RHp
-      Z(278) = LRF*Z(253)
-      Z(282) = Z(277) + Z(278)
-      Z(268) = Z(12)*Z(252) - Z(11)*Z(235)
-      Z(292) = Z(16)*Z(282) - Z(15)*Z(268)
-      Z(283) = LRF*Z(16)
-      Z(165) = LFF*Z(18)
-      Z(171) = LFF*Z(17)
-      Z(174) = Z(171) - LRF
-      Z(180) = Z(14)*Z(165) - Z(13)*Z(174)
-      Z(176) = -Z(13)*Z(165) - Z(14)*Z(174)
-      Z(191) = Z(10)*Z(180) - Z(9)*Z(176)
-      Z(196) = -Z(9)*Z(180) - Z(10)*Z(176)
-      Z(210) = Z(191)*Z(207) + Z(196)*Z(209)
-      Z(216) = Z(191)*Z(208) + Z(196)*Z(207)
-      Z(236) = Z(8)*Z(210) - Z(7)*Z(216)
-      Z(228) = -Z(7)*Z(210) - Z(8)*Z(216)
-      Z(270) = -Z(11)*Z(236) - Z(12)*Z(228)
-      Z(261) = Z(12)*Z(236) - Z(11)*Z(228)
-      Z(284) = Z(16)*Z(270) - Z(15)*Z(261)
-      Z(189) = Z(180) - LSH
-      Z(192) = Z(10)*Z(189) - Z(9)*Z(176)
-      Z(197) = -Z(9)*Z(189) - Z(10)*Z(176)
-      Z(205) = Z(197) - LTH
-      Z(211) = Z(192)*Z(207) + Z(205)*Z(209)
-      Z(218) = Z(192)*Z(208) + Z(205)*Z(207)
-      Z(238) = Z(8)*Z(211) - Z(7)*Z(218)
-      Z(230) = -Z(7)*Z(211) - Z(8)*Z(218)
-      Z(272) = -Z(11)*Z(238) - Z(12)*Z(230)
-      Z(262) = Z(12)*Z(238) - Z(11)*Z(230)
-      Z(285) = Z(16)*Z(272) - Z(15)*Z(262)
-      Z(212) = Z(192)*Z(207) + Z(197)*Z(209)
-      Z(217) = Z(192)*Z(208) + Z(197)*Z(207)
-      Z(239) = Z(8)*Z(212) - Z(7)*Z(217)
-      Z(231) = -Z(7)*Z(212) - Z(8)*Z(217)
-      Z(273) = -Z(11)*Z(239) - Z(12)*Z(231)
-      Z(263) = Z(12)*Z(239) - Z(11)*Z(231)
-      Z(286) = Z(16)*Z(273) - Z(15)*Z(263)
-      Z(226) = LTH + Z(218)
-      Z(237) = Z(8)*Z(211) - Z(7)*Z(226)
-      Z(250) = LSH + Z(237)
-      Z(229) = -Z(7)*Z(211) - Z(8)*Z(226)
-      Z(271) = -Z(11)*Z(250) - Z(12)*Z(229)
-      Z(279) = LRF + Z(271)
-      Z(264) = Z(12)*Z(250) - Z(11)*Z(229)
-      Z(287) = Z(16)*Z(279) - Z(15)*Z(264)
-      Z(234) = LTH*Z(8)
-      Z(242) = LTH*Z(7)
-      Z(251) = LSH - Z(242)
-      Z(269) = Z(12)*Z(234) - Z(11)*Z(251)
-      Z(280) = LRF + Z(269)
-      Z(265) = Z(11)*Z(234) + Z(12)*Z(251)
-      Z(288) = Z(16)*Z(280) - Z(15)*Z(265)
-      Z(276) = LSH*Z(11)
-      Z(281) = LRF - Z(276)
-      Z(260) = LSH*Z(12)
-      Z(289) = Z(16)*Z(281) - Z(15)*Z(260)
+      POP2Y = Q2 - LFF*Z(40)
       Z(35) = Z(32)*Z(1) - Z(33)*Z(2)
       Z(37) = Z(34)*Z(1) - Z(32)*Z(2)
       Z(39) = Z(29)*Z(35) + Z(30)*Z(37)
       Z(31) = Z(13)*Z(18) + Z(14)*Z(17)
-      Z(41) = Z(29)*Z(37) + Z(31)*Z(35)
-      Z(166) = -Z(17)*Z(39) - Z(18)*Z(41)
-      Z(169) = Z(18)*Z(39) - Z(17)*Z(41)
-      Z(181) = Z(14)*Z(166) - Z(13)*Z(169)
-      Z(177) = -Z(13)*Z(166) - Z(14)*Z(169)
-      Z(193) = Z(10)*Z(181) - Z(9)*Z(177)
-      Z(198) = -Z(9)*Z(181) - Z(10)*Z(177)
-      Z(213) = Z(207)*Z(193) + Z(209)*Z(198)
-      Z(219) = Z(207)*Z(198) + Z(208)*Z(193)
-      Z(240) = Z(8)*Z(213) - Z(7)*Z(219)
-      Z(232) = -Z(7)*Z(213) - Z(8)*Z(219)
-      Z(274) = -Z(11)*Z(240) - Z(12)*Z(232)
-      Z(266) = Z(12)*Z(240) - Z(11)*Z(232)
-      Z(290) = Z(16)*Z(274) - Z(15)*Z(266)
       Z(42) = Z(29)*Z(38) + Z(31)*Z(36)
-      Z(167) = -Z(17)*Z(40) - Z(18)*Z(42)
-      Z(170) = Z(18)*Z(40) - Z(17)*Z(42)
-      Z(182) = Z(14)*Z(167) - Z(13)*Z(170)
-      Z(178) = -Z(13)*Z(167) - Z(14)*Z(170)
-      Z(194) = Z(10)*Z(182) - Z(9)*Z(178)
-      Z(199) = -Z(9)*Z(182) - Z(10)*Z(178)
-      Z(214) = Z(207)*Z(194) + Z(209)*Z(199)
-      Z(220) = Z(207)*Z(199) + Z(208)*Z(194)
-      Z(241) = Z(8)*Z(214) - Z(7)*Z(220)
-      Z(233) = -Z(7)*Z(214) - Z(8)*Z(220)
-      Z(275) = -Z(11)*Z(241) - Z(12)*Z(233)
-      Z(267) = Z(12)*Z(241) - Z(11)*Z(233)
-      Z(291) = Z(16)*Z(275) - Z(15)*Z(267)
-      Z(75) = -Z(15)*Z(67) - Z(16)*Z(65)
-      Z(302) = -Z(15)*Z(282) - Z(16)*Z(268)
-      Z(303) = RKp - RAp - RHp - RMTPp
-      Z(310) = LFF*Z(303)
-      Z(315) = Z(302) + Z(310)
-      Z(294) = -Z(15)*Z(270) - Z(16)*Z(261)
-      Z(295) = -Z(15)*Z(272) - Z(16)*Z(262)
-      Z(296) = -Z(15)*Z(273) - Z(16)*Z(263)
-      Z(297) = -Z(15)*Z(279) - Z(16)*Z(264)
-      Z(311) = LFF + Z(297)
-      Z(298) = -Z(15)*Z(280) - Z(16)*Z(265)
-      Z(312) = LFF + Z(298)
-      Z(293) = -Z(15)*Z(281) - Z(16)*Z(260)
-      Z(313) = LFF + Z(293)
-      Z(301) = LRF*Z(15)
-      Z(314) = LFF - Z(301)
-      Z(299) = -Z(15)*Z(274) - Z(16)*Z(266)
-      Z(300) = -Z(15)*Z(275) - Z(16)*Z(267)
-      VOP11Y = Z(73)*(Z(292)+Z(283)*U8+Z(284)*U9+Z(285)*U5+Z(286)*U7+Z(2
-     &87)*U3+Z(288)*U4+Z(289)*U6+Z(290)*U1+Z(291)*U2) + Z(75)*(Z(315)+Z(
-     &294)*U9+Z(295)*U5+Z(296)*U7+Z(311)*U3+Z(312)*U4+Z(313)*U6+Z(314)*U
-     &8+Z(299)*U1+Z(300)*U2)
-      VRY1 = -K3*POP11Y - K4*ABS(POP11Y)*VOP11Y
-      Z(59) = Z(4)*Z(1) - Z(3)*Z(2)
-      Z(62) = Z(8)*Z(57) - Z(7)*Z(59)
-      Z(60) = -Z(7)*Z(57) - Z(8)*Z(59)
-      Z(66) = -Z(11)*Z(62) - Z(12)*Z(60)
-      Z(64) = Z(12)*Z(62) - Z(11)*Z(60)
-      Z(72) = Z(16)*Z(66) - Z(15)*Z(64)
-      Z(50) = Z(14)*Z(37) - Z(13)*Z(35)
-      Z(54) = Z(5)*Z(1) + Z(6)*Z(2)
-      POP11X = Q1 + LFF*Z(72) + LRF*Z(64) + LSH*Z(60) + LTH*Z(57) - LFF*
-     &Z(39) - LRF*Z(50) - LSH*Z(35) - LTH*Z(54)
-      DRX1 = POP11X - RTOEXI
-      Z(74) = -Z(15)*Z(66) - Z(16)*Z(64)
-      VOP11X = Z(72)*(Z(292)+Z(283)*U8+Z(284)*U9+Z(285)*U5+Z(286)*U7+Z(2
-     &87)*U3+Z(288)*U4+Z(289)*U6+Z(290)*U1+Z(291)*U2) + Z(74)*(Z(315)+Z(
-     &294)*U9+Z(295)*U5+Z(296)*U7+Z(311)*U3+Z(312)*U4+Z(313)*U6+Z(314)*U
-     &8+Z(299)*U1+Z(300)*U2)
-      VRX1 = -VRY1*(K1*DRX1+K2*VOP11X)
-      POP10Y = Q2 + LRF*Z(65) + LSH*Z(61) + LTH*Z(58) - LFF*Z(40) - LRF*
-     &Z(51) - LSH*Z(36) - LTH*Z(55)
-      VOP10Y = Z(65)*(Z(268)+Z(260)*U6+Z(261)*U9+Z(262)*U5+Z(263)*U7+Z(2
-     &64)*U3+Z(265)*U4+Z(266)*U1+Z(267)*U2) + Z(67)*(Z(282)+LRF*U8+Z(270
-     &)*U9+Z(272)*U5+Z(273)*U7+Z(279)*U3+Z(280)*U4+Z(281)*U6+Z(274)*U1+Z
-     &(275)*U2)
-      VRY2 = -K7*POP10Y - K8*ABS(POP10Y)*VOP10Y
-      POP10X = Q1 + LRF*Z(64) + LSH*Z(60) + LTH*Z(57) - LFF*Z(39) - LRF*
-     &Z(50) - LSH*Z(35) - LTH*Z(54)
-      DRX2 = POP10X - RMTPXI
-      VOP10X = Z(64)*(Z(268)+Z(260)*U6+Z(261)*U9+Z(262)*U5+Z(263)*U7+Z(2
-     &64)*U3+Z(265)*U4+Z(266)*U1+Z(267)*U2) + Z(66)*(Z(282)+LRF*U8+Z(270
-     &)*U9+Z(272)*U5+Z(273)*U7+Z(279)*U3+Z(280)*U4+Z(281)*U6+Z(274)*U1+Z
-     &(275)*U2)
-      VRX2 = -VRY2*(K5*DRX2+K6*VOP10X)
-      POP2Y = Q2 - LFF*Z(40)
+      Z(155) = LKp - LAp - LHp - LMTPp
+      Z(157) = LFF*Z(155)
+      Z(41) = Z(29)*Z(37) + Z(31)*Z(35)
       VOP2Y = Z(40)*(Z(39)*U1+Z(40)*U2) - Z(42)*(Z(157)+LFF*U3+LFF*U5+LF
      &F*U7+LFF*U9-Z(41)*U1-Z(42)*U2)
       RY2 = -K7*POP2Y - K8*ABS(POP2Y)*VOP2Y
       POP2X = Q1 - LFF*Z(39)
-      DLX2 = POP2X - LMTPXI
+      DLX2 = POP2X - MTPXI
       VOP2X = Z(39)*(Z(39)*U1+Z(40)*U2) - Z(41)*(Z(157)+LFF*U3+LFF*U5+LF
      &F*U7+LFF*U9-Z(41)*U1-Z(42)*U2)
       RX2 = -RY2*(K5*DLX2+K6*VOP2X)
+      Z(3) = COS(RH)
+      Z(4) = SIN(RH)
+      Z(7) = COS(RK)
+      Z(8) = SIN(RK)
+      Z(11) = COS(RA)
+      Z(12) = SIN(RA)
+      Z(15) = COS(RMTP)
+      Z(16) = SIN(RMTP)
       Z(19) = COS(RS)
       Z(20) = SIN(RS)
       Z(21) = COS(LS)
@@ -587,7 +414,24 @@ C**   Quantities to be specified
       Z(45) = Z(28)*Z(13) - Z(27)*Z(14)
       Z(49) = Z(43)*Z(38) + Z(45)*Z(36)
       Z(53) = -Z(13)*Z(38) - Z(14)*Z(36)
+      Z(54) = Z(5)*Z(1) + Z(6)*Z(2)
+      Z(55) = Z(5)*Z(2) - Z(6)*Z(1)
+      Z(57) = Z(3)*Z(1) + Z(4)*Z(2)
+      Z(58) = Z(3)*Z(2) - Z(4)*Z(1)
+      Z(59) = Z(4)*Z(1) - Z(3)*Z(2)
+      Z(60) = -Z(7)*Z(57) - Z(8)*Z(59)
+      Z(61) = -Z(7)*Z(58) - Z(8)*Z(57)
+      Z(62) = Z(8)*Z(57) - Z(7)*Z(59)
+      Z(63) = Z(8)*Z(58) - Z(7)*Z(57)
+      Z(64) = Z(12)*Z(62) - Z(11)*Z(60)
+      Z(65) = Z(12)*Z(63) - Z(11)*Z(61)
+      Z(66) = -Z(11)*Z(62) - Z(12)*Z(60)
+      Z(67) = -Z(11)*Z(63) - Z(12)*Z(61)
       Z(71) = Z(27)*Z(67) - Z(28)*Z(65)
+      Z(72) = Z(16)*Z(66) - Z(15)*Z(64)
+      Z(73) = Z(16)*Z(67) - Z(15)*Z(65)
+      Z(74) = -Z(15)*Z(66) - Z(16)*Z(64)
+      Z(75) = -Z(15)*Z(67) - Z(16)*Z(65)
       Z(76) = -Z(19)*Z(1) - Z(20)*Z(2)
       Z(77) = Z(20)*Z(1) - Z(19)*Z(2)
       Z(80) = -Z(23)*Z(77) - Z(24)*Z(76)
@@ -609,20 +453,83 @@ C**   Quantities to be specified
       Z(144) = REpp - RSpp
       Z(150) = LEpp - LSpp
       Z(156) = LFFO*Z(155)
+      Z(158) = LKp - LAp - LHp
       Z(163) = LRFO*Z(158)
       Z(164) = LRFFO*Z(158)
+      Z(165) = LFF*Z(18)
+      Z(166) = -Z(17)*Z(39) - Z(18)*Z(41)
+      Z(167) = -Z(17)*Z(40) - Z(18)*Z(42)
+      Z(169) = Z(18)*Z(39) - Z(17)*Z(41)
+      Z(170) = Z(18)*Z(40) - Z(17)*Z(42)
+      Z(171) = LFF*Z(17)
+      Z(173) = LRF*Z(158)
+      Z(174) = Z(171) - LRF
+      Z(176) = -Z(13)*Z(165) - Z(14)*Z(174)
+      Z(177) = -Z(13)*Z(166) - Z(14)*Z(169)
+      Z(178) = -Z(13)*Z(167) - Z(14)*Z(170)
+      Z(180) = Z(14)*Z(165) - Z(13)*Z(174)
+      Z(181) = Z(14)*Z(166) - Z(13)*Z(169)
+      Z(182) = Z(14)*Z(167) - Z(13)*Z(170)
+      Z(184) = LKp - LHp
       Z(185) = LSHO*Z(184)
       Z(186) = Z(180) - LSHO
+      Z(188) = LSH*Z(184)
+      Z(189) = Z(180) - LSH
+      Z(192) = Z(10)*Z(189) - Z(9)*Z(176)
+      Z(193) = Z(10)*Z(181) - Z(9)*Z(177)
+      Z(194) = Z(10)*Z(182) - Z(9)*Z(178)
+      Z(197) = -Z(9)*Z(189) - Z(10)*Z(176)
+      Z(198) = -Z(9)*Z(181) - Z(10)*Z(177)
+      Z(199) = -Z(9)*Z(182) - Z(10)*Z(178)
       Z(201) = LTHO*LHp
       Z(202) = Z(197) - LTHO
+      Z(204) = LTH*LHp
+      Z(205) = Z(197) - LTH
+      Z(207) = Z(3)*Z(5) + Z(4)*Z(6)
+      Z(208) = Z(4)*Z(5) - Z(3)*Z(6)
+      Z(209) = Z(3)*Z(6) - Z(4)*Z(5)
+      Z(211) = Z(192)*Z(207) + Z(205)*Z(209)
+      Z(213) = Z(207)*Z(193) + Z(209)*Z(198)
+      Z(214) = Z(207)*Z(194) + Z(209)*Z(199)
+      Z(218) = Z(192)*Z(208) + Z(205)*Z(207)
+      Z(219) = Z(207)*Z(198) + Z(208)*Z(193)
+      Z(220) = Z(207)*Z(199) + Z(208)*Z(194)
       Z(222) = Z(93)*RHp
       Z(223) = Z(93) + Z(218)
+      Z(225) = LTH*RHp
+      Z(226) = LTH + Z(218)
+      Z(229) = -Z(7)*Z(211) - Z(8)*Z(226)
+      Z(232) = -Z(7)*Z(213) - Z(8)*Z(219)
+      Z(233) = -Z(7)*Z(214) - Z(8)*Z(220)
+      Z(237) = Z(8)*Z(211) - Z(7)*Z(226)
+      Z(240) = Z(8)*Z(213) - Z(7)*Z(219)
+      Z(241) = Z(8)*Z(214) - Z(7)*Z(220)
+      Z(244) = RKp - RHp
       Z(245) = Z(92)*Z(244)
       Z(246) = Z(92) + Z(237)
+      Z(249) = LSH*Z(244)
+      Z(250) = LSH + Z(237)
+      Z(253) = RKp - RAp - RHp
       Z(258) = Z(91)*Z(253)
       Z(259) = LRFFO*Z(253)
+      Z(264) = Z(12)*Z(250) - Z(11)*Z(229)
+      Z(266) = Z(12)*Z(240) - Z(11)*Z(232)
+      Z(267) = Z(12)*Z(241) - Z(11)*Z(233)
+      Z(271) = -Z(11)*Z(250) - Z(12)*Z(229)
+      Z(274) = -Z(11)*Z(240) - Z(12)*Z(232)
+      Z(275) = -Z(11)*Z(241) - Z(12)*Z(233)
+      Z(278) = LRF*Z(253)
+      Z(279) = LRF + Z(271)
+      Z(287) = Z(16)*Z(279) - Z(15)*Z(264)
+      Z(290) = Z(16)*Z(274) - Z(15)*Z(266)
+      Z(291) = Z(16)*Z(275) - Z(15)*Z(267)
+      Z(297) = -Z(15)*Z(279) - Z(16)*Z(264)
+      Z(299) = -Z(15)*Z(274) - Z(16)*Z(266)
+      Z(300) = -Z(15)*Z(275) - Z(16)*Z(267)
+      Z(303) = RKp - RAp - RHp - RMTPp
       Z(304) = Z(90)*Z(303)
       Z(305) = Z(90) + Z(297)
+      Z(311) = LFF + Z(297)
       Z(317) = Z(5)*Z(192) + Z(6)*Z(205)
       Z(319) = Z(5)*Z(193) + Z(6)*Z(198)
       Z(320) = Z(5)*Z(194) + Z(6)*Z(199)
@@ -949,25 +856,35 @@ C**********************************************************************
       IMPLICIT         DOUBLE PRECISION (A - Z)
       INTEGER          ILOOP
       COMMON/CONSTNTS/ FOOTANG,G,IFF,IHAT,ILA,IRF,ISH,ITH,IUA,K1,K2,K3,K
-     &4,K5,K6,K7,K8,LFF,LFFO,LHAT,LHATO,LLA,LLAO,LMTPXI,LRF,LRFF,LRFFO,L
-     &RFO,LSH,LSHO,LTH,LTHO,LTOEXI,LUA,LUAO,MFF,MHAT,MLA,MRF,MSH,MTH,MTP
-     &B,MTPK,MUA,RMTPXI,RTOEXI
+     &4,K5,K6,K7,K8,LFF,LFFO,LHAT,LHATO,LLA,LLAO,LRF,LRFF,LRFFO,LRFO,LSH
+     &,LSHO,LTH,LTHO,LUA,LUAO,MFF,MHAT,MLA,MRF,MSH,MTH,MTPB,MTPK,MTPXI,M
+     &UA,TOEXI
       COMMON/SPECFIED/ LA,LE,LH,LK,LMTP,LS,RA,RE,RH,RK,RMTP,RS,LAp,LEp,L
      &Hp,LKp,LMTPp,LSp,RAp,REp,RHp,RKp,RMTPp,RSp,LApp,LEpp,LHpp,LKpp,LMT
      &Ppp,LSpp,RApp,REpp,RHpp,RKpp,RMTPpp,RSpp
       COMMON/VARIBLES/ Q1,Q2,Q3,U1,U2,U3
       COMMON/ALGBRAIC/ HZ,KECM,LATQ,LETQ,LHTQ,LKTQ,LSTQ,PX,PY,RATQ,RETQ,
      &RHTQ,RKTQ,RSTQ,RX1,RX2,RY1,RY2,U10,U11,U12,U13,U4,U5,U6,U7,U8,U9,V
-     &RX1,VRX2,VRY1,VRY2,Q1p,Q2p,Q3p,U1p,U2p,U3p,DLX1,DLX2,DRX1,DRX2,LMT
-     &Q,POCMX,POCMY,POP10X,POP10Y,POP11X,POP11Y,POP12X,POP12Y,POP13X,POP
-     &13Y,POP14X,POP14Y,POP15X,POP15Y,POP16X,POP16Y,POP1X,POP1Y,POP2X,PO
-     &P2Y,POP3X,POP3Y,POP4X,POP4Y,POP5X,POP5Y,POP6X,POP6Y,POP7X,POP7Y,PO
-     &P8X,POP8Y,POP9X,POP9Y,RMTQ,RX,RY,VOCMX,VOCMY,VOP10X,VOP10Y,VOP11X,
-     &VOP11Y,VOP2X,VOP2Y,VRX,VRY
+     &RX1,VRX2,VRY1,VRY2,Q1p,Q2p,Q3p,U1p,U2p,U3p,DLX1,DLX2,LMTQ,POCMX,PO
+     &CMY,POP10X,POP10Y,POP11X,POP11Y,POP12X,POP12Y,POP13X,POP13Y,POP14X
+     &,POP14Y,POP15X,POP15Y,POP16X,POP16Y,POP1X,POP1Y,POP2X,POP2Y,POP3X,
+     &POP3Y,POP4X,POP4Y,POP5X,POP5Y,POP6X,POP6Y,POP7X,POP7Y,POP8X,POP8Y,
+     &POP9X,POP9Y,RMTQ,RX,RY,VOCMX,VOCMY,VOP2X,VOP2Y,VRX,VRY
       COMMON/MISCLLNS/ PI,DEGtoRAD,RADtoDEG,Z(1287),COEF(3,3),RHS(3)
 
 C**   Evaluate output quantities
+      Z(168) = Z(18)*Z(157)
+      Z(172) = Z(17)*Z(157)
+      Z(175) = Z(172) - Z(173)
+      Z(183) = Z(14)*Z(168) - Z(13)*Z(175)
+      Z(190) = Z(183) - Z(188)
+      Z(179) = -Z(13)*Z(168) - Z(14)*Z(175)
+      Z(195) = Z(10)*Z(190) - Z(9)*Z(179)
+      Z(200) = -Z(9)*Z(190) - Z(10)*Z(179)
+      Z(206) = Z(200) + Z(204)
       Z(321) = Z(5)*Z(195) + Z(6)*Z(206)
+      Z(191) = Z(10)*Z(180) - Z(9)*Z(176)
+      Z(196) = -Z(9)*Z(180) - Z(10)*Z(176)
       Z(316) = Z(5)*Z(191) + Z(6)*Z(196)
       Z(318) = Z(5)*Z(192) + Z(6)*Z(197)
       Z(327) = Z(5)*Z(206) - Z(6)*Z(195)
@@ -975,7 +892,13 @@ C**   Evaluate output quantities
       Z(323) = Z(5)*Z(197) - Z(6)*Z(192)
       Z(187) = Z(183) - Z(185)
       Z(203) = Z(200) + Z(201)
+      Z(215) = Z(207)*Z(195) + Z(209)*Z(206)
+      Z(210) = Z(191)*Z(207) + Z(196)*Z(209)
+      Z(212) = Z(192)*Z(207) + Z(197)*Z(209)
+      Z(221) = Z(207)*Z(206) + Z(208)*Z(195)
       Z(224) = Z(221) - Z(222)
+      Z(216) = Z(191)*Z(208) + Z(196)*Z(207)
+      Z(217) = Z(192)*Z(208) + Z(197)*Z(207)
       Z(336) = Z(20)*Z(327) - Z(19)*Z(321)
       Z(330) = Z(20)*Z(322) - Z(19)*Z(316)
       Z(331) = Z(20)*Z(323) - Z(19)*Z(318)
@@ -994,9 +917,51 @@ C**   Evaluate output quantities
       Z(382) = -Z(21)*Z(322) - Z(22)*Z(316)
       Z(383) = -Z(21)*Z(323) - Z(22)*Z(318)
       Z(384) = -Z(21)*Z(324) - Z(22)*Z(317)
+      Z(227) = Z(221) - Z(225)
+      Z(243) = Z(8)*Z(215) - Z(7)*Z(227)
+      Z(252) = Z(243) + Z(249)
+      Z(235) = -Z(7)*Z(215) - Z(8)*Z(227)
+      Z(277) = -Z(11)*Z(252) - Z(12)*Z(235)
+      Z(282) = Z(277) + Z(278)
+      Z(268) = Z(12)*Z(252) - Z(11)*Z(235)
+      Z(292) = Z(16)*Z(282) - Z(15)*Z(268)
+      Z(283) = LRF*Z(16)
+      Z(236) = Z(8)*Z(210) - Z(7)*Z(216)
+      Z(228) = -Z(7)*Z(210) - Z(8)*Z(216)
+      Z(270) = -Z(11)*Z(236) - Z(12)*Z(228)
+      Z(261) = Z(12)*Z(236) - Z(11)*Z(228)
+      Z(284) = Z(16)*Z(270) - Z(15)*Z(261)
+      Z(238) = Z(8)*Z(211) - Z(7)*Z(218)
+      Z(230) = -Z(7)*Z(211) - Z(8)*Z(218)
+      Z(272) = -Z(11)*Z(238) - Z(12)*Z(230)
+      Z(262) = Z(12)*Z(238) - Z(11)*Z(230)
+      Z(285) = Z(16)*Z(272) - Z(15)*Z(262)
+      Z(239) = Z(8)*Z(212) - Z(7)*Z(217)
+      Z(231) = -Z(7)*Z(212) - Z(8)*Z(217)
+      Z(273) = -Z(11)*Z(239) - Z(12)*Z(231)
+      Z(263) = Z(12)*Z(239) - Z(11)*Z(231)
+      Z(286) = Z(16)*Z(273) - Z(15)*Z(263)
+      Z(234) = LTH*Z(8)
+      Z(242) = LTH*Z(7)
+      Z(251) = LSH - Z(242)
+      Z(269) = Z(12)*Z(234) - Z(11)*Z(251)
+      Z(280) = LRF + Z(269)
+      Z(265) = Z(11)*Z(234) + Z(12)*Z(251)
+      Z(288) = Z(16)*Z(280) - Z(15)*Z(265)
+      Z(276) = LSH*Z(11)
+      Z(281) = LRF - Z(276)
+      Z(260) = LSH*Z(12)
+      Z(289) = Z(16)*Z(281) - Z(15)*Z(260)
+      Z(302) = -Z(15)*Z(282) - Z(16)*Z(268)
       Z(309) = Z(302) + Z(304)
+      Z(294) = -Z(15)*Z(270) - Z(16)*Z(261)
+      Z(295) = -Z(15)*Z(272) - Z(16)*Z(262)
+      Z(296) = -Z(15)*Z(273) - Z(16)*Z(263)
+      Z(298) = -Z(15)*Z(280) - Z(16)*Z(265)
       Z(306) = Z(90) + Z(298)
+      Z(293) = -Z(15)*Z(281) - Z(16)*Z(260)
       Z(307) = Z(90) + Z(293)
+      Z(301) = LRF*Z(15)
       Z(308) = Z(90) - Z(301)
       Z(349) = Z(343) - Z(347)
       Z(365) = Z(24)*Z(336) - Z(23)*Z(349)
@@ -1110,6 +1075,8 @@ C**   Evaluate output quantities
       Z(119) = Z(1)*Z(64) + Z(2)*Z(65)
       Z(111) = Z(1)*Z(60) + Z(2)*Z(61)
       Z(137) = Z(1)*Z(39) + Z(2)*Z(40)
+      Z(50) = Z(14)*Z(37) - Z(13)*Z(35)
+      Z(51) = Z(14)*Z(38) - Z(13)*Z(36)
       Z(125) = Z(1)*Z(50) + Z(2)*Z(51)
       Z(582) = LHATO + Z(102)*Z(19) + Z(102)*Z(21) + 0.5D0*Z(99)*Z(159) 
      &+ 0.5D0*Z(99)*Z(254) - Z(95) - Z(106)*Z(3) - Z(578)*Z(32) - Z(579)
@@ -1820,6 +1787,7 @@ C**   Evaluate output quantities
      &Z(12)*Z(251)*Z(486)-4*Z(91)*Z(483)-LRFFO*Z(484)-4*Z(12)*Z(234)*Z(4
      &83)-2*Z(234)*Z(565)*Z(484)-4*Z(251)*Z(482)-2*Z(1212)*Z(487)-2*Z(25
      &1)*Z(564)*Z(487))
+      Z(312) = LFF + Z(298)
       Z(1279) = Z(546)*(Z(234)*Z(61)-Z(247)*Z(63)) + 0.5D0*Z(545)*(LRFFO
      &*Z(71)+2*Z(234)*Z(61)-2*Z(91)*Z(67)-2*Z(251)*Z(63)) + Z(1220) - Z(
      &1161)*Z(57) - Z(265)*VRX2*Z(64) - Z(265)*VRY2*Z(65) - Z(280)*VRX2*
@@ -1898,6 +1866,7 @@ C**   Evaluate output quantities
      &)-2*Z(1211)*Z(484)-4*LSH*Z(11)*Z(483)-2*LSH*Z(563)*Z(484)-2*Z(1209
      &)*Z(486)-4*LSH*Z(12)*Z(486)-4*Z(91)*Z(11)*Z(482)-4*Z(91)*Z(12)*Z(4
      &81)-2*LRFFO*Z(563)*Z(482)-2*LRFFO*Z(565)*Z(481))
+      Z(313) = LFF + Z(293)
       Z(1281) = 0.5D0*Z(545)*(LRFFO*Z(71)-2*LSH*Z(63)-2*Z(91)*Z(67)) + Z
      &(1232) - Z(1164)*Z(63) - Z(260)*VRX2*Z(64) - Z(260)*VRY2*Z(65) - Z
      &(281)*VRX2*Z(66) - Z(281)*VRY2*Z(67) - Z(289)*VRX1*Z(72) - Z(289)*
@@ -1969,6 +1938,7 @@ C**   Evaluate output quantities
      &0.25D0*MRF*(LRFFO*Z(484)+4*Z(91)*Z(483)+2*Z(1212)*Z(487)-2*Z(1207)
      &*Z(483)-2*Z(1211)*Z(484)-2*Z(1209)*Z(486)-4*Z(91)*Z(11)*Z(482)-4*Z
      &(91)*Z(12)*Z(481)-2*LRFFO*Z(563)*Z(482)-2*LRFFO*Z(565)*Z(481))
+      Z(314) = LFF - Z(301)
       Z(1283) = 0.5D0*Z(545)*(LRFFO*Z(71)-2*Z(91)*Z(67)) + Z(1243) - Z(2
      &83)*VRX1*Z(72) - Z(283)*VRY1*Z(73) - Z(314)*VRX1*Z(74) - Z(314)*VR
      &Y1*Z(75) - LRF*(VRX2*Z(66)+VRY2*Z(67)) - Z(543)*(Z(283)*Z(73)+Z(30
@@ -2088,6 +2058,14 @@ C**   Evaluate output quantities
      &(50) - LRFF*Z(68) - LSH*Z(35) - LTH*Z(54)
       POP9Y = Q2 + LRF*Z(65) + LSH*Z(61) + LTH*Z(58) - LFF*Z(40) - LRF*Z
      &(51) - LRFF*Z(69) - LSH*Z(36) - LTH*Z(55)
+      POP10X = Q1 + LRF*Z(64) + LSH*Z(60) + LTH*Z(57) - LFF*Z(39) - LRF*
+     &Z(50) - LSH*Z(35) - LTH*Z(54)
+      POP10Y = Q2 + LRF*Z(65) + LSH*Z(61) + LTH*Z(58) - LFF*Z(40) - LRF*
+     &Z(51) - LSH*Z(36) - LTH*Z(55)
+      POP11X = Q1 + LFF*Z(72) + LRF*Z(64) + LSH*Z(60) + LTH*Z(57) - LFF*
+     &Z(39) - LRF*Z(50) - LSH*Z(35) - LTH*Z(54)
+      POP11Y = Q2 + LFF*Z(73) + LRF*Z(65) + LSH*Z(61) + LTH*Z(58) - LFF*
+     &Z(40) - LRF*Z(51) - LSH*Z(36) - LTH*Z(55)
       POP12X = Q1 + LHAT*Z(1) - LFF*Z(39) - LRF*Z(50) - LSH*Z(35) - LTH*
      &Z(54)
       POP12Y = Q2 + LHAT*Z(2) - LFF*Z(40) - LRF*Z(51) - LSH*Z(36) - LTH*

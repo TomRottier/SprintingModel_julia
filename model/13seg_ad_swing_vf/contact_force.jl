@@ -1,5 +1,5 @@
 function contact_forces(u, p, t)
-    @unpack footang, g, iff, ihat, irf, ish, ith, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, mff, mhat, mrf, msh, mth, mtpb, mtpk, rmtpxi, rtoexi, u4, u5, u6, u7, u8, u9, z = p
+    @unpack footang, g, iff, ihat, irf, ish, ith, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, mtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, toexi, mff, mhat, mrf, msh, mth, mtpb, mtpk, u4, u5, u6, u7, u8, u9, z = p
     @inbounds q1, q2, q3, u1, u2, u3 = u
 
     # specified variables

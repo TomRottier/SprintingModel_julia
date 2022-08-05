@@ -60,12 +60,12 @@ py(sol) = [py(sol, t) for t in sol.t]
 
 
 function rhtq(sol, t)
-    @unpack z = sol.prob.p
+
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[1279] + z[1217] * u3p + z[1218] * u1p + z[1219] * u2p
@@ -75,12 +75,12 @@ rhtq(sol) = [rhtq(sol, t) for t in sol.t]
 
 
 function lhtq(sol, t)
-    @unpack z = sol.prob.p
+
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[1280] + z[1222] * u3p + z[1223] * u1p + z[1224] * u2p
@@ -90,12 +90,12 @@ lhtq(sol) = [lhtq(sol, t) for t in sol.t]
 
 
 function rktq(sol, t)
-    @unpack z = sol.prob.p
+
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[1281] + z[1229] * u3p + z[1230] * u1p + z[1231] * u2p
@@ -105,12 +105,12 @@ rktq(sol) = [rktq(sol, t) for t in sol.t]
 
 
 function lktq(sol, t)
-    @unpack z = sol.prob.p
+
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[1282] + z[1234] * u3p + z[1235] * u1p + z[1236] * u2p
@@ -120,12 +120,12 @@ lktq(sol) = [lktq(sol, t) for t in sol.t]
 
 
 function ratq(sol, t)
-    @unpack z = sol.prob.p
+
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[1283] + z[1240] * u3p + z[1241] * u1p + z[1242] * u2p
@@ -135,12 +135,12 @@ ratq(sol) = [ratq(sol, t) for t in sol.t]
 
 
 function latq(sol, t)
-    @unpack z = sol.prob.p
+
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[1284] + z[1245] * u3p + z[1246] * u1p + z[1247] * u2p
@@ -150,12 +150,12 @@ latq(sol) = [latq(sol, t) for t in sol.t]
 
 
 function rstq(sol, t)
-    @unpack z = sol.prob.p
+
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[1285] + z[1250] * u3p + z[1251] * u1p + z[1252] * u2p
@@ -165,12 +165,12 @@ rstq(sol) = [rstq(sol, t) for t in sol.t]
 
 
 function lstq(sol, t)
-    @unpack z = sol.prob.p
+
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return z[1286] + z[1254] * u3p + z[1255] * u1p + z[1256] * u2p
@@ -180,12 +180,12 @@ lstq(sol) = [lstq(sol, t) for t in sol.t]
 
 
 function retq(sol, t)
-    @unpack z = sol.prob.p
+
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return (z[1258] * u3p + z[1259] * u1p + z[1260] * u2p) - z[1277]
@@ -195,12 +195,12 @@ retq(sol) = [retq(sol, t) for t in sol.t]
 
 
 function letq(sol, t)
-    @unpack z = sol.prob.p
+
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
 
     # set z array values
-    q1p, q2p, q3p, u1p, u2p, u3p = eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
     return (z[1262] * u3p + z[1263] * u1p + z[1264] * u2p) - z[1278]
@@ -449,6 +449,66 @@ end
 pop9y(sol) = [pop9y(sol, t) for t in sol.t]
 
 
+function pop10x(sol, t)
+    @unpack z, lrf, lsh, lth, lff = sol.prob.p
+    @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
+
+
+    # set z array values
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    io(sol, t)
+
+    return ((((q1 + lrf * z[64] + lsh * z[60] + lth * z[57]) - lff * z[39]) - lrf * z[50]) - lsh * z[35]) - lth * z[54]
+end
+
+pop10x(sol) = [pop10x(sol, t) for t in sol.t]
+
+
+function pop10y(sol, t)
+    @unpack z, lrf, lsh, lth, lff = sol.prob.p
+    @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
+
+
+    # set z array values
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    io(sol, t)
+
+    return ((((q2 + lrf * z[65] + lsh * z[61] + lth * z[58]) - lff * z[40]) - lrf * z[51]) - lsh * z[36]) - lth * z[55]
+end
+
+pop10y(sol) = [pop10y(sol, t) for t in sol.t]
+
+
+function pop11x(sol, t)
+    @unpack z, lff, lrf, lsh, lth = sol.prob.p
+    @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
+
+
+    # set z array values
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    io(sol, t)
+
+    return ((((q1 + lff * z[72] + lrf * z[64] + lsh * z[60] + lth * z[57]) - lff * z[39]) - lrf * z[50]) - lsh * z[35]) - lth * z[54]
+end
+
+pop11x(sol) = [pop11x(sol, t) for t in sol.t]
+
+
+function pop11y(sol, t)
+    @unpack z, lff, lrf, lsh, lth = sol.prob.p
+    @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
+
+
+    # set z array values
+    eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
+    io(sol, t)
+
+    return ((((q2 + lff * z[73] + lrf * z[65] + lsh * z[61] + lth * z[58]) - lff * z[40]) - lrf * z[51]) - lsh * z[36]) - lth * z[55]
+end
+
+pop11y(sol) = [pop11y(sol, t) for t in sol.t]
+
+
 function pop12x(sol, t)
     @unpack z, lhat, lff, lrf, lsh, lth = sol.prob.p
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
@@ -653,7 +713,7 @@ function vocmy(sol, t)
     eom(SA[q1, q2, q3, u1, u2, u3], sol.prob.p, t)
     io(sol, t)
 
-    return u2 + z[95] * z[1] * u3 + z[54] * (z[425] - z[101] * u3 - z[101] * u5) + z[82] * (z[428] + z[97] * u10 + z[97] * u12 + z[97] * u3) + z[89] * (z[421] + z[97] * u11 + z[97] * u13 + z[97] * u3) + z[75] * (z[427] + z[103] * u3 + z[103] * u4 + z[103] * u6 + z[103] * u8) + z[38] * (z[424] - z[100] * u3 - z[100] * u5 - z[100] * u7) + 0.5 * z[49] * (z[423] - z[99] * u3 - z[99] * u5 - z[99] * u7 - z[99] * u9) + 0.5 * z[53] * (z[422] - z[98] * u3 - z[98] * u5 - z[98] * u7 - z[98] * u9) + 0.5 * z[71] * (z[430] - z[99] * u3 - z[99] * u4 - z[99] * u6 - z[99] * u8) - z[57] * (z[432] - z[106] * u3 - z[106] * u4) - z[76] * (z[433] - z[102] * u10 - z[102] * u3) - z[83] * (z[426] - z[102] * u11 - z[102] * u3) - z[42] * (z[420] + z[96] * u3 + z[96] * u5 + z[96] * u7 + z[96] * u9) - z[63] * (z[431] - z[105] * u3 - z[105] * u4 - z[105] * u6) - z[67] * (z[429] - z[104] * u3 - z[104] * u4 - z[104] * u6 - z[104] * u8)
+    return ((((((u2 + z[95] * z[1] * u3 + z[54] * ((z[425] - z[101] * u3) - z[101] * u5) + z[82] * (z[428] + z[97] * u10 + z[97] * u12 + z[97] * u3) + z[89] * (z[421] + z[97] * u11 + z[97] * u13 + z[97] * u3) + z[75] * (z[427] + z[103] * u3 + z[103] * u4 + z[103] * u6 + z[103] * u8) + z[38] * (((z[424] - z[100] * u3) - z[100] * u5) - z[100] * u7) + 0.5 * z[49] * ((((z[423] - z[99] * u3) - z[99] * u5) - z[99] * u7) - z[99] * u9) + 0.5 * z[53] * ((((z[422] - z[98] * u3) - z[98] * u5) - z[98] * u7) - z[98] * u9) + 0.5 * z[71] * ((((z[430] - z[99] * u3) - z[99] * u4) - z[99] * u6) - z[99] * u8)) - z[57] * ((z[432] - z[106] * u3) - z[106] * u4)) - z[76] * ((z[433] - z[102] * u10) - z[102] * u3)) - z[83] * ((z[426] - z[102] * u11) - z[102] * u3)) - z[42] * (z[420] + z[96] * u3 + z[96] * u5 + z[96] * u7 + z[96] * u9)) - z[63] * (((z[431] - z[105] * u3) - z[105] * u4) - z[105] * u6)) - z[67] * ((((z[429] - z[104] * u3) - z[104] * u4) - z[104] * u6) - z[104] * u8)
 end
 
 vocmy(sol) = [vocmy(sol, t) for t in sol.t]
@@ -750,14 +810,10 @@ ry(sol) = [ry(sol, t) for t in sol.t]
 
 
 function io(sol, t)
-    @unpack footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, rmtpxi, rtoexi, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, z = sol.prob.p
+    @unpack footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mtpxi, mua, toexi, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, z = sol.prob.p
     @inbounds q1, q2, q3, u1, u2, u3 = sol(t)
 
     # specified variables
-    rmtp = _rmtp(t)
-    ra = _ra(t)
-    rk = _rk(t)
-    rh = _rh(t)
     la = _la(t)
     lmtp = _lmtp(t)
     lh = _lh(t)
@@ -766,14 +822,15 @@ function io(sol, t)
     lap = _lap(t)
     lhp = _lhp(t)
     lmtpp = _lmtpp(t)
-    rhp = _rhp(t)
-    rkp = _rkp(t)
-    rap = _rap(t)
-    rmtpp = _rmtpp(t)
+    rh = _rh(t)
+    rk = _rk(t)
+    ra = _ra(t)
+    rmtp = _rmtp(t)
     rs = _rs(t)
     ls = _ls(t)
     re = _re(t)
     le = _le(t)
+    rhp = _rhp(t)
     rkpp = _rkpp(t)
     rhpp = _rhpp(t)
     lkpp = _lkpp(t)
@@ -788,6 +845,9 @@ function io(sol, t)
     rspp = _rspp(t)
     lepp = _lepp(t)
     lspp = _lspp(t)
+    rkp = _rkp(t)
+    rap = _rap(t)
+    rmtpp = _rmtpp(t)
     rep = _rep(t)
     lep = _lep(t)
 
@@ -889,7 +949,18 @@ function io(sol, t)
     z[1239] = (lrffo^2 + 4 * z[91]^2) - 4 * lrffo * z[27] * z[91]
     z[1244] = iff + irf + mff * lffo^2
     z[1249] = ila + iua
+    z[168] = z[18] * z[157]
+    z[172] = z[17] * z[157]
+    z[175] = z[172] - z[173]
+    z[183] = z[14] * z[168] - z[13] * z[175]
+    z[190] = z[183] - z[188]
+    z[179] = -(z[13]) * z[168] - z[14] * z[175]
+    z[195] = z[10] * z[190] - z[9] * z[179]
+    z[200] = -(z[9]) * z[190] - z[10] * z[179]
+    z[206] = z[200] + z[204]
     z[321] = z[5] * z[195] + z[6] * z[206]
+    z[191] = z[10] * z[180] - z[9] * z[176]
+    z[196] = -(z[9]) * z[180] - z[10] * z[176]
     z[316] = z[5] * z[191] + z[6] * z[196]
     z[318] = z[5] * z[192] + z[6] * z[197]
     z[327] = z[5] * z[206] - z[6] * z[195]
@@ -897,7 +968,13 @@ function io(sol, t)
     z[323] = z[5] * z[197] - z[6] * z[192]
     z[187] = z[183] - z[185]
     z[203] = z[200] + z[201]
+    z[215] = z[207] * z[195] + z[209] * z[206]
+    z[210] = z[191] * z[207] + z[196] * z[209]
+    z[212] = z[192] * z[207] + z[197] * z[209]
+    z[221] = z[207] * z[206] + z[208] * z[195]
     z[224] = z[221] - z[222]
+    z[216] = z[191] * z[208] + z[196] * z[207]
+    z[217] = z[192] * z[208] + z[197] * z[207]
     z[336] = z[20] * z[327] - z[19] * z[321]
     z[330] = z[20] * z[322] - z[19] * z[316]
     z[331] = z[20] * z[323] - z[19] * z[318]
@@ -916,9 +993,51 @@ function io(sol, t)
     z[382] = -(z[21]) * z[322] - z[22] * z[316]
     z[383] = -(z[21]) * z[323] - z[22] * z[318]
     z[384] = -(z[21]) * z[324] - z[22] * z[317]
+    z[227] = z[221] - z[225]
+    z[243] = z[8] * z[215] - z[7] * z[227]
+    z[252] = z[243] + z[249]
+    z[235] = -(z[7]) * z[215] - z[8] * z[227]
+    z[277] = -(z[11]) * z[252] - z[12] * z[235]
+    z[282] = z[277] + z[278]
+    z[268] = z[12] * z[252] - z[11] * z[235]
+    z[292] = z[16] * z[282] - z[15] * z[268]
+    z[283] = lrf * z[16]
+    z[236] = z[8] * z[210] - z[7] * z[216]
+    z[228] = -(z[7]) * z[210] - z[8] * z[216]
+    z[270] = -(z[11]) * z[236] - z[12] * z[228]
+    z[261] = z[12] * z[236] - z[11] * z[228]
+    z[284] = z[16] * z[270] - z[15] * z[261]
+    z[238] = z[8] * z[211] - z[7] * z[218]
+    z[230] = -(z[7]) * z[211] - z[8] * z[218]
+    z[272] = -(z[11]) * z[238] - z[12] * z[230]
+    z[262] = z[12] * z[238] - z[11] * z[230]
+    z[285] = z[16] * z[272] - z[15] * z[262]
+    z[239] = z[8] * z[212] - z[7] * z[217]
+    z[231] = -(z[7]) * z[212] - z[8] * z[217]
+    z[273] = -(z[11]) * z[239] - z[12] * z[231]
+    z[263] = z[12] * z[239] - z[11] * z[231]
+    z[286] = z[16] * z[273] - z[15] * z[263]
+    z[234] = lth * z[8]
+    z[242] = lth * z[7]
+    z[251] = lsh - z[242]
+    z[269] = z[12] * z[234] - z[11] * z[251]
+    z[280] = lrf + z[269]
+    z[265] = z[11] * z[234] + z[12] * z[251]
+    z[288] = z[16] * z[280] - z[15] * z[265]
+    z[276] = lsh * z[11]
+    z[281] = lrf - z[276]
+    z[260] = lsh * z[12]
+    z[289] = z[16] * z[281] - z[15] * z[260]
+    z[302] = -(z[15]) * z[282] - z[16] * z[268]
     z[309] = z[302] + z[304]
+    z[294] = -(z[15]) * z[270] - z[16] * z[261]
+    z[295] = -(z[15]) * z[272] - z[16] * z[262]
+    z[296] = -(z[15]) * z[273] - z[16] * z[263]
+    z[298] = -(z[15]) * z[280] - z[16] * z[265]
     z[306] = z[90] + z[298]
+    z[293] = -(z[15]) * z[281] - z[16] * z[260]
     z[307] = z[90] + z[293]
+    z[301] = lrf * z[15]
     z[308] = z[90] - z[301]
     z[349] = z[343] - z[347]
     z[365] = z[24] * z[336] - z[23] * z[349]
@@ -973,6 +1092,8 @@ function io(sol, t)
     z[119] = z[1] * z[64] + z[2] * z[65]
     z[111] = z[1] * z[60] + z[2] * z[61]
     z[137] = z[1] * z[39] + z[2] * z[40]
+    z[50] = z[14] * z[37] - z[13] * z[35]
+    z[51] = z[14] * z[38] - z[13] * z[36]
     z[125] = z[1] * z[50] + z[2] * z[51]
     z[582] = (((((((((((lhato + z[102] * z[19] + z[102] * z[21] + 0.5 * z[99] * z[159] + 0.5 * z[99] * z[254]) - z[95]) - z[106] * z[3]) - z[578] * z[32]) - z[579] * z[5]) - z[97] * z[145]) - z[97] * z[151]) - z[103] * z[131]) - z[104] * z[119]) - z[105] * z[111]) - z[580] * z[137]) - 0.5 * z[581] * z[125]
     z[941] = mhat * z[582]
@@ -1466,6 +1587,7 @@ function io(sol, t)
     z[1116] = msh * z[232]
     z[1117] = msh * z[233]
     z[1220] = (((z[1187] + z[1189] + z[1190] + z[1135] * z[470] + mff * (z[288] * z[497] + z[306] * z[498])) - z[1191]) - msh * (z[234] * z[478] - z[247] * z[479])) - 0.25 * mrf * ((((((((2 * z[1207] * z[483] + 2 * z[1211] * z[484] + 2 * z[251] * z[563] * z[484] + 4 * z[11] * z[251] * z[483] + 2 * z[1209] * z[486] + 4 * z[234] * z[481] + 2 * lrffo * z[563] * z[482] + 2 * lrffo * z[565] * z[481] + 2 * z[234] * z[563] * z[487] + 4 * z[91] * z[11] * z[482] + 4 * z[91] * z[12] * z[481] + 4 * z[11] * z[234] * z[486] + 4 * z[12] * z[251] * z[486]) - 4 * z[91] * z[483]) - lrffo * z[484]) - 4 * z[12] * z[234] * z[483]) - 2 * z[234] * z[565] * z[484]) - 4 * z[251] * z[482]) - 2 * z[1212] * z[487]) - 2 * z[251] * z[564] * z[487])
+    z[312] = lff + z[298]
     z[1279] = ((((((((((z[546] * (z[234] * z[61] - z[247] * z[63]) + 0.5 * z[545] * (((lrffo * z[71] + 2 * z[234] * z[61]) - 2 * z[91] * z[67]) - 2 * z[251] * z[63]) + z[1220]) - z[1161] * z[57]) - z[265] * vrx2 * z[64]) - z[265] * vry2 * z[65]) - z[280] * vrx2 * z[66]) - z[280] * vry2 * z[67]) - z[288] * vrx1 * z[72]) - z[288] * vry1 * z[73]) - z[312] * vrx1 * z[74]) - z[312] * vry1 * z[75]) - z[543] * (z[288] * z[73] + z[306] * z[75])
     z[1217] = ((z[1214] + z[1135] * z[223] + mff * (z[287] * z[288] + z[305] * z[306])) - msh * (z[229] * z[234] - z[246] * z[247])) - 0.25 * mrf * ((((((4 * z[1205] + 4 * z[229] * z[234] + 2 * lrffo * z[229] * z[565] + 2 * lrffo * z[250] * z[563] + 2 * lrffo * z[251] * z[563] + 4 * z[91] * z[11] * z[250] + 4 * z[91] * z[11] * z[251] + 4 * z[91] * z[12] * z[229]) - 4 * z[1216]) - z[1215]) - 4 * z[250] * z[251]) - 4 * z[91] * z[12] * z[234]) - 2 * lrffo * z[234] * z[565])
     z[1218] = (z[1135] * z[219] + mff * (z[288] * z[290] + z[306] * z[299]) + 0.5 * mrf * (((((2 * z[251] * z[240] - 2 * z[234] * z[232]) - 2 * z[91] * z[11] * z[240]) - 2 * z[91] * z[12] * z[232]) - lrffo * z[563] * z[240]) - lrffo * z[565] * z[232])) - msh * (z[234] * z[232] - z[247] * z[240])
@@ -1476,6 +1598,7 @@ function io(sol, t)
     z[1223] = (mff * (z[285] * z[290] + z[295] * z[299]) + mhat * (z[317] * z[319] + z[324] * z[325]) + mla * (z[352] * z[354] + z[360] * z[362]) + mla * (z[397] * z[399] + z[405] * z[407]) + mrf * (z[230] * z[232] + z[238] * z[240]) + msh * (z[176] * z[177] + z[186] * z[181]) + msh * (z[230] * z[232] + z[238] * z[240]) + mth * (z[192] * z[193] + z[202] * z[198]) + mth * (z[211] * z[213] + z[218] * z[219]) + mua * (z[332] * z[334] + z[339] * z[341]) + mua * (z[377] * z[379] + z[384] * z[386]) + 0.5 * mrf * ((((lrfo * z[17] * z[41] - 2 * lff * z[41]) - lrffo * z[560] * z[41]) - lrffo * z[561] * z[39]) - lrfo * z[18] * z[39])) - z[992] * z[41]
     z[1224] = (mff * (z[285] * z[291] + z[295] * z[300]) + mhat * (z[317] * z[320] + z[324] * z[326]) + mla * (z[352] * z[355] + z[360] * z[363]) + mla * (z[397] * z[400] + z[405] * z[408]) + mrf * (z[230] * z[233] + z[238] * z[241]) + msh * (z[176] * z[178] + z[186] * z[182]) + msh * (z[230] * z[233] + z[238] * z[241]) + mth * (z[192] * z[194] + z[202] * z[199]) + mth * (z[211] * z[214] + z[218] * z[220]) + mua * (z[332] * z[335] + z[339] * z[342]) + mua * (z[377] * z[380] + z[384] * z[387]) + 0.5 * mrf * ((((lrfo * z[17] * z[42] - 2 * lff * z[42]) - lrffo * z[560] * z[42]) - lrffo * z[561] * z[40]) - lrfo * z[18] * z[40])) - z[992] * z[42]
     z[1232] = z[1187] + z[1189] + z[1190] + z[1120] * z[479] + mff * (z[289] * z[497] + z[307] * z[498]) + 0.25 * mrf * (((((((((((lrffo * z[484] + 4 * z[91] * z[483] + 2 * z[1212] * z[487] + 4 * lsh * z[482] + 2 * lsh * z[564] * z[487]) - 2 * z[1207] * z[483]) - 2 * z[1211] * z[484]) - 4 * lsh * z[11] * z[483]) - 2 * lsh * z[563] * z[484]) - 2 * z[1209] * z[486]) - 4 * lsh * z[12] * z[486]) - 4 * z[91] * z[11] * z[482]) - 4 * z[91] * z[12] * z[481]) - 2 * lrffo * z[563] * z[482]) - 2 * lrffo * z[565] * z[481])
+    z[313] = lff + z[293]
     z[1281] = ((((((((((0.5 * z[545] * ((lrffo * z[71] - 2 * lsh * z[63]) - 2 * z[91] * z[67]) + z[1232]) - z[1164] * z[63]) - z[260] * vrx2 * z[64]) - z[260] * vry2 * z[65]) - z[281] * vrx2 * z[66]) - z[281] * vry2 * z[67]) - z[289] * vrx1 * z[72]) - z[289] * vry1 * z[73]) - z[313] * vrx1 * z[74]) - z[313] * vry1 * z[75]) - z[543] * (z[289] * z[73] + z[307] * z[75])
     z[1229] = z[1226] + z[1120] * z[246] + mff * (z[287] * z[289] + z[305] * z[307]) + 0.25 * mrf * ((((((((z[1204] + 4 * lsh * z[250]) - 4 * z[1205]) - 4 * z[1227] * z[11]) - 2 * z[1228] * z[563]) - 4 * z[91] * z[11] * z[250]) - 4 * z[91] * z[12] * z[229]) - 2 * lrffo * z[229] * z[565]) - 2 * lrffo * z[250] * z[563])
     z[1230] = z[1120] * z[240] + mff * (z[289] * z[290] + z[307] * z[299]) + 0.5 * mrf * ((((2 * lsh * z[240] - 2 * z[91] * z[11] * z[240]) - 2 * z[91] * z[12] * z[232]) - lrffo * z[563] * z[240]) - lrffo * z[565] * z[232])
@@ -1486,6 +1609,7 @@ function io(sol, t)
     z[1235] = (mff * (z[286] * z[290] + z[296] * z[299]) + mhat * (z[318] * z[319] + z[323] * z[325]) + mla * (z[351] * z[354] + z[359] * z[362]) + mla * (z[396] * z[399] + z[404] * z[407]) + mrf * (z[231] * z[232] + z[239] * z[240]) + msh * (z[176] * z[177] + z[186] * z[181]) + msh * (z[231] * z[232] + z[239] * z[240]) + mth * (z[192] * z[193] + z[197] * z[198]) + mth * (z[212] * z[213] + z[217] * z[219]) + mua * (z[331] * z[334] + z[338] * z[341]) + mua * (z[376] * z[379] + z[383] * z[386]) + 0.5 * mrf * ((((lrfo * z[17] * z[41] - 2 * lff * z[41]) - lrffo * z[560] * z[41]) - lrffo * z[561] * z[39]) - lrfo * z[18] * z[39])) - z[992] * z[41]
     z[1236] = (mff * (z[286] * z[291] + z[296] * z[300]) + mhat * (z[318] * z[320] + z[323] * z[326]) + mla * (z[351] * z[355] + z[359] * z[363]) + mla * (z[396] * z[400] + z[404] * z[408]) + mrf * (z[231] * z[233] + z[239] * z[241]) + msh * (z[176] * z[178] + z[186] * z[182]) + msh * (z[231] * z[233] + z[239] * z[241]) + mth * (z[192] * z[194] + z[197] * z[199]) + mth * (z[212] * z[214] + z[217] * z[220]) + mua * (z[331] * z[335] + z[338] * z[342]) + mua * (z[376] * z[380] + z[383] * z[387]) + 0.5 * mrf * ((((lrfo * z[17] * z[42] - 2 * lff * z[42]) - lrffo * z[560] * z[42]) - lrffo * z[561] * z[40]) - lrfo * z[18] * z[40])) - z[992] * z[42]
     z[1243] = z[1187] + z[1189] + mff * (z[283] * z[497] + z[308] * z[498]) + 0.25 * mrf * ((((((((lrffo * z[484] + 4 * z[91] * z[483] + 2 * z[1212] * z[487]) - 2 * z[1207] * z[483]) - 2 * z[1211] * z[484]) - 2 * z[1209] * z[486]) - 4 * z[91] * z[11] * z[482]) - 4 * z[91] * z[12] * z[481]) - 2 * lrffo * z[563] * z[482]) - 2 * lrffo * z[565] * z[481])
+    z[314] = lff - z[301]
     z[1283] = ((((((0.5 * z[545] * (lrffo * z[71] - 2 * z[91] * z[67]) + z[1243]) - z[283] * vrx1 * z[72]) - z[283] * vry1 * z[73]) - z[314] * vrx1 * z[74]) - z[314] * vry1 * z[75]) - lrf * (vrx2 * z[66] + vry2 * z[67])) - z[543] * (z[283] * z[73] + z[308] * z[75])
     z[1240] = z[1238] + mff * (z[283] * z[287] + z[305] * z[308]) + 0.25 * mrf * ((((z[1239] - 4 * z[91] * z[11] * z[250]) - 4 * z[91] * z[12] * z[229]) - 2 * lrffo * z[229] * z[565]) - 2 * lrffo * z[250] * z[563])
     z[1241] = mff * (z[283] * z[290] + z[308] * z[299]) - 0.5 * mrf * (lrffo * z[563] * z[240] + lrffo * z[565] * z[232] + 2 * z[91] * z[11] * z[240] + 2 * z[91] * z[12] * z[232])
@@ -1635,7 +1759,7 @@ RY(sol) = [RY(sol, t) for t in sol.t]
 
 
 function vocmx(u, p, t)
-    @unpack footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, rmtpxi, rtoexi, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, z = p
+    @unpack footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, mtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, toexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, z = p
     @inbounds q1, q2, q3, u1, u2, u3 = u
 
     # specified variables
@@ -1668,7 +1792,7 @@ function vocmx(u, p, t)
 end
 
 function vocmy(u, p, t)
-    @unpack footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, rmtpxi, rtoexi, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, z = p
+    @unpack footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, mtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, toexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, z = p
     @inbounds q1, q2, q3, u1, u2, u3 = u
 
     # specified variables
@@ -1701,7 +1825,7 @@ function vocmy(u, p, t)
 end
 
 function pocmx(u, p, t)
-    @unpack footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, rmtpxi, rtoexi, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, z = p
+    @unpack footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, mtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, toexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, z = p
     @inbounds q1, q2, q3, u1, u2, u3 = u
 
     # specified variables
@@ -1721,7 +1845,7 @@ function pocmx(u, p, t)
     return q1 + 0.5 * (2 * llao * mla * cos(ls - le - q3) + 2 * llao * mla * cos(rs - re - q3) + 2 * (lhato * mhat + 2 * lhat * mla + 2 * lhat * mua) * cos(q3) + (2 * lrf * mff + mrf * (2 * lrf - lrfo)) * cos(ra + rh - rk - q3) + 2 * (lth * mff + lth * mrf + lth * msh + mth * (lth - ltho)) * cos(rh - q3) + 2 * (lsh * mff + lsh * mhat + lsh * mrf + lsh * msh + lsho * msh + 2 * lsh * mla + 2 * lsh * mth + 2 * lsh * mua) * cos(lh - lk - q3) + 2 * (lff * mff + lff * mhat + lffo * mff + 2 * lff * mla + 2 * lff * mrf + 2 * lff * msh + 2 * lff * mth + 2 * lff * mua) * cos(la + lh + lmtp - lk - q3) - 2 * (lua * mla + luao * mua) * cos(ls - q3) - 2 * (lua * mla + luao * mua) * cos(rs - q3) - lrffo * mrf * cos(la + lh - footang - lk - q3) - lrffo * mrf * cos(ra + rh - footang - rk - q3) - 2 * mff * (lff - lffo) * cos(ra + rh + rmtp - rk - q3) - 2 * (lsh * mff + lsh * mrf + msh * (lsh - lsho)) * cos(rh - rk - q3) - 2 * (lth * mff + lth * mhat + lth * mrf + lth * msh + lth * mth + ltho * mth + 2 * lth * mla + 2 * lth * mua) * cos(lh - q3) - (lrfo * mrf + 2 * lrf * mff + 2 * lrf * mhat + 2 * lrf * mrf + 4 * lrf * mla + 4 * lrf * msh + 4 * lrf * mth + 4 * lrf * mua) * cos(la + lh - lk - q3)) / (mhat + 2 * mff + 2 * mla + 2 * mrf + 2 * msh + 2 * mth + 2 * mua)
 end
 function pocmy(u, p, t)
-    @unpack footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, lmtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, ltoexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, rmtpxi, rtoexi, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, z = p
+    @unpack footang, g, iff, ihat, ila, irf, ish, ith, iua, k1, k2, k3, k4, k5, k6, k7, k8, lff, lffo, lhat, lhato, lla, llao, mtpxi, lrf, lrff, lrffo, lrfo, lsh, lsho, lth, ltho, toexi, lua, luao, mff, mhat, mla, mrf, msh, mth, mtpb, mtpk, mua, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, z = p
     @inbounds q1, q2, q3, u1, u2, u3 = u
 
     # specified variables

@@ -41,7 +41,7 @@ constants k{8}		   % vertical and horizontal stiffness and damping
 constants mtpk,mtpb    % rotational stiffness and damping for mtp joint 
 constants g
 constants footang      % angle of mtp-heel line relative to mtp-ajc line
-constants rtoexi,rmtpxi,ltoexi,lmtpxi % initial x positions for springs
+constants toexi,mtpxi % initial x positions for springs
 specified rh'',lh'',rk'',lk'',ra'',la'',rmtp'',lmtp'',rs'',ls'',re'',le'' % specified joint angles
 %
 %
@@ -267,20 +267,18 @@ rmtq = mtpk*(pi-rmtp) - mtpb*rmtp'
 lmtq = mtpk*(pi-lmtp) - mtpb*lmtp'
 %
 % reaction forces
-% left foot
-dlx1 = pop1x - ltoexi
-dlx2 = pop2x - lmtpxi
+% real force
+dlx1 = pop1x - toexi
+dlx2 = pop2x - mtpxi
 ry1 = -k3*pop1y-k4*vop1y*abs(pop1y)         % toe
 rx1 = (-k1*dlx1-k2*vop1x)*ry1
 ry2 = -k7*pop2y-k8*vop2y*abs(pop2y)         % mtp
 rx2 = (-k5*dlx2-k6*vop2x)*ry2
-% right foot
-drx1 = pop11x - rtoexi
-drx2 = pop10x - rmtpxi
-vry1 = -k3*pop11y-k4*vop11y*abs(pop11y)         % toe
-vrx1 = (-k1*drx1-k2*vop11x)*vry1
-vry2 = -k7*pop10y-k8*vop10y*abs(pop10y)         % mtp
-vrx2 = (-k5*drx2-k6*vop10x)*vry2
+% virtual force
+vry1 = T^3         % toe
+vrx1 = T^3
+vry2 = T^3         % mtp
+vrx2 = T^3
 
 vrx = vrx1+vrx2
 vry = vry1+vry2
