@@ -1864,3 +1864,10 @@ function pocmy(u, p, t)
 
     return q2 - 0.5 * (2 * llao * mla * sin(ls - le - q3) + 2 * llao * mla * sin(rs - re - q3) + (2 * lrf * mff + mrf * (2 * lrf - lrfo)) * sin(ra + rh - rk - q3) + 2 * (lth * mff + lth * mrf + lth * msh + mth * (lth - ltho)) * sin(rh - q3) + 2 * (lsh * mff + lsh * mhat + lsh * mrf + lsh * msh + lsho * msh + 2 * lsh * mla + 2 * lsh * mth + 2 * lsh * mua) * sin(lh - lk - q3) + 2 * (lff * mff + lff * mhat + lffo * mff + 2 * lff * mla + 2 * lff * mrf + 2 * lff * msh + 2 * lff * mth + 2 * lff * mua) * sin(la + lh + lmtp - lk - q3) - 2 * (lua * mla + luao * mua) * sin(ls - q3) - 2 * (lua * mla + luao * mua) * sin(rs - q3) - 2 * (lhato * mhat + 2 * lhat * mla + 2 * lhat * mua) * sin(q3) - lrffo * mrf * sin(la + lh - footang - lk - q3) - lrffo * mrf * sin(ra + rh - footang - rk - q3) - 2 * mff * (lff - lffo) * sin(ra + rh + rmtp - rk - q3) - 2 * (lsh * mff + lsh * mrf + msh * (lsh - lsho)) * sin(rh - rk - q3) - 2 * (lth * mff + lth * mhat + lth * mrf + lth * msh + lth * mth + ltho * mth + 2 * lth * mla + 2 * lth * mua) * sin(lh - q3) - (lrfo * mrf + 2 * lrf * mff + 2 * lrf * mhat + 2 * lrf * mrf + 4 * lrf * mla + 4 * lrf * msh + 4 * lrf * mth + 4 * lrf * mua) * sin(la + lh - lk - q3)) / (mhat + 2 * mff + 2 * mla + 2 * mrf + 2 * msh + 2 * mth + 2 * mua)
 end
+
+function combine_sols(f, sol1, sol2)
+    d1 = [f(sol1, t) for t in sol1.t[1:end-2]]
+    d2 = [f(sol2, t) for t in sol1.t[end-1]:0.001:sol2.t[end]]
+
+    return [d1; d2]
+end
