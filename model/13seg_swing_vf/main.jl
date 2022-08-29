@@ -44,8 +44,10 @@ Nt = 10
 tol = 1e-3
 
 # bounds and step length
-ub = [20_000.0, 2000, 200_000, 100_000, 20_000, 1000, 200_000, 100_000]
-lb = zeros(8)
+ub = repeat([1.0, repeat([0.5, 0.5, 1.0], 3)...], 6)
+lb = repeat([0.01, repeat([0.0, 0.1, 0.01], 3)...], 6) # constrain lb of activation to 0.01
+append!(ub, [20_000, 2000, 200_000, 100_000, 20_000, 1000, 200_000, 100_000])
+append!(lb, zeros(8))
 v = ub .- lb
 
 # initial guess
