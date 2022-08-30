@@ -1,32 +1,32 @@
-using DelimitedFiles, Statistics
-using StaticArrays, Parameters, Setfield
-using OrdinaryDiffEq, Plots
+# using DelimitedFiles, Statistics
+# using StaticArrays, Parameters, Setfield
+# using OrdinaryDiffEq, Plots
 
-include("eom.jl")
-include("parameters.jl")
-include("specifieds.jl")
-include("functions.jl")
-include("contact_force.jl")
-include("setup.jl")
-include("callbacks.jl")
-include("optimisation.jl")
-include("plotting.jl")
+# include("eom.jl")
+# include("parameters.jl")
+# include("specifieds.jl")
+# include("functions.jl")
+# include("contact_force.jl")
+# include("setup.jl")
+# include("callbacks.jl")
+# include("optimisation.jl")
+# include("plotting.jl")
 
-# set up model
-p, u₀, matching_data = setup()
+# # set up model
+# p, u₀, matching_data = setup()
 
-# time span
-tspan = (0.0, 0.484)
+# # time span
+# tspan = (0.0, 0.484)
 
-# set up problem
-prob = ODEProblem(eom, u₀, tspan, p)
+# # set up problem
+# prob = ODEProblem(eom, u₀, tspan, p)
 
-# solve
-# sol = solve(prob, Tsit5(), reltol=1e-6, abstol=1e-6, saveat=0.001)
-sol1, sol2 = simulate(prob)
+# # solve
+# # sol = solve(prob, Tsit5(), reltol=1e-6, abstol=1e-6, saveat=0.001)
+# sol1, sol2 = simulate(prob)
 
-# animate
-animate_model(sol1, sol2)
+# # animate
+# animate_model(sol1, sol2)
 
 
 
@@ -36,14 +36,14 @@ addprocs(12, exeflags="--project")   # create worker processes with current proj
 @everywhere include("parallel_setup.jl")
 
 # simulated annealing parameters
-T₀ = 0.5
+T₀ = 50
 N = 8
-Ns = 36
-Nt = 10
-tol = 1e-3
+Ns = 48
+Nt = 50
+tol = 1.0
 
 # bounds and step length
-ub = [20_000.0, 2000, 200_000, 100_000, 20_000, 1000, 200_000, 100_000]
+ub = [50_000.0, 5000, 500_000, 200_000, 50_000, 2000, 500_000, 200_000]
 lb = zeros(8)
 v = ub .- lb
 

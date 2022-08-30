@@ -78,58 +78,58 @@ end
 mse(x, y) = (x .- y) .^ 2 |> mean
 
 # cost function for simulation
-function cost(sim_data)
-    global matching_data
+# function cost(sim_data)
+#     global matching_data
 
-    # # CoM position and HAT orientation
-    # # sim_cmx = pocmx(sim_data)
-    # sim_cmy = pocmy(sim_data)
-    # sim_θ = sim_data[3, :] .|> rad2deg
-    # # exp_cmx = matching_data[:cmx]
-    # exp_cmy = matching_data[:cmy]
-    # exp_θ = matching_data[:lhat]
+#     # # CoM position and HAT orientation
+#     # # sim_cmx = pocmx(sim_data)
+#     # sim_cmy = pocmy(sim_data)
+#     # sim_θ = sim_data[3, :] .|> rad2deg
+#     # # exp_cmx = matching_data[:cmx]
+#     # exp_cmy = matching_data[:cmy]
+#     # exp_θ = matching_data[:lhat]
 
-    # # mse between simulation and experimental data
-    # cmx_mse = 0.0 #mse(sim_cmx, exp_cmx)
-    # cmy_mse = mse(sim_cmy, exp_cmy)
-    # θ_mse = mse(sim_θ, exp_θ)
+#     # # mse between simulation and experimental data
+#     # cmx_mse = 0.0 #mse(sim_cmx, exp_cmx)
+#     # cmy_mse = mse(sim_cmy, exp_cmy)
+#     # θ_mse = mse(sim_θ, exp_θ)
 
-    # # scale by range 
-    # # cmx_mse /= abs(reduce(-, extrema(sim_cmx)))
-    # cmy_mse /= abs(reduce(-, extrema(sim_cmy)))
-    # θ_mse /= abs(reduce(-, extrema(sim_θ)))
+#     # # scale by range 
+#     # # cmx_mse /= abs(reduce(-, extrema(sim_cmx)))
+#     # cmy_mse /= abs(reduce(-, extrema(sim_cmy)))
+#     # θ_mse /= abs(reduce(-, extrema(sim_θ)))
 
-    # # cost function
-    # return cmx_mse + cmy_mse + θ_mse
+#     # # cost function
+#     # return cmx_mse + cmy_mse + θ_mse
 
-    # # CoM velocity and HAT orientation
-    # # sim_vcmx = vocmx(sim_data)
-    # # sim_vcmy = vocmy(sim_data)
-    # sim_vcmx = Vector{Float64}(undef, size(sim_data, 2))
-    # sim_vcmy = Vector{Float64}(undef, size(sim_data, 2))
-    # for i in 1:size(sim_data, 2)
-    #     sim_vcmx[i] = vocmx(sim_data[:, i], prob.p, (i - 1) / 1000)
-    #     sim_vcmy[i] = vocmy(sim_data[:, i], prob.p, (i - 1) / 1000)
-    # end
+#     # # CoM velocity and HAT orientation
+#     # # sim_vcmx = vocmx(sim_data)
+#     # # sim_vcmy = vocmy(sim_data)
+#     # sim_vcmx = Vector{Float64}(undef, size(sim_data, 2))
+#     # sim_vcmy = Vector{Float64}(undef, size(sim_data, 2))
+#     # for i in 1:size(sim_data, 2)
+#     #     sim_vcmx[i] = vocmx(sim_data[:, i], prob.p, (i - 1) / 1000)
+#     #     sim_vcmy[i] = vocmy(sim_data[:, i], prob.p, (i - 1) / 1000)
+#     # end
 
-    # sim_θ = sim_data[3, :] .|> rad2deg
-    # exp_vcmx = matching_data[:vcmx]
-    # exp_vcmy = matching_data[:vcmy]
-    # exp_θ = matching_data[:ht]
+#     # sim_θ = sim_data[3, :] .|> rad2deg
+#     # exp_vcmx = matching_data[:vcmx]
+#     # exp_vcmy = matching_data[:vcmy]
+#     # exp_θ = matching_data[:ht]
 
-    # # mse between simulation and experimental data
-    # vcmx_mse = mse(sim_vcmx, exp_vcmx)
-    # vcmy_mse = mse(sim_vcmy, exp_vcmy)
-    # θ_mse = mse(sim_θ, exp_θ)
+#     # # mse between simulation and experimental data
+#     # vcmx_mse = mse(sim_vcmx, exp_vcmx)
+#     # vcmy_mse = mse(sim_vcmy, exp_vcmy)
+#     # θ_mse = mse(sim_θ, exp_θ)
 
-    # # scale by range 
-    # vcmx_mse /= abs(reduce(-, extrema(sim_vcmx)))
-    # vcmy_mse /= abs(reduce(-, extrema(sim_vcmy)))
-    # θ_mse /= abs(reduce(-, extrema(sim_θ)))
+#     # # scale by range 
+#     # vcmx_mse /= abs(reduce(-, extrema(sim_vcmx)))
+#     # vcmy_mse /= abs(reduce(-, extrema(sim_vcmy)))
+#     # θ_mse /= abs(reduce(-, extrema(sim_θ)))
 
-    # # cost function
-    # return vcmx_mse + vcmy_mse + θ_mse
-end
+#     # # cost function
+#     # return vcmx_mse + vcmy_mse + θ_mse
+# end
 
 # cost(sol1, sol2) = cost([Array(sol1(0:0.001:sol1.t[end-1])) Array(sol2(sol1.t[end-1]+0.001:0.001:sol2.t[end]))])
 cost(sol1, sol2) = mse(matching_data[:fx], combine_sols(RX, sol1, sol2)) + mse(matching_data[:fy], combine_sols(RY, sol1, sol2))
