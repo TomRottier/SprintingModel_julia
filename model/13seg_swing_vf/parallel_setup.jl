@@ -3,6 +3,7 @@ using StaticArrays, Parameters, Setfield
 using OrdinaryDiffEq, Plots
 using SimulatedAnnealing
 
+include("../../musclemodel/torque_generator.jl")
 include("eom.jl")
 include("parameters.jl")
 include("specifieds.jl")

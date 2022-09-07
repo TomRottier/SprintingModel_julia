@@ -38,14 +38,14 @@ addprocs(12, exeflags="--project")   # create worker processes with current proj
 
 # simulated annealing parameters
 T₀ = 0.5
-N = 8
-Ns = 36
-Nt = 10
-tol = 1e-3
+N = 68
+Ns = 24
+Nt = 5
+tol = 1e-1
 
 # bounds and step length
-ub = repeat([1.0, repeat([0.5, 0.5, 1.0], 3)...], 6)
-lb = repeat([0.01, repeat([0.0, 0.1, 0.01], 3)...], 6) # constrain lb of activation to 0.01
+ub = repeat([1.2, repeat([0.5, 0.5, 1.0], 3)...], 6)
+lb = repeat([0.01, repeat([0.0, 0.07, 0.01], 3)...], 6) # constrain lb of activation to 0.01
 append!(ub, [20_000, 2000, 200_000, 100_000, 20_000, 1000, 200_000, 100_000])
 append!(lb, zeros(8))
 v = ub .- lb
@@ -61,7 +61,7 @@ result = Result(fopt=f₀, xopt=x₀)
 options = Options(func=objective, N=N, Ns=Ns, Nt=Nt, lb=lb, ub=ub, tol=tol, print_status=true)
 @time sa!(current, result, options)
 
-open("model\\13seg_ad_swing_vf\\results.csv", "a") do io
+open("model\\13seg_swing_vf\\results.csv", "a") do io
     writedlm(io, [result.fopt result.xopt...], ',')
 end
 

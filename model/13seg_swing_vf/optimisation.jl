@@ -90,13 +90,13 @@ function cost(sim_data)
     # calculate mse
     hip_mse = mse(θhip, matching_data[:lhip])
     knee_mse = mse(θknee, matching_data[:lknee])
-    hat_mse = mse(θhat, matching_data[:lhat])
+    hat_mse = mse(θhat, matching_data[:ht])
     ankle_mse = mse(θankle, matching_data[:lankle])
 
     # scale by range
     sf_hip = view(matching_data[:lhip], :) |> extrema |> collect |> diff
     sf_knee = view(matching_data[:lknee], :) |> extrema |> collect |> diff
-    sf_hat = view(matching_data[:lhat], :) |> extrema |> collect |> diff
+    sf_hat = view(matching_data[:ht], :) |> extrema |> collect |> diff
     hip_mse /= sf_hip[1]
     knee_mse /= sf_knee[1]
     hat_mse /= sf_hat[1]
