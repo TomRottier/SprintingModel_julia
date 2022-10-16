@@ -71,7 +71,7 @@ function plot_jointangles(sol)
 
     # actual data
     time = matching_data[:time]
-    data = [matching_data[:lhat] matching_data[:lhip] matching_data[:lknee] matching_data[:lankle]]
+    data = [matching_data[:ht] matching_data[:lhip] matching_data[:lknee] matching_data[:lankle]]
 
     # plot
     plt = plot(time, data, ls=:solid, labels=["hat" "hip" "knee" "ankle"])
@@ -92,13 +92,13 @@ function plot_jointangles(sol1, sol2)
     # simulation data
     sim_time = range(0, step=0.001, length=Nsol)
     θhat = view(full, 3, :) .|> rad2deg
-    θhip = π .+ view(full, 7, :) .|> rad2deg
-    θknee = π .- view(full, 6, :) .|> rad2deg
-    θankle = π .+ view(full, 5, :) .|> rad2deg
+    θhip = view(full, 4, :) .|> rad2deg
+    θknee = view(full, 5, :) .|> rad2deg
+    θankle = view(full, 6, :) .|> rad2deg
 
     # actual data
     time = matching_data[:time]
-    data = [matching_data[:lhat] matching_data[:lhip] matching_data[:lknee] matching_data[:lankle]]
+    data = [matching_data[:ht] matching_data[:lhip] matching_data[:lknee] matching_data[:lankle]]
 
     # plot
     plt = plot(time, data, ls=:solid, labels=["hat" "hip" "knee" "ankle"])
