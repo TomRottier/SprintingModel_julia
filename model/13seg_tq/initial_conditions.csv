@@ -1,0 +1,23 @@
+generalised coordinate, units, value
+mtp_x,m,0.0
+mtp_y,m,0.0
+hat,deg,81.451
+l_mtp,deg,143.563
+l_ankle,deg,120.502
+l_knee,deg,157.074
+l_hip,deg,144.11
+r_mtp,deg,136.02750014624496
+r_ankle,deg,131.14876769535195
+r_knee,deg,47.11487054636838
+r_hip,deg,160.39750548154473
+vcmx,m/s,9.67406
+vcmy,m/s,-0.7203
+hatv,deg/s,-24.9253
+l_mtpv,deg/s,1064.1
+l_anklev,deg/s,-650.361
+l_kneev,deg/s,-160.134
+l_hipv,deg/s,429.803
+r_mtpv,deg/s,83.125
+r_anklev,deg/s,-236.304
+r_kneev,deg/s,-576.854
+r_hipv,deg/s,-765.306

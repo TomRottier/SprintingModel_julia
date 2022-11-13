@@ -27,7 +27,7 @@ eom_str = "# Automatically generated
               $( join(rhss, "\n\t") )
           
               # set up system of equations
-              coef = @SMatrix [$(["coef$i$j" for i in 1:N, j in 1:N] |> x -> [join(row, ' ') for row in eachrow(x)] |> x -> join(x, "; "))]
+              coef = @SMatrix [$(["coef$(i)_$(j)" for i in 1:N, j in 1:N] |> x -> [join(row, ' ') for row in eachrow(x)] |> x -> join(x, "; "))]
               rhs = @SVector [$(join(["rhs$i" for i in 1:N], ", "))]
           
               # derivatives
