@@ -28,7 +28,7 @@ function simulate(prob::ODEProblem, x)
     newprob = remake(prob, u0=unew, p=pnew)
 
     # solve new problem
-    return solve(newprob, INTEGRATOR; callback=vcb, saveat=0.001, abstol=1e-8, reltol=1e-8)#INT_OPTIONS...)
+    return solve(newprob, INTEGRATOR; callback=vcb, saveat=0.001, abstol=1e-8, reltol=1e-8, verbose=false)
 end
 
 
@@ -36,33 +36,25 @@ end
 mse(x, y) = (x .- y) .^ 2 |> mean
 
 # cost function for simulation
-function cost(sim_data)
-    # global matching_data
+function cost(sol)
+    # difference between start and end for opposite legs
+    q1_s, q2_s, q3_s, q4_s, q5_s, q6_s, q7_s, q8_s, q9_s, q10_s, q11_s = sol(0.0)
+    q1_e, q2_e, q3_e, q4_e, q5_e, q6_e, q7_e, q8_e, q9_e, q10_e, q11_e = sol(sol.t[end])
 
-    # calculate hip and knee angles
-    θhat = view(sim_data, 3, :) .|> rad2deg
-    θhip = view(sim_data, 4, :) .|> rad2deg
-    θknee = view(sim_data, 5, :) .|> rad2deg
-    θankle = view(sim_data, 6, :) .|> rad2deg
+    j1 = (q3_s - q3_e)^2 # torso
+    j2 = (q4_s - q8_e)^2 # left hip
+    j3 = (q5_s - q9_e)^2 # left knee
+    j4 = (q6_s - q10_e)^2 # left ankle
+    j5 = (q7_s - q11_e)^2 # left mtp
+    j6 = (q8_s - q4_e)^2 # right hip
+    j7 = (q9_s - q5_e)^2 # right knee
+    j8 = (q10_s - q6_e)^2 # right ankle
+    j9 = (q11_s - q7_e)^2 # right mtp
 
-    # calculate mse
-    hip_mse = mse(θhip, view(matching_data[:lhip], 1:125))
-    knee_mse = mse(θknee, view(matching_data[:lknee], 1:125))
-    hat_mse = mse(θhat, view(matching_data[:ht], 1:125))
-    ankle_mse = mse(θankle, view(matching_data[:lankle], 1:125))
-
-    # scale by range
-    sf_hip = view(matching_data[:lhip], :) |> extrema |> collect |> diff
-    sf_knee = view(matching_data[:lknee], :) |> extrema |> collect |> diff
-    sf_hat = view(matching_data[:ht], :) |> extrema |> collect |> diff
-    hip_mse /= sf_hip[1]
-    knee_mse /= sf_knee[1]
-    hat_mse /= sf_hat[1]
-
-    return hip_mse + knee_mse + hat_mse + 0.1ankle_mse
+    return j1 + j2 + j3 + j4 + j5 + j6 + j7 + j8 + j9
 end
 
-cost(sol1, sol2) = cost([Array(sol1(0:0.001:sol1.t[end-1])) Array(sol2(sol1.t[end-1]+0.001:0.001:sol2.t[end]))])
+scost(sol1, sol2) = cost([Array(sol1(0:0.001:sol1.t[end-1])) Array(sol2(sol1.t[end-1]+0.001:0.001:sol2.t[end]))])
 cost(sol1, err::Int) = 1e7 - err
 cost(err1::Int, err2::Int) = 1e7 - 10err1 - err2
 

@@ -1,5 +1,5 @@
 using DelimitedFiles, Statistics
-using StaticArrays, Parameters, Setfield
+using StaticArrays, Parameters, Setfield, SimulatedAnnealing
 using OrdinaryDiffEq, Plots
 
 include("../../musclemodel/torque_generator.jl")
@@ -33,13 +33,13 @@ animate_model(sol)
 
 ## run optimisation
 using Distributed
-addprocs(12, exeflags="--project")   # create worker processes with current project activated
+addprocs(10, exeflags="--project")   # create worker processes with current project activated
 @everywhere include("parallel_setup.jl")
 
 # simulated annealing parameters
-T₀ = 0.5
-N = 68
-Ns = 24
+T₀ = 0.05
+N = 128
+Ns = 20
 Nt = 5
 tol = 1e-1
 
@@ -66,3 +66,29 @@ open("model\\13seg_swing_vf\\results.csv", "a") do io
 end
 
 xfail = [10439.361, 1233.33, 60349.687, 98505.517, 12915.36, 723.547, 136851.274, 9057.667]
+
+
+
+## optimization.jl
+using Optimization, OptimizationEvolutionary
+
+plt1 = plot()
+iterations = 0
+
+callback = function (x, J)
+    @show J
+
+    # plot cost function change over optimization
+    push!(Js, J)
+    Plots.scatter!(plt1, [count], [J], mc=:black)
+    display(plt1)
+
+    #update count
+    iterations += 1
+    @show iterations
+
+    return false
+end
+
+opt_prob = OptimizationProblem(objective, x₀, lb=lb, ub=ub)
+opt_sol = solve(opt_prob, CMAES(), callback=callback, abstol=1e-2)
