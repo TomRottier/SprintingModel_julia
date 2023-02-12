@@ -38,23 +38,33 @@ mse(x, y) = (x .- y) .^ 2 |> mean
 # cost function for simulation
 function cost(sol)
     # difference between start and end for opposite legs
-    q1_s, q2_s, q3_s, q4_s, q5_s, q6_s, q7_s, q8_s, q9_s, q10_s, q11_s = sol(0.0)
-    q1_e, q2_e, q3_e, q4_e, q5_e, q6_e, q7_e, q8_e, q9_e, q10_e, q11_e = sol(sol.t[end])
+    # q1_s, q2_s, q3_s, q4_s, q5_s, q6_s, q7_s, q8_s, q9_s, q10_s, q11_s = sol(0.0)
+    # q1_e, q2_e, q3_e, q4_e, q5_e, q6_e, q7_e, q8_e, q9_e, q10_e, q11_e = sol(sol.t[end])
+    # j1 = (q3_s - q3_e)^2 # torso
+    # j2 = (q4_s - q8_e)^2 # left hip
+    # j3 = (q5_s - q9_e)^2 # left knee
+    # j4 = (q6_s - q10_e)^2 # left ankle
+    # j5 = (q7_s - q11_e)^2 # left mtp
+    # j6 = (q8_s - q4_e)^2 # right hip
+    # j7 = (q9_s - q5_e)^2 # right knee
+    # j8 = (q10_s - q6_e)^2 # right ankle
+    # j9 = (q11_s - q7_e)^2 # right mtp
 
-    j1 = (q3_s - q3_e)^2 # torso
-    j2 = (q4_s - q8_e)^2 # left hip
-    j3 = (q5_s - q9_e)^2 # left knee
-    j4 = (q6_s - q10_e)^2 # left ankle
-    j5 = (q7_s - q11_e)^2 # left mtp
-    j6 = (q8_s - q4_e)^2 # right hip
-    j7 = (q9_s - q5_e)^2 # right knee
-    j8 = (q10_s - q6_e)^2 # right ankle
-    j9 = (q11_s - q7_e)^2 # right mtp
+    start = sol(0.0, idxs=1:22)
+    stop = sol(sol.t[end], idxs=1:22)
 
-    return j1 + j2 + j3 + j4 + j5 + j6 + j7 + j8 + j9
+    pairs = [3 => 3, 4 => 8, 5 => 9, 6 => 10, 7 => 11, 8 => 4, 9 => 5, 10 => 6, 11 => 7]
+    jθ = 0
+    jω = 0
+    for (k, v) in pairs
+        jθ += (start[k] - stop[v])^2
+        # jω += (start[k+11] - stop[v+11])^2
+    end
+
+    return jθ
 end
 
-scost(sol1, sol2) = cost([Array(sol1(0:0.001:sol1.t[end-1])) Array(sol2(sol1.t[end-1]+0.001:0.001:sol2.t[end]))])
+cost(sol1, sol2) = cost([Array(sol1(0:0.001:sol1.t[end-1])) Array(sol2(sol1.t[end-1]+0.001:0.001:sol2.t[end]))])
 cost(sol1, err::Int) = 1e7 - err
 cost(err1::Int, err2::Int) = 1e7 - 10err1 - err2
 
@@ -64,20 +74,35 @@ function update_parameters(p, x, u)
     q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11 = u
 
     # manually separate out
-    lhe_α_p = ActivationProfile(x[1:10])
-    lke_α_p = ActivationProfile(x[11:20])
-    lae_α_p = ActivationProfile(x[21:30])
-    lhf_α_p = ActivationProfile(x[31:40])
-    lkf_α_p = ActivationProfile(x[41:50])
-    laf_α_p = ActivationProfile(x[51:60])
-    rhe_α_p = ActivationProfile(x[61:70])
-    rke_α_p = ActivationProfile(x[71:80])
-    rae_α_p = ActivationProfile(x[81:90])
-    rhf_α_p = ActivationProfile(x[91:100])
-    rkf_α_p = ActivationProfile(x[101:110])
-    raf_α_p = ActivationProfile(x[111:120])
+    # lhe_α_p = ActivationProfile(x[1:10])
+    # lke_α_p = ActivationProfile(x[11:20])
+    # lae_α_p = ActivationProfile(x[21:30])
+    # lhf_α_p = ActivationProfile(x[31:40])
+    # lkf_α_p = ActivationProfile(x[41:50])
+    # laf_α_p = ActivationProfile(x[51:60])
+    # rhe_α_p = ActivationProfile(x[61:70])
+    # rke_α_p = ActivationProfile(x[71:80])
+    # rae_α_p = ActivationProfile(x[81:90])
+    # rhf_α_p = ActivationProfile(x[91:100])
+    # rkf_α_p = ActivationProfile(x[101:110])
+    # raf_α_p = ActivationProfile(x[111:120])
+    lhe_α_p = ActivationProfile(x[1:7])
+    lke_α_p = ActivationProfile(x[8:14])
+    lae_α_p = ActivationProfile(x[15:21])
+    lhf_α_p = ActivationProfile(x[22:28])
+    lkf_α_p = ActivationProfile(x[29:35])
+    laf_α_p = ActivationProfile(x[36:42])
+    rhe_α_p = ActivationProfile(x[43:49])
+    rke_α_p = ActivationProfile(x[50:56])
+    rae_α_p = ActivationProfile(x[57:63])
+    rhf_α_p = ActivationProfile(x[64:70])
+    rkf_α_p = ActivationProfile(x[71:77])
+    raf_α_p = ActivationProfile(x[78:84])
 
-    _k1, _k2, _k3, _k4, _k5, _k6, _k7, _k8 = x[121:128]
+
+    # _k1, _k2, _k3, _k4, _k5, _k6, _k7, _k8 = x[121:128]
+    _k1, _k2, _k3, _k4, _k5, _k6, _k7, _k8 = x[85:92]
+
 
     # torque generators with inital values and new activation parameters
     _lhe = TorqueGenerator(2π - q4, -u4, lhe.cc.cc_p, lhe.sec.sec_p, lhe_α_p)
